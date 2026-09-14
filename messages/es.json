@@ -1,0 +1,588 @@
+{
+  "landingV2": {
+    "hero": {
+      "scrollDown": "Deslizar",
+      "title1": "Ve más allá",
+      "title2": "del crecimiento.",
+      "description": "<bold>130+ carrier appointments</bold> en un solo contrato, el <bold>sistema</bold> para operarlos y el <bold>equipo</bold> que lo sostiene. <bold>Tu book of business sigue siendo tuyo.</bold>",
+      "descriptionMobile": "<bold>130+ carrier appointments</bold> en un solo contrato. El <bold>sistema y el equipo</bold>, incluidos.",
+      "ctaPlans": "Solicita tu contrato",
+      "ctaAgents": "Ver GO AMS"
+    },
+    "licensingHero": {
+      "title": "Licensing",
+      "description": "Epicare Insurance holds the necessary state licenses to conduct insurance business. All insurance transactions are carried out through licensed agents in compliance with state regulations.",
+      "cta": "Check Our Active Licenses"
+    },
+    "interactiveMap": {
+      "overline": "Alcance Nacional",
+      "title": "52 Jurisdicciones.",
+      "description": "Licenciados y operando activamente en los 50 estados, Washington DC y Puerto Rico. Un solo acuerdo cubre toda tu operación."
+    },
+    "licensingGrid": {
+      "title": "Licencias por estado",
+      "searchPlaceholder": "Buscar por estado...",
+      "noResults": "No se encontraron licencias para"
+    },
+    "metrics": {
+      "carriers": "Carrier\nAppointments",
+      "years": "Asegurados\nactivos",
+      "agents": "Agentes\nactivos",
+      "platform": "Operando\ndesde",
+      "titleLine1": "No es una promesa.",
+      "titleLine2": "Es una operación",
+      "titleLine3": "que ya está corriendo."
+    },
+    "bento": {
+      "itemDiTitle": "Contracting",
+      "itemDiDesc": "Appointments con 130+ carriers gestionados desde el portal, con estado en vivo de cada solicitud.",
+      "itemOmsTitle": "Compliance",
+      "itemOmsDesc": "Licencias, E&O y renovaciones con alerta antes del vencimiento, no después.",
+      "sectionTitle": "Tu agencia,\nun solo ecosistema",
+      "sectionDesc": "GO AMS, GO CRM y Epicare Academy. <b>Software propio</b>, no licencias de terceros.",
+      "card1Title": "GO CRM",
+      "card1Desc": "Leads, pipeline y seguimiento en un solo lugar. Sabes a quién llamar hoy y por qué.",
+      "card4Title": "GO AMS",
+      "card4Desc": "El core de tu operación: pólizas, comisiones, licencias y downline. Todo auditable.",
+      "card6Title": "GO CALLS",
+      "card6Desc": "Llamadas integradas al CRM. Cada conversación queda registrada contra el cliente correcto.",
+      "card7Title": "Métricas",
+      "card7Desc": "Producción, retención y persistencia por agente. Los números que deciden tu mes.",
+      "card8Title": "Academy",
+      "card8Desc": "Certificaciones, entrenamiento de producto y onboarding de agentes nuevos. A tu ritmo.",
+      "cardCta": "Explorar"
+    },
+    "spotlight": {
+      "eppigo": {
+        "name": "Eppigo™",
+        "cta": "Únete a Epicare",
+        "title": "Insurance that finally makes sense.",
+        "desc": "Donde ellos gestionan sus pólizas y wallets, y tu agencia los asiste en tiempo real.",
+        "f1Title": "Seguros y Wallets",
+        "f1Desc": "Acceso total a coberturas activas y métodos de pago seguros.",
+        "f2Title": "Compras Integradas",
+        "f2Desc": "Descubren y compran nuevos seguros desde su propio ecosistema.",
+        "f3Title": "Asistencia Directa",
+        "f3Desc": "Tu equipo asiste y opera junto al cliente dentro del mismo portal."
+      },
+      "solutions": {
+        "name": "Agency Solutions",
+        "cta": "Explorar soluciones",
+        "title": "Marketing que sí cierra pólizas.",
+        "desc": "Olvídate del lienzo en blanco. Despliega campañas, embudos y activos publicitarios diseñados exclusivamente para la industria de seguros.",
+        "f1Title": "Campañas Plug & Play",
+        "f1Desc": "Estrategias de captación completas y listas para activarse en minutos.",
+        "f2Title": "Embudos de Alta Conversión",
+        "f2Desc": "Recorridos testeados para transformar prospectos fríos en clientes reales.",
+        "f3Title": "Activos Premium",
+        "f3Desc": "Material de venta y diseño con la calidad gráfica de una agencia top."
+      }
+    },
+    "darkGradient": {
+      "sectionTitle": "Un solo acuerdo para <span>toda tu organización.</span>",
+      "sectionDesc": "Appointments con 130+ carriers, sistema de gestión, visibilidad en tiempo real y equipo de soporte. Todo incluido bajo el mismo contrato.",
+      "tiltCard": "Girar",
+      "feature1_step": "01 · Contratación",
+      "feature1_title": "Un contrato, 130+ carriers",
+      "feature1_subtitle": "Un solo acuerdo. Todos tus appointments.",
+      "feature1_body": "Firmas con Epicare y accedes al portafolio completo. <b>Sin negociar contrato por contrato</b> ni perseguir a cada carrier por separado.",
+      "feature2_step": "02 · Sistema",
+      "feature2_title": "GO AMS, incluido en tu contrato",
+      "feature2_subtitle": "Sin costo de plataforma.",
+      "feature2_body": "El AMS, el CRM, el motor de cotización Eppigo™ y Academy vienen con tu contrato de productor. <b>Sin costos adicionales de plataforma</b>.",
+      "feature3_step": "03 · Visibilidad",
+      "feature3_title": "Tu producción, en tiempo real",
+      "feature3_subtitle": "Sin esperar el reporte del mes.",
+      "feature3_body": "Producción por agente, estado de cada aplicación, comisiones proyectadas y vencimientos de licencia. <b>Tu downline deja de ser una caja negra</b>.",
+      "feature4_step": "04 · Soporte",
+      "feature4_title": "Contracting, commissions y compliance",
+      "feature4_subtitle": "Un equipo, no un buzón.",
+      "feature4_body": "Tickets con historial auditable y tiempos de respuesta definidos. <b>Cuando algo se traba, alguien con nombre lo resuelve</b>."
+    },
+    "nav": {
+      "about": "Nosotros",
+      "aboutCompany": "La compañía",
+      "aboutCompanyDesc": "Quiénes somos, cómo operamos y desde cuándo.",
+      "aboutTeam": "Equipo",
+      "aboutTeamDesc": "Las personas detrás de contracting, commissions y soporte.",
+      "aboutLicensing": "Licencias",
+      "aboutLicensingDesc": "Nuestras licencias, registros y jurisdicciones.",
+      "gohub": "Go Hub",
+      "gohubCrm": "GO CRM",
+      "gohubCrmDesc": "Leads, pipeline y seguimiento en un solo lugar.",
+      "gohubAms": "Go AMS",
+      "gohubAmsDesc": "Pólizas, comisiones, licencias y downline.",
+      "gohubCalls": "GO Calls",
+      "gohubCallsDesc": "Llamadas integradas al CRM, con registro automático.",
+      "gohubAcademy": "Epicare Academy",
+      "gohubAcademyDesc": "Entrenamiento de producto y certificaciones de carrier.",
+      "solutions": "Soluciones",
+      "solMarketing": "Marketing",
+      "solMarketingDesc": "Campañas, embudos y material de venta para agentes.",
+      "solTech": "Technology",
+      "solTechDesc": "Infraestructura propia, no licencias de terceros.",
+      "comingSoon": "Próximamente",
+      "login": "Iniciar Sesión",
+      "moreFromEpicare": "Más de Epicare"
+    },
+    "productLines": {
+      "overline": "Líneas de producto",
+      "tag": "3 categorías",
+      "productsLabel": "productos",
+      "titleLine1": "Lo que puedes vender",
+      "titleLine2": "desde el día uno.",
+      "desc": "Tres categorías y los carriers correctos en cada una. Todo bajo el mismo contrato de productor.",
+      "cat1_name": "Vida",
+      "cat1_desc": "Desde cobertura temporal hasta pólizas permanentes y gastos finales.",
+      "cat2_name": "Salud",
+      "cat2_desc": "Planes médicos para cada etapa y presupuesto, incluyendo Marketplace y Medicare Advantage.",
+      "cat3_name": "Complementario",
+      "cat3_desc": "Lo que llena los vacíos: dental, visión y protección ante lo inesperado.",
+      "cat1_items": [
+        "Term Life",
+        "Whole Life",
+        "Final Expense"
+      ],
+      "cat1_descs": [
+        "Cobertura asequible por un período fijo — ideal para proteger ingresos y familia.",
+        "Protección permanente que acumula valor en efectivo de por vida.",
+        "Póliza de vida pequeña que cubre gastos funerarios y del final de la vida."
+      ],
+      "cat2_items": [
+        "Short Term Medical",
+        "Major Medical",
+        "ACA / Marketplace",
+        "Medicare Advantage (MAPD)"
+      ],
+      "cat2_descs": [
+        "Cobertura médica temporal que cubre el vacío entre planes.",
+        "Cobertura de salud integral para atención cotidiana y grave.",
+        "Planes elegibles a subsidios a través del Marketplace federal.",
+        "Medicare todo-en-uno con cobertura de medicamentos incluida."
+      ],
+      "cat3_items": [
+        "Dental",
+        "Vision",
+        "Accident",
+        "Cancer",
+        "Hospital Indemnity",
+        "Critical Illness",
+        "Senior Supplement"
+      ],
+      "cat3_descs": [
+        "Cobertura para cuidado dental preventivo y restaurador.",
+        "Cobertura de exámenes, lentes y monturas.",
+        "Beneficios en efectivo por lesiones de accidentes cubiertos.",
+        "Protección financiera que paga ante un diagnóstico de cáncer.",
+        "Pagos fijos en efectivo por cada hospitalización cubierta.",
+        "Beneficio de suma única para eventos graves como infarto o ACV.",
+        "Cubre los vacíos que deja Medicare Original."
+      ]
+    },
+    "peopleReveal": {
+      "portalWord": "JUNTOS",
+      "statement": "Tu operación respaldada.",
+      "imageAlt": "Equipo y agentes de Epicare"
+    },
+    "forWho": {
+      "overline": "Para quién es",
+      "titleLine1": "Operas solo o mueves",
+      "titleLine2": "un downline entero.",
+      "desc": "El sistema es el mismo. Lo que cambia es lo que ves.",
+      "tagAgent": "Agente",
+      "tagOwner": "Agency Owner",
+      "tagSub": "Sub-agencia",
+      "toggleAgent": "Para agentes",
+      "toggleAgency": "Para agencias",
+      "agentTitle": "Para agentes",
+      "agentKicker": "Operas solo, control total",
+      "agencyTitle": "Para agencias",
+      "agencyKicker": "Multinivel, un solo sistema",
+      "agentItems": [
+        "Dashboard que te dice qué atender hoy",
+        "Tus contratos con 130+ carriers en un lugar",
+        "Cotización y enrollment desde un solo portal",
+        "Propuestas profesionales en minutos",
+        "Licencias con alerta antes del vencimiento",
+        "Soporte con SLAs visibles y ticket auditable",
+        "Tu staff con acceso y permisos propios"
+      ],
+      "agencyItems": [
+        "Vista agregada de todo tu downline",
+        "Onboarding de nuevos agentes desde el portal",
+        "Contratos de tu agencia centralizados",
+        "Métricas de producción por agente",
+        "Estructura multinivel soportada de forma nativa",
+        "Toggle Agency / Agent — operas en ambos modos",
+        "Tus agentes usan el mismo sistema que tú"
+      ],
+      "hoverHint": "Pasa el mouse para ver más →",
+      "agentImg1Alt": "Dashboard del agente en tablet",
+      "agentImg2Alt": "Agente con headset dando soporte",
+      "agencyImg1Alt": "Pipeline de la agencia por etapas",
+      "agencyImg2Alt": "Composición agregada de la agencia"
+    },
+    "howToJoin": {
+      "overline": "Activación Inmediata",
+      "title1": "De la firma a",
+      "title2": "tu primera póliza.",
+      "step1Title": "APLICAS",
+      "step1Desc": "Contracting te contacta en 24-48 horas hábiles.",
+      "step2Title": "FIRMAS",
+      "step2Desc": "Digitalmente, desde el mismo portal tu acuerdo de productor.",
+      "step3Title": "CUENTA",
+      "step3Desc": "Recibes la invitación, creas tu contraseña y entras automáticamente.",
+      "step4Title": "PRODUCES",
+      "step4Desc": "Con tus appointments, tus licencias y tu book ya cargados."
+    },
+    "faq": {
+      "overline": "F.A.Q.",
+      "title": "Dudas Frecuentes",
+      "q1": "¿Qué carriers están disponibles?",
+      "a1": "130+ carrier appointments en Life, Health y Supplementary — nacionales y regionales. La lista crece conforme sumamos nombramientos.",
+      "q2": "¿Son dueños de mi book of business?",
+      "a2": "No. Mantienes el 100% de la propiedad de tu cartera desde el día uno. Epicare es tu infraestructura operativa, no el dueño de tu trabajo.",
+      "q3": "¿Cuánto cuesta la plataforma?",
+      "a3": "GO AMS, GO CRM, Eppigo™ y Academy están incluidos en tu contrato de productor, sin costo de plataforma. Lo único que se acuerda al contratar es tu split de comisiones.",
+      "q4": "¿Necesito estar en Florida?",
+      "a4": "No. Nuestra sede está en Miami, pero operamos en las 52 jurisdicciones: los 50 estados, Washington DC y Puerto Rico. Tú vendes donde tengas licencia.",
+      "q5": "¿Epicare es una startup o una compañía establecida?",
+      "a5": "Epicare Insurance Corp opera desde 2021, con 6,000+ asegurados y 100+ agentes activos. EIN 87-1093490 · NPN 19985316 · EPICARE® registrada en USPTO (Reg. 8148738).",
+      "q6": "¿Qué pasa si ya tengo mi propio CRM?",
+      "a6": "Puedes seguir usándolo. GO AMS es donde viven tus contratos, comisiones y licencias — eso no se duplica en otro sistema. Para tus datos hay exportación disponible.",
+      "q7": "¿Cuánto tarda el onboarding completo?",
+      "a7": "De 24 a 48 horas desde la firma si tus licencias están vigentes. Los appointments con cada carrier dependen del tiempo de respuesta de cada uno; te mostramos el estado en vivo desde el portal."
+    },
+    "coverage": {
+      "overline": "Alcance nacional",
+      "title": "52 jurisdicciones.",
+      "desc": "50 estados, Washington DC y Puerto Rico. Licenciados y operando en todas — no en proceso, no próximamente.",
+      "cta": "Ver licencias activas"
+    },
+    "footerCta": {
+      "marquee": "EPICARE ✦ OPERACIÓN REAL ✦",
+      "line1": "La agencia que trabaja para ti.",
+      "line2": "No al revés.",
+      "primary": "Solicita tu contrato",
+      "secondary": "Habla con el equipo",
+      "privacy": "Privacidad",
+      "terms": "Términos"
+    }
+  },
+  "goAms": {
+    "hero": {
+      "overline": "Portal de Epicare",
+      "title1": "GO AMS.",
+      "title2": "Tu negocio de seguros.",
+      "description": "GO AMS es el <bold>portal operacional</bold> para agentes y agencias — donde gestionas <bold>contratos, clientes, producción y pagos</bold>, todo bajo una <bold>misma interfaz</bold>.",
+      "cta": "Opera Ya",
+      "bullet1": "Respaldado por 5 años, 130+ carriers, 52 juris.",
+      "bullet2": "Procesa millones en primas de manera automática"
+    },
+    "problemSection": {
+      "title": "Caos Operativo",
+      "subtitle": "Conoces la rutina, más producción significa más <blue>carga administrativa</blue>, contraseñas y <blue>hojas de cálculo</blue>.",
+      "pains": [
+        {
+          "title": "Portales fragmentados",
+          "description": "Saltas entre múltiples portales de carrier todos los días solo para rastrear el estatus de un cliente o una póliza."
+        },
+        {
+          "title": "Seguimiento manual",
+          "description": "Llevas el control de tu book of business y tus renovaciones en un Excel que tienes que actualizar a mano."
+        },
+        {
+          "title": "Comisiones opacas",
+          "description": "Recibes pagos en tu cuenta sin tener visibilidad clara de cuándo te pagan, por qué pólizas, o si te aplicaron un chargeback."
+        },
+        {
+          "title": "Ceguera de equipo",
+          "description": "Si tienes un downline, la única forma de saber qué está produciendo tu agencia es preguntándoles directamente."
+        },
+        {
+          "title": "Accesos comprometidos",
+          "description": "Tu equipo de soporte administrativo tiene que operar usando tus usuarios y contraseñas personales."
+        },
+        {
+          "title": "Tenemos la solución",
+          "description": "Unificamos todo tu ecosistema en un solo portal."
+        }
+      ]
+    },
+    "platformReveal": {
+      "title1": "Un sistema.",
+      "title2": "Dos modos de trabajo.",
+      "subtitle": "Separa lo que <bold>administras</bold> de lo que <bold>vendes</bold>. Dos espacios dedicados en una <bold>misma plataforma</bold>.",
+      "boTab": "Back Office",
+      "boCard1Title": "¿Qué es Back Office?",
+      "boCard1Desc": "Es tu centro de control operativo. Una consola privada para administrar jerarquías, contratos y toda tu fuerza de ventas.",
+      "boCard2Title": "Motor Financiero",
+      "boCard2Desc": "Controla y automatiza el pago de comisiones, conciliación de pólizas y reportes en tiempo real.",
+      "qeTab": "Quote & Enroll",
+      "qeCard1Title": "¿Qué es Quote & Enroll?",
+      "qeCard1Desc": "Es tu motor de ventas. El entorno diseñado para cotizar planes de salud y vida frente al cliente en segundos.",
+      "qeCard2Title": "Cierre Inmediato",
+      "qeCard2Desc": "Compara +130 aseguradoras y completa la solicitud con firmas digitales integradas, todo en una pantalla.",
+      "tiltLabel": "Girar"
+    },
+    "agentAgency": {
+      "title1": "Con agencia,",
+      "title2": "el portal cambia contigo.",
+      "subtitle": "Alterna entre tu <bold>cuenta personal</bold> y tu <bold>vista de agencia</bold> con un solo clic.",
+      "tabAgent": "Cuenta de Agente",
+      "tabAgency": "Cuenta de Agencia",
+      "agentBadge1": "Modo: Producción Directa",
+      "agentBadge2": "13 Módulos + Quote",
+      "agentHeadline": "Tu negocio personal, sin intermediarios.",
+      "agencyBadge1": "Modo: Gestión de Downline",
+      "agencyBadge2": "Estructura & Compliance",
+      "agencyHeadline": "Supervisión total de tu equipo en tiempo real.",
+      "agentFeature1Title": "Pólizas de Agente",
+      "agentFeature1Desc": "Acceso total a tus pólizas activas, renovaciones y análisis de cartera.",
+      "agentFeature2Title": "Detalle de Clientes",
+      "agentFeature2Desc": "Expediente 360° del asegurado, historial de pólizas y documentos.",
+      "agentFeature3Title": "Quote & Enroll",
+      "agentFeature3Desc": "Cotización multicarrier y enrolamiento instantáneo con tus carriers.",
+      "agencyFeature1Title": "Pólizas de Downline",
+      "agencyFeature1Desc": "Supervisión consolidada de producción, volumen y estado de compliance.",
+      "agencyFeature2Title": "Detalle de Agentes & Clientes",
+      "agencyFeature2Desc": "Gestión de estructura, onboarding de productores y expedientes de agencia.",
+      "agencyFeature3Title": "Quote & Contracts",
+      "agencyFeature3Desc": "Resumen centralizado de appointments, acuerdos y cotización de grupo."
+    },
+    "downline": {
+      "overline": "Agency Downline",
+      "title1": "Ves a tu equipo",
+      "title2": "sin tener que preguntarle.",
+      "scrollHint": "Desliza hacia abajo",
+      "card1Title": "Downline en Tiempo Real",
+      "card1Badge": "8 Agentes Activos · Salesforce",
+      "card1Alt": "Downline en Tiempo Real · Métricas de Producción por Agente",
+      "card2Title": "Licencias & Continuing Education",
+      "card2Badge": "NIPR Sincronizado",
+      "card2Alt": "Detalles de Licencias y Vigencia por Estado",
+      "card3Title": "Onboarding de Nuevos Agentes",
+      "card3Badge": "Invitación en 1 Clic",
+      "card3Alt": "Onboarding e Invitación de Nuevos Productores a la Agencia"
+    },
+    "quoteWays": {
+      "title1_1": "Unificamos",
+      "title1_2": "todos los carriers y servicios",
+      "title1_3": "en un solo lugar.",
+      "title2_1": "Tus clientes ven",
+      "title2_2": "su portafolio",
+      "title2_3": "en una sola pantalla.",
+      "pill1": "API Sync",
+      "pill2": "Tiempo Real",
+      "pill3": "Dashboard",
+      "pill4": "Cifrado",
+      "card1Title": "Direct Enrollment",
+      "card1Desc": "Cotiza e inscribe al cliente de <bold>principio a fin sin salir de GO AMS</bold>. Tienes acceso a <blue>todos los carriers en una sola pantalla</blue>, eliminando la necesidad de visitar múltiples portales para cerrar una venta.",
+      "card2Title": "Partial Enrollment",
+      "card2Desc": "Asiste al cliente completando el proceso inicial, y <blue>envíale un enlace seguro</blue> para que él mismo ingrese su <bold>información sensible</bold> (como tarjeta de crédito) desde su dispositivo.",
+      "card3Title": "Referral Link",
+      "card3Desc": "Envía un enlace único al cliente para redirigirlo a nuestra plataforma <bold>Eppigo™</bold>. Cualquier compra que realice el usuario se traduce automáticamente en una <blue>comisión porcentual</blue> para ti.",
+      "card4Title": "Proposals",
+      "card4Desc": "Genera cotizaciones personalizadas y dinámicas según el perfil del cliente. <bold>Filtra y ajusta las mejores opciones</bold> para enviarle una <blue>propuesta lista para comparar y elegir</blue> con total claridad."
+    },
+    "delegateUsers": {
+      "overline": "Control de Acceso",
+      "title1": "Tu equipo entra",
+      "title2": "con su propia cuenta.",
+      "subtitle": "Otorga permisos granulares a tus asistentes o agentes. Mantén la <bold>seguridad total</bold> de tu agencia decidiendo <bold>exactamente a qué módulos</bold> pueden acceder.",
+      "modQuote": "Quote & Enroll",
+      "modCustomers": "Clientes",
+      "modContracts": "Contratos",
+      "modCommissions": "Comisiones",
+      "modDownline": "Downline",
+      "modSettings": "Configuración",
+      "act1Badge": "Invitación de Asistente",
+      "act1Name": "Sofía Ramírez",
+      "act1Role": "Asistente de Operaciones",
+      "act1Email": "sofia@tuagencia.com",
+      "act1Status": "Cuenta Asignada ✓",
+      "act2Badge": "Permisos Granulares",
+      "act2Allowed": "Permitido",
+      "act2Blocked": "Bloqueado",
+      "act3Badge": "Vista del Asistente",
+      "act3Session": "Sesión Activa: Sofía",
+      "act3Safe": "Tus comisiones y cuentas bancarias están 100% blindadas",
+      "statusActive": "Activo",
+      "threeModules": "3 Módulos",
+      "restricted": "Restringidos",
+      "off": "OFF"
+    },
+    "backOfficeTour": {
+      "panel1Title": "APPOINTMENTS",
+      "panel1Desc": "Gestiona y rastrea todos tus contratos, solicitudes y nombramientos activos con aseguradoras en un solo lugar.",
+      "panel2Title": "MEMBER SUPPORT",
+      "panel2Desc": "Sistema de tickets directo y asistencia dedicada para resolver consultas operativas y casos de pólizas con rapidez.",
+      "panel3Title": "DOCUMENTS",
+      "panel3Desc": "Repositorio centralizado y seguro para expedientes de clientes, archivos de pólizas y acuerdos firmados.",
+      "panel4Title": "DELEGATE USERS",
+      "panel4Desc": "Control granular de accesos y roles para delegar tareas a tu equipo y asistentes sin comprometer datos confidenciales.",
+      "panel5Title": "RESOURCES",
+      "panel5Desc": "Biblioteca de guías de aseguradoras, materiales comerciales, manuales y herramientas operativas listas para usar.",
+      "panel6Title": "NOTIFICATIONS",
+      "panel6Desc": "Alertas en tiempo real sobre vencimiento de licencias, estatus de pólizas, renovaciones y pagos de comisiones.",
+      "panel7Title": "REPORTING",
+      "panel7Desc": "Business intelligence completo, analíticas de producción, seguimiento de volumen de equipo y exportación de datos."
+    },
+    "howToJoin": {
+      "overline": "Activación Inmediata",
+      "title1": "De la firma a",
+      "title2": "tu primera póliza.",
+      "step1Title": "APLICAS",
+      "step1Desc": "Contracting te contacta en <b>24-48 horas hábiles</b>.",
+      "step2Title": "FIRMAS",
+      "step2Desc": "Digitalmente, desde el mismo portal tu <b>acuerdo de productor</b>.",
+      "step3Title": "CUENTA",
+      "step3Desc": "Recibes la invitación, <b>creas tu contraseña</b> y entras automáticamente.",
+      "step4Title": "PRODUCES",
+      "step4Desc": "Con tus appointments, tus licencias y <b>tu book ya cargados</b>."
+    },
+    "architecture": {
+      "panel1Title": "GO AMS CORE",
+      "panel1Subtitle": "El motor principal.",
+      "panel1Desc": "Lee y escribe datos en la operación real sin fricción ni lag. Sincronización 100% nativa con Epicare.",
+      "panel2Title": "CONTRATOS",
+      "panel2Subtitle": "Sync Bidireccional.",
+      "panel2Desc": "Los contratos y licencias viven en Epicare y se sincronizan en tiempo real. Lo que firmas aparece instantáneamente.",
+      "panel3Title": "COTIZACIONES",
+      "panel3Subtitle": "Precios 1:1.",
+      "panel3Desc": "El mismo catálogo y los mismos precios. La arquitectura garantiza que veas exactamente lo mismo que el cliente.",
+      "panel4Title": "SEGURIDAD",
+      "panel4Subtitle": "Cero Retención.",
+      "panel4Desc": "SSN y pagos viajan directo al carrier mediante túneles cifrados. GO AMS nunca guarda tus datos sensibles."
+    },
+    "faq": {
+      "title": "FAQ",
+      "subtitle": "Seis preguntas específicas del producto.",
+      "q1": "¿Cuánto cuesta GO AMS?",
+      "a1": "Nada. Está incluido en tu contrato de productor con Epicare.",
+      "q2": "¿Hay app móvil?",
+      "a2": "En el lanzamiento funciona en navegador, desde cualquier dispositivo. La app nativa está planeada para una fase posterior.",
+      "q3": "¿Puedo cotizar con los 130+ carriers?",
+      "a3": "Los appointments con los 130+ los administras en GO AMS. La cotización directa dentro del portal está disponible con los carriers integrados vía API — hoy cinco, y la lista crece.",
+      "q4": "¿Qué pasa con el book que ya tengo?",
+      "a4": "Tus pólizas existentes se cargan desde los reportes de tus uplines. Empiezas con tu historial, no desde cero.",
+      "q5": "¿Mi asistente puede tener acceso?",
+      "a5": "Sí, con cuenta propia y permisos que defines tú.",
+      "q6": "¿Alguien de Epicare puede entrar a mi cuenta?",
+      "a6": "Solo el equipo autorizado, cuando resuelve un caso tuyo. Cada acción queda registrada y visible para ti."
+    },
+    "ctaFinal": {
+      "eyebrow": "Epicare Insurance Corp™",
+      "title1": "Toma el control",
+      "title2": "de tu agencia.",
+      "desc": "El proceso de contracting toma días, no horas. Aplica ahora para tener tu cuenta de GO AMS lista desde el primer día, sin costo de plataforma.",
+      "btnPrimary": "Aplicar Ya",
+      "btnSecondary": "Contactar"
+    }
+  },
+  "goCrm": {
+    "hero": {
+      "overline": "GO CRM",
+      "title": "Tu Libro de Negocios, <blue>Un Centro de Control.</blue>",
+      "subhead": "La capa de venta de <bold>GO Hub</bold>. Todo lo que pasa antes de que un prospecto se vuelva póliza, en un solo lugar.",
+      "cta": "Notificarme",
+      "microcopy": "En construcción. <muted>Se libera en</muted>"
+    },
+    "problem": {
+      "overline": "El problema",
+      "h2": "Una venta no ocurre en un solo paso.",
+      "p1": "Alguien llamó el martes preguntando por un plan. Quedó en el <b>historial del teléfono</b>.",
+      "p2": "Le mandaste la cotización por correo. <b>Ahí sigue</b>.",
+      "p3": "Dijo que lo pensaba, que le escribieras en dos semanas. Eso <b>quedó en tu cabeza</b>.",
+      "p4": "<b>Te acordaste tarde.</b> Ya compró.",
+      "cierre": "Con 10 clientes, la memoria basta. <b>Con 100, no.</b>"
+    },
+    "salesLayer": {
+      "overline": "La capa de venta",
+      "title": "Con <blue>CRM</blue> conviertes oportunidades sueltas en <blue>ventas predecibles</blue>.",
+      "p1": "Cada uno tiene un valor y todos se te pueden caer por la misma razón: <b>nadie volvió a llamar.</b>",
+      "p2": "Eso es lo que hace un CRM. Cada persona con su ficha, en qué etapa está y qué sigue con ella. Deja de estar en tu memoria y pasa a estar en un sistema.",
+      "cierre": "GO CRM administra el ingreso que todavía no cobras.",
+      "disclaimer": "No cotiza, no emite pólizas y no administra comisiones. Para eso ya tienes otras herramientas.",
+      "featuresTitle": "Cuatro cosas, bien hechas.",
+      "feature1Title": "Prospectos",
+      "feature1Desc": "Una ficha por cada persona que todavía no compró: sus datos, qué necesita y en qué etapa está. Contactado, cotizado, solicitud enviada, esperando documentos, cerrado. Cuando los ves agrupados por etapa, ves dónde se te está atascando el negocio.",
+      "feature2Title": "Tareas",
+      "feature2Desc": "Algo que le debes a alguien, con fecha. Llamar a María el jueves. Pedirle el ID a Carlos. Es lo que convierte una agenda de contactos en un plan de trabajo.",
+      "feature3Title": "Automatizaciones",
+      "feature3Desc": "Reglas que el sistema ejecuta por ti. Entra un prospecto, sale el correo de bienvenida. Pasan tres días sin respuesta, aparece una tarea de volver a llamar. Las reglas las configuras tú.",
+      "feature4Title": "Seguimiento",
+      "feature4Desc": "Todo lo que pasó con esa persona, registrado. Y ningún prospecto sin siguiente paso definido."
+    },
+    "sources": {
+      "overline": "03 — Fuentes de Entrada",
+      "headline": "Toda oportunidad comienza en algún lugar.",
+      "description": "<normal>No importa si un prospecto te encuentra por</normal> <blue>Facebook,</blue> <normal>llena un</normal> <blue>formulario web,</blue> <normal>te escribe por</normal> <blue>WhatsApp</blue> <normal>o hace una</normal> <blue>llamada entrante...</blue> <normal>todo converge en un mismo pipeline estructurado.</normal>",
+      "outcomeUnified": "Salida Unificada",
+      "outcomeContact": "Un Perfil de Contacto",
+      "outcomeProcess": "Proceso de Venta",
+      "outcomeOpportunity": "Un Pipeline Estructurado",
+      "active": "Activo"
+    },
+    "contactVsOpp": {
+      "overline": "04 — Contacto ≠ Oportunidad",
+      "headline": "Una persona puede significar más de una oportunidad.",
+      "contactLabel": "Perfil de Contacto",
+      "contactName": "Carlos Martínez",
+      "opp1": "Oportunidad: Dental",
+      "opp1Desc": "Flujo de trabajo independiente y siguientes pasos para el proceso Dental.",
+      "opp2": "Oportunidad: Auto",
+      "opp2Desc": "Motor de cotización y seguimiento totalmente separados para el proceso de Auto.",
+      "opp3": "Oportunidad: Vida",
+      "opp3Desc": "Pipeline de seguimiento a largo plazo configurado para la cobertura de Vida.",
+      "statusActive": "Cliente Activo",
+      "openOpps": "Oportunidades Abiertas",
+      "tasksTitle": "Tareas y Notas Pendientes",
+      "task1Title": "Llamada de seguimiento — Dental",
+      "task1Time": "Hoy, 3:00 PM",
+      "task2Title": "Enviar cotización — Seguro de Auto",
+      "task2Time": "Pendiente de revisión",
+      "taskNote": "Nota: Prefiere contacto por WhatsApp en las mañanas.",
+      "metricsTitle": "Métricas del Cliente",
+      "metricLtv": "LTV Proyectado",
+      "metricLtvValue": "$12,450",
+      "metricFirstTouch": "Primer Contacto",
+      "metricFirstTouchValue": "Hace 3 semanas (Form Web)",
+      "metricResponse": "Tiempo de Respuesta",
+      "metricResponseValue": "4 minutos",
+      "metricTouchpoints": "Puntos de Contacto",
+      "metricTouchpointsValue": "14 interacciones"
+    },
+    "dayVsList": {
+      "overline": "La diferencia",
+      "h2": "La mayoría de estos sistemas te da una lista. <blue>GO CRM te da un día.</blue>",
+      "p1": "Un CRM te muestra a quién tienes. Decidir cada mañana a quién llamar primero sigue siendo tu trabajo, y con ochenta prospectos armar ese día toma más tiempo que hacer las llamadas.",
+      "p2": "Cada tarea tiene fecha. Cada prospecto tiene un siguiente paso. Al entrar, ese día ya está armado.",
+      "step1Title": "Lo que vence hoy.",
+      "step1Desc": "Las tareas con fecha de hoy, arriba y en orden.",
+      "step2Title": "Lo que se pasó de fecha.",
+      "step2Desc": "Lo que prometiste y no hiciste, separado y visible. No desaparece.",
+      "step3Title": "Lo que no tiene siguiente paso.",
+      "step3Desc": "Los prospectos que quedaron sin nada agendado. Son los que se caen.",
+      "cierre": "Las reglas las defines tú. El orden lo mantiene el sistema."
+    },
+    "pipeline": {
+      "overline": "PIPELINE",
+      "headline": "Visualiza el avance real de cada prospecto.",
+      "description": "Una vista clara del proceso comercial, desde los nuevos prospectos hasta las oportunidades que avanzan."
+    },
+    "conversations": {
+      "overline": "CONVERSACIONES",
+      "headline": "Cada conversación se mantiene conectada a la venta.",
+      "description": "WhatsApp, correos y SMS no ocurren en el vacío. Pertenecen dentro de la oportunidad."
+    },
+    "calendar": {
+      "overline": "CALENDARIO + CITAS",
+      "headline": "Tu pipeline se conecta con tu calendario.",
+      "description": "Sincronización nativa con todo el ecosistema de Google Calendar. Las citas son parte del flujo de trabajo, no eventos aislados."
+    },
+    "automation": {
+      "headline": "Keep the follow-up moving automatically."
+    }
+  }
+}
