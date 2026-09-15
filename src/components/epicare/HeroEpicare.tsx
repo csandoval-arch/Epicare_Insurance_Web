@@ -219,6 +219,10 @@ function HeroEpicareV1({ t }: { t: any }) {
 
 function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const scrollBadgeRef = useRef<HTMLDivElement>(null);
+  const ctaWrapperRef = useRef<HTMLDivElement>(null);
+  const videoWrapperRef = useRef<HTMLDivElement>(null);
+  
   const isEn = locale === 'en';
 
   useEffect(() => {
@@ -226,22 +230,77 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
     const el = containerRef.current;
     if (!el) return;
     
+    // Check for reduced motion (Hardware Symphony accessibility rule)
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
     const ctx = gsap.context(() => {
-      // Suave fade in de entrada
+      // Act 1: Suave fade in de entrada
       gsap.fromTo(el, 
         { opacity: 0 }, 
         { opacity: 1, duration: 1.5, ease: "power2.out" }
       );
 
-      // Mantenemos el pin estructural para que BrandsCarousel (que tiene mt-[-100vh]) 
-      // no aplaste y cubra el Hero inmediatamente al cargar.
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top top",
-        end: "+=250%",
-        pin: true,
-        pinSpacing: true,
+      // Act 2: Cinematic Tunnel Transition (ScrollTrigger)
+      // Mantenemos el pin estructural para BrandsCarousel
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: el,
+          start: "top top",
+          end: "+=250%",
+          scrub: 1,
+          pin: true,
+          pinSpacing: true,
+        }
       });
+
+      if (!prefersReducedMotion) {
+        // 1. Animate UI and Text OUT (Smart Shutdown: fade and translate)
+        // Separamos los elementos para que salgan hacia los lados como un telón abriéndose
+        
+        // Elementos de la izquierda (Textos: GO, VE MÁS, GROWTH, CRECIMIENTO)
+        tl.to(".hero-act1-left", {
+          opacity: 0,
+          x: "-25vw", 
+          duration: 1.5,
+          stagger: 0.05,
+          ease: "power2.inOut"
+        }, 0);
+
+        // Elementos de la derecha (Textos: BEYOND, ALLÁ DEL, y el bloque de CTAs)
+        tl.to([".hero-act1-right", ctaWrapperRef.current], {
+          opacity: 0,
+          x: "25vw", 
+          duration: 1.5,
+          stagger: 0.05,
+          ease: "power2.inOut"
+        }, 0);
+
+        // El Scroll Badge central se hunde suavemente
+        tl.to(scrollBadgeRef.current, {
+          opacity: 0,
+          y: 60,
+          scale: 0.8,
+          duration: 1.5,
+          ease: "power2.inOut"
+        }, 0);
+
+        // 2. Expand the Architectural Cut to Fullscreen using width/left
+        tl.to(videoWrapperRef.current, {
+          left: "0%",
+          width: "100vw",
+          maxWidth: "100vw", 
+          minWidth: "100vw", 
+          duration: 2,
+          ease: "power3.inOut"
+        }, 0);
+
+        // 3. Fade out the dark architectural shadows/tints
+        tl.to(".hero-video-shadow", {
+          opacity: 0,
+          duration: 1.5,
+          ease: "power2.inOut"
+        }, 0.5);
+      }
     }, el);
 
     return () => ctx.revert();
@@ -260,7 +319,7 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
       <HeaderEpicare isHeaderForcedDark={true} />
 
       {/* Vertical Architectural Cut (Video) - Movido 1 columna extra a la izquierda solo en inglés */}
-      <div className="absolute top-0 bottom-0 max-w-[240px] min-w-[140px] h-full z-20 overflow-hidden bg-black shadow-2xl"
+      <div ref={videoWrapperRef} className="absolute top-0 bottom-0 max-w-[240px] min-w-[140px] h-full z-20 overflow-hidden bg-black shadow-2xl"
            style={{ 
              left: isEn ? 'calc(25% + 84px)' : 'calc(33.333% + 84px)', 
              width: 'calc(16.666% - 24px)' 
@@ -277,8 +336,8 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
         </video>
         
         {/* Subtle physical depth shadows and blue architectural tint inside the cut */}
-        <div className="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.8)] pointer-events-none"></div>
-        <div className="absolute inset-0 bg-[#35BBFD]/10 mix-blend-color pointer-events-none"></div>
+        <div className="hero-video-shadow absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.8)] pointer-events-none"></div>
+        <div className="hero-video-shadow absolute inset-0 bg-[#35BBFD]/10 mix-blend-color pointer-events-none"></div>
       </div>
 
       {/* Massive Editorial Typography crossing the vertical axis */}
@@ -290,7 +349,7 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
           {isEn ? (
             <>
               {/* ENGLISH LAYOUT: GO BEYOND GROWTH */}
-              <div className="absolute top-[45%] -translate-y-[100%] z-30 flex flex-col items-start gap-2 md:gap-4" style={{ left: '17.666vw' }}>
+              <div className="hero-act1-left absolute top-[45%] -translate-y-[100%] z-30 flex flex-col items-start gap-2 md:gap-4" style={{ left: '17.666vw' }}>
                 <div 
                   className="text-[9px] lg:text-[11px] font-semibold tracking-[0.2em] text-[#35BBFD] uppercase opacity-90 flex items-center" 
                   style={{ fontFamily: 'var(--font-jetbrains-mono)', letterSpacing: '0.2em' }}
@@ -300,17 +359,17 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
                 <div>GO</div>
               </div>
               
-              <div className="absolute top-[45%] -translate-y-[100%] z-10" style={{ left: 'calc(41.666% + 66px)' }}>
+              <div className="hero-act1-right absolute top-[45%] -translate-y-[100%] z-10" style={{ left: 'calc(41.666% + 66px)' }}>
                 BEYOND
               </div>
-              <div className="absolute top-[45%] z-30" style={{ left: '17.666vw' }}>
+              <div className="hero-act1-left absolute top-[45%] z-30" style={{ left: '17.666vw' }}>
                 GROWTH.
               </div>
             </>
           ) : (
             <>
               {/* SPANISH LAYOUT */}
-              <div className="absolute top-[45%] -translate-y-[100%] left-[10vw] z-30 flex flex-col items-start gap-2 md:gap-4">
+              <div className="hero-act1-left absolute top-[45%] -translate-y-[100%] left-[10vw] z-30 flex flex-col items-start gap-2 md:gap-4">
                 <div 
                   className="text-[9px] lg:text-[11px] font-semibold tracking-[0.2em] text-[#35BBFD] uppercase opacity-90 flex items-center" 
                   style={{ fontFamily: 'var(--font-jetbrains-mono)', letterSpacing: '0.2em' }}
@@ -321,12 +380,12 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
               </div>
 
               {/* Parte 2: ALLÁ DEL (Detrás del video -> z-10). Gap ajustado -6px para simetría milimétrica. */}
-              <div className="absolute top-[45%] -translate-y-[100%] z-10" style={{ left: 'calc(50% + 66px)' }}>
+              <div className="hero-act1-right absolute top-[45%] -translate-y-[100%] z-10" style={{ left: 'calc(50% + 66px)' }}>
                 ALLÁ DEL
               </div>
               
               {/* Fila 2: CRECIMIENTO. (Por encima del video -> z-30) */}
-              <div className="absolute top-[45%] left-[10vw] z-30">
+              <div className="hero-act1-left absolute top-[45%] left-[10vw] z-30">
                 CRECIMIENTO.
               </div>
             </>
@@ -335,7 +394,7 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
       </div>
 
       {/* Ultra-Minimalist Circular Scroll to Explore (Center Bottom) */}
-      <div className="absolute bottom-[3vh] lg:bottom-[4vh] left-1/2 -translate-x-1/2 z-30 flex items-center justify-center w-16 h-16 lg:w-[85px] lg:h-[85px] opacity-50 hover:opacity-100 transition-opacity cursor-pointer">
+      <div ref={scrollBadgeRef} className="absolute bottom-[3vh] lg:bottom-[4vh] left-1/2 -translate-x-1/2 z-30 flex items-center justify-center w-16 h-16 lg:w-[85px] lg:h-[85px] opacity-50 hover:opacity-100 transition-opacity cursor-pointer">
         <style>{`
           @keyframes spin-slow { 100% { transform: rotate(360deg); } }
           @keyframes bounce-subtle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
@@ -364,7 +423,7 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
       </div>
 
       {/* Secondary Information & Interface Controls */}
-      <div className="absolute bottom-[10vh] right-[5vw] lg:right-[16.33vw] z-30 w-full max-w-[380px] pointer-events-auto flex flex-col gap-5">
+      <div ref={ctaWrapperRef} className="absolute bottom-[10vh] right-[5vw] lg:right-[16.33vw] z-30 w-full max-w-[380px] pointer-events-auto flex flex-col gap-5">
         
         {/* Minimal Social Proof Component */}
         <div className="flex items-center gap-4">
