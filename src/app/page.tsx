@@ -83,8 +83,8 @@ export default function EpicareLandingPage() {
       <div className="w-full order-1"><LoaderEpicare /></div>
       {/* ── S01 · Hero (HOOK · pin 1) ── */}
       <div className="w-full order-2"><HeroEpicare /></div>
-      {/* ── S02 · BrandsCarousel (credibilidad) — solape sobre Hero pineado ── */}
-      <div className="w-full order-3 mt-[-100vh] relative z-20"><BrandsCarousel /></div>
+      {/* ── S02 · BrandsCarousel (credibilidad) — scroll normal después del Hero ── */}
+      <div className="w-full order-3 relative z-20"><BrandsCarousel /></div>
       {/* ── S03 · DarkGradient / La Plataforma (solución inmediata) ── */}
       <div className="w-full order-4"><DarkGradientSection /></div>
       {/* ── S04 · Metrics (prueba dura) ── */}

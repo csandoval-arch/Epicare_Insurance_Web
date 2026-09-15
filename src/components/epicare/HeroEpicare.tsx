@@ -224,6 +224,14 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
   const videoWrapperRef = useRef<HTMLDivElement>(null);
   
   const isEn = locale === 'en';
+  const tMetrics = useTranslations('landingV2.metrics');
+
+  const metricsData = [
+    { value: "130+", label: tMetrics('carriers') },
+    { value: "6,000+", label: tMetrics('years') },
+    { value: "100+", label: tMetrics('agents') },
+    { value: "2021", label: tMetrics('platform') }
+  ];
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -300,6 +308,30 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
           duration: 1.5,
           ease: "power2.inOut"
         }, 0.5);
+
+        // 4. Act 2: Slide up the Solid Metrics Bar
+        // La barra sube desde abajo (yPercent: 100 -> 0)
+        tl.fromTo(".act2-metrics-grid", {
+          opacity: 0,
+          yPercent: 100
+        }, {
+          opacity: 1,
+          yPercent: 0,
+          duration: 1.2,
+          ease: "power3.out"
+        }, 1.0);
+        
+        // Efecto cascada (stagger) para el contenido dentro de cada columna
+        tl.fromTo(".act2-metric-content", {
+          y: 20,
+          opacity: 0,
+        }, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power2.out"
+        }, 1.2);
       }
     }, el);
 
@@ -462,6 +494,39 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
               <ArrowUR className="absolute w-4 h-4 -translate-x-5 translate-y-5 transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
             </span>
           </button>
+        </div>
+      </div>
+
+      {/* ACT 2: Architectural Footer Metrics (Flush to bottom, high transparency) */}
+      <div className="act2-metrics-grid absolute bottom-0 inset-x-0 z-40 pointer-events-none opacity-0 border-t border-white/10 bg-black/10 backdrop-blur-sm">
+        <div className="w-full mx-auto grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
+          
+          {metricsData.map((metric, idx) => {
+            const hoverAccent = idx === 0 ? 'group-hover:bg-[#35BBFD]' : idx === 1 ? 'group-hover:bg-[#F26023]' : 'group-hover:bg-white/50';
+
+            return (
+              <div 
+                key={idx}
+                className="p-6 md:p-8 lg:p-12 flex flex-col justify-end relative overflow-hidden pointer-events-auto group h-[180px] md:h-[220px] lg:h-[280px] transition-colors duration-500 hover:bg-white/[0.03]"
+              >
+                {/* Thin animated accent bar at the very top of the column */}
+                <div className={`absolute top-0 left-0 w-0 h-[2px] ${hoverAccent} transition-all duration-[800ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:w-full`} />
+                
+                {/* Subtle bottom glow on hover */}
+                <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
+                <div className="act2-metric-content relative z-10 flex flex-col items-start mt-auto">
+                  <div className="text-5xl lg:text-7xl font-medium tracking-tighter text-white mb-2 lg:mb-4 drop-shadow-lg" style={{ fontFamily: 'var(--font-inter-display)' }}>
+                    {metric.value}
+                  </div>
+                  <div className="text-[10px] lg:text-[13px] text-white/60 font-medium uppercase tracking-[0.15em] group-hover:text-white transition-colors duration-300 drop-shadow-md" style={{ fontFamily: 'var(--font-jetbrains-mono)' }}>
+                    {metric.label}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+
         </div>
       </div>
 
