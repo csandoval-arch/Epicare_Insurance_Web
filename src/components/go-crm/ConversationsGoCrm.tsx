@@ -85,43 +85,45 @@ export default function ConversationsGoCrm() {
   };
 
   return (
-    <section ref={container} className="relative w-full min-h-[90vh] bg-[var(--color-surface-BG-base)] text-[var(--color-text-primary)] overflow-hidden flex flex-col items-center justify-center py-24 lg:py-32 border-y border-[var(--color-border-Strokes-default)]">
+    <section ref={container} className="relative w-full min-h-[90vh] bg-[var(--color-surface-BG-base)] text-[var(--color-text-primary)] overflow-hidden flex items-center justify-center py-24 lg:py-32 border-y border-[var(--color-border-Strokes-default)]">
       
       {/* Background ambient glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] max-w-3xl max-h-3xl bg-[var(--color-brand-blue)]/5 blur-[120px] rounded-full pointer-events-none" />
 
-      {/* TEXT BLOCK */}
-      <div className="w-full max-w-4xl mx-auto px-gutter-md flex flex-col items-center text-center relative z-20 mb-16 lg:mb-24">
-        <div className="overflow-hidden mb-6 flex justify-center">
-          <p className="conv-text-reveal text-overline text-[var(--color-text-accent-blue)] uppercase tracking-widest flex items-center gap-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand-blue)]" />
-            08 — {t("overline", { defaultMessage: "CONVERSATIONS" })}
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand-blue)]" />
-          </p>
-        </div>
+      {/* GRID CONTAINER */}
+      <div className="w-full max-w-[1440px] mx-auto px-gutter-md grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center relative z-20">
         
-        <div className="overflow-hidden pb-4">
-          <h2 className="conv-text-reveal text-display-lg font-bold tracking-tighter leading-[0.9] text-[var(--color-text-primary)]">
-            {t("headline", { defaultMessage: "Every conversation stays connected to the sale." })}
-          </h2>
+        {/* TEXT BLOCK (Left) */}
+        <div className="flex flex-col items-start text-left lg:pr-8">
+          <div className="overflow-hidden mb-6 flex justify-start">
+            <p className="conv-text-reveal text-overline text-[var(--color-text-accent-blue)] uppercase tracking-widest flex items-center gap-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand-blue)]" />
+              08 — {t("overline", { defaultMessage: "CONVERSATIONS" })}
+            </p>
+          </div>
+          
+          <div className="overflow-hidden pb-4">
+            <h2 className="conv-text-reveal text-display-lg font-bold tracking-tighter leading-[1.0] text-[var(--color-text-primary)]">
+              {t("headline", { defaultMessage: "Every conversation stays connected to the sale." })}
+            </h2>
+          </div>
+          
+          <div className="overflow-hidden mt-4 flex justify-start">
+            <p className="conv-text-reveal text-body-lg text-[var(--color-text-secondary)] leading-relaxed max-w-xl">
+              {t("description", { defaultMessage: "WhatsApp, Email, and SMS don't happen in a vacuum. They belong inside the opportunity." })}
+            </p>
+          </div>
         </div>
-        
-        <div className="overflow-hidden mt-4 flex justify-center">
-          <p className="conv-text-reveal text-body-lg text-[var(--color-text-secondary)] leading-relaxed max-w-2xl">
-            {t("description", { defaultMessage: "WhatsApp, Email, and SMS don't happen in a vacuum. They belong inside the opportunity." })}
-          </p>
-        </div>
-      </div>
 
-      {/* VISUAL BLOCK (Omni-Thread UI) */}
-      <div className="w-full px-gutter-md flex justify-center relative z-10 perspective-[1000px]">
-        
-        <div 
-          ref={threadRef} 
-          onMouseMove={handleMagneticMove}
-          onMouseLeave={handleMagneticLeave}
-          className="w-full max-w-2xl bg-[var(--color-surface-BG-1)] border border-[var(--color-border-Strokes-strong)] rounded-[2rem] shadow-elevation-5 p-6 md:p-10 flex flex-col gap-6 relative transform-style-3d cursor-crosshair"
-        >
+        {/* VISUAL BLOCK (Right) */}
+        <div className="w-full flex justify-center lg:justify-end relative z-10 perspective-[1000px]">
+          
+          <div 
+            ref={threadRef} 
+            onMouseMove={handleMagneticMove}
+            onMouseLeave={handleMagneticLeave}
+            className="w-full max-w-2xl bg-[var(--color-surface-BG-1)] border border-[var(--color-border-Strokes-strong)] rounded-[2rem] shadow-elevation-5 p-6 md:p-10 flex flex-col gap-6 relative transform-style-3d cursor-crosshair"
+          >
           {/* Header of the fake UI */}
           <div className="flex items-center justify-between border-b border-[var(--color-border-Strokes-default)] pb-4 mb-2">
              <div className="flex items-center gap-4">
@@ -188,6 +190,7 @@ export default function ConversationsGoCrm() {
         </div>
       </div>
 
+      </div>
     </section>
   );
 }

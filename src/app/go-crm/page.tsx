@@ -14,6 +14,7 @@ import DayVsListContainer from "@/components/go-crm/day-vs-list";
 import ConversationsGoCrm from "@/components/go-crm/ConversationsGoCrm";
 import AutomationGoCrm from "@/components/go-crm/AutomationGoCrm";
 import CalendarGoCrm from "@/components/go-crm/CalendarGoCrm";
+import OpportunityJourneyGoCrm from "@/components/go-crm/OpportunityJourneyGoCrm";
 import CierreGoCrm from "@/components/go-crm/CierreGoCrm";
 
 export default function GoCrmPage() {
@@ -51,6 +52,7 @@ export default function GoCrmPage() {
       <ConversationsGoCrm />
       <CalendarGoCrm />
       <AutomationGoCrm />
+      <OpportunityJourneyGoCrm />
       <CierreGoCrm />
 
       {/* ── GLOBAL FOOTER ── */}

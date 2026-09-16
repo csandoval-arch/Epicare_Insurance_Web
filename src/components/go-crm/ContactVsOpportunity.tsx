@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslations } from "next-intl";
 import { EASE, STAGGER } from "@/lib/motion";
+import { Envelope, Phone, Database } from "@phosphor-icons/react";
 
 // ── DATOS ─────────────────────────────────────────────────────────────────────
 
@@ -339,6 +340,7 @@ export default function ContactVsOpportunity() {
         <div className="slice-left absolute inset-0 bg-slate-900" style={{ clipPath: 'polygon(0 0, 33.33% 0, 33.33% 100%, 0 100%)' }}>
           <div className="absolute top-0 bottom-0 left-0 w-[33.33%] z-0">
              <img src="/client_auto.jpg" alt="Auto Client" className="w-full h-full object-cover opacity-[0.65]" />
+             <div className="absolute inset-0 bg-[#00a1e0]/15 mix-blend-color" />
           </div>
           <div className="absolute top-0 bottom-0 left-0 w-[33.33%] p-static-xl md:p-static-2xl pt-static-xl md:pt-[3.25rem] flex flex-col gap-fluid-lg border-r border-slate-800">
             
@@ -358,8 +360,21 @@ export default function ContactVsOpportunity() {
                     <h3 className="text-h6 text-slate-900 font-semibold leading-tight">Elena Rojas</h3>
                   </div>
                 </div>
-                <div className="flex flex-col gap-1 pt-static-sm border-t border-slate-900/10">
-                  <span className="text-body-xs text-slate-700 font-mono">c.martinez@email.com</span>
+                <div className="flex flex-col gap-2 pt-static-sm border-t border-slate-900/10">
+                  <div className="flex items-center gap-2">
+                    <Envelope className="w-4 h-4 text-slate-400" />
+                    <span className="text-body-xs text-slate-600 font-mono">e.rojas@email.com</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-4 h-4 text-slate-400" />
+                    <span className="text-body-xs text-slate-600 font-mono">+1 (555) 234-9812</span>
+                  </div>
+                  <div className="pt-1">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 border border-slate-900/10 rounded-full bg-white/40 backdrop-blur-sm">
+                      <Database className="w-3.5 h-3.5 text-[#00a1e0]" />
+                      <span className="text-[11px] font-medium text-slate-700 tracking-wide">Salesforce</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -370,6 +385,7 @@ export default function ContactVsOpportunity() {
         <div className="slice-center absolute inset-0 bg-slate-900" style={{ clipPath: 'polygon(33.33% 0, 66.66% 0, 66.66% 100%, 33.33% 100%)' }}>
           <div className="absolute top-0 bottom-0 left-[33.33%] w-[33.33%] z-0">
              <img src="/client_business.jpg" alt="Business Client" className="w-full h-full object-cover opacity-[0.65]" />
+             <div className="absolute inset-0 bg-[#00a1e0]/15 mix-blend-color" />
           </div>
           <div className="absolute top-0 bottom-0 left-[33.33%] w-[33.33%] p-static-xl md:p-static-2xl pb-static-xl md:pb-[3.25rem] flex flex-col justify-end items-center border-r border-slate-800">
             <div className="relative z-10 w-full max-w-[320px] rounded-2xl border border-white/50 shadow-elevation-4 overflow-hidden">
@@ -386,8 +402,21 @@ export default function ContactVsOpportunity() {
                     <h3 className="text-h6 text-slate-900 font-semibold leading-tight">David Smith</h3>
                   </div>
                 </div>
-                <div className="flex flex-col gap-1 pt-static-sm border-t border-slate-900/10">
-                  <span className="text-body-xs text-slate-700 font-mono">david.smith@business.com</span>
+                <div className="flex flex-col gap-2 pt-static-sm border-t border-slate-900/10">
+                  <div className="flex items-center gap-2">
+                    <Envelope className="w-4 h-4 text-slate-400" />
+                    <span className="text-body-xs text-slate-600 font-mono">david.smith@business.com</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-4 h-4 text-slate-400" />
+                    <span className="text-body-xs text-slate-600 font-mono">+1 (555) 765-4321</span>
+                  </div>
+                  <div className="pt-1">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 border border-slate-900/10 rounded-full bg-white/40 backdrop-blur-sm">
+                      <Database className="w-3.5 h-3.5 text-[#00a1e0]" />
+                      <span className="text-[11px] font-medium text-slate-700 tracking-wide">Salesforce</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -398,6 +427,7 @@ export default function ContactVsOpportunity() {
         <div className="slice-right absolute inset-0 bg-slate-900" style={{ clipPath: 'polygon(66.66% 0, 100% 0, 100% 100%, 66.66% 100%)' }}>
           <div className="absolute top-0 bottom-0 right-0 w-[33.33%] z-0">
              <img src="/client_family.jpg" alt="Family Client" className="w-full h-full object-cover opacity-[0.65]" />
+             <div className="absolute inset-0 bg-[#00a1e0]/15 mix-blend-color" />
           </div>
           <div className="absolute top-0 bottom-0 right-0 w-[33.33%] p-static-xl md:p-static-2xl pt-static-xl md:pt-[3.25rem] flex flex-col items-center border-l border-slate-800">
             <div className="relative z-10 w-full max-w-[320px] rounded-2xl border border-white/50 shadow-elevation-4 overflow-hidden">
@@ -414,8 +444,21 @@ export default function ContactVsOpportunity() {
                     <h3 className="text-h6 text-slate-900 font-semibold leading-tight">Maria Lopez</h3>
                   </div>
                 </div>
-                <div className="flex flex-col gap-1 pt-static-sm border-t border-slate-900/10">
-                  <span className="text-body-xs text-slate-700 font-mono">m.lopez@family.com</span>
+                <div className="flex flex-col gap-2 pt-static-sm border-t border-slate-900/10">
+                  <div className="flex items-center gap-2">
+                    <Envelope className="w-4 h-4 text-slate-400" />
+                    <span className="text-body-xs text-slate-600 font-mono">m.lopez@family.com</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-4 h-4 text-slate-400" />
+                    <span className="text-body-xs text-slate-600 font-mono">+1 (555) 987-6543</span>
+                  </div>
+                  <div className="pt-1">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 border border-slate-900/10 rounded-full bg-white/40 backdrop-blur-sm">
+                      <Database className="w-3.5 h-3.5 text-[#00a1e0]" />
+                      <span className="text-[11px] font-medium text-slate-700 tracking-wide">Salesforce</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -428,6 +471,7 @@ export default function ContactVsOpportunity() {
       <div className="slice-left absolute inset-0 pointer-events-none z-30 md:hidden bg-slate-900 flex flex-col items-center justify-center px-static-xl">
           <div className="absolute inset-0 z-0">
              <img src="/client_auto.jpg" alt="Auto Client" className="w-full h-full object-cover opacity-[0.45]" />
+             <div className="absolute inset-0 bg-[#00a1e0]/15 mix-blend-color" />
           </div>
           <div className="z-10 flex flex-col w-full p-static-xl pt-static-2xl max-w-sm mx-auto">
             <div className="relative z-10 w-full max-w-[320px] mx-auto rounded-2xl border border-white/50 shadow-elevation-4 overflow-hidden">
