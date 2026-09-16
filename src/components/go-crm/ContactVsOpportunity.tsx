@@ -332,86 +332,127 @@ export default function ContactVsOpportunity() {
       {/* ════════════════════════════════════════════════════════════════════════
           ACTO 1: Foreground Slices (Sin Cambios)
       ════════════════════════════════════════════════════════════════════════ */}
+      {/* Foreground Layer: ACT 1 The Contact (Sliced via clip-path) */}
       <div className="absolute inset-0 pointer-events-none z-30 hidden md:block">
-        <SliceFg
-          cls="slice-left"
-          clip="polygon(0 0, 33.33% 0, 33.33% 100%, 0 100%)"
-          img="/client_auto.jpg"
-          left="0" width="33.33%" border="right" valign="top"
-          initials="ER" name="Elena Rojas" email="e.rojas@email.com"
-        />
-        <SliceFg
-          cls="slice-center"
-          clip="polygon(33.33% 0, 66.66% 0, 66.66% 100%, 33.33% 100%)"
-          img="/client_business.jpg"
-          left="33.33%" width="33.33%" border="right" valign="bottom"
-          initials="DS" name="David Smith" email="david.smith@co.com"
-        />
-        <SliceFg
-          cls="slice-right"
-          clip="polygon(66.66% 0, 100% 0, 100% 100%, 66.66% 100%)"
-          img="/client_family.jpg"
-          left="66.66%" width="33.34%" border="left" valign="top"
-          initials="ML" name="Maria Lopez" email="m.lopez@family.com"
-        />
+        
+        {/* Left Slice */}
+        <div className="slice-left absolute inset-0 bg-slate-900" style={{ clipPath: 'polygon(0 0, 33.33% 0, 33.33% 100%, 0 100%)' }}>
+          <div className="absolute top-0 bottom-0 left-0 w-[33.33%] z-0">
+             <img src="/client_auto.jpg" alt="Auto Client" className="w-full h-full object-cover opacity-[0.65]" />
+          </div>
+          <div className="absolute top-0 bottom-0 left-0 w-[33.33%] p-static-xl md:p-static-2xl pt-static-xl md:pt-[3.25rem] flex flex-col gap-fluid-lg border-r border-slate-800">
+            
+            {/* The Realistic Profile Card (Ultra-Glassmorphic Minimalist) */}
+            <div className="relative z-10 w-full max-w-[320px] rounded-2xl border border-white/50 shadow-elevation-4 overflow-hidden">
+              <div className="absolute inset-0 -z-10 rounded-2xl">
+                <div className="absolute inset-0 bg-white/40 backdrop-blur-[40px] saturate-[1.5]" />
+                <div className="absolute inset-0 bg-gradient-to-br from-white/60 to-white/10" />
+                <div className="absolute inset-0 rounded-2xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)]" />
+              </div>
+              <div className="relative z-10 p-static-md flex flex-col gap-static-sm">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-static-sm">
+                    <div className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center shadow-elevation-1 shrink-0">
+                      <span className="text-body-sm font-medium text-white">ER</span>
+                    </div>
+                    <h3 className="text-h6 text-slate-900 font-semibold leading-tight">Elena Rojas</h3>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-1 pt-static-sm border-t border-slate-900/10">
+                  <span className="text-body-xs text-slate-700 font-mono">c.martinez@email.com</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Center Slice */}
+        <div className="slice-center absolute inset-0 bg-slate-900" style={{ clipPath: 'polygon(33.33% 0, 66.66% 0, 66.66% 100%, 33.33% 100%)' }}>
+          <div className="absolute top-0 bottom-0 left-[33.33%] w-[33.33%] z-0">
+             <img src="/client_business.jpg" alt="Business Client" className="w-full h-full object-cover opacity-[0.65]" />
+          </div>
+          <div className="absolute top-0 bottom-0 left-[33.33%] w-[33.33%] p-static-xl md:p-static-2xl pb-static-xl md:pb-[3.25rem] flex flex-col justify-end items-center border-r border-slate-800">
+            <div className="relative z-10 w-full max-w-[320px] rounded-2xl border border-white/50 shadow-elevation-4 overflow-hidden">
+              <div className="absolute inset-0 -z-10 rounded-2xl">
+                <div className="absolute inset-0 bg-white/40 backdrop-blur-[40px] saturate-[1.5]" />
+                <div className="absolute inset-0 bg-gradient-to-br from-white/60 to-white/10" />
+              </div>
+              <div className="relative z-10 p-static-md flex flex-col gap-static-sm">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-static-sm">
+                    <div className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center shadow-elevation-1 shrink-0">
+                      <span className="text-body-sm font-medium text-white">DS</span>
+                    </div>
+                    <h3 className="text-h6 text-slate-900 font-semibold leading-tight">David Smith</h3>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-1 pt-static-sm border-t border-slate-900/10">
+                  <span className="text-body-xs text-slate-700 font-mono">david.smith@business.com</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Slice */}
+        <div className="slice-right absolute inset-0 bg-slate-900" style={{ clipPath: 'polygon(66.66% 0, 100% 0, 100% 100%, 66.66% 100%)' }}>
+          <div className="absolute top-0 bottom-0 right-0 w-[33.33%] z-0">
+             <img src="/client_family.jpg" alt="Family Client" className="w-full h-full object-cover opacity-[0.65]" />
+          </div>
+          <div className="absolute top-0 bottom-0 right-0 w-[33.33%] p-static-xl md:p-static-2xl pt-static-xl md:pt-[3.25rem] flex flex-col items-center border-l border-slate-800">
+            <div className="relative z-10 w-full max-w-[320px] rounded-2xl border border-white/50 shadow-elevation-4 overflow-hidden">
+              <div className="absolute inset-0 -z-10 rounded-2xl">
+                <div className="absolute inset-0 bg-white/40 backdrop-blur-[40px] saturate-[1.5]" />
+                <div className="absolute inset-0 bg-gradient-to-br from-white/60 to-white/10" />
+              </div>
+              <div className="relative z-10 p-static-md flex flex-col gap-static-sm">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-static-sm">
+                    <div className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center shadow-elevation-1 shrink-0">
+                      <span className="text-body-sm font-medium text-white">ML</span>
+                    </div>
+                    <h3 className="text-h6 text-slate-900 font-semibold leading-tight">Maria Lopez</h3>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-1 pt-static-sm border-t border-slate-900/10">
+                  <span className="text-body-xs text-slate-700 font-mono">m.lopez@family.com</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <div
-        className="slice-left absolute inset-0 pointer-events-none z-30 md:hidden flex items-center justify-center px-gutter-sm"
-        style={{ background: "var(--color-brand-dark)" }}
-      >
-        <img src="/client_auto.jpg" alt="" className="absolute inset-0 w-full h-full object-cover opacity-40" />
-        <div className="relative z-10 w-full">
-          <ContactCard initials="ER" name="Elena Rojas" email="e.rojas@email.com" />
-        </div>
+      {/* Mobile Foreground Layer: Fallback */}
+      <div className="slice-left absolute inset-0 pointer-events-none z-30 md:hidden bg-slate-900 flex flex-col items-center justify-center px-static-xl">
+          <div className="absolute inset-0 z-0">
+             <img src="/client_auto.jpg" alt="Auto Client" className="w-full h-full object-cover opacity-[0.45]" />
+          </div>
+          <div className="z-10 flex flex-col w-full p-static-xl pt-static-2xl max-w-sm mx-auto">
+            <div className="relative z-10 w-full max-w-[320px] mx-auto rounded-2xl border border-white/50 shadow-elevation-4 overflow-hidden">
+              <div className="absolute inset-0 -z-10 rounded-2xl">
+                <div className="absolute inset-0 bg-white/40 backdrop-blur-[40px] saturate-[1.5]" />
+                <div className="absolute inset-0 bg-gradient-to-br from-white/60 to-white/10" />
+                <div className="absolute inset-0 rounded-2xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)]" />
+              </div>
+              <div className="relative z-10 p-static-md flex flex-col gap-static-sm">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-static-sm">
+                    <div className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center shadow-elevation-1 shrink-0">
+                      <span className="text-body-sm font-medium text-white">ER</span>
+                    </div>
+                    <h3 className="text-h6 text-slate-900 font-semibold leading-tight">Elena Rojas</h3>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-1 pt-static-sm border-t border-slate-900/10">
+                  <span className="text-body-xs text-slate-700 font-mono">c.martinez@email.com</span>
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
 
     </section>
-  );
-}
-
-// ── SUB-COMPONENTES ACTO 1 ────────────────────────────────────────────────────
-
-interface SliceFgProps {
-  cls: string; clip: string;
-  img: string; left: string; width: string;
-  border: "left" | "right"; valign: "top" | "bottom";
-  initials: string; name: string; email: string;
-}
-
-function SliceFg({ cls, clip, img, left, width, border, valign, initials, name, email }: SliceFgProps) {
-  return (
-    <div className={`${cls} absolute inset-0`} style={{ clipPath: clip }}>
-      <div className="absolute top-0 bottom-0" style={{ left, width }}>
-        <img src={img} alt="" className="w-full h-full object-cover opacity-55" />
-        <div className="absolute inset-0" style={{ background: "rgba(47,52,55,0.60)" }} />
-      </div>
-      <div
-        className={`absolute top-0 bottom-0 flex flex-col p-static-xl ${valign === "bottom" ? "justify-end" : ""} ${border === "left" ? "border-l" : "border-r"} border-white/10`}
-        style={{ left, width }}
-      >
-        <ContactCard initials={initials} name={name} email={email} />
-      </div>
-    </div>
-  );
-}
-
-function ContactCard({ initials, name, email }: { initials: string; name: string; email: string }) {
-  return (
-    <div className="relative w-full max-w-xs rounded-2xl border border-white/40 shadow-elevation-4 overflow-hidden">
-      <div className="absolute inset-0 -z-10" style={{ background: "rgba(255,255,255,0.28)", backdropFilter: "blur(32px)" }} />
-      <div className="absolute inset-0 -z-10" style={{ background: "linear-gradient(135deg,rgba(255,255,255,0.48),rgba(255,255,255,0.06))" }} />
-      <div className="relative z-10 p-static-md flex flex-col gap-static-sm">
-        <div className="flex items-center gap-static-sm">
-          <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-elevation-1 shrink-0" style={{ background: "var(--color-brand-dark)" }}>
-            <span className="text-body-sm font-semibold text-white">{initials}</span>
-          </div>
-          <h3 className="text-h6 font-semibold leading-tight" style={{ color: "var(--color-brand-dark)" }}>{name}</h3>
-        </div>
-        <div className="pt-static-sm border-t border-black/10">
-          <span className="text-meta" style={{ color: "rgba(47,52,55,0.6)" }}>{email}</span>
-        </div>
-      </div>
-    </div>
   );
 }
