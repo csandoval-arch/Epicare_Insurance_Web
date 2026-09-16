@@ -241,25 +241,32 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
     // Check for reduced motion (Hardware Symphony accessibility rule)
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
-    const ctx = gsap.context(() => {
-      // Act 1: Suave fade in de entrada
-      gsap.fromTo(el, 
-        { opacity: 0 }, 
-        { opacity: 1, duration: 1.5, ease: "power2.out" }
-      );
+    let ctx: gsap.Context;
+    
+    // Retrasamos la inicialización de GSAP un micro-instante (100ms) para garantizar
+    // que Next.js haya terminado de hidratar el DOM. Esto evita que GSAP 
+    // almacene en caché el inline style equivocado durante el primer render.
+    const initTimer = setTimeout(() => {
+      ctx = gsap.context(() => {
+        // Act 1: Suave fade in de entrada
+        gsap.fromTo(el, 
+          { opacity: 0 }, 
+          { opacity: 1, duration: 1.5, ease: "power2.out" }
+        );
 
-      // Act 2: Cinematic Tunnel Transition (ScrollTrigger)
-      // Mantenemos el pin estructural para BrandsCarousel
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: el,
-          start: "top top",
-          end: "+=250%",
-          scrub: 1,
-          pin: true,
-          pinSpacing: true,
-        }
-      });
+        // Act 2: Cinematic Tunnel Transition (ScrollTrigger)
+        // Mantenemos el pin estructural para BrandsCarousel
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: el,
+            start: "top top",
+            end: "+=250%",
+            scrub: 1,
+            pin: true,
+            pinSpacing: true,
+            invalidateOnRefresh: true, // Recalcula los calc() en caso de resize para evitar saltos
+          }
+        });
 
       if (!prefersReducedMotion) {
         // 1. Animate UI and Text OUT (Smart Shutdown: fade and translate)
@@ -335,8 +342,13 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
       }
     }, el);
 
-    return () => ctx.revert();
-  }, []);
+    }, 100); // 100ms Hydration Delay
+
+    return () => {
+      clearTimeout(initTimer);
+      if (ctx) ctx.revert();
+    };
+  }, [locale]);
 
   return (
     <div ref={containerRef} className="relative w-full h-[100vh] min-h-[700px] bg-[#16181A] overflow-hidden flex flex-col font-sans">
@@ -351,18 +363,29 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
       <HeaderEpicare isHeaderForcedDark={true} />
 
       {/* Vertical Architectural Cut (Video) - Movido 1 columna extra a la izquierda solo en inglés */}
-      <div ref={videoWrapperRef} className="absolute top-0 bottom-0 max-w-[240px] min-w-[140px] h-full z-20 overflow-hidden bg-black shadow-2xl"
-           style={{ 
-             left: isEn ? 'calc(25% + 84px)' : 'calc(33.333% + 84px)', 
-             width: 'calc(16.666% - 24px)' 
-           }}>
+      {/* 
+        EL SECRETO: key={locale}
+        Fuerza a React a destruir y crear un elemento DOM completamente nuevo al cambiar de idioma.
+        Esto impide que el ctx.revert() de GSAP pueda sobreescribir el estilo de la nueva caja 
+        con sus valores cacheados de la caja anterior.
+      */}
+      <div 
+        key={`hero-video-${locale}`}
+        ref={videoWrapperRef} 
+        className="absolute top-0 bottom-0 max-w-[240px] min-w-[140px] h-full z-20 overflow-hidden bg-black shadow-2xl"
+        style={{ 
+          left: isEn ? 'calc(25% + 84px)' : 'calc(33.333% + 84px)', 
+          width: 'calc(16.666% - 24px)' 
+        }}
+      >
         <video
           autoPlay
           loop
           muted
           playsInline
           poster={asset("/Files/Epicare_Landing/Hero/posters/Hero_02.webp")}
-          className="absolute inset-0 w-full h-full object-cover scale-[1.02]"
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover md:mix-blend-screen scale-[1.05]"
         >
           <source src={asset("/Files/Epicare_Landing/Hero/Hero_02.mp4")} type="video/mp4" />
         </video>
