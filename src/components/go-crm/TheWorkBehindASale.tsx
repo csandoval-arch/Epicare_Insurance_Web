@@ -7,31 +7,24 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 const PANELS = [
     {
       id: "tasks",
-      title: "Tasks",
-      desc: "Actions assigned with a strict deadline. The engine that prevents lost sales.",
+      title: "Assign a Task",
+      desc: "Give the opportunity a clear next action.",
       image: "/Files/Go_CRM/THE%20WORK%20BEHIND%20A%20SALE/Task.png",
       color: "#10B981"
     },
     {
-      id: "activities",
-      title: "Activities",
-      desc: "Every interaction, email, and stage change recorded in a single timeline.",
-      image: "/Files/Go_CRM/THE%20WORK%20BEHIND%20A%20SALE/client_Comunication.png",
-      color: "var(--color-brand-blue)"
-    },
-    {
       id: "notes",
-      title: "Notes",
-      desc: "The critical context and preferences that make the next conversation warmer.",
+      title: "Notes & Context",
+      desc: "Keep the details that matter close to the opportunity.",
       image: "/Files/Go_CRM/THE%20WORK%20BEHIND%20A%20SALE/Automation.png",
       color: "#F59E0B"
     },
     {
-      id: "followup",
-      title: "Follow-up",
-      desc: "Consistent contact until a decision. Where most fail, the system persists.",
-      image: "/Files/Go_CRM/THE%20WORK%20BEHIND%20A%20SALE/Follow_up.png",
-      color: "var(--color-brand-orange)"
+      id: "activities",
+      title: "Activity History",
+      desc: "See what has already happened.",
+      image: "/Files/Go_CRM/THE%20WORK%20BEHIND%20A%20SALE/client_Comunication.png",
+      color: "var(--color-brand-blue)"
     }
   ];
 
@@ -40,62 +33,67 @@ export default function TheWorkBehindASale() {
   const track = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
+    if (typeof window === "undefined") return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Contexto GSAP SÍNCRONO para evitar saltos y flashes en el DOM
     let ctx = gsap.context(() => {
-      gsap.registerPlugin(ScrollTrigger);
+      
+      const getScrollAmount = () => {
+        if (!track.current) return 0;
+        return track.current.scrollWidth - window.innerWidth;
+      };
 
-      // Horizontal Scroll Mechanism
-      const trackWidth = track.current!.scrollWidth;
-      const windowWidth = window.innerWidth;
-      const scrollDistance = trackWidth - windowWidth;
-
+      // 1. Scroll Horizontal (Hardware Accelerated)
       gsap.to(track.current, {
-        x: -scrollDistance,
+        x: () => -getScrollAmount(),
         ease: "none",
         scrollTrigger: {
           trigger: container.current,
           pin: true,
           start: "top top",
-          end: () => `+=${scrollDistance}`,
+          end: () => `+=${getScrollAmount()}`,
           scrub: 1,
           invalidateOnRefresh: true,
         }
       });
 
-      // B2: Image Inner Parallax
+      // 2. Parallax Interno de Imágenes (Calculado Dinámicamente)
       const images = gsap.utils.toArray<HTMLElement>(".parallax-image");
       images.forEach((img) => {
         gsap.to(img, {
-          x: "20%", // Image moves slightly right while container moves left
+          x: "15%",
           ease: "none",
           scrollTrigger: {
             trigger: container.current,
             start: "top top",
-            end: () => `+=${scrollDistance}`,
+            end: () => `+=${getScrollAmount()}`,
             scrub: 1,
+            invalidateOnRefresh: true,
           }
         });
       });
 
-      // B1: Initial Text Reveal
+      // 3. Revelado de Texto Inicial (Simplificado a 'y' en lugar de 'yPercent' para evitar colapso de alto)
       gsap.fromTo(".intro-text-line",
-        { yPercent: 100, opacity: 0 },
+        { y: 40, opacity: 0 },
         { 
-          yPercent: 0, 
+          y: 0, 
           opacity: 1, 
           duration: 1, 
           stagger: 0.1, 
           ease: "power3.out",
           scrollTrigger: {
             trigger: container.current,
-            start: "top 75%"
+            start: "top 80%"
           }
         }
       );
 
-      // B3: Latent Life (Continuous Slow Breathing on Images)
+      // 4. Vida Latente (Escala muy sutil para no desincronizar la GPU)
       gsap.to(".parallax-image", {
-        scale: 1.15,
-        duration: 15,
+        scale: 1.05,
+        duration: 10,
         ease: "sine.inOut",
         yoyo: true,
         repeat: -1
@@ -103,41 +101,49 @@ export default function TheWorkBehindASale() {
 
     }, container);
 
-    return () => ctx.revert();
+    // Refresco seguro post-hidratación para asegurar medidas perfectas
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+      ctx.revert();
+    };
   }, []);
 
   return (
     <section ref={container} className="relative w-full h-screen bg-[var(--color-surface-BG-base)] text-[var(--color-text-primary)] overflow-hidden flex items-center border-y border-[var(--color-border-Strokes-default)]">
       
-      {/* The Horizontal Track */}
-      <div ref={track} className="flex h-full w-max items-center pl-[5vw] lg:pl-[10vw]">
+      {/* El Track Horizontal con aceleración de GPU (transform-gpu) para prevenir que Chrome oculte nodos */}
+      <div ref={track} className="flex h-full w-max items-center pl-[5vw] lg:pl-[10vw] transform-gpu will-change-transform">
         
-        {/* Intro Panel (Static relative to the track) */}
+        {/* Intro Panel */}
         <div className="w-[85vw] lg:w-[40vw] h-full flex flex-col justify-center shrink-0 pr-12 lg:pr-24">
           <div className="overflow-hidden mb-4">
-            <p className="intro-text-line text-overline text-[var(--color-brand-blue)] uppercase tracking-widest flex items-center gap-2">
+            <p className="intro-text-line text-overline text-[var(--color-brand-blue)] uppercase tracking-widest flex items-center gap-2 transform-gpu">
               <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand-blue)]" />
               06 — THE WORK BEHIND A SALE
             </p>
           </div>
           <div className="overflow-hidden mb-8">
-            <h2 className="intro-text-line text-display-xl lg:text-[4.5vw] font-bold tracking-tighter leading-[0.95] text-[var(--color-text-primary)]">
+            <h2 className="intro-text-line text-display-xl lg:text-[4.5vw] font-bold tracking-tighter leading-[0.95] text-[var(--color-text-primary)] transform-gpu">
               Every opportunity creates work.
             </h2>
           </div>
           <div className="overflow-hidden">
-            <p className="intro-text-line text-body-lg text-[var(--color-text-secondary)] leading-relaxed max-w-md">
+            <p className="intro-text-line text-body-lg text-[var(--color-text-secondary)] leading-relaxed max-w-md transform-gpu">
               Tasks, activities, notes and follow-up keep the sales process moving around a specific opportunity.
             </p>
           </div>
         </div>
 
-          {/* The 4 Image Panels */}
+          {/* The 3 Panels */}
           {PANELS.map((panel, i) => (
-            <div key={panel.id} className="relative w-[85vw] lg:w-[50vw] h-[60vh] lg:h-[75vh] shrink-0 mr-8 lg:mr-16 rounded-2xl overflow-hidden shadow-elevation-4 border border-[var(--color-border-Strokes-strong)] bg-[var(--color-surface-BG-1)] group flex flex-col">
+            <div key={panel.id} className="w-[85vw] lg:w-[50vw] shrink-0 mr-8 lg:mr-16 flex flex-col group transform-gpu">
               
-              {/* Top: Image Parallax Container */}
-              <div className="relative flex-1 w-full overflow-hidden bg-[var(--color-surface-BG-2)]">
+              {/* Imagen Superior */}
+              <div className="relative w-full h-[50vh] lg:h-[55vh] rounded-xl overflow-hidden shadow-elevation-2 border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-2)] mb-6 transform-gpu">
                 <div className="absolute inset-0 w-[120%] -left-[10%] h-full z-0 overflow-hidden">
                   <img 
                     src={panel.image} 
@@ -147,32 +153,21 @@ export default function TheWorkBehindASale() {
                 </div>
               </div>
   
-              {/* Bottom: Clean Typography Dock */}
-              <div className="relative shrink-0 border-t border-[var(--color-border-Strokes-default)] p-6 lg:p-8 flex flex-col justify-center bg-[var(--color-surface-BG-1)]">
-                <div className="flex justify-between items-start gap-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: panel.color }} />
-                      <h3 className="text-xl lg:text-2xl font-bold tracking-tight text-[var(--color-text-primary)] uppercase">
-                        {panel.title}
-                      </h3>
-                    </div>
-                    <p className="text-sm lg:text-base text-[var(--color-text-secondary)] leading-relaxed">
-                      {panel.desc}
-                    </p>
-                  </div>
-                  
-                  {/* Subtle Hover Arrow */}
-                  <div className="w-10 h-10 rounded-full border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-2)] flex items-center justify-center shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-[-10px] group-hover:translate-x-0">
-                     <svg className="w-4 h-4 text-[var(--color-text-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                  </div>
-                </div>
+              {/* Texto Inferior Limpio */}
+              <div className="flex flex-col transform-gpu">
+                <h3 className="text-xl lg:text-3xl font-bold tracking-tight text-[var(--color-text-primary)] mb-2 flex items-center gap-3">
+                  <span className="text-[var(--color-text-secondary)] font-mono text-lg font-normal">0{i + 1} —</span> 
+                  {panel.title}
+                </h3>
+                <p className="text-base lg:text-lg text-[var(--color-text-secondary)] leading-relaxed pl-[42px]">
+                  {panel.desc}
+                </p>
               </div>
               
             </div>
         ))}
 
-        {/* End Buffer to allow scrolling past the last card smoothly */}
+        {/* End Buffer */}
         <div className="w-[10vw] shrink-0 h-full" />
 
       </div>
