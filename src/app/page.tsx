@@ -87,8 +87,8 @@ export default function EpicareLandingPage() {
       <div className="w-full order-3 relative z-20"><BrandsCarousel /></div>
       {/* ── S03 · DarkGradient / La Plataforma (solución inmediata) ── */}
       <div className="w-full order-4"><DarkGradientSection /></div>
-      {/* ── S04 · Metrics (prueba dura) ── */}
-      <div className="w-full order-5"><MetricsEpicare /></div>
+      {/* ── S04 · Metrics (prueba dura) — MOVIDO A HERO ACT 2 ── */}
+      {/* <div className="w-full order-5"><MetricsEpicare /></div> */}
       {/* ── S05 · BentoGrid / Ecosistema GO (PICO 2 · pin) ── */}
       <div className="w-full order-6 pb-section-lg"><BentoGridEpicare /></div>
       {/* ── S06a · Eppigo — producción (salió del bento a sección propia) ── */}
