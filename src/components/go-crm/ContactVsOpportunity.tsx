@@ -59,7 +59,7 @@ export default function ContactVsOpportunity() {
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         
         gsap.set(".a2-title", { opacity: 0, y: 40 });
-        gsap.set(".a2-card", { opacity: 0, y: 80, scale: 0.95 });
+        gsap.set(".a2-card", { opacity: 0, y: 30 });
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -82,11 +82,12 @@ export default function ContactVsOpportunity() {
         }, 0.5);
 
         tl.to(".a2-card", {
-          opacity: 1, y: 0, scale: 1,
-          ease: "back.out(1.2)",
-          duration: 0.6,
-          stagger: STAGGER.wave,
-        }, 0.6);
+          opacity: 1, 
+          y: 0, 
+          ease: "power3.out",
+          duration: 0.4,
+          stagger: 0.08,
+        }, 0.5);
 
         // ── VIDA LATENTE (Animaciones abstractas en las cards) ───────────
         
@@ -123,11 +124,7 @@ export default function ContactVsOpportunity() {
           ease: "sine.out",
           stagger: { each: 1.25, repeat: -1 }
         });
-        // Escáner principal
-        gsap.fromTo(".art-car-scanner", 
-          { x: -18 },
-          { x: 18, duration: 1.2, ease: "sine.inOut", yoyo: true, repeat: -1 }
-        );
+        // El Escáner fue removido para mayor minimalismo
         
         // Faro Izquierdo (Brilla cuando el escáner está a la izquierda)
         gsap.fromTo(".art-car-hl-left",
@@ -185,7 +182,7 @@ export default function ContactVsOpportunity() {
           ACTO 2: Fondo Azul + Grid Simétrico
       ════════════════════════════════════════════════════════════════════════ */}
       <div
-        className="absolute inset-0 flex flex-col items-center justify-center px-gutter-md lg:px-gutter-xl gap-fluid-lg"
+        className="absolute inset-0 flex flex-col items-center px-gutter-md lg:px-gutter-xl"
         style={{ background: "var(--color-brand-blue)" }}
       >
         <div 
@@ -193,7 +190,10 @@ export default function ContactVsOpportunity() {
           style={{ background: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15) 0%, transparent 60%)" }}
         />
 
-        <div className="a2-title relative z-10 flex flex-col items-center text-center gap-static-sm max-w-3xl">
+        {/* Espaciador superior (igual al inferior y al medio) */}
+        <div className="flex-1 w-full min-h-[2vh] md:min-h-[4vh]" />
+
+        <div className="a2-title relative z-10 flex flex-col items-center text-center gap-static-sm max-w-3xl shrink-0">
           <p className="text-overline text-white/60 tracking-[0.2em] uppercase">
             GO CRM · Contactos
           </p>
@@ -202,32 +202,41 @@ export default function ContactVsOpportunity() {
           </h2>
         </div>
 
-        <div className="relative z-10 w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-fluid-sm">
+        {/* Espaciador medio (simetría garantizada) */}
+        <div className="flex-1 w-full min-h-[2vh] md:min-h-[4vh]" />
+
+        <div className="relative z-10 w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-fluid-sm shrink-0">
           
           {OPPS.map((opp, i) => (
             <div
               key={opp.num}
-              className="a2-card group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/20 shadow-elevation-3 transition-all duration-500 hover:-translate-y-2 hover:shadow-elevation-5 hover:border-white/40"
+              className="a2-card group relative flex flex-col justify-start overflow-hidden rounded-[2rem] border border-white/20 shadow-elevation-3 transition-all duration-500 hover:-translate-y-2 hover:shadow-elevation-5 hover:border-white/40"
               style={{
                 background: "rgba(255, 255, 255, 0.08)",
                 backdropFilter: "blur(24px)",
                 aspectRatio: "3/4",
-                maxHeight: "480px"
+                maxHeight: "480px",
+                WebkitMaskImage: "linear-gradient(to bottom, black 65%, transparent 100%)",
+                maskImage: "linear-gradient(to bottom, black 65%, transparent 100%)"
               }}
             >
               <div className="absolute inset-0 rounded-[2rem] shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)] pointer-events-none" />
               <div className="absolute -inset-20 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-[80px] pointer-events-none" />
 
-              <div className="relative z-10 p-static-lg flex justify-between items-start">
-                <span className="px-static-sm py-static-xs rounded-full border border-white/30 bg-white/10 text-meta font-semibold text-white tracking-widest tabular-nums">
-                  {opp.num}
-                </span>
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="opacity-50 group-hover:opacity-100 transition-opacity">
-                  <path d="M1 11L11 1M11 1H3.5M11 1V8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+              {/* Textos y Etiquetas (Arriba para no perder legibilidad con el difuminado) */}
+              <div className="relative z-10 p-static-lg flex flex-col gap-6">
+                <div>
+                  <h3 className="text-h2 font-semibold text-white tracking-tight mb-static-xs">
+                    {opp.label}
+                  </h3>
+                  <p className="text-body-md text-white/80 leading-relaxed">
+                    {opp.desc}
+                  </p>
+                </div>
               </div>
 
-              <div className="relative z-10 flex-1 flex items-center justify-center">
+              {/* Arte Holográfico (Centrado en el espacio restante, más arriba del fade) */}
+              <div className="relative z-10 flex-1 flex items-center justify-center mb-8 -translate-y-6">
                 
                 {/* DENTAL ART (i === 0) - Diente Holográfico Escala Mayor */}
                 {i === 0 && (
@@ -279,8 +288,6 @@ export default function ContactVsOpportunity() {
                       <circle className="art-car-hl-right" cx="16.5" cy="14" r="1.5" fill="transparent" stroke="rgba(255,255,255,0.4)" strokeWidth="0.8" />
                     </svg>
 
-                    {/* Escáner dinámico en la parrilla frontal */}
-                    <div className="art-car-scanner absolute w-[16px] h-[2.5px] bg-white z-20 shadow-[0_0_8px_2px_rgba(255,255,255,1)] rounded-full" style={{ top: '56.5%' }} />
                   </div>
                 )}
 
@@ -315,19 +322,12 @@ export default function ContactVsOpportunity() {
                 )}
               </div>
 
-              <div className="relative z-10 p-static-lg pt-0">
-                <div className="w-6 h-px bg-white/30 mb-static-sm transition-all duration-300 group-hover:w-12 group-hover:bg-white" />
-                <h3 className="text-h3 font-semibold text-white tracking-tight mb-static-xs">
-                  {opp.label}
-                </h3>
-                <p className="text-body-sm text-white/60 leading-relaxed">
-                  {opp.desc}
-                </p>
-              </div>
-
             </div>
           ))}
         </div>
+
+        {/* Espaciador inferior (cierra la simetría) */}
+        <div className="flex-1 w-full min-h-[2vh] md:min-h-[4vh]" />
       </div>
 
       {/* ════════════════════════════════════════════════════════════════════════
