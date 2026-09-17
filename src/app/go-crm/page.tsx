@@ -39,7 +39,7 @@ export default function GoCrmPage() {
     <main className="min-h-screen bg-[var(--color-surface-BG-base)] transition-colors duration-500 overflow-x-clip relative">
       {/* ── GLOBAL HEADER & LOADER ── */}
       <LoaderEpicare />
-      <HeaderEpicare isHeaderPill={isHeaderPill} />
+      <HeaderEpicare isHeaderPill={isHeaderPill} scrollSafeZone={150} />
 
       {/* ── GO CRM SECTIONS ── */}
       <HeroGoCrm />

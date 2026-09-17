@@ -41,7 +41,7 @@ export default function GoAmsPage() {
       {/*   GLOBAL COMPONENTS     */}
       {/* ======================= */}
       <LoaderEpicare />
-      <HeaderEpicare isHeaderPill={isHeaderPill} />
+      <HeaderEpicare isHeaderPill={isHeaderPill} scrollSafeZone={150} />
       
       {/* ======================= */}
       {/*   LANDING SECTIONS      */}

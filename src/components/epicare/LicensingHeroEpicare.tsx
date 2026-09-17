@@ -140,7 +140,7 @@ export default function LicensingHeroEpicare() {
   return (
     <div className="w-full bg-[var(--color-surface-BG-white)] dark:bg-[var(--color-surface-BG-black)] transition-colors duration-500">
       
-      <HeaderEpicare isHeaderPill={false} isHeaderForcedDark={false} />
+      <HeaderEpicare isHeaderPill={false} isHeaderForcedDark={false} scrollSafeZone={150} />
 
       <section 
         ref={containerRef} 

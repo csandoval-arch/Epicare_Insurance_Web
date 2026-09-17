@@ -151,7 +151,7 @@ function HeroEpicareV1({ t }: { t: any }) {
 
   return (
     <div className="w-full bg-[var(--color-surface-BG-base)]">
-      <HeaderEpicare isHeaderPill={isHeaderPill} isHeaderForcedDark={isHeaderForcedDark} />
+      <HeaderEpicare isHeaderPill={isHeaderPill} isHeaderForcedDark={isHeaderForcedDark} scrollSafeZone={150} />
       <div ref={containerRef} className="w-full relative z-10 bg-[var(--color-surface-BG-base)] text-[var(--color-text-primary)]">
         <div 
           className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-end bg-[var(--color-surface-BG-base)]"
@@ -223,6 +223,9 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
   const ctaWrapperRef = useRef<HTMLDivElement>(null);
   const videoWrapperRef = useRef<HTMLDivElement>(null);
   
+  const [isHeaderPill, setIsHeaderPill] = useState(false);
+  const [isHeaderForcedDark, setIsHeaderForcedDark] = useState(true);
+
   const isEn = locale === 'en';
   const tMetrics = useTranslations('landingV2.metrics');
 
@@ -265,6 +268,17 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
             pin: true,
             pinSpacing: true,
             invalidateOnRefresh: true, // Recalcula los calc() en caso de resize para evitar saltos
+            onUpdate: (self) => {
+              // Same smart pill logic as V1
+              const isMobileCheck = window.innerWidth < 768;
+              if (isMobileCheck) {
+                setIsHeaderPill(self.progress >= 0.85);
+              } else {
+                setIsHeaderPill(self.progress >= 0.55);
+              }
+              // Dark mode changes depending on scroll
+              setIsHeaderForcedDark(self.progress < 0.95);
+            }
           }
         });
 
@@ -351,18 +365,18 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
   }, [locale]);
 
   return (
-    <div ref={containerRef} className="relative w-full h-[100vh] min-h-[700px] bg-[#16181A] overflow-hidden flex flex-col font-sans">
-      
-      {/* Invisible 12-column grid background to structure the space */}
-      <div className="absolute inset-0 z-0 grid grid-cols-12 gap-0 pointer-events-none opacity-[0.03]">
-        {Array.from({ length: 12 }).map((_, i) => (
-          <div key={i} className="border-r border-[#F4F4F0] h-full w-full" />
-        ))}
-      </div>
+    <>
+      <HeaderEpicare isHeaderPill={isHeaderPill} isHeaderForcedDark={isHeaderForcedDark} scrollSafeZone={150} />
+      <div ref={containerRef} className="relative w-full h-[100vh] min-h-[700px] bg-[#16181A] overflow-hidden flex flex-col font-sans">
+        
+        {/* Invisible 12-column grid background to structure the space */}
+        <div className="absolute inset-0 z-0 grid grid-cols-12 gap-0 pointer-events-none opacity-[0.03]">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <div key={i} className="border-r border-[#F4F4F0] h-full w-full" />
+          ))}
+        </div>
 
-      <HeaderEpicare isHeaderForcedDark={true} />
-
-      {/* Vertical Architectural Cut (Video) - Movido 1 columna extra a la izquierda solo en inglés */}
+        {/* Vertical Architectural Cut (Video) - Movido 1 columna extra a la izquierda solo en inglés */}
       {/* 
         EL SECRETO: key={locale}
         Fuerza a React a destruir y crear un elemento DOM completamente nuevo al cambiar de idioma.
@@ -554,5 +568,6 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
       </div>
 
     </div>
+    </>
   );
 }

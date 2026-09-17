@@ -11,6 +11,7 @@ import { DUR, EASE, STAGGER, REVEAL } from "@/lib/motion";
 interface HeaderEpicareProps {
   isHeaderPill?: boolean;
   isHeaderForcedDark?: boolean;
+  scrollSafeZone?: number;
 }
 
 const ArrowUR = ({ className = '' }: { className?: string }) => (
@@ -23,6 +24,7 @@ const ArrowUR = ({ className = '' }: { className?: string }) => (
 export default function HeaderEpicare({
   isHeaderPill = false,
   isHeaderForcedDark = false,
+  scrollSafeZone,
 }: HeaderEpicareProps) {
   const t = useTranslations("landingV2.nav");
   const tHero = useTranslations("landingV2.hero");
@@ -177,7 +179,7 @@ export default function HeaderEpicare({
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const safeZone = window.innerHeight * 2.5;
+      const safeZone = scrollSafeZone !== undefined ? scrollSafeZone : window.innerHeight * 2.5;
       
       if (currentScrollY < safeZone) {
         setIsHidden(false);
@@ -193,8 +195,8 @@ export default function HeaderEpicare({
           }
           scrollDistance.current += delta;
           
-          // Tolerancia brutal: 420px de scroll down antes de desaparecer
-          if (scrollDistance.current > 420) {
+          // Tolerancia normal de smart header: 60px de scroll down antes de desaparecer
+          if (scrollDistance.current > 60) {
             setIsHidden(true);
           }
         } else if (delta < 0) {
@@ -209,7 +211,7 @@ export default function HeaderEpicare({
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [scrollSafeZone]);
 
   const toggleTheme = () => {
     const nextDark = !isDark;

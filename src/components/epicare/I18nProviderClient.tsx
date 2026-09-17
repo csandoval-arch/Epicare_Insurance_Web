@@ -48,9 +48,9 @@ export default function I18nProviderClient({
   return (
     <I18nContext.Provider value={{ locale, setLocale }}>
       <NextIntlClientProvider locale={locale} messages={messages} timeZone="UTC">
-        <div key={locale} className="flex flex-col flex-1 w-full">
+        <React.Fragment key={locale}>
           {children}
-        </div>
+        </React.Fragment>
       </NextIntlClientProvider>
     </I18nContext.Provider>
   );
