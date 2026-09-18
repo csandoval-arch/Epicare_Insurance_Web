@@ -62,8 +62,8 @@ export default function GoCrmPage() {
       {/* ── GO CRM SECTIONS ── */}
       <HeroGoCrm />
       <ProblemGoCrm />
-      <OpportunitySources />
-      <ContactVsOpportunity />
+      {/* <OpportunitySources /> -> Su contenido se movió a ContactVsOpportunity para ahorrar espacio */}
+      <div className="w-full pt-section-sm md:pt-section-md" /><ContactVsOpportunity />
       {/* <DayVsListContainer /> */}
       <TheWorkBehindASale />
       {/* <ThePipeline /> -> Fusionado en TheWorkBehindASale */}

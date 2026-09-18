@@ -7,9 +7,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 const ITEMS = [
   {
     num: "01",
-    title: "Assign a Task",
+    title: "Catch or Create an Opportunity",
     desc: "Give the opportunity a clear next action.",
-    image: "/Files/Go_CRM/THE%20WORK%20BEHIND%20A%20SALE/Task.png",
+    image: "/Files/Go_CRM/THE%20WORK%20BEHIND%20A%20SALE/Catch_Opportunity.mp4",
+    isVideo: true,
   },
   {
     num: "02",
@@ -166,7 +167,7 @@ export default function TheWorkBehindASale() {
           </div>
 
           {/* RIGHT PANEL: Visual Demonstrations Strip */}
-          <div className="h-full relative overflow-hidden bg-[var(--color-surface-BG-1)] border-l flex flex-col justify-center">
+          <div className="h-full relative overflow-hidden bg-[var(--color-surface-BG-1)] border-l border-[var(--color-border-Strokes-default)] flex flex-col justify-center">
             
             {/* Ambient Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[var(--color-brand-blue)]/5 blur-[100px] rounded-full pointer-events-none z-0"></div>
@@ -174,22 +175,23 @@ export default function TheWorkBehindASale() {
             {/* The scrolling strip */}
             <div className="v4-right-strip absolute top-0 w-full h-[400vh] flex flex-col z-10">
               {ITEMS.map((item, i) => (
-                <div key={i} className="h-[100vh] flex items-center justify-center p-8 lg:p-16 relative">
-                  <div className="w-full h-full max-h-[80vh] bg-[var(--color-surface-BG-2)] rounded-3xl border border-[var(--color-border-Strokes-default)] overflow-hidden shadow-elevation-4 relative flex flex-col">
-                    {/* Fake browser chrome */}
-                    <div className="h-10 bg-[var(--color-surface-BG-3)] border-b border-[var(--color-border-Strokes-default)] flex items-center px-4 gap-2 shrink-0">
-                      <div className="w-2.5 h-2.5 rounded-full bg-[var(--color-surface-BG-4)]" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-[var(--color-surface-BG-4)]" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-[var(--color-surface-BG-4)]" />
-                    </div>
-                    <div className="relative flex-1 bg-[var(--color-surface-BG-base)] p-4 overflow-hidden flex items-start justify-center">
-                      <img 
-                        src={item.image} 
-                        alt={item.title} 
-                        className="w-full h-auto max-h-full object-contain object-top rounded-xl shadow-elevation-2"
-                      />
-                    </div>
-                  </div>
+                <div key={i} className="h-[100vh] w-full flex items-center justify-center relative">
+                  {item.isVideo ? (
+                    <video
+                      src={item.image}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-auto max-h-[75vh] object-contain object-center block"
+                    />
+                  ) : (
+                    <img 
+                      src={item.image} 
+                      alt={item.title} 
+                      className="w-full h-[75vh] object-cover object-center block"
+                    />
+                  )}
                 </div>
               ))}
             </div>

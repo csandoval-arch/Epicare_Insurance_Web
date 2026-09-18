@@ -176,7 +176,7 @@ export default function ContactVsOpportunity() {
   return (
     <section
       ref={comp}
-      className="w-full h-dvh relative overflow-hidden"
+      className="w-full h-dvh relative overflow-hidden mt-32 md:mt-48"
       style={{ background: "var(--color-brand-dark)" }}
     >
       {/* ════════════════════════════════════════════════════════════════════════
@@ -343,7 +343,7 @@ export default function ContactVsOpportunity() {
              <img src="/client_auto.jpg" alt="Auto Client" className="w-full h-full object-cover opacity-[0.65]" />
              <div className="absolute inset-0 bg-[#00a1e0]/15 mix-blend-color" />
           </div>
-          <div className="absolute top-0 bottom-0 left-0 w-[33.33%] p-static-xl md:p-static-2xl pt-static-xl md:pt-[3.25rem] flex flex-col gap-fluid-lg border-r border-slate-800">
+          <div className="absolute top-0 bottom-0 left-0 w-[33.33%] p-static-xl md:p-static-2xl pb-static-xl md:pb-[3.25rem] flex flex-col justify-end gap-fluid-lg">
             
             {/* The Realistic Profile Card (Ultra-Glassmorphic Minimalist) */}
             <div className="relative z-10 w-full max-w-[320px] rounded-2xl border border-white/50 shadow-elevation-4 overflow-hidden">
@@ -383,43 +383,30 @@ export default function ContactVsOpportunity() {
         </div>
 
         {/* Center Slice */}
-        <div className="slice-center absolute inset-0 bg-slate-900" style={{ clipPath: 'polygon(33.33% 0, 66.66% 0, 66.66% 100%, 33.33% 100%)' }}>
-          <div className="absolute top-0 bottom-0 left-[33.33%] w-[33.33%] z-0">
-             <img src="/client_business.jpg" alt="Business Client" className="w-full h-full object-cover opacity-[0.65]" />
-             <div className="absolute inset-0 bg-[#00a1e0]/15 mix-blend-color" />
+        <div className="slice-center absolute inset-0 bg-slate-950" style={{ clipPath: 'polygon(33.33% 0, 66.66% 0, 66.66% 100%, 33.33% 100%)' }}>
+          <div className="absolute top-0 bottom-0 left-[33.33%] w-[33.33%] z-0 bg-[var(--color-brand-blue)] overflow-hidden">
+             {/* Imagen Generada por IA (Blobs puros cian/claros Variante 2) */}
+             <img src="/Files/Go_CRM/blue_blobs_bg_light_v2.jpg" alt="Brand Gradient Light V2" className="w-full h-full object-cover" />
+             
+             {/* Capa de cristal reducida para no matar el azul */}
+             <div className="absolute inset-0 bg-slate-900/20 backdrop-blur-md saturate-125" />
+             
+             {/* Viñeteado suave solo en los extremos superior e inferior */}
+             <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50 pointer-events-none" />
           </div>
-          <div className="absolute top-0 bottom-0 left-[33.33%] w-[33.33%] p-static-xl md:p-static-2xl pb-static-xl md:pb-[3.25rem] flex flex-col justify-end items-center border-r border-slate-800">
-            <div className="relative z-10 w-full max-w-[320px] rounded-2xl border border-white/50 shadow-elevation-4 overflow-hidden">
-              <div className="absolute inset-0 -z-10 rounded-2xl">
-                <div className="absolute inset-0 bg-white/40 backdrop-blur-[40px] saturate-[1.5]" />
-                <div className="absolute inset-0 bg-gradient-to-br from-white/60 to-white/10" />
-              </div>
-              <div className="relative z-10 p-static-md flex flex-col gap-static-sm">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-static-sm">
-                    <div className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center shadow-elevation-1 shrink-0">
-                      <span className="text-body-sm font-medium text-white">DS</span>
-                    </div>
-                    <h3 className="text-h6 text-slate-900 font-semibold leading-tight">David Smith</h3>
-                  </div>
-                </div>
-                <div className="flex flex-col gap-2 pt-static-sm border-t border-slate-900/10">
-                  <div className="flex items-center gap-2">
-                    <Envelope className="w-4 h-4 text-slate-400" />
-                    <span className="text-body-xs text-slate-600 font-mono">david.smith@business.com</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Phone className="w-4 h-4 text-slate-400" />
-                    <span className="text-body-xs text-slate-600 font-mono">+1 (555) 765-4321</span>
-                  </div>
-                  <div className="pt-1">
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 border border-slate-900/10 rounded-full bg-white/40 backdrop-blur-sm">
-                      <Database className="w-3.5 h-3.5 text-[#00a1e0]" />
-                      <span className="text-[11px] font-medium text-slate-700 tracking-wide">Salesforce</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          
+          <div className="absolute top-0 bottom-0 left-[33.33%] w-[33.33%] p-static-lg lg:p-static-xl flex flex-col justify-center items-start">
+            <div className="relative z-10 w-full text-left">
+              <p className="text-h1 md:text-display-sm lg:text-display font-bold text-[var(--color-text-primary-Reverted)] drop-shadow-md">
+                No importa cómo llegue el prospecto
+              </p>
+              
+              {/* Línea decorativa física solicitada */}
+              <div className="w-24 md:w-32 h-1.5 bg-[var(--color-text-primary-Reverted)] opacity-80 my-static-md rounded-full"></div>
+              
+              <p className="text-h1 md:text-display-sm lg:text-display font-bold text-[var(--color-text-primary-Reverted)] drop-shadow-md">
+                Facebook, formulario web, WhatsApp o llamada entrante... todo converge en un mismo pipeline estructurado.
+              </p>
             </div>
           </div>
         </div>
@@ -430,7 +417,7 @@ export default function ContactVsOpportunity() {
              <img src="/client_family.jpg" alt="Family Client" className="w-full h-full object-cover opacity-[0.65]" />
              <div className="absolute inset-0 bg-[#00a1e0]/15 mix-blend-color" />
           </div>
-          <div className="absolute top-0 bottom-0 right-0 w-[33.33%] p-static-xl md:p-static-2xl pt-static-xl md:pt-[3.25rem] flex flex-col items-center border-l border-slate-800">
+          <div className="absolute top-0 bottom-0 right-0 w-[33.33%] p-static-xl md:p-static-2xl pb-static-xl md:pb-[3.25rem] flex flex-col justify-end items-center">
             <div className="relative z-10 w-full max-w-[320px] rounded-2xl border border-white/50 shadow-elevation-4 overflow-hidden">
               <div className="absolute inset-0 -z-10 rounded-2xl">
                 <div className="absolute inset-0 bg-white/40 backdrop-blur-[40px] saturate-[1.5]" />
