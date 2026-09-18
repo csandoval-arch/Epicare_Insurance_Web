@@ -246,62 +246,44 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
     
     let ctx: gsap.Context;
     
-    // Retrasamos la inicialización de GSAP un micro-instante (100ms) para garantizar
-    // que Next.js haya terminado de hidratar el DOM. Esto evita que GSAP 
-    // almacene en caché el inline style equivocado durante el primer render.
+    let forcePlay: (() => void) | null = null;
+    
     const initTimer = setTimeout(() => {
       ctx = gsap.context(() => {
-        // Preparar estado inicial para la animación de entrada
-        gsap.set(el, { opacity: 1 });
+        
+        // 1. INTRO ANIMATION (On Load)
+        // We use fromTo so it's immune to cached states and strict mode
+        const isLoaderFinished = (window as any).epicareLoaderFinished;
+        const introTl = gsap.timeline({
+          paused: !isLoaderFinished
+        });
+
         if (!prefersReducedMotion) {
-          gsap.set(videoWrapperRef.current, { scaleY: 0, transformOrigin: "bottom center" });
-          gsap.set(".hero-act1-left", { opacity: 0, x: -40, filter: "blur(10px)" });
-          gsap.set(".hero-act1-right", { opacity: 0, x: 40, filter: "blur(10px)" });
-          gsap.set([ctaWrapperRef.current, scrollBadgeRef.current], { opacity: 0, y: 30 });
-        }
-
-        const playIntro = () => {
-          if (prefersReducedMotion) {
-            gsap.set([videoWrapperRef.current, ".hero-act1-left", ".hero-act1-right", ctaWrapperRef.current, scrollBadgeRef.current], { clearProps: "all" });
-            return;
-          }
-
-          const introTl = gsap.timeline();
-          
-          introTl.to(videoWrapperRef.current, {
-            scaleY: 1,
-            duration: 1.4,
-            ease: "power4.inOut"
-          })
-          .to(".hero-act1-left", {
-            opacity: 1,
-            x: 0,
-            filter: "blur(0px)",
-            duration: 1.2,
-            stagger: 0.1,
-            ease: "power3.out"
-          }, "-=0.8")
-          .to(".hero-act1-right", {
-            opacity: 1,
-            x: 0,
-            filter: "blur(0px)",
-            duration: 1.2,
-            ease: "power3.out"
-          }, "-=1.0")
-          .to([ctaWrapperRef.current, scrollBadgeRef.current], {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            stagger: 0.2,
-            ease: "power3.out"
-          }, "-=0.8");
-        };
-
-        if ((window as any).epicareLoaderFinished) {
-          playIntro();
+          introTl.fromTo(videoWrapperRef.current, 
+            { scaleY: 0, transformOrigin: "bottom center" },
+            { scaleY: 1, duration: 1.4, ease: "power4.inOut" }
+          )
+          .fromTo(".hero-act1-left", 
+            { opacity: 0, x: -40, filter: "blur(10px)" },
+            { opacity: 1, x: 0, filter: "blur(0px)", duration: 1.2, stagger: 0.1, ease: "power3.out" }, 
+            "-=0.8"
+          )
+          .fromTo(".hero-act1-right", 
+            { opacity: 0, x: 40, filter: "blur(10px)" },
+            { opacity: 1, x: 0, filter: "blur(0px)", duration: 1.2, ease: "power3.out" }, 
+            "-=1.0"
+          )
+          .fromTo([ctaWrapperRef.current, scrollBadgeRef.current], 
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power3.out" }, 
+            "-=0.8"
+          );
         } else {
-          window.addEventListener('epicareLoaderFinished', playIntro, { once: true });
+          introTl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 1 });
         }
+
+        forcePlay = () => { if (introTl.paused() || introTl.progress() === 0) introTl.play(0); };
+        window.addEventListener('epicareLoaderFinished', forcePlay, { once: true });
 
         // Act 2: Cinematic Tunnel Transition (ScrollTrigger)
         // Mantenemos el pin estructural para BrandsCarousel
@@ -335,21 +317,21 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
         // Elementos de la izquierda (Textos: GO, VE MÁS, GROWTH, CRECIMIENTO)
         tl.fromTo(".hero-act1-left", 
           { opacity: 1, x: "0vw" },
-          { opacity: 0, x: "-25vw", duration: 1.5, stagger: 0.05, ease: "power2.inOut" }, 
+          { opacity: 0, x: "-25vw", duration: 1.5, stagger: 0.05, ease: "power2.inOut", immediateRender: false }, 
           0
         );
 
         // Elementos de la derecha (Textos: BEYOND, ALLÁ DEL, y el bloque de CTAs)
         tl.fromTo([".hero-act1-right", ctaWrapperRef.current], 
           { opacity: 1, x: "0vw" },
-          { opacity: 0, x: "25vw", duration: 1.5, stagger: 0.05, ease: "power2.inOut" }, 
+          { opacity: 0, x: "25vw", duration: 1.5, stagger: 0.05, ease: "power2.inOut", immediateRender: false }, 
           0
         );
 
         // El Scroll Badge central se hunde suavemente
         tl.fromTo(scrollBadgeRef.current, 
           { opacity: 1, y: 0, scale: 1 },
-          { opacity: 0, y: 60, scale: 0.8, duration: 1.5, ease: "power2.inOut" }, 
+          { opacity: 0, y: 60, scale: 0.8, duration: 1.5, ease: "power2.inOut", immediateRender: false }, 
           0
         );
 
@@ -366,7 +348,7 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
         // 3. Fade out the dark architectural shadows/tints
         tl.fromTo(".hero-video-shadow", 
           { opacity: 1 },
-          { opacity: 0, duration: 1.5, ease: "power2.inOut" }, 
+          { opacity: 0, duration: 1.5, ease: "power2.inOut", immediateRender: false }, 
           0.5
         );
 
@@ -400,6 +382,7 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
 
     return () => {
       clearTimeout(initTimer);
+      if (forcePlay) window.removeEventListener('epicareLoaderFinished', forcePlay);
       if (ctx) ctx.revert();
     };
   }, [locale]);

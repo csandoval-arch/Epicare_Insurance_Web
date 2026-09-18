@@ -21,9 +21,10 @@ const ITEMS = [
   },
   {
     num: "03",
-    title: "Activity History",
+    title: "Book or Update an Appointment",
     desc: "See what has already happened.",
-    image: "/Files/Go_CRM/THE%20WORK%20BEHIND%20A%20SALE/client_Comunication.png",
+    image: "/Files/Go_CRM/THE%20WORK%20BEHIND%20A%20SALE/Appointments.mp4",
+    isVideo: true,
   },
   {
     num: "04",
