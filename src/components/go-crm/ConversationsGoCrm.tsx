@@ -11,7 +11,8 @@ export default function ConversationsGoCrm() {
   const threadRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    let ctx = gsap.context(() => {
+    if (typeof window === "undefined") return;
+  let ctx = gsap.context(() => {
       gsap.registerPlugin(ScrollTrigger);
 
       // Text Reveal
@@ -194,3 +195,4 @@ export default function ConversationsGoCrm() {
     </section>
   );
 }
+

@@ -17,10 +17,24 @@ import CalendarGoCrm from "@/components/go-crm/CalendarGoCrm";
 import OpportunityJourneyGoCrm from "@/components/go-crm/OpportunityJourneyGoCrm";
 import CierreGoCrm from "@/components/go-crm/CierreGoCrm";
 
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 export default function GoCrmPage() {
   const [isHeaderPill, setIsHeaderPill] = useState(false);
 
   useEffect(() => {
+    // ----------------------------------------------------
+    // STABILITY PATCH: Fix "jumping" and layout shifts
+    // ----------------------------------------------------
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // Refresh progressively to catch all async image/font loads
+    const refreshST = () => ScrollTrigger.refresh();
+    const timeouts = [100, 500, 1000, 2000].map(ms => setTimeout(refreshST, ms));
+    
+    window.addEventListener("load", refreshST);
+    
     const handleScroll = () => {
       if (window.scrollY > 150) {
         setIsHeaderPill(true);
@@ -32,7 +46,11 @@ export default function GoCrmPage() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("load", refreshST);
+      timeouts.forEach(clearTimeout);
+    };
   }, []);
 
   return (
@@ -48,7 +66,7 @@ export default function GoCrmPage() {
       <ContactVsOpportunity />
       {/* <DayVsListContainer /> */}
       <TheWorkBehindASale />
-      <ThePipeline />
+      {/* <ThePipeline /> -> Fusionado en TheWorkBehindASale */}
       <ConversationsGoCrm />
       <CalendarGoCrm />
       <AutomationGoCrm />

@@ -45,7 +45,8 @@ export default function ContactVsOpportunity() {
   const ring2 = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    if (typeof window === "undefined") return;
+  gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
 
@@ -500,3 +501,4 @@ export default function ContactVsOpportunity() {
     </section>
   );
 }
+

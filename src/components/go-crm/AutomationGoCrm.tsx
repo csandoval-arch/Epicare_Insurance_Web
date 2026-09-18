@@ -10,6 +10,9 @@ export default function AutomationGoCrm() {
   const container = useRef<HTMLElement>(null);
 
   useLayoutEffect(() => {
+    if (typeof window === "undefined") return;
+  if (!container.current) return;
+    
     let ctx = gsap.context(() => {
       gsap.registerPlugin(ScrollTrigger);
       
@@ -455,3 +458,4 @@ export default function AutomationGoCrm() {
     </section>
   );
 }
+

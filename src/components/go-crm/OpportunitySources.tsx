@@ -10,6 +10,9 @@ export default function OpportunitySources() {
   const comp = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
+    if (typeof window === "undefined") return;
+  if (!comp.current) return;
+    
     let ctx = gsap.context(() => {
       // Highlight scrub logic for the text spans
       const textSpans = gsap.utils.toArray(".scrub-word") as HTMLElement[];
@@ -29,14 +32,7 @@ export default function OpportunitySources() {
         }
       );
 
-      // Smooth rise for the CRM block
-      gsap.fromTo(".crm-block",
-        { y: 100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.5, ease: "power3.out", scrollTrigger: {
-          trigger: ".crm-block",
-          start: "top 85%"
-        }}
-      );
+
 
     }, comp);
     return () => ctx.revert();
@@ -92,3 +88,4 @@ export default function OpportunitySources() {
     </section>
   );
 }
+

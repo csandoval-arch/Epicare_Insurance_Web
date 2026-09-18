@@ -48,7 +48,8 @@ function Variant1({ copy }: { copy: any }) {
   const comp = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    let ctx = gsap.context(() => {
+    if (typeof window === "undefined") return;
+  let ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: comp.current,
@@ -127,7 +128,8 @@ function Variant2({ copy }: { copy: any }) {
   const comp = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    let ctx = gsap.context(() => {
+    if (typeof window === "undefined") return;
+  let ctx = gsap.context(() => {
       // Free floating parallax (no pin)
       gsap.to(".widget-fast", { y: -300, ease: "none", scrollTrigger: { trigger: comp.current, start: "top bottom", end: "bottom top", scrub: 1 } });
       gsap.to(".widget-slow", { y: -100, ease: "none", scrollTrigger: { trigger: comp.current, start: "top bottom", end: "bottom top", scrub: 1 } });
@@ -182,7 +184,8 @@ function Variant3({ copy }: { copy: any }) {
   const comp = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    let ctx = gsap.context(() => {
+    if (typeof window === "undefined") return;
+  let ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: comp.current,
@@ -239,3 +242,4 @@ function Variant3({ copy }: { copy: any }) {
     </div>
   );
 }
+

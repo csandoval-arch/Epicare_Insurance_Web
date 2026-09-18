@@ -11,6 +11,9 @@ export default function CalendarGoCrm() {
   const calendarRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
+    if (typeof window === "undefined") return;
+  if (!calendarRef.current) return;
+    
     let ctx = gsap.context(() => {
       gsap.registerPlugin(ScrollTrigger);
 
@@ -193,11 +196,6 @@ export default function CalendarGoCrm() {
                 ))}
               </div>
 
-              {/* ── CURRENT TIME INDICATOR (Soft Orange) ── */}
-              <div className="absolute left-0 w-full h-[2px] bg-[#F26023] z-10 pointer-events-none" style={{ top: "35%" }}>
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#F26023]" />
-              </div>
-
               {/* ── EVENTS (Beautiful Soft Design) ── */}
               <div className="absolute inset-0 grid grid-cols-5">
                 
@@ -219,7 +217,7 @@ export default function CalendarGoCrm() {
 
                 {/* Column 3: WED (Primary Appointment - Cute & Crisp) */}
                 <div className="relative h-full col-start-3">
-                  <div className="cal-event-block absolute top-[31.25%] h-[18.75%] left-2 right-2 p-4 bg-[var(--color-brand-blue)] rounded-2xl shadow-[0_12px_24px_rgba(53,187,253,0.3)] flex flex-col cursor-pointer hover:-translate-y-1 transition-transform z-40">
+                  <div className="cal-event-block absolute top-[31.25%] h-[22%] left-2 right-2 p-4 bg-[var(--color-brand-blue)] rounded-2xl shadow-[0_12px_24px_rgba(53,187,253,0.3)] flex flex-col cursor-pointer hover:-translate-y-1 transition-transform z-40">
                     <div className="flex items-center gap-1.5 opacity-90 mb-1">
                        <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
                        <span className="text-[10px] text-white font-bold tracking-wider">11:30 AM</span>
@@ -227,10 +225,26 @@ export default function CalendarGoCrm() {
                     <span className="text-sm font-bold text-white leading-tight">Sarah Jenkins</span>
                     <span className="text-xs text-white/80 font-medium mt-0.5 truncate">Auto Fleet Review</span>
                     
-                    {/* Cute Pipeline Sync Badge */}
-                    <div className="mt-auto flex items-center gap-1.5 bg-white/20 backdrop-blur-sm rounded-lg px-2 py-1 w-fit">
-                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-3 h-3 text-white"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/></svg>
-                       <span className="text-[9px] font-bold text-white uppercase tracking-wider">Pipeline Synced</span>
+                    {/* Etiquetas (Meet & Sync) */}
+                    <div className="mt-auto flex flex-wrap items-center gap-2">
+                      
+                      {/* Google Meet Badge (Official Colors) */}
+                      <div className="flex items-center gap-1.5 bg-white hover:bg-gray-50 transition-colors shadow-sm rounded-md px-2 py-1 w-fit">
+                         <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 shrink-0" xmlns="http://www.w3.org/2000/svg">
+                           <path fill="#EA4335" d="M24 10.618v2.764c0 .89-.96 1.435-1.711.96l-3.233-2.04v-2.204l3.233-2.04c.751-.475 1.711.07 1.711.96z"/>
+                           <path fill="#4285F4" d="M2.5 18H7V6H2.5C1.12 6 0 7.12 0 8.5v7C0 16.88 1.12 18 2.5 18z"/>
+                           <path fill="#34A853" d="M19.056 12.342V18h-5v-6h5z"/>
+                           <path fill="#FBBC04" d="M14.056 6v6h5V6h-5z"/>
+                         </svg>
+                         <span className="text-[9px] font-bold text-gray-800 tracking-wide">Google Meet</span>
+                      </div>
+                      
+                      {/* Pipeline Sync Badge */}
+                      <div className="flex items-center gap-1.5 bg-white/20 backdrop-blur-sm rounded-md px-2 py-1 w-fit">
+                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-3 h-3 text-white"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/></svg>
+                         <span className="text-[9px] font-bold text-white uppercase tracking-wider">Synced</span>
+                      </div>
+                      
                     </div>
                   </div>
                 </div>
@@ -259,3 +273,4 @@ export default function CalendarGoCrm() {
     </section>
   );
 }
+

@@ -10,7 +10,8 @@ export default function DayVsListGoCrm() {
   const container = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    if (typeof window === "undefined") return;
+  gsap.registerPlugin(ScrollTrigger);
     
     const ctx = gsap.context(() => {
       // Very simple scroll triggers to light up the UI zones
@@ -178,3 +179,4 @@ export default function DayVsListGoCrm() {
     </section>
   );
 }
+

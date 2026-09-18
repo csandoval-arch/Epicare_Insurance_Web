@@ -17,6 +17,7 @@ export default function ProblemGoCrm() {
 
   useLayoutEffect(() => {
     if (typeof window === "undefined") return;
+   if (typeof window === "undefined") return;
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
@@ -118,3 +119,4 @@ export default function ProblemGoCrm() {
     </section>
   );
 }
+

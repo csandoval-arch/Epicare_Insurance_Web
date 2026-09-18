@@ -32,7 +32,8 @@ export default function SalesLayerGoCrm() {
   ];
 
   useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    if (typeof window === "undefined") return;
+  gsap.registerPlugin(ScrollTrigger);
     
     const ctx = gsap.context(() => {
       const panels = gsap.utils.toArray<HTMLElement>(".spread-panel");
@@ -155,3 +156,4 @@ export default function SalesLayerGoCrm() {
     </section>
   );
 }
+

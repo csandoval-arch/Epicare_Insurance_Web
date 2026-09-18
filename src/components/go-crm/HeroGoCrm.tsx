@@ -84,6 +84,7 @@ export default function HeroGoCrm() {
 
   useLayoutEffect(() => {
     if (typeof window === "undefined") return;
+   if (typeof window === "undefined") return;
     gsap.registerPlugin(ScrollTrigger);
 
     const el = containerRef.current;
@@ -372,3 +373,4 @@ export default function HeroGoCrm() {
     </div>
   );
 }
+

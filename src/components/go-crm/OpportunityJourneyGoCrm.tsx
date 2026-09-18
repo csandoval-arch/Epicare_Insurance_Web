@@ -21,6 +21,7 @@ export default function OpportunityJourneyGoCrm() {
 
   useLayoutEffect(() => {
     if (typeof window === "undefined") return;
+   if (typeof window === "undefined") return;
     gsap.registerPlugin(ScrollTrigger);
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -123,3 +124,4 @@ export default function OpportunityJourneyGoCrm() {
     </section>
   );
 }
+

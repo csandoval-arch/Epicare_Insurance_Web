@@ -251,11 +251,57 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
     // almacene en caché el inline style equivocado durante el primer render.
     const initTimer = setTimeout(() => {
       ctx = gsap.context(() => {
-        // Act 1: Suave fade in de entrada
-        gsap.fromTo(el, 
-          { opacity: 0 }, 
-          { opacity: 1, duration: 1.5, ease: "power2.out" }
-        );
+        // Preparar estado inicial para la animación de entrada
+        gsap.set(el, { opacity: 1 });
+        if (!prefersReducedMotion) {
+          gsap.set(videoWrapperRef.current, { scaleY: 0, transformOrigin: "bottom center" });
+          gsap.set(".hero-act1-left", { opacity: 0, x: -40, filter: "blur(10px)" });
+          gsap.set(".hero-act1-right", { opacity: 0, x: 40, filter: "blur(10px)" });
+          gsap.set([ctaWrapperRef.current, scrollBadgeRef.current], { opacity: 0, y: 30 });
+        }
+
+        const playIntro = () => {
+          if (prefersReducedMotion) {
+            gsap.set([videoWrapperRef.current, ".hero-act1-left", ".hero-act1-right", ctaWrapperRef.current, scrollBadgeRef.current], { clearProps: "all" });
+            return;
+          }
+
+          const introTl = gsap.timeline();
+          
+          introTl.to(videoWrapperRef.current, {
+            scaleY: 1,
+            duration: 1.4,
+            ease: "power4.inOut"
+          })
+          .to(".hero-act1-left", {
+            opacity: 1,
+            x: 0,
+            filter: "blur(0px)",
+            duration: 1.2,
+            stagger: 0.1,
+            ease: "power3.out"
+          }, "-=0.8")
+          .to(".hero-act1-right", {
+            opacity: 1,
+            x: 0,
+            filter: "blur(0px)",
+            duration: 1.2,
+            ease: "power3.out"
+          }, "-=1.0")
+          .to([ctaWrapperRef.current, scrollBadgeRef.current], {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out"
+          }, "-=0.8");
+        };
+
+        if ((window as any).epicareLoaderFinished) {
+          playIntro();
+        } else {
+          window.addEventListener('epicareLoaderFinished', playIntro, { once: true });
+        }
 
         // Act 2: Cinematic Tunnel Transition (ScrollTrigger)
         // Mantenemos el pin estructural para BrandsCarousel
