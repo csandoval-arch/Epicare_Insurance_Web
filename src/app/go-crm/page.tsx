@@ -69,7 +69,7 @@ export default function GoCrmPage() {
       {/* <ThePipeline /> -> Fusionado en TheWorkBehindASale */}
       <ConversationsGoCrm />
       <CalendarGoCrm />
-      <AutomationGoCrm />
+      {/* <AutomationGoCrm /> */}
       <OpportunityJourneyGoCrm />
       <CierreGoCrm />
 

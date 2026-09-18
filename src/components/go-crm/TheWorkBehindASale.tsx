@@ -14,9 +14,10 @@ const ITEMS = [
   },
   {
     num: "02",
-    title: "Notes & Context",
+    title: "Create Tasks and Notes",
     desc: "Keep the details that matter close to the opportunity.",
-    image: "/Files/Go_CRM/THE%20WORK%20BEHIND%20A%20SALE/Automation.png",
+    image: "/Files/Go_CRM/THE%20WORK%20BEHIND%20A%20SALE/Tasks%20and%20notes.mp4",
+    isVideo: true,
   },
   {
     num: "03",

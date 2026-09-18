@@ -333,31 +333,25 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
         // Separamos los elementos para que salgan hacia los lados como un telón abriéndose
         
         // Elementos de la izquierda (Textos: GO, VE MÁS, GROWTH, CRECIMIENTO)
-        tl.to(".hero-act1-left", {
-          opacity: 0,
-          x: "-25vw", 
-          duration: 1.5,
-          stagger: 0.05,
-          ease: "power2.inOut"
-        }, 0);
+        tl.fromTo(".hero-act1-left", 
+          { opacity: 1, x: "0vw" },
+          { opacity: 0, x: "-25vw", duration: 1.5, stagger: 0.05, ease: "power2.inOut" }, 
+          0
+        );
 
         // Elementos de la derecha (Textos: BEYOND, ALLÁ DEL, y el bloque de CTAs)
-        tl.to([".hero-act1-right", ctaWrapperRef.current], {
-          opacity: 0,
-          x: "25vw", 
-          duration: 1.5,
-          stagger: 0.05,
-          ease: "power2.inOut"
-        }, 0);
+        tl.fromTo([".hero-act1-right", ctaWrapperRef.current], 
+          { opacity: 1, x: "0vw" },
+          { opacity: 0, x: "25vw", duration: 1.5, stagger: 0.05, ease: "power2.inOut" }, 
+          0
+        );
 
         // El Scroll Badge central se hunde suavemente
-        tl.to(scrollBadgeRef.current, {
-          opacity: 0,
-          y: 60,
-          scale: 0.8,
-          duration: 1.5,
-          ease: "power2.inOut"
-        }, 0);
+        tl.fromTo(scrollBadgeRef.current, 
+          { opacity: 1, y: 0, scale: 1 },
+          { opacity: 0, y: 60, scale: 0.8, duration: 1.5, ease: "power2.inOut" }, 
+          0
+        );
 
         // 2. Expand the Architectural Cut to Fullscreen using width/left
         tl.to(videoWrapperRef.current, {
@@ -370,11 +364,11 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
         }, 0);
 
         // 3. Fade out the dark architectural shadows/tints
-        tl.to(".hero-video-shadow", {
-          opacity: 0,
-          duration: 1.5,
-          ease: "power2.inOut"
-        }, 0.5);
+        tl.fromTo(".hero-video-shadow", 
+          { opacity: 1 },
+          { opacity: 0, duration: 1.5, ease: "power2.inOut" }, 
+          0.5
+        );
 
         // 4. Act 2: Slide up the Solid Metrics Bar
         // La barra sube desde abajo (yPercent: 100 -> 0)
