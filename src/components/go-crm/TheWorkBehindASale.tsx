@@ -25,12 +25,6 @@ const ITEMS = [
     desc: "See what has already happened.",
     image: "/Files/Go_CRM/THE%20WORK%20BEHIND%20A%20SALE/Appointments.mp4",
     isVideo: true,
-  },
-  {
-    num: "04",
-    title: "Pipeline UI",
-    desc: "Una vista clara del proceso comercial, desde los nuevos prospectos hasta las oportunidades que avanzan.",
-    image: "/Files/Go_CRM/PIpeline/Pipeline.png",
   }
 ];
 
@@ -77,32 +71,30 @@ export default function TheWorkBehindASale() {
           trigger: container.current,
           pin: true,
           start: "top top",
-          end: "+=400%", // 4 sections
+          end: "+=300%", // 3 sections
           scrub: 1,
         }
       });
 
-      // Animate the right strip up
+      // Animate the right strip up (2 steps of shift out of 3 total items)
       tl.to(".v4-right-strip", {
-        yPercent: -75, // Move up by 3/4 of total height to show the 4th image
+        yPercent: -66.667,
         ease: "none",
-        duration: 4
+        duration: 3
       }, 0);
 
       // Set initial states for title blocks
       gsap.set(".v4-title-block-0", { opacity: 1, y: 0 });
-      gsap.set([".v4-title-block-1", ".v4-title-block-2", ".v4-title-block-3"], { opacity: 0, y: 40 });
+      gsap.set([".v4-title-block-1", ".v4-title-block-2"], { opacity: 0, y: 40 });
 
       // Crossfade logic for title blocks
       tl.to(".v4-title-block-0", { opacity: 0, y: -40, duration: 0.3 }, 0.7)
         .to(".v4-title-block-1", { opacity: 1, y: 0, duration: 0.3 }, 1.0)
         .to(".v4-title-block-1", { opacity: 0, y: -40, duration: 0.3 }, 1.7)
-        .to(".v4-title-block-2", { opacity: 1, y: 0, duration: 0.3 }, 2.0)
-        .to(".v4-title-block-2", { opacity: 0, y: -40, duration: 0.3 }, 2.7)
-        .to(".v4-title-block-3", { opacity: 1, y: 0, duration: 0.3 }, 3.0);
+        .to(".v4-title-block-2", { opacity: 1, y: 0, duration: 0.3 }, 2.0);
 
       // Progress bar animation
-      tl.to(".v4-stepper-progress", { width: "100%", duration: 4, ease: "none" }, 0);
+      tl.to(".v4-stepper-progress", { width: "100%", duration: 3, ease: "none" }, 0);
 
     }, container);
 
@@ -175,7 +167,7 @@ export default function TheWorkBehindASale() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[var(--color-brand-blue)]/5 blur-[100px] rounded-full pointer-events-none z-0"></div>
 
             {/* The scrolling strip */}
-            <div className="v4-right-strip absolute top-0 w-full h-[400vh] flex flex-col z-10">
+            <div className="v4-right-strip absolute top-0 w-full h-[300vh] flex flex-col z-10">
               {ITEMS.map((item, i) => (
                 <div key={i} className="h-[100vh] w-full flex items-center justify-center relative">
                   {item.isVideo ? (

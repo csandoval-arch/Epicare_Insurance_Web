@@ -259,24 +259,20 @@ function HeroEpicareV2({ t, locale }: { t: any, locale: string }) {
         });
 
         if (!prefersReducedMotion) {
+          // Estilo Editorial Premium
           introTl.fromTo(videoWrapperRef.current, 
-            { scaleY: 0, transformOrigin: "bottom center" },
-            { scaleY: 1, duration: 1.4, ease: "power4.inOut" }
+            { opacity: 0, filter: "brightness(0.4)" },
+            { opacity: 1, filter: "brightness(1)", duration: 2.5, ease: "power3.out" }
           )
-          .fromTo(".hero-act1-left", 
-            { opacity: 0, x: -40, filter: "blur(10px)" },
-            { opacity: 1, x: 0, filter: "blur(0px)", duration: 1.2, stagger: 0.1, ease: "power3.out" }, 
-            "-=0.8"
-          )
-          .fromTo(".hero-act1-right", 
-            { opacity: 0, x: 40, filter: "blur(10px)" },
-            { opacity: 1, x: 0, filter: "blur(0px)", duration: 1.2, ease: "power3.out" }, 
-            "-=1.0"
+          .fromTo([".hero-act1-left", ".hero-act1-right"], 
+            { opacity: 0, filter: "blur(12px)" },
+            { opacity: 1, filter: "blur(0px)", duration: 2, stagger: 0.15, ease: "power2.out" }, 
+            "-=2.0"
           )
           .fromTo([ctaWrapperRef.current, scrollBadgeRef.current], 
-            { opacity: 0, y: 30 },
-            { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power3.out" }, 
-            "-=0.8"
+            { opacity: 0 },
+            { opacity: 1, duration: 1.5, stagger: 0.2, ease: "power2.out" }, 
+            "-=1.5"
           );
         } else {
           introTl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 1 });

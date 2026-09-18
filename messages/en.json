@@ -589,9 +589,28 @@
       "description": "A clear view of the sales process, from new prospects to opportunities that are moving forward."
     },
     "conversations": {
-      "overline": "CONVERSATIONS",
-      "headline": "Every conversation stays connected to the sale.",
-      "description": "WhatsApp, Email, and SMS don't happen in a vacuum. They belong inside the opportunity."
+      "overline": "08 — CONVERSATIONS & TOTAL CONTACT",
+      "headline": "Every conversation, task, and document connected to the sale.",
+      "description": "Speak directly with each prospect, place calls in one click, request contracts, and automate follow-ups from a single omnichannel command center.",
+      "callButton": "Call",
+      "emailButton": "Email",
+      "docButton": "Request Doc",
+      "taskButton": "Create Task",
+      "clientName": "Sarah Jenkins",
+      "opportunity": "Opportunity: Commercial Auto Fleet",
+      "phone": "+1 (305) 849-2041",
+      "callLogTitle": "Outbound Call Completed",
+      "callLogMeta": "04:18 min • Audio & transcript synced",
+      "docTitle": "Commercial_Policy_Contract_Signed.pdf",
+      "docMeta": "Document received and verified by client",
+      "automationTitle": "Pipeline Automation Triggered",
+      "automationDesc": "Automatic WhatsApp reminder dispatched. Task created: 'Confirm policy terms before Friday'.",
+      "card1Title": "Direct Calling & Number",
+      "card1Desc": "Keep their direct number at your fingertips. Place calls in one click and log every call recording inside the opportunity.",
+      "card2Title": "Contracts & Secure Docs",
+      "card2Desc": "Request IDs, forms, and signed contracts right in the thread. Instant alert notifications as soon as documents are uploaded.",
+      "card3Title": "Pipeline Tasks & Auto Messages",
+      "card3Desc": "Pipelines trigger automated tasks as deals advance. Dispatch scheduled messages effortlessly so no opportunity slips away."
     },
     "calendar": {
       "overline": "CALENDAR + APPOINTMENTS",
