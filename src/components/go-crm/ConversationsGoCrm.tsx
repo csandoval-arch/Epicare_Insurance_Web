@@ -58,11 +58,10 @@ export default function ConversationsGoCrm() {
           x: "0%",
           opacity: 1,
           duration: 1.2,
-          stagger: 0.2,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: ".features-container",
-            start: "top 60%",
+            trigger: ".card-left",
+            start: "top 85%",
           }
         }
       );
@@ -76,8 +75,8 @@ export default function ConversationsGoCrm() {
           duration: 1.2,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: ".features-container",
-            start: "top 50%",
+            trigger: ".card-right",
+            start: "top 85%",
           }
         }
       );
@@ -91,37 +90,40 @@ export default function ConversationsGoCrm() {
           duration: 1.2,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: ".features-container",
-            start: "top 50%",
+            trigger: ".card-bottom",
+            start: "top 90%",
           }
         }
       );
 
-      // --- Holographic Visuals GSAP ---
+      // --- Holographic Visuals GSAP (HARDWARE SYMPHONY OPTIMIZED) ---
+      const holoTrigger = {
+        trigger: ".features-container",
+        start: "top bottom",
+        end: "bottom top",
+        toggleActions: "play pause resume pause"
+      };
+
       gsap.to(".art-pulse", { 
         scale: 1.8, opacity: 0, duration: 2.5, 
-        ease: "sine.out", stagger: { each: 1.25, repeat: -1 } 
+        ease: "sine.out", stagger: { each: 1.25, repeat: -1 },
+        scrollTrigger: holoTrigger
       });
 
       gsap.to([".art-svg-1", ".art-svg-2", ".art-svg-3"], { 
-        filter: "drop-shadow(0 0 6px rgba(255,255,255,0.8))", 
         stroke: "rgba(255,255,255,1)", 
-        duration: 1.5, ease: "sine.inOut", stagger: 0.2, yoyo: true, repeat: -1 
+        duration: 1.5, ease: "sine.inOut", stagger: 0.2, yoyo: true, repeat: -1,
+        scrollTrigger: holoTrigger
       });
 
       gsap.fromTo(".art-node-1", 
-        { scale: 0.5, opacity: 0.5, filter: "drop-shadow(0 0 2px rgba(255,255,255,0.5))" },
-        { scale: 1.5, opacity: 1, filter: "drop-shadow(0 0 10px rgba(255,255,255,1))", duration: 0.8, ease: "sine.inOut", yoyo: true, repeat: -1 }
+        { scale: 0.5, opacity: 0.5 },
+        { scale: 1.5, opacity: 1, duration: 0.8, ease: "sine.inOut", yoyo: true, repeat: -1, scrollTrigger: holoTrigger }
       );
 
       gsap.fromTo(".art-scanner-2",
         { y: -6, opacity: 0 },
-        { y: 6, opacity: 1, duration: 1.5, ease: "sine.inOut", yoyo: true, repeat: -1 }
-      );
-
-      gsap.fromTo(".art-core-3", 
-        { scale: 0.8, opacity: 0.4 },
-        { scale: 1.6, opacity: 1, filter: "drop-shadow(0 0 12px rgba(255,255,255,1))", duration: 1, ease: "power2.inOut", yoyo: true, repeat: -1 }
+        { y: 6, opacity: 1, duration: 1.5, ease: "sine.inOut", yoyo: true, repeat: -1, scrollTrigger: holoTrigger }
       );
 
     }, container);
@@ -213,10 +215,11 @@ export default function ConversationsGoCrm() {
                  <div className="art-pulse absolute w-12 h-12 rounded-full border border-white/40 shadow-[0_0_10px_rgba(255,255,255,0.3)] z-0" />
                  <div className="art-pulse absolute w-12 h-12 rounded-full border border-white/40 shadow-[0_0_10px_rgba(255,255,255,0.3)] z-0" />
                  <svg viewBox="0 0 24 24" className="art-svg-2 w-7 h-7 relative z-10" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                   <rect width="18" height="14" x="3" y="5" rx="2" ry="2" />
-                   <circle cx="12" cy="10" r="2" />
-                   <line x1="8" y1="15" x2="16" y2="15" />
-                   <line x1="10" y1="17" x2="14" y2="17" />
+                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                   <polyline points="14 2 14 8 20 8" />
+                   <line x1="8" y1="13" x2="16" y2="13" />
+                   <line x1="8" y1="17" x2="16" y2="17" />
+                   <line x1="8" y1="9" x2="11" y2="9" />
                  </svg>
                  <div className="art-scanner-2 absolute w-6 h-[1px] bg-white z-20 shadow-[0_0_8px_rgba(255,255,255,1)]" />
                </div>
@@ -241,11 +244,22 @@ export default function ConversationsGoCrm() {
                    <div className="absolute w-8 h-8 bg-white/10 blur-[10px] rounded-full" />
                    <div className="art-pulse absolute w-12 h-12 rounded-full border border-white/40 shadow-[0_0_10px_rgba(255,255,255,0.3)] z-0" />
                    <div className="art-pulse absolute w-12 h-12 rounded-full border border-white/40 shadow-[0_0_10px_rgba(255,255,255,0.3)] z-0" />
-                   <svg viewBox="0 0 24 24" className="art-svg-3 w-7 h-7 relative z-10" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                     <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-                     <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-                   </svg>
-                   <div className="art-core-3 absolute w-2.5 h-2.5 bg-white rounded-full z-20 top-1 right-1.5 shadow-[0_0_12px_rgba(255,255,255,1)]" />
+                    <svg viewBox="0 0 24 24" className="art-svg-3 w-7 h-7 relative z-10 overflow-visible" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10" />
+                      <g className="art-clock-hands">
+                        <line x1="12" y1="12" x2="12" y2="6" />
+                        <line x1="12" y1="12" x2="16" y2="14" />
+                        <circle cx="16" cy="14" r="1.5" fill="white" stroke="none" className="drop-shadow-[0_0_4px_rgba(255,255,255,1)]" />
+                      </g>
+                    </svg>
+                    
+                    {/* Badge de Notificación Pequeño */}
+                    <div className="absolute top-0 right-0 z-20 w-4 h-4 bg-[#35BBFD] rounded-full border border-white/30 flex items-center justify-center shadow-[0_0_8px_#35BBFD]">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-2.5 h-2.5 relative -top-[0.5px]">
+                        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+                        <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+                      </svg>
+                    </div>
                  </div>
               </div>
               <h3 className="text-body-md font-bold text-white leading-snug mb-3">

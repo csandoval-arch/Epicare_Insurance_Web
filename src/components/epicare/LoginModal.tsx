@@ -1,12 +1,12 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useLoginModal } from "@/lib/loginModalStore";
 import { EASE, DUR, STAGGER, REVEAL } from "@/lib/motion";
-import { AcademyIcon } from "./EcosystemIcons";
+import { EppigoIcon } from "./EcosystemIcons";
 import { X } from "@phosphor-icons/react";
-import SmartVideo from "./SmartVideo";
+
 import { asset, posterFor } from "@/lib/asset";
 import { useTranslations } from "next-intl";
 
@@ -57,10 +57,10 @@ const AcademyLogo = ({ className }: { className?: string }) => (
 );
 
 const CARDS = [
-  { id: "crm", titleKey: "card1Title", descKey: "card1Desc", Logo: CrmLogo, logoColor: "text-[var(--color-brand-blue)] dark:text-white", hue: "var(--color-brand-blue)", videoLight: asset("/Files/Features/CRM_Light_Final.mp4"), videoDark: asset("/Files/Features/CRM_Dark_Final.mp4") },
-  { id: "ams", titleKey: "card4Title", descKey: "card4Desc", Logo: AmsLogo, logoColor: "text-[var(--color-brand-blue)] dark:text-white", hue: "var(--color-brand-orange)", videoLight: asset("/Files/Go_AMS/hero/go-ams-hero.mp4"), videoDark: asset("/Files/Go_AMS/hero/go-ams-hero.mp4") },
-  { id: "calls", titleKey: "card6Title", descKey: "card6Desc", Logo: CallsLogo, logoColor: "text-[var(--color-brand-dark)] dark:text-white", hue: "var(--color-brand-dark)", videoLight: asset("/conversation_contact.mp4"), videoDark: asset("/conversation_contact.mp4") },
-  { id: "academy", titleKey: "card8Title", descKey: "card8Desc", Logo: AcademyLogo, logoColor: "text-[var(--color-brand-blue)] dark:text-white", hue: "var(--color-brand-blue)", videoLight: asset("/Files/Features/Academy_V2_Light.mp4"), videoDark: asset("/Files/Features/Academy_Dark_Final.mp4") },
+  { id: "crm", titleKey: "card1Title", descKey: "landingV2.bento.card1Desc", Logo: CrmLogo, logoColor: "text-[var(--color-brand-blue)] dark:text-white", hue: "var(--color-brand-blue)", videoLight: asset("/Files/Features/CRM_Light_Final.mp4"), videoDark: asset("/Files/Features/CRM_Dark_Final.mp4") },
+  { id: "ams", titleKey: "card4Title", descKey: "landingV2.bento.card4Desc", Logo: AmsLogo, logoColor: "text-[var(--color-brand-blue)] dark:text-white", hue: "var(--color-brand-orange)", videoLight: asset("/Files/Go_AMS/hero/go-ams-hero.mp4"), videoDark: asset("/Files/Go_AMS/hero/go-ams-hero.mp4") },
+  { id: "eppigo", descKey: "landingV2.spotlight.eppigo.desc", Logo: EppigoIcon, logoColor: "text-[var(--color-brand-blue)] dark:text-white", hue: "var(--color-brand-blue)", videoLight: asset("/Files/Features/Eppigo_Light_Final.mp4"), videoDark: asset("/Files/Features/Eppigo_Dark_Final.mp4") },
+  { id: "academy", titleKey: "card8Title", descKey: "landingV2.bento.card8Desc", Logo: AcademyLogo, logoColor: "text-[var(--color-brand-blue)] dark:text-white", hue: "var(--color-brand-blue)", videoLight: asset("/Files/Features/Academy_V2_Light.mp4"), videoDark: asset("/Files/Features/Academy_Dark_Final.mp4") },
 ];
 
 export default function LoginModal() {
@@ -196,7 +196,7 @@ export default function LoginModal() {
           <div ref={descRef} className="flex flex-col md:items-end w-full max-w-[416px] shrink-0 md:pb-3">
             <div className="w-10 h-[3px] bg-[var(--color-brand-blue)] rounded-full mb-3 opacity-80 hidden md:block" />
             <p className="text-body-lg text-[var(--color-text-muted)] leading-relaxed drop-shadow-sm md:text-right">
-              All the <strong className="font-semibold text-[var(--color-text-primary)]">tools, resources, and connections</strong> you need from <span className="text-[var(--color-text-accent-blue)] font-semibold">Epicare</span>â€”organized in one easy place. Access support, platforms, and <strong className="font-semibold text-[var(--color-text-primary)]">growth opportunities</strong> anytime, anywhere.
+              All the <strong className="font-semibold text-[var(--color-text-primary)]">tools, resources, and connections</strong> you need from <span className="text-[var(--color-text-accent-blue)] font-semibold">Epicare</span>ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Âorganized in one easy place. Access support, platforms, and <strong className="font-semibold text-[var(--color-text-primary)]">growth opportunities</strong> anytime, anywhere.
             </p>
           </div>
         </div>
@@ -217,7 +217,7 @@ export default function LoginModal() {
                 <div className="flex flex-col items-start justify-start pt-10 px-8 pb-4 shrink-0 relative z-20 w-full">
                   <card.Logo className={`h-8 lg:h-10 w-auto mb-4 ${card.logoColor} transition-transform duration-700 ease-out group-hover:scale-110 origin-left`} />
                   <span className="text-body-sm text-[var(--color-text-muted)] leading-relaxed transition-colors duration-300 group-hover:text-[var(--color-text-primary)]">
-                    {t(`landingV2.bento.${card.descKey}`)}
+                    {t(card.descKey as any)}
                   </span>
                 </div>
 
@@ -226,12 +226,12 @@ export default function LoginModal() {
                   {card.id === 'ams' ? (
                     // AMS uses a framed container without mix-blend
                     <div className="relative w-full h-[85%] mx-6 mb-6 rounded-2xl border border-black/10 dark:border-white/15 overflow-hidden shadow-elevation-3 bg-[var(--color-surface-BG-1)]">
-                      <SmartVideo 
+                      <video autoPlay muted loop playsInline preload="auto" 
                         src={card.videoLight}
                         poster={posterFor(card.videoLight)}
                         className="w-full h-full object-cover dark:hidden" 
                       />
-                      <SmartVideo 
+                      <video autoPlay muted loop playsInline preload="auto" 
                         src={card.videoDark}
                         poster={posterFor(card.videoDark)}
                         className="w-full h-full object-cover hidden dark:block" 
@@ -240,12 +240,12 @@ export default function LoginModal() {
                   ) : (
                     // CRM, CALLS, ACADEMY use the Floating 3D Object trick (mix-blend)
                     <>
-                      <SmartVideo 
+                      <video autoPlay muted loop playsInline preload="auto" 
                         src={card.videoLight}
                         poster={posterFor(card.videoLight)}
                         className={`absolute inset-0 w-full h-full transition-transform duration-[2s] ease-out mix-blend-multiply dark:hidden ${card.id === 'academy' ? 'object-contain scale-90 group-hover:scale-100' : 'object-cover group-hover:scale-105'}`}
                       />
-                      <SmartVideo 
+                      <video autoPlay muted loop playsInline preload="auto" 
                         src={card.videoDark}
                         poster={posterFor(card.videoDark)}
                         className={`absolute inset-0 w-full h-full transition-transform duration-[2s] ease-out mix-blend-screen hidden dark:block ${card.id === 'academy' ? 'object-contain scale-90 group-hover:scale-100' : 'object-cover group-hover:scale-105'}`}
@@ -268,4 +268,6 @@ export default function LoginModal() {
     </div>
   );
 }
+
+
 
