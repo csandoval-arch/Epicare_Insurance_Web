@@ -15,7 +15,7 @@ export default function ConversationsGoCrm() {
     let ctx = gsap.context(() => {
       gsap.registerPlugin(ScrollTrigger);
 
-      {/* Text Reveal */}
+      // Text Reveal
       gsap.fromTo(
         ".conv-text-reveal",
         { yPercent: 100, opacity: 0 },
@@ -32,7 +32,7 @@ export default function ConversationsGoCrm() {
         }
       );
 
-      // Central Console Animation (Scale + Blur)
+      // Central Console Animation
       gsap.fromTo(
         consoleRef.current,
         { scale: 0.95, opacity: 0, filter: "blur(10px)", y: 40 },
@@ -50,22 +50,78 @@ export default function ConversationsGoCrm() {
         }
       );
 
-      // Bottom Cards
-      const cards = gsap.utils.toArray<HTMLElement>(".feature-card");
+      // Minimalist Floating Cards (Overlapping the video)
       gsap.fromTo(
-        cards,
-        { y: 40, opacity: 0 },
+        ".card-left",
+        { x: "-100%", opacity: 0 },
+        {
+          x: "0%",
+          opacity: 1,
+          duration: 1.2,
+          stagger: 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".features-container",
+            start: "top 60%",
+          }
+        }
+      );
+
+      gsap.fromTo(
+        ".card-right",
+        { x: "100%", opacity: 0 },
+        {
+          x: "0%",
+          opacity: 1,
+          duration: 1.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".features-container",
+            start: "top 50%",
+          }
+        }
+      );
+
+      gsap.fromTo(
+        ".card-bottom",
+        { y: 50, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
-          stagger: 0.15,
+          duration: 1.2,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: ".features-grid",
-            start: "top 85%",
+            trigger: ".features-container",
+            start: "top 50%",
           }
         }
+      );
+
+      // --- Holographic Visuals GSAP ---
+      gsap.to(".art-pulse", { 
+        scale: 1.8, opacity: 0, duration: 2.5, 
+        ease: "sine.out", stagger: { each: 1.25, repeat: -1 } 
+      });
+
+      gsap.to([".art-svg-1", ".art-svg-2", ".art-svg-3"], { 
+        filter: "drop-shadow(0 0 6px rgba(255,255,255,0.8))", 
+        stroke: "rgba(255,255,255,1)", 
+        duration: 1.5, ease: "sine.inOut", stagger: 0.2, yoyo: true, repeat: -1 
+      });
+
+      gsap.fromTo(".art-node-1", 
+        { scale: 0.5, opacity: 0.5, filter: "drop-shadow(0 0 2px rgba(255,255,255,0.5))" },
+        { scale: 1.5, opacity: 1, filter: "drop-shadow(0 0 10px rgba(255,255,255,1))", duration: 0.8, ease: "sine.inOut", yoyo: true, repeat: -1 }
+      );
+
+      gsap.fromTo(".art-scanner-2",
+        { y: -6, opacity: 0 },
+        { y: 6, opacity: 1, duration: 1.5, ease: "sine.inOut", yoyo: true, repeat: -1 }
+      );
+
+      gsap.fromTo(".art-core-3", 
+        { scale: 0.8, opacity: 0.4 },
+        { scale: 1.6, opacity: 1, filter: "drop-shadow(0 0 12px rgba(255,255,255,1))", duration: 1, ease: "power2.inOut", yoyo: true, repeat: -1 }
       );
 
     }, container);
@@ -80,8 +136,8 @@ export default function ConversationsGoCrm() {
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] max-w-4xl max-h-4xl bg-[var(--color-brand-blue)]/5 blur-[120px] rounded-full pointer-events-none" />
 
       {/* HEADER CENTRAL */}
-      <div className="w-full max-w-6xl mx-auto px-gutter-md text-center relative z-20 flex flex-col items-center mb-16 lg:mb-24">
-        <div className="overflow-hidden mb-6">
+      <div className="w-full max-w-6xl mx-auto px-gutter-md text-center relative z-20 flex flex-col items-center mb-4 lg:mb-6">
+        <div className="overflow-hidden mb-4">
           <p className="conv-text-reveal text-overline text-[var(--color-text-accent-blue)] uppercase tracking-widest flex items-center justify-center gap-3">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand-blue)] relative">
               <span className="absolute inset-0 bg-[var(--color-brand-blue)] rounded-full animate-ping opacity-75"></span>
@@ -95,75 +151,117 @@ export default function ConversationsGoCrm() {
             {t("headline", { defaultMessage: "Cada conversación, tarea y documento, conectados a la venta." })}
           </h2>
         </div>
+      </div>
+
+      {/* MAIN COMPOSITION (Video + Awwwards Micro-Nodes) */}
+      <div className="features-container relative w-full flex justify-center">
         
-        <div className="overflow-hidden mt-4">
-          <p className="conv-text-reveal text-body-lg text-[var(--color-text-secondary)] leading-relaxed max-w-2xl mx-auto">
-            {t("description", { defaultMessage: "Habla directamente con cada prospecto, realiza llamadas en un clic, solicita contratos y automatiza el seguimiento desde un único centro de mando omnicanal." })}
-          </p>
+        {/* EL VIDEO */}
+        <div className="w-full max-w-[1400px] px-gutter-md relative z-10 perspective-[1200px]">
+          <div 
+            ref={consoleRef} 
+            className="w-full rounded-[12px] shadow-elevation-5 overflow-hidden flex flex-col border border-[var(--color-border-Strokes-strong)] bg-[var(--color-surface-BG-1)]"
+          >
+            <video
+              src="/Files/Go_CRM/Contact_Conversations/conversation_contact.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-auto object-cover block"
+            />
+          </div>
+        </div>
+
+        {/* MICRO-NODOS AWWWARDS (Pegados a los bordes del navegador) */}
+        <div className="absolute inset-0 z-20 pointer-events-none">
+          
+          {/* Card 1 - Izquierda Arriba */}
+          <div className="card-left absolute top-[10%] left-4 lg:left-8 w-[208px] md:w-[248px] bg-[var(--color-brand-blue)]/50 backdrop-blur-[32px] saturate-150 border border-white/20 rounded-[4px] p-6 shadow-elevation-4 pointer-events-auto">
+            
+            {/* Círculo chiquito en la punta */}
+            <div className="absolute -top-[3px] -right-[3px] w-2 h-2 rounded-full bg-[#35BBFD] shadow-[0_0_8px_#35BBFD]" />
+
+            <div className="flex items-start justify-between border-b border-white/20 pb-4 mb-4">
+               <div className="relative w-12 h-12 flex items-center justify-center">
+                 <div className="absolute w-8 h-8 bg-white/10 blur-[10px] rounded-full" />
+                 <div className="art-pulse absolute w-12 h-12 rounded-full border border-white/40 shadow-[0_0_10px_rgba(255,255,255,0.3)] z-0" />
+                 <div className="art-pulse absolute w-12 h-12 rounded-full border border-white/40 shadow-[0_0_10px_rgba(255,255,255,0.3)] z-0" />
+                 <svg viewBox="0 0 24 24" className="art-svg-1 w-7 h-7 relative z-10" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                 </svg>
+                 <div className="art-node-1 absolute w-2 h-2 bg-white rounded-full z-20 top-1 right-1 shadow-[0_0_8px_rgba(255,255,255,1)]" />
+               </div>
+            </div>
+            <h3 className="text-body-md font-bold text-white leading-snug mb-3">
+              {t("card1Title", { defaultMessage: "Llamadas Directas" })}
+            </h3>
+            <p className="text-body-sm text-white leading-relaxed font-light">
+              {t("card1Desc", { defaultMessage: "Registro sonoro y cronológico dentro de la oportunidad." })}
+            </p>
+          </div>
+
+          {/* Card 2 - Derecha Medio */}
+          <div className="card-right absolute top-1/2 -translate-y-1/2 right-4 lg:right-8 w-[208px] md:w-[248px] bg-[var(--color-brand-blue)]/50 backdrop-blur-[32px] saturate-150 border border-white/20 rounded-[4px] p-6 shadow-elevation-4 pointer-events-auto">
+            
+            {/* Círculo chiquito en la punta */}
+            <div className="absolute -top-[3px] -left-[3px] w-2 h-2 rounded-full bg-[#35BBFD] shadow-[0_0_8px_#35BBFD]" />
+
+            <div className="flex items-start justify-between border-b border-white/20 pb-4 mb-4">
+               <div className="relative w-12 h-12 flex items-center justify-center">
+                 <div className="absolute w-8 h-8 bg-white/10 blur-[10px] rounded-full" />
+                 <div className="art-pulse absolute w-12 h-12 rounded-full border border-white/40 shadow-[0_0_10px_rgba(255,255,255,0.3)] z-0" />
+                 <div className="art-pulse absolute w-12 h-12 rounded-full border border-white/40 shadow-[0_0_10px_rgba(255,255,255,0.3)] z-0" />
+                 <svg viewBox="0 0 24 24" className="art-svg-2 w-7 h-7 relative z-10" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                   <rect width="18" height="14" x="3" y="5" rx="2" ry="2" />
+                   <circle cx="12" cy="10" r="2" />
+                   <line x1="8" y1="15" x2="16" y2="15" />
+                   <line x1="10" y1="17" x2="14" y2="17" />
+                 </svg>
+                 <div className="art-scanner-2 absolute w-6 h-[1px] bg-white z-20 shadow-[0_0_8px_rgba(255,255,255,1)]" />
+               </div>
+            </div>
+            <h3 className="text-body-md font-bold text-white leading-snug mb-3 text-left">
+              {t("card2Title", { defaultMessage: "Documentos Seguros" })}
+            </h3>
+            <p className="text-body-sm text-white leading-relaxed font-light text-left">
+              {t("card2Desc", { defaultMessage: "Pide identificaciones y pólizas en el mismo hilo. Notificación al instante." })}
+            </p>
+          </div>
+
+          {/* Card 3 - Centro Abajo */}
+          <div className="absolute -bottom-[35%] left-0 w-full flex justify-center z-20 pointer-events-none">
+            <div className="card-bottom relative w-[240px] md:w-[280px] bg-[var(--color-brand-blue)]/50 backdrop-blur-[32px] saturate-150 border border-white/20 rounded-[4px] p-6 shadow-elevation-4 pointer-events-auto">
+              
+              {/* Círculo chiquito en la punta */}
+              <div className="absolute -top-[3px] -right-[3px] w-2 h-2 rounded-full bg-[#35BBFD] shadow-[0_0_8px_#35BBFD]" />
+
+              <div className="flex items-start justify-between border-b border-white/20 pb-4 mb-4">
+                 <div className="relative w-12 h-12 flex items-center justify-center">
+                   <div className="absolute w-8 h-8 bg-white/10 blur-[10px] rounded-full" />
+                   <div className="art-pulse absolute w-12 h-12 rounded-full border border-white/40 shadow-[0_0_10px_rgba(255,255,255,0.3)] z-0" />
+                   <div className="art-pulse absolute w-12 h-12 rounded-full border border-white/40 shadow-[0_0_10px_rgba(255,255,255,0.3)] z-0" />
+                   <svg viewBox="0 0 24 24" className="art-svg-3 w-7 h-7 relative z-10" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                     <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+                     <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+                   </svg>
+                   <div className="art-core-3 absolute w-2.5 h-2.5 bg-white rounded-full z-20 top-1 right-1.5 shadow-[0_0_12px_rgba(255,255,255,1)]" />
+                 </div>
+              </div>
+              <h3 className="text-body-md font-bold text-white leading-snug mb-3">
+                {t("card3Title", { defaultMessage: "Mensajes Automáticos" })}
+              </h3>
+              <p className="text-body-sm text-white leading-relaxed font-light">
+                {t("card3Desc", { defaultMessage: "El pipeline activa tareas automáticamente ante cada cambio de etapa." })}
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
-
-      {/* CENTRAL VISUAL (Video Component) */}
-      <div className="w-full max-w-5xl mx-auto px-gutter-md relative z-10 perspective-[1200px] mb-24 lg:mb-32">
-        <div 
-          ref={consoleRef} 
-          className="w-full rounded-[2rem] shadow-elevation-5 overflow-hidden flex flex-col border border-[var(--color-border-Strokes-strong)]"
-        >
-          <video
-            src="/Files/Go_CRM/Contact_Conversations/conversation_contact.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-auto object-cover block"
-          />
-        </div>
-      </div>
-
-      {/* 3-COLUMN BENTO GRID */}
-      <div className="features-grid w-full max-w-6xl mx-auto px-gutter-md grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
-        
-        {/* Card 1 */}
-        <div className="feature-card bg-[var(--color-surface-BG-1)] border border-[var(--color-border-Strokes-default)] p-8 rounded-[2rem] flex flex-col gap-4 hover:border-[var(--color-brand-blue)]/50 transition-colors group">
-          <div className="w-12 h-12 rounded-xl bg-[var(--color-surface-BG-2)] border border-[var(--color-border-Strokes-default)] flex items-center justify-center text-[var(--color-brand-blue)] group-hover:scale-110 transition-transform duration-300">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg>
-          </div>
-          <h3 className="text-body-lg font-bold text-[var(--color-text-primary)]">
-            {t("card1Title", { defaultMessage: "Llamadas & Teléfono Directo" })}
-          </h3>
-          <p className="text-body text-[var(--color-text-secondary)] leading-relaxed">
-            {t("card1Desc", { defaultMessage: "Tienes su número siempre a mano. Haz llamadas directas en un clic y mantén el registro sonoro y cronológico dentro de la oportunidad." })}
-          </p>
-        </div>
-
-        {/* Card 2 */}
-        <div className="feature-card bg-[var(--color-surface-BG-1)] border border-[var(--color-border-Strokes-default)] p-8 rounded-[2rem] flex flex-col gap-4 hover:border-[#10B981]/50 transition-colors group">
-          <div className="w-12 h-12 rounded-xl bg-[var(--color-surface-BG-2)] border border-[var(--color-border-Strokes-default)] flex items-center justify-center text-[#10B981] group-hover:scale-110 transition-transform duration-300">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 15.75h3.75M18 19.5a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08M15.75 18H8.857c-1.03 0-1.996-.53-2.568-1.43L4.5 13.5m11.25 4.5v-1.5a3 3 0 00-3-3h-1.5M15.75 18h1.5a2.25 2.25 0 002.25-2.25v-1.5M4.5 13.5V15M4.5 13.5l3 3m-3-3l-3 3" /></svg>
-          </div>
-          <h3 className="text-body-lg font-bold text-[var(--color-text-primary)]">
-            {t("card2Title", { defaultMessage: "Contratos & Documentos Seguros" })}
-          </h3>
-          <p className="text-body text-[var(--color-text-secondary)] leading-relaxed">
-            {t("card2Desc", { defaultMessage: "Pide identificaciones, formularios y pólizas firmadas en el mismo hilo. Notificación inmediata cuando el cliente sube su archivo." })}
-          </p>
-        </div>
-
-        {/* Card 3 */}
-        <div className="feature-card bg-[var(--color-surface-BG-1)] border border-[var(--color-border-Strokes-default)] p-8 rounded-[2rem] flex flex-col gap-4 hover:border-[#F26023]/50 transition-colors group">
-          <div className="w-12 h-12 rounded-xl bg-[var(--color-surface-BG-2)] border border-[var(--color-border-Strokes-default)] flex items-center justify-center text-[#F26023] group-hover:scale-110 transition-transform duration-300">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
-          </div>
-          <h3 className="text-body-lg font-bold text-[var(--color-text-primary)]">
-            {t("card3Title", { defaultMessage: "Tareas & Mensajes Automáticos" })}
-          </h3>
-          <p className="text-body text-[var(--color-text-secondary)] leading-relaxed">
-            {t("card3Desc", { defaultMessage: "El pipeline activa tareas automáticas ante cada cambio de etapa. Envía mensajes sin esfuerzo manual y jamás pierdas un prospecto." })}
-          </p>
-        </div>
-
-      </div>
-
+      
+      {/* Spacer to replace padding and margins previously attached to features-container */}
+      <div className="w-full pb-12 mb-24 lg:mb-32" />
     </section>
   );
 }

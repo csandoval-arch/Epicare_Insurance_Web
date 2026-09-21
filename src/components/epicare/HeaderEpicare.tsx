@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useLocale } from "./I18nProviderClient";
 import { asset } from "@/lib/asset";
+import { loginModalStore } from "@/lib/loginModalStore";
 import gsap from "gsap";
 import { DUR, EASE, STAGGER, REVEAL } from "@/lib/motion";
 
@@ -424,7 +425,7 @@ export default function HeaderEpicare({
           </button>
           
           {/* Botón de Login */}
-          <button className="group hidden md:flex h-[44px] pl-5 pr-1.5 rounded-full flex justify-between items-center gap-3 bg-[var(--color-brand-blue)] text-white text-body-sm font-semibold normal-case transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] shadow-elevation-1 hover:brightness-105 hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-3 active:scale-95 cursor-pointer">
+          <button onClick={() => loginModalStore.open()} className="group hidden md:flex h-[44px] pl-5 pr-1.5 rounded-full flex justify-between items-center gap-3 bg-[var(--color-brand-blue)] text-white text-body-sm font-semibold normal-case transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] shadow-elevation-1 hover:brightness-105 hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-3 active:scale-95 cursor-pointer">
             <span>{t('login')}</span>
             <span className="relative w-8 h-8 rounded-full bg-white text-[var(--color-brand-blue)] flex items-center justify-center overflow-hidden shrink-0">
               <ArrowUR className="absolute w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
@@ -499,9 +500,8 @@ export default function HeaderEpicare({
           </div>
 
           <div className="mobile-nav-item mt-auto flex flex-col gap-3 pt-6 opacity-0">
-            <Link 
-              href="#"
-              onClick={() => setIsMobileMenuOpen(false)}
+            <button 
+              onClick={(e) => { e.preventDefault(); loginModalStore.open(); setIsMobileMenuOpen(false); }}
               className="group w-full flex items-center justify-between h-[56px] pl-8 pr-2 rounded-full bg-[var(--color-brand-blue)] text-white text-body-lg font-semibold transition-transform active:scale-95 shadow-elevation-2"
             >
               <span>{t('login')}</span>
@@ -509,7 +509,7 @@ export default function HeaderEpicare({
                 <ArrowUR className="absolute w-5 h-5 transition-transform duration-300 ease-out group-hover:translate-x-6 group-hover:-translate-y-6" />
                 <ArrowUR className="absolute w-5 h-5 -translate-x-6 translate-y-6 transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
               </span>
-            </Link>
+            </button>
             <Link 
               href="#"
               onClick={() => setIsMobileMenuOpen(false)}

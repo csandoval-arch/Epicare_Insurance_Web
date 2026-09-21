@@ -97,6 +97,7 @@ export const viewport: Viewport = {
 
 import I18nProviderClient from "../components/epicare/I18nProviderClient";
 import SmoothScrollProvider from "../components/SmoothScrollProvider";
+import LoginModal from "../components/epicare/LoginModal";
 
 export default function RootLayout({
   children,
@@ -112,6 +113,7 @@ export default function RootLayout({
         <SmoothScrollProvider>
           <I18nProviderClient>
             {children}
+            <LoginModal />
           </I18nProviderClient>
         </SmoothScrollProvider>
       </body>
