@@ -8,7 +8,6 @@ import { useTranslations } from "next-intl";
 import SlideCalendar from "./SlideCalendar";
 import SlidePipeline from "./SlidePipeline";
 import SlideVelocity from "./SlideVelocity";
-import SlideOmnichannel from "./SlideOmnichannel";
 
 export default function HorizontalMetricsGoCrm() {
   const containerRef = useRef<HTMLElement>(null);
@@ -26,21 +25,14 @@ export default function HorizontalMetricsGoCrm() {
           trigger: containerRef.current,
           pin: true,
           scrub: 1,
-          // MÁGIA MATEMÁTICA: Si aumentamos la velocidad de las tarjetas, debemos
-          // acortar el tiempo (distancia) de scroll para que la última tarjeta
-          // (Acto 5) termine exactamente en la pantalla y no salga volando.
-          end: () => "+=" + (wrapperRef.current!.offsetWidth * 0.75),
+          end: () => "+=" + (wrapperRef.current!.offsetWidth * 0.38), // Escala la distancia para mantener la alta velocidad original
         }
       });
 
       sections.forEach((sec, i) => {
-        // Acto 1 y 2 viajan a velocidad normal (-400%)
-        let speed = -100 * (sections.length - 1); 
-        
-        // Acto 3, 4 y 5 viajan a -520%. 
-        // Esta diferencia de 120% es EXACTAMENTE la necesaria para cerrar
-        // la brecha de 85vw entre las tarjetas y lograr el overlap perfecto.
-        if (i >= 2) speed = -520; 
+        // Recuperamos la cinética original pero acortamos el porcentaje para que el Acto 4 aterrice en 7.5vw exactos.
+        let speed = -146; 
+        if (i >= 2) speed = -253.5; 
         
         tl.to(sec, {
           xPercent: speed,
@@ -57,7 +49,7 @@ export default function HorizontalMetricsGoCrm() {
       ref={containerRef} 
       className="relative w-full h-screen bg-[var(--color-surface-BG-1)] overflow-hidden border-t border-[var(--color-border-Strokes-default)]"
     >
-      {/* Subtle Background Accent using Brand Tokens */}
+      {/* Subtle Background Accent */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-[50vw] h-[50vw] rounded-full bg-[var(--color-brand-blue)]/5 blur-[100px]" />
         <div className="absolute bottom-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-[var(--color-brand-orange)]/5 blur-[80px]" />
@@ -67,7 +59,7 @@ export default function HorizontalMetricsGoCrm() {
       <div ref={wrapperRef} className="flex h-full w-max">
         
         {/* ACT 1: TITLE (FLOATING) */}
-        <div className="horizontal-slide w-[90vw] md:w-[45vw] shrink-0 flex flex-col justify-center px-gutter-md md:pl-gutter-xl pr-0">
+        <div className="horizontal-slide w-[90vw] md:w-[45vw] shrink-0 flex flex-col justify-center px-gutter-md md:pl-gutter-xl pr-0 ml-[8vw]">
            <div className="relative z-10 w-full max-w-xl">
              <span className="text-ui-label text-[var(--color-text-accent-blue)] uppercase tracking-widest mb-6 block">
                Real-Time Metrics & Control
@@ -92,14 +84,9 @@ export default function HorizontalMetricsGoCrm() {
            <SlidePipeline />
         </div>
 
-        {/* ACT 4: VELOCITY */}
-        <div className="horizontal-slide w-[95vw] md:w-[85vw] h-full shrink-0 flex items-center justify-center px-gutter-sm md:px-gutter-md">
-           <SlideVelocity />
-        </div>
-
-        {/* ACT 5: OMNICHANNEL */}
+        {/* ACT 4: VELOCITY & COMMS */}
         <div className="horizontal-slide w-[95vw] md:w-[85vw] h-full shrink-0 flex items-center justify-center px-gutter-sm md:px-gutter-xl pr-gutter-xl">
-           <SlideOmnichannel />
+           <SlideVelocity />
         </div>
       </div>
     </section>
