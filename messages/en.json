@@ -600,6 +600,60 @@
           "desc": "See everything that already happened, in order."
         }
       ]
+    },
+    "metricsDash": {
+      "overline": "Real-time metrics",
+      "headline": "Every pulse of your sales in one ecosystem.",
+      "hint": "Explore the live data",
+      "calendar": {
+        "title": "Calendar Sync",
+        "subtitle": "Booked appointments and automatic events",
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "onboarding": "Onboarding call",
+        "admin": "Admin block",
+        "review": "Fleet review",
+        "followUp": "Follow-up call",
+        "lead": "Every appointment lands on your calendar by itself."
+      },
+      "pipeline": {
+        "title": "Leads & Revenue",
+        "live": "Metrics updated in real time",
+        "assigned": "Assigned leads",
+        "revenue": "Revenue generated",
+        "total": "Total",
+        "agent": "Agent",
+        "newLeads": "New leads",
+        "period": "This period",
+        "analyze": "Analyze",
+        "tooltip": "42 leads",
+        "lead": "How many leads come in and what they sell, up to date."
+      },
+      "velocity": {
+        "title": "Velocity & Omnichannel",
+        "subtitle": "Status and communications in real time",
+        "velocity": "Sales velocity",
+        "duration": "Avg duration",
+        "open": "Open",
+        "booked": "Booked appointments",
+        "abandoned": "Abandoned",
+        "won": "Won",
+        "outbound": "Outbound calls",
+        "inbound": "Inbound calls",
+        "summary": "Overview",
+        "kpiLeads": "Total leads",
+        "kpiWon": "Closed sales",
+        "kpiChargebacks": "Total chargebacks",
+        "kpiPaymentError": "Payment errors",
+        "kpiLeadChargeback": "Leads with chargeback",
+        "kpiChurn": "Churn",
+        "lead": "How fast you close and where you talk to every client."
+      }
     }
   }
 }

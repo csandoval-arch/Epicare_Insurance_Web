@@ -600,6 +600,60 @@
           "desc": "Mira todo lo que ya pasó, en orden."
         }
       ]
+    },
+    "metricsDash": {
+      "overline": "Métricas en tiempo real",
+      "headline": "Todo el pulso de tus ventas en un solo ecosistema.",
+      "hint": "Explora los datos en vivo",
+      "calendar": {
+        "title": "Calendario sincronizado",
+        "subtitle": "Citas agendadas y eventos automáticos",
+        "days": [
+          "Lun",
+          "Mar",
+          "Mié",
+          "Jue",
+          "Vie"
+        ],
+        "onboarding": "Llamada de bienvenida",
+        "admin": "Bloque administrativo",
+        "review": "Revisión de flota",
+        "followUp": "Llamada de seguimiento",
+        "lead": "Cada cita aparece sola en tu calendario."
+      },
+      "pipeline": {
+        "title": "Leads y ventas",
+        "live": "Métricas actualizadas en tiempo real",
+        "assigned": "Leads asignados",
+        "revenue": "Monto generado",
+        "total": "Total",
+        "agent": "Agente",
+        "newLeads": "Nuevos leads",
+        "period": "Este periodo",
+        "analyze": "Analizar",
+        "tooltip": "42 leads",
+        "lead": "Cuántos leads entran y cuánto venden, al día."
+      },
+      "velocity": {
+        "title": "Velocidad y omnicanal",
+        "subtitle": "Estado y comunicaciones en tiempo real",
+        "velocity": "Velocidad de venta",
+        "duration": "Duración media",
+        "open": "Abiertas",
+        "booked": "Citas agendadas",
+        "abandoned": "Abandonadas",
+        "won": "Ganadas",
+        "outbound": "Llamadas realizadas",
+        "inbound": "Llamadas recibidas",
+        "summary": "Resumen general",
+        "kpiLeads": "Leads totales",
+        "kpiWon": "Ventas cerradas",
+        "kpiChargebacks": "Chargebacks totales",
+        "kpiPaymentError": "Con error de pago",
+        "kpiLeadChargeback": "Leads con chargeback",
+        "kpiChurn": "Churn",
+        "lead": "Qué tan rápido cierras y por dónde hablas con cada cliente."
+      }
     }
   }
 }

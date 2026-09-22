@@ -535,21 +535,21 @@ body {
 @utility text-h7 { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: 0.875rem; line-height: 1.6; letter-spacing: 0; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
 
 /* Body · UI → Inter Tight (inherited from body). Weights 300·400·500·600·700. */
-@utility text-subtitle { font-size: clamp(1.125rem, 2vw, 1.5rem); line-height: 1.5; font-weight: 300; letter-spacing: 0; text-wrap: pretty; }
-@utility text-body-2xl { font-size: 1.5rem; line-height: 1.45; font-weight: 300; letter-spacing: -0.01em; text-wrap: pretty; }
-@utility text-body-2xl-light { font-size: 1.5rem; line-height: 1.45; font-weight: 300; letter-spacing: -0.01em; text-wrap: pretty; }
-@utility text-body-xl { font-size: 1.25rem; line-height: 1.5; font-weight: 300; letter-spacing: -0.005em; text-wrap: pretty; }
-@utility text-body-xl-light { font-size: 1.25rem; line-height: 1.5; font-weight: 300; letter-spacing: -0.005em; text-wrap: pretty; }
-@utility text-body-lg { font-size: 1.125rem; line-height: 1.6; font-weight: 300; letter-spacing: 0; text-wrap: pretty; }
-@utility text-body-lg-light { font-size: 1.125rem; line-height: 1.6; font-weight: 300; letter-spacing: 0; text-wrap: pretty; }
-@utility text-body-md { font-size: 1rem; line-height: 1.6; font-weight: 300; letter-spacing: 0; text-wrap: pretty; }
-@utility text-body-md-light { font-size: 1rem; line-height: 1.6; font-weight: 300; letter-spacing: 0; text-wrap: pretty; }
-@utility text-body { font-size: 1rem; line-height: 1.6; font-weight: 300; letter-spacing: 0; text-wrap: pretty; }
-@utility text-body-light { font-size: 1rem; line-height: 1.6; font-weight: 300; letter-spacing: 0; text-wrap: pretty; }
-@utility text-body-sm { font-size: 0.875rem; line-height: 1.6; font-weight: 400; letter-spacing: 0.005em; text-wrap: pretty; }
-@utility text-body-sm-light { font-size: 0.875rem; line-height: 1.6; font-weight: 400; letter-spacing: 0.005em; text-wrap: pretty; }
-@utility text-body-xs { font-size: 0.75rem; line-height: 1.6; font-weight: 400; letter-spacing: 0.01em; text-wrap: pretty; }
-@utility text-body-xs-light { font-size: 0.75rem; line-height: 1.6; font-weight: 400; letter-spacing: 0.01em; text-wrap: pretty; }
+@utility text-subtitle { font-size: clamp(1.125rem, 2vw, 1.5rem); line-height: 1.5; font-weight: 300; letter-spacing: 0; text-wrap-style: pretty; }
+@utility text-body-2xl { font-size: 1.5rem; line-height: 1.45; font-weight: 300; letter-spacing: -0.01em; text-wrap-style: pretty; }
+@utility text-body-2xl-light { font-size: 1.5rem; line-height: 1.45; font-weight: 300; letter-spacing: -0.01em; text-wrap-style: pretty; }
+@utility text-body-xl { font-size: 1.25rem; line-height: 1.5; font-weight: 300; letter-spacing: -0.005em; text-wrap-style: pretty; }
+@utility text-body-xl-light { font-size: 1.25rem; line-height: 1.5; font-weight: 300; letter-spacing: -0.005em; text-wrap-style: pretty; }
+@utility text-body-lg { font-size: 1.125rem; line-height: 1.6; font-weight: 300; letter-spacing: 0; text-wrap-style: pretty; }
+@utility text-body-lg-light { font-size: 1.125rem; line-height: 1.6; font-weight: 300; letter-spacing: 0; text-wrap-style: pretty; }
+@utility text-body-md { font-size: 1rem; line-height: 1.6; font-weight: 300; letter-spacing: 0; text-wrap-style: pretty; }
+@utility text-body-md-light { font-size: 1rem; line-height: 1.6; font-weight: 300; letter-spacing: 0; text-wrap-style: pretty; }
+@utility text-body { font-size: 1rem; line-height: 1.6; font-weight: 300; letter-spacing: 0; text-wrap-style: pretty; }
+@utility text-body-light { font-size: 1rem; line-height: 1.6; font-weight: 300; letter-spacing: 0; text-wrap-style: pretty; }
+@utility text-body-sm { font-size: 0.875rem; line-height: 1.6; font-weight: 400; letter-spacing: 0.005em; text-wrap-style: pretty; }
+@utility text-body-sm-light { font-size: 0.875rem; line-height: 1.6; font-weight: 400; letter-spacing: 0.005em; text-wrap-style: pretty; }
+@utility text-body-xs { font-size: 0.75rem; line-height: 1.6; font-weight: 400; letter-spacing: 0.01em; text-wrap-style: pretty; }
+@utility text-body-xs-light { font-size: 0.75rem; line-height: 1.6; font-weight: 400; letter-spacing: 0.01em; text-wrap-style: pretty; }
 @utility text-caption { font-size: 0.75rem; line-height: 1.5; font-weight: 400; letter-spacing: 0.01em; }
 
 /* Meta · Code → JetBrains Mono. Numbers, hex, labels, metadata only. */
