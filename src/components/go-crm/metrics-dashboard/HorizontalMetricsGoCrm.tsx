@@ -18,21 +18,23 @@ export default function HorizontalMetricsGoCrm() {
     
     let ctx = gsap.context(() => {
       gsap.registerPlugin(ScrollTrigger);
-      const sections = gsap.utils.toArray(".horizontal-slide");
+      const sections = gsap.utils.toArray<HTMLElement>(".horizontal-slide");
       
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           pin: true,
           scrub: 1,
-          end: () => "+=" + (wrapperRef.current!.offsetWidth * 0.38), // Escala la distancia para mantener la alta velocidad original
+          end: () => "+=" + (wrapperRef.current!.offsetWidth * 0.50),
         }
       });
 
       sections.forEach((sec, i) => {
-        // Recuperamos la cinética original pero acortamos el porcentaje para que el Acto 4 aterrice en 7.5vw exactos.
-        let speed = -146; 
-        if (i >= 2) speed = -253.5; 
+        // Velocidades mecánicas constantes (ease: "none") para mantener la ilusión de paralaje intacta.
+        let speed = -100; 
+        if (i === 1) speed = -140; 
+        if (i === 2) speed = -210;
+        if (i === 3) speed = -310; // Velocidad bestial
         
         tl.to(sec, {
           xPercent: speed,
@@ -85,7 +87,7 @@ export default function HorizontalMetricsGoCrm() {
         </div>
 
         {/* ACT 4: VELOCITY & COMMS */}
-        <div className="horizontal-slide w-[95vw] md:w-[85vw] h-full shrink-0 flex items-center justify-center px-gutter-sm md:px-gutter-xl pr-gutter-xl">
+        <div className="horizontal-slide w-[95vw] md:w-[85vw] h-full shrink-0 flex items-center justify-center px-gutter-sm md:px-gutter-xl pr-gutter-xl md:ml-[50vw]">
            <SlideVelocity />
         </div>
       </div>

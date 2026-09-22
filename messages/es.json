@@ -485,8 +485,8 @@
       "overline": "GO CRM",
       "title": "Tu Libro de Negocios, <blue>Un Centro de Control.</blue>",
       "subhead": "La capa de venta de <bold>GO Hub</bold>. Todo lo que pasa antes de que un prospecto se vuelva póliza, en un solo lugar.",
-      "cta": "Notificarme",
-      "microcopy": "En construcción. <muted>Se libera en</muted>"
+      "cta": "Abre tu centro de control",
+      "scrollDown": "Desplázate hacia abajo"
     },
     "problem": {
       "overline": "El problema",
@@ -526,33 +526,25 @@
       "active": "Activo"
     },
     "contactVsOpp": {
-      "overline": "04 — Contacto ≠ Oportunidad",
-      "headline": "Una persona puede significar más de una oportunidad.",
-      "contactLabel": "Perfil de Contacto",
-      "contactName": "Carlos Martínez",
-      "opp1": "Oportunidad: Dental",
-      "opp1Desc": "Flujo de trabajo independiente y siguientes pasos para el proceso Dental.",
-      "opp2": "Oportunidad: Auto",
-      "opp2Desc": "Motor de cotización y seguimiento totalmente separados para el proceso de Auto.",
-      "opp3": "Oportunidad: Vida",
-      "opp3Desc": "Pipeline de seguimiento a largo plazo configurado para la cobertura de Vida.",
-      "statusActive": "Cliente Activo",
-      "openOpps": "Oportunidades Abiertas",
-      "tasksTitle": "Tareas y Notas Pendientes",
-      "task1Title": "Llamada de seguimiento — Dental",
-      "task1Time": "Hoy, 3:00 PM",
-      "task2Title": "Enviar cotización — Seguro de Auto",
-      "task2Time": "Pendiente de revisión",
-      "taskNote": "Nota: Prefiere contacto por WhatsApp en las mañanas.",
-      "metricsTitle": "Métricas del Cliente",
-      "metricLtv": "LTV Proyectado",
-      "metricLtvValue": "$12,450",
-      "metricFirstTouch": "Primer Contacto",
-      "metricFirstTouchValue": "Hace 3 semanas (Form Web)",
-      "metricResponse": "Tiempo de Respuesta",
-      "metricResponseValue": "4 minutos",
-      "metricTouchpoints": "Puntos de Contacto",
-      "metricTouchpointsValue": "14 interacciones"
+      "overline": "Cartera",
+      "headline": "Una persona puede significar <i>más de una</i> oportunidad.",
+      "opps": [
+        {
+          "label": "Dental",
+          "desc": "Flujo de trabajo y seguimiento completamente independiente."
+        },
+        {
+          "label": "Salud",
+          "desc": "Cotización, enrolamiento y gestión de pólizas médicas independientes."
+        },
+        {
+          "label": "Vida",
+          "desc": "Pipeline configurado para la cobertura a largo plazo."
+        }
+      ],
+      "convergeTitle": "No importa cómo llegue el prospecto",
+      "convergeBody": "Facebook, formulario web, WhatsApp o llamada entrante... todo converge en un mismo pipeline estructurado.",
+      "cta": "Conecta tus fuentes"
     },
     "dayVsList": {
       "overline": "La diferencia",

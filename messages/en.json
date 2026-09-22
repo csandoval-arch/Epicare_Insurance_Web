@@ -485,8 +485,8 @@
       "overline": "GO CRM",
       "title": "Your book of business, <blue>one control center.</blue>",
       "subhead": "The sales layer of <bold>GO Hub</bold>. Everything that happens before a prospect becomes a policy, in one place.",
-      "cta": "Notify me when available",
-      "microcopy": "Under construction. Launching on go.epicare.com"
+      "cta": "Open your control center",
+      "scrollDown": "Scroll down"
     },
     "problem": {
       "overline": "The problem",
@@ -526,33 +526,25 @@
       "active": "Active"
     },
     "contactVsOpp": {
-      "overline": "04 — Contact ≠ Opportunity",
-      "headline": "One person can mean more than one opportunity.",
-      "contactLabel": "Contact Record",
-      "contactName": "Carlos Martínez",
-      "opp1": "Dental Opportunity",
-      "opp1Desc": "Independent workflow, timeline, and next steps for the Dental process.",
-      "opp2": "Auto Opportunity",
-      "opp2Desc": "Completely separate quoting engine and tracking for the Auto process.",
-      "opp3": "Life Opportunity",
-      "opp3Desc": "Long-term nurture pipeline specifically configured for Life coverage.",
-      "statusActive": "Active Client",
-      "openOpps": "Open Opportunities",
-      "tasksTitle": "Pending Tasks & Notes",
-      "task1Title": "Follow-up call — Dental",
-      "task1Time": "Today, 3:00 PM",
-      "task2Title": "Send quote — Auto Insurance",
-      "task2Time": "Pending review",
-      "taskNote": "Note: Prefers WhatsApp communication during mornings.",
-      "metricsTitle": "Relationship Metrics",
-      "metricLtv": "Projected LTV",
-      "metricLtvValue": "$12,450",
-      "metricFirstTouch": "First Touch",
-      "metricFirstTouchValue": "3 weeks ago (Web Form)",
-      "metricResponse": "Avg. Response Time",
-      "metricResponseValue": "4 minutes",
-      "metricTouchpoints": "Touchpoints Logged",
-      "metricTouchpointsValue": "14 interactions"
+      "overline": "Portfolio",
+      "headline": "One person can mean <i>more than one</i> opportunity.",
+      "opps": [
+        {
+          "label": "Dental",
+          "desc": "Fully independent workflow and follow-up."
+        },
+        {
+          "label": "Health",
+          "desc": "Independent quoting, enrollment and medical policy management."
+        },
+        {
+          "label": "Life",
+          "desc": "Pipeline configured for long-term coverage."
+        }
+      ],
+      "convergeTitle": "No matter how the prospect arrives",
+      "convergeBody": "Facebook, web form, WhatsApp or inbound call... everything converges into one structured pipeline.",
+      "cta": "Connect your sources"
     },
     "dayVsList": {
       "overline": "The difference",

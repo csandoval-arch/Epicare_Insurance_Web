@@ -1,69 +1,13 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslations } from 'next-intl';
 import { EASE, DUR, STAGGER, REVEAL } from '@/lib/motion';
 import { asset } from "@/lib/asset";
-
-/** Up-right arrow used inside the CTA bubbles. */
-const ArrowUR = ({ className = '' }: { className?: string }) => (
-  <svg
-    viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-    strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true"
-  >
-    <path d="M7 17 17 7M7 7h10v10" />
-  </svg>
-);
-
-// Helper to make a container break out of the right side of the grid and touch the viewport edge
-function BleedRight({ children, className = "" }: { children: React.ReactNode, className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [offset, setOffset] = useState(0);
-  
-  useEffect(() => {
-    const update = () => {
-      // Pilar 2: Limita el uso de offsets vía JavaScript únicamente a resoluciones de escritorio
-      if (window.innerWidth >= 1024 && ref.current) {
-        const originalRight = ref.current.style.right;
-        ref.current.style.right = '0px';
-        const rect = ref.current.getBoundingClientRect();
-        const dist = document.documentElement.clientWidth - rect.right;
-        ref.current.style.right = originalRight;
-        setOffset(dist > 0 ? dist : 0);
-      } else {
-        setOffset(0);
-      }
-    };
-    
-    // Initial calculate
-    update();
-    
-    // Recalculate on load and resize
-    window.addEventListener('load', update);
-    window.addEventListener('resize', update);
-    
-    const observer = new MutationObserver(update);
-    observer.observe(document.body, { childList: true, subtree: true });
-    
-    return () => {
-      window.removeEventListener('load', update);
-      window.removeEventListener('resize', update);
-      observer.disconnect();
-    };
-  }, []);
-
-  return (
-    <div 
-      ref={ref} 
-      style={{ right: offset > 0 ? `-${offset}px` : undefined }} 
-      className={`${className} min-w-[180%] w-[180%] -mr-[80%] lg:min-w-0 lg:w-full lg:mr-0`}
-    >
-      {children}
-    </div>
-  );
-}
+import ArrowUR from "@/components/icons/ArrowUR";
+import BleedRight from "@/components/BleedRight";
 
 export default function HeroSection() {
   const t = useTranslations('goAms.hero');
@@ -265,7 +209,7 @@ export default function HeroSection() {
           {/* Row 4 (Desktop Row 3): Dark Panel / Video Showcase */}
           <div id="visual-panel-wrapper" className="col-span-12 lg:col-start-2 lg:col-span-11 lg:row-start-3 lg:row-span-1 w-full h-auto relative mt-6 lg:mt-6">
             
-            <BleedRight className="relative w-full h-full">
+            <BleedRight className="relative w-full h-full" mobileBleedClassName="min-w-[180%] w-[180%] -mr-[80%]">
               
               {/* Scroll Down Button (Desktop Only) */}
               <div className="absolute top-[140px] left-[-24px] -translate-x-full z-20 hidden lg:flex">

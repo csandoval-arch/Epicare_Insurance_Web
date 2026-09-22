@@ -1,14 +1,26 @@
 "use client";
 
-import React, { useRef, useLayoutEffect } from "react";
+import { Fragment, useLayoutEffect, useRef, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { EASE } from "@/lib/motion";
+
+// ── VALORES FUERA DE TOKEN (margen creativo declarado) ──
+/** Suavizado del scroll horizontal: más ágil que SCRUB.crisp (1). */
+const TRACK_SCRUB = 0.5;
+/** Scroll vertical necesario = ancho de la pista × este factor. */
+const TRACK_DISTANCE_FACTOR = 0.5;
+
+/** Frases de la historia, en orden. La última lleva el cierre y va resaltada en azul. */
+const STORY_KEYS = ["p1", "p2", "p3", "p4"] as const;
+
+const bold = (chunks: ReactNode) => <strong className="font-semibold">{chunks}</strong>;
 
 /**
  * @file ProblemGoCrm.tsx
- * @description Diseño Simétrico en Scroll Horizontal.
- * Todos los puntos (1 al 5) tienen la misma jerarquía y fluyen como columnas idénticas.
+ * @description "El problema" de GO CRM. Pista horizontal pineada: panel de título + 4 frases de
+ * la historia de una venta + panel azul de cierre. El scroll vertical la desplaza en X.
  */
 export default function ProblemGoCrm() {
   const t = useTranslations("goCrm.problem");
@@ -16,95 +28,77 @@ export default function ProblemGoCrm() {
   const track = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    if (typeof window === "undefined") return;
-   if (typeof window === "undefined") return;
+    const section = container.current;
+    const trackEl = track.current;
+    if (!section || !trackEl) return;
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      // Horizontal Scroll
-      gsap.to(track.current, {
-        x: () => -(track.current!.scrollWidth - window.innerWidth),
-        ease: "none",
+      gsap.to(trackEl, {
+        x: () => -(trackEl.scrollWidth - window.innerWidth),
+        ease: EASE.none,
         scrollTrigger: {
-          trigger: container.current,
+          trigger: section,
           pin: true,
-          scrub: 0.5, // Reducido de 1 a 0.5 para que se sienta más responsivo
-          // Reducimos la distancia de scroll vertical necesaria a la mitad (0.5)
-          end: () => "+=" + (track.current!.scrollWidth * 0.5)
-        }
+          scrub: TRACK_SCRUB,
+          end: () => "+=" + trackEl.scrollWidth * TRACK_DISTANCE_FACTOR,
+          // Recalcula x y end al cambiar el viewport (sin esto, un resize deja la pista desfasada).
+          invalidateOnRefresh: true,
+        },
       });
-    }, container);
+    }, section);
 
     return () => ctx.revert();
   }, []);
 
   const points = [
-    { 
-      num: "01", 
-      text: <>"{t.rich("p1", { b: (chunks) => <strong className="font-semibold">{chunks}</strong> })}"</> 
-    },
-    { 
-      num: "02", 
-      text: <>"{t.rich("p2", { b: (chunks) => <strong className="font-semibold">{chunks}</strong> })}"</> 
-    },
-    { 
-      num: "03", 
-      text: <>"{t.rich("p3", { b: (chunks) => <strong className="font-semibold">{chunks}</strong> })}"</> 
-    },
-    { 
-      num: "04", 
-      text: <>"{t.rich("p4", { b: (chunks) => <strong className="font-semibold">{chunks}</strong> })}"</> 
-    },
-    { 
-      num: "05", 
-      text: <>{t.rich("p5", { b: (chunks) => <strong className="font-semibold">{chunks}</strong> })} {t.rich("cierre", { b: (chunks) => <strong className="font-semibold">{chunks}</strong> })}</> 
-    }
+    ...STORY_KEYS.map((key) => <Fragment key={key}>&quot;{t.rich(key, { b: bold })}&quot;</Fragment>),
+    <Fragment key="cierre">
+      {t.rich("p5", { b: bold })} {t.rich("cierre", { b: bold })}
+    </Fragment>,
   ];
 
   return (
     <section ref={container} className="h-screen w-full bg-[var(--color-surface-BG-base)] text-[var(--color-text-primary)] overflow-hidden flex items-center">
-      
-      {/* Track Horizontal que contiene el Título y las columnas simétricas */}
       <div ref={track} className="flex h-full w-max items-stretch">
-        
-        {/* Panel 0: Título Masivo (Acto 0 con más margen izquierdo) */}
-        <div className="w-[100vw] lg:w-[60vw] h-full flex flex-col justify-center px-8 lg:pr-16 lg:pl-[8vw] xl:pl-[12vw] border-r border-[var(--color-border-Strokes-default)] shrink-0">
-          <p className="text-meta uppercase tracking-[0.2em] text-[var(--color-brand-blue)] mb-8">
+
+        {/* ── PANEL 0: TÍTULO ── */}
+        <div className="w-[100vw] lg:w-[60vw] h-full flex flex-col justify-center px-static-xl lg:pr-16 lg:pl-[8vw] xl:pl-[12vw] border-r border-[var(--color-border-Strokes-default)] shrink-0">
+          <p className="text-meta uppercase tracking-[0.2em] text-[var(--color-brand-blue)] mb-static-xl">
             {t("overline")}
           </p>
-          <h2 className="text-display-md lg:text-[4.5vw] font-medium tracking-tight leading-[1.05] max-w-4xl">
+          <h2 className="text-display lg:text-[4.5vw] font-medium tracking-tight leading-[1.05] max-w-4xl">
             {t("h2")}
           </h2>
         </div>
 
-        {/* Paneles 1 al 4: Puntos idénticos (excepto el 4 que lleva fondo azul y es más ancho) */}
-        {points.map((pt, i) => {
-          const isHighlight = i === 4;
+        {/* ── PANELES 1-5: LA HISTORIA (el último, azul y más ancho, es el cierre) ── */}
+        {points.map((text, i) => {
+          const isHighlight = i === points.length - 1;
           return (
-            <div 
-              key={i} 
-              className={`relative ${isHighlight ? "w-[90vw] lg:w-[35vw]" : "w-[85vw] lg:w-[28vw]"} h-full flex flex-col justify-center px-8 lg:px-16 border-r border-[var(--color-border-Strokes-default)] shrink-0 transition-colors duration-500
-                ${isHighlight 
-                  ? "bg-[var(--color-brand-blue)] text-white hover:bg-[var(--color-brand-blue)]" 
+            <div
+              key={i}
+              className={`relative ${isHighlight ? "w-[90vw] lg:w-[35vw]" : "w-[85vw] lg:w-[28vw]"} h-full flex flex-col justify-center px-static-xl lg:px-16 border-r border-[var(--color-border-Strokes-default)] shrink-0 transition-colors duration-500
+                ${isHighlight
+                  ? "bg-[var(--color-brand-blue)] text-[var(--color-text-White-100)]"
                   : "bg-[var(--color-surface-BG-base)] hover:bg-[var(--color-surface-BG-1)] text-[var(--color-text-primary)]"
                 }
               `}
             >
               {!isHighlight && (
-                <span className="block text-body-md font-mono mb-12 text-[var(--color-text-muted)]">
-                  {pt.num}
+                <span className="block text-body-md font-mono mb-static-2xl text-[var(--color-text-muted)]">
+                  {String(i + 1).padStart(2, "0")}
                 </span>
               )}
-              <p className={`leading-relaxed ${isHighlight ? "text-display-sm font-bold text-white tracking-tight" : "text-display-xs font-light text-[var(--color-text-secondary)]"}`}>
-                {pt.text}
+              <p className={`leading-relaxed ${isHighlight ? "text-display-sm font-bold text-[var(--color-text-White-100)] tracking-tight" : "text-display-xs font-light text-[var(--color-text-secondary)]"}`}>
+                {text}
               </p>
 
-              {/* Flecha minimalista hacia abajo */}
               {isHighlight && (
-                <div className="absolute bottom-12 right-12 lg:bottom-16 lg:right-16 text-white/80">
+                <div className="absolute bottom-static-2xl right-static-2xl lg:bottom-16 lg:right-16 text-white/80" aria-hidden="true">
                   <svg width="24" height="60" viewBox="0 0 24 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-16 lg:h-20 w-auto">
-                    <path d="M12 2L12 58" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                    <path d="M6 52L12 58L18 52" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M12 2L12 58" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M6 52L12 58L18 52" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
               )}
@@ -112,11 +106,9 @@ export default function ProblemGoCrm() {
           );
         })}
 
-        {/* Espacio final (buffer) para que la última tarjeta respire al terminar el scroll */}
+        {/* Respiro final para que el último panel no quede pegado al borde al terminar el scroll */}
         <div className="w-[10vw] lg:w-[20vw] h-full shrink-0 bg-[var(--color-surface-BG-base)]" />
-
       </div>
     </section>
   );
 }
-
