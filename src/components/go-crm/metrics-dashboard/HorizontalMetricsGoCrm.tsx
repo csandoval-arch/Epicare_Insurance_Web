@@ -21,16 +21,31 @@ export default function HorizontalMetricsGoCrm() {
       gsap.registerPlugin(ScrollTrigger);
       const sections = gsap.utils.toArray(".horizontal-slide");
       
-      gsap.to(sections, {
-        xPercent: -100 * (sections.length - 1),
-        ease: "none",
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           pin: true,
           scrub: 1,
-          snap: 1 / (sections.length - 1),
-          end: () => "+=" + wrapperRef.current!.offsetWidth,
+          // MÁGIA MATEMÁTICA: Si aumentamos la velocidad de las tarjetas, debemos
+          // acortar el tiempo (distancia) de scroll para que la última tarjeta
+          // (Acto 5) termine exactamente en la pantalla y no salga volando.
+          end: () => "+=" + (wrapperRef.current!.offsetWidth * 0.75),
         }
+      });
+
+      sections.forEach((sec, i) => {
+        // Acto 1 y 2 viajan a velocidad normal (-400%)
+        let speed = -100 * (sections.length - 1); 
+        
+        // Acto 3, 4 y 5 viajan a -520%. 
+        // Esta diferencia de 120% es EXACTAMENTE la necesaria para cerrar
+        // la brecha de 85vw entre las tarjetas y lograr el overlap perfecto.
+        if (i >= 2) speed = -520; 
+        
+        tl.to(sec, {
+          xPercent: speed,
+          ease: "none",
+        }, 0);
       });
     }, containerRef);
 
