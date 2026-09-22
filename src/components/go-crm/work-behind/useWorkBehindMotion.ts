@@ -60,6 +60,9 @@ export function useWorkBehindMotion(scopeRef: RefObject<HTMLElement | null>) {
           scrollTrigger: { trigger: intro, start: TRIGGER.late, end: INTRO.end, scrub: INTRO.scrub },
         }
       );
+      // CTA bajo el titular: one-shot (no scrubeado), cuando el titular ya se está encendiendo.
+      const cta = el.querySelector(".v4-cta");
+      gsap.fromTo(cta, SUB_FROM, { ...SUB_TO, scrollTrigger: { trigger: cta, start: TRIGGER.standard, toggleActions: "play none none reverse" } });
     });
 
     // ── DESKTOP: SPLIT PINEADO CON TIRA DE PANTALLAZOS ──

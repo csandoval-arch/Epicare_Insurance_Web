@@ -42,6 +42,8 @@ export function useConversationsMotion(scopeRef: RefObject<HTMLElement | null>) 
 
     mm.add(FULL, () => {
       gsap.fromTo(".conv-text-reveal", BIRTH_FROM, { ...BIRTH_TO, stagger: STAGGER.base, ...oneShot(el, TRIGGER.late) });
+      // CTA bajo el titular: fade-up (fuera de overflow-hidden para no recortar hover ni sombra).
+      gsap.fromTo(".conv-cta", CARD_FROM, { ...CARD_TO, delay: STAGGER.wave * 2, ...oneShot(el, TRIGGER.late) });
       gsap.fromTo(
         ".conv-console",
         { ...CARD_FROM, scale: CONSOLE_START_SCALE },

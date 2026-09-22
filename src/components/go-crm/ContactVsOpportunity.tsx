@@ -14,7 +14,7 @@ import { asset } from "@/lib/asset";
 import MobileContactVsOpp from "./contact-vs-opp/MobileContactVsOpp";
 import OppCard, { type OppCopy } from "./contact-vs-opp/OppCard";
 import ProfileCard from "./contact-vs-opp/ProfileCard";
-import SecondaryCta from "./contact-vs-opp/SecondaryCta";
+import SecondaryCta from "./cta/SecondaryCta";
 import { CONTACT_IMAGES, CONTACTS_LEFT, CONTACTS_RIGHT } from "./contact-vs-opp/data";
 import { useContactVsOppMotion } from "./contact-vs-opp/useContactVsOppMotion";
 

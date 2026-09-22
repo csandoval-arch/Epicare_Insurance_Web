@@ -16,6 +16,7 @@ import SlideCalendar from "./SlideCalendar";
 import SlidePipeline from "./SlidePipeline";
 import SlideVelocity from "./SlideVelocity";
 import { useMetricsMotion } from "./useMetricsMotion";
+import PrimaryCta from "../cta/PrimaryCta";
 
 /**
  * Temporizador de los carruseles (ver `TimerDots`): una barra que se vacía con `scaleX`. Al pausar
@@ -100,6 +101,8 @@ export default function HorizontalMetricsGoCrm() {
                 <span className="hidden lg:inline text-body-md text-[var(--color-text-muted)]">{t("hint")}</span>
               </div>
             </div>
+            {/* CTA primario: las métricas son la prueba, el punto de conversión de media página */}
+            <PrimaryCta label={t("cta")} className="md-cta mt-static-lg lg:mt-static-xl" />
           </div>
         </div>
 

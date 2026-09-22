@@ -572,7 +572,8 @@
       "card2Title": "Contratos & Documentos Seguros",
       "card2Desc": "Pide identificaciones, formularios y pólizas firmadas en el mismo hilo. Notificación inmediata cuando el cliente sube su archivo.",
       "card3Title": "Tareas & Mensajes Automáticos",
-      "card3Desc": "El pipeline activa tareas automáticas ante cada cambio de etapa. Envía mensajes sin esfuerzo manual y jamás pierdas un prospecto."
+      "card3Desc": "El pipeline activa tareas automáticas ante cada cambio de etapa. Envía mensajes sin esfuerzo manual y jamás pierdas un prospecto.",
+      "cta": "Centraliza todo"
     },
     "calendar": {
       "overline": "CALENDARIO + CITAS",
@@ -599,7 +600,8 @@
           "title": "Agenda o actualiza citas",
           "desc": "Mira todo lo que ya pasó, en orden."
         }
-      ]
+      ],
+      "cta": "Ordena tu seguimiento"
     },
     "metricsDash": {
       "overline": "Métricas en tiempo real",
@@ -653,7 +655,8 @@
         "kpiLeadChargeback": "Leads con chargeback",
         "kpiChurn": "Churn",
         "lead": "Qué tan rápido cierras y por dónde hablas con cada cliente."
-      }
+      },
+      "cta": "Ve tus números"
     }
   }
 }

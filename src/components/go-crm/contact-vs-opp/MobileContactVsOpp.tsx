@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { asset } from "@/lib/asset";
 import OppCard, { type OppCopy } from "./OppCard";
 import ProfileCard from "./ProfileCard";
-import SecondaryCta from "./SecondaryCta";
+import SecondaryCta from "../cta/SecondaryCta";
 import { CONTACT_IMAGES, CONTACTS_LEFT } from "./data";
 
 interface MobileContactVsOppProps {

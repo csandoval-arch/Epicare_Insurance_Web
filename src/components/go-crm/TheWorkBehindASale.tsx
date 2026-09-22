@@ -3,7 +3,7 @@
 /**
  * @file TheWorkBehindASale.tsx
  * @description Sección 4 de GO CRM — "Seguimiento". Intro con titular que se enciende palabra a
- * palabra con el scroll y, debajo, los 3 pasos del trabajo de una venta:
+ * palabra con el scroll + CTA primario y, debajo, los 3 pasos del trabajo de una venta:
  * - Desktop (≥lg): split pineado con tira de pantallazos (`work-behind/StepsPinned`).
  * - Móvil/tablet (<lg): scroll normal, título + subtítulo + pantallazo por paso (`StepsStacked`).
  */
@@ -12,6 +12,7 @@ import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import StepsPinned from "./work-behind/StepsPinned";
 import StepsStacked from "./work-behind/StepsStacked";
+import PrimaryCta from "./cta/PrimaryCta";
 import type { StepCopy } from "./work-behind/data";
 import { useWorkBehindMotion } from "./work-behind/useWorkBehindMotion";
 
@@ -36,6 +37,7 @@ export default function TheWorkBehindASale() {
               </span>
             ))}
         </h2>
+        <PrimaryCta label={t("cta")} className="v4-cta mt-static-xl" />
       </section>
 
       {/* ── LOS 3 PASOS ── */}

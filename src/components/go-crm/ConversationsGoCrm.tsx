@@ -14,6 +14,7 @@ import { useTranslations } from "next-intl";
 import { asset } from "@/lib/asset";
 import SmartVideo from "@/components/epicare/SmartVideo";
 import ConvCard, { type ConvCopy } from "./conversations/ConvCard";
+import PrimaryCta from "./cta/PrimaryCta";
 import { useConversationsMotion } from "./conversations/useConversationsMotion";
 
 const VIDEO = "/Files/Go_CRM/Contact_Conversations/conversation_contact.mp4";
@@ -104,6 +105,7 @@ export default function ConversationsGoCrm() {
         <div className="overflow-hidden pb-static-md w-full max-w-[1100px] mx-auto">
           <h2 className="conv-text-reveal text-display-sm lg:text-display-lg text-[var(--color-text-primary)]">{t("headline")}</h2>
         </div>
+        <PrimaryCta label={t("cta")} className="conv-cta mt-static-md mb-static-md md:mb-0" />
       </div>
 
       {/* ── MÓVIL: TARJETAS EN SLIDER, ENTRE EL TITULAR Y EL VÍDEO ── */}

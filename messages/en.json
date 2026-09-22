@@ -572,7 +572,8 @@
       "card2Title": "Contracts & Secure Docs",
       "card2Desc": "Request IDs, forms, and signed contracts right in the thread. Instant alert notifications as soon as documents are uploaded.",
       "card3Title": "Pipeline Tasks & Auto Messages",
-      "card3Desc": "Pipelines trigger automated tasks as deals advance. Dispatch scheduled messages effortlessly so no prospect slips away."
+      "card3Desc": "Pipelines trigger automated tasks as deals advance. Dispatch scheduled messages effortlessly so no prospect slips away.",
+      "cta": "Centralize it all"
     },
     "calendar": {
       "overline": "CALENDAR + APPOINTMENTS",
@@ -599,7 +600,8 @@
           "title": "Book or update appointments",
           "desc": "See everything that already happened, in order."
         }
-      ]
+      ],
+      "cta": "Organize follow-ups"
     },
     "metricsDash": {
       "overline": "Real-time metrics",
@@ -653,7 +655,8 @@
         "kpiLeadChargeback": "Leads with chargeback",
         "kpiChurn": "Churn",
         "lead": "How fast you close and where you talk to every client."
-      }
+      },
+      "cta": "See live numbers"
     }
   }
 }

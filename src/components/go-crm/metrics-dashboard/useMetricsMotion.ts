@@ -41,6 +41,8 @@ export function useMetricsMotion(sectionRef: RefObject<HTMLElement | null>, trac
 
     mm.add(FULL, () => {
       gsap.fromTo(".md-text-reveal", BIRTH_FROM, { ...BIRTH_TO, stagger: STAGGER.base, ...oneShot(el, TRIGGER.late) });
+      // El CTA no va en un overflow-hidden (le recortaría hover y sombra): entra con fade-up.
+      gsap.fromTo(".md-cta", CARD_FROM, { ...CARD_TO, delay: STAGGER.wave * 2, ...oneShot(el, TRIGGER.late) });
     });
 
     // El pin va sin condición de movimiento reducido: es navegación, no decoración.
