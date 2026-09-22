@@ -595,6 +595,25 @@
     },
     "automation": {
       "headline": "Keep the follow-up moving automatically."
+    },
+    "workBehind": {
+      "overline": "Follow-up",
+      "intro": "Every sale comes with its own work. Here, nothing slips through.",
+      "stepLabel": "Step",
+      "steps": [
+        {
+          "title": "Capture or create a deal",
+          "desc": "Give it a clear next step from minute one."
+        },
+        {
+          "title": "Tasks and notes",
+          "desc": "The details that matter, attached to each deal."
+        },
+        {
+          "title": "Book or update appointments",
+          "desc": "See everything that already happened, in order."
+        }
+      ]
     }
   }
 }

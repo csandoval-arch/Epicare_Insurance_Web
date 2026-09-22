@@ -1,199 +1,48 @@
 "use client";
 
-import React, { useRef, useLayoutEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+/**
+ * @file TheWorkBehindASale.tsx
+ * @description Sección 4 de GO CRM — "Seguimiento". Intro con titular que se enciende palabra a
+ * palabra con el scroll y, debajo, los 3 pasos del trabajo de una venta:
+ * - Desktop (≥lg): split pineado con tira de pantallazos (`work-behind/StepsPinned`).
+ * - Móvil/tablet (<lg): scroll normal, título + subtítulo + pantallazo por paso (`StepsStacked`).
+ */
 
-const ITEMS = [
-  {
-    num: "01",
-    title: "Catch or Create an Opportunity",
-    desc: "Give the opportunity a clear next action.",
-    image: "/Files/Go_CRM/THE%20WORK%20BEHIND%20A%20SALE/Catch_Opportunity.mp4",
-    isVideo: true,
-  },
-  {
-    num: "02",
-    title: "Create Tasks and Notes",
-    desc: "Keep the details that matter close to the opportunity.",
-    image: "/Files/Go_CRM/THE%20WORK%20BEHIND%20A%20SALE/Tasks%20and%20notes.mp4",
-    isVideo: true,
-  },
-  {
-    num: "03",
-    title: "Book or Update an Appointment",
-    desc: "See what has already happened.",
-    image: "/Files/Go_CRM/THE%20WORK%20BEHIND%20A%20SALE/Appointments.mp4",
-    isVideo: true,
-  }
-];
+import { useRef } from "react";
+import { useTranslations } from "next-intl";
+import StepsPinned from "./work-behind/StepsPinned";
+import StepsStacked from "./work-behind/StepsStacked";
+import type { StepCopy } from "./work-behind/data";
+import { useWorkBehindMotion } from "./work-behind/useWorkBehindMotion";
 
 export default function TheWorkBehindASale() {
-  const container = useRef<HTMLElement>(null);
-  const introRef = useRef<HTMLElement>(null);
+  const t = useTranslations("goCrm.workBehind");
+  const steps = t.raw("steps") as StepCopy[];
+  const rootRef = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
-    if (typeof window === "undefined") return;
-    if (!introRef.current) return;
-    
-    let ctx = gsap.context(() => {
-      const textSpans = gsap.utils.toArray(".scrub-word") as HTMLElement[];
-      
-      gsap.fromTo(textSpans, 
-        { opacity: 0.15 },
-        { 
-          opacity: 1, 
-          stagger: 0.1, 
-          ease: "none",
-          scrollTrigger: {
-            trigger: introRef.current,
-            start: "top 75%",
-            end: "bottom 50%",
-            scrub: 0.5,
-          }
-        }
-      );
-    }, introRef);
-    
-    return () => ctx.revert();
-  }, []);
-
-  useLayoutEffect(() => {
-    if (typeof window === "undefined") return;
-    if (!container.current) return;
-    
-    gsap.registerPlugin(ScrollTrigger);
-
-    let ctx = gsap.context(() => {
-      
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container.current,
-          pin: true,
-          start: "top top",
-          end: "+=300%", // 3 sections
-          scrub: 1,
-        }
-      });
-
-      // Animate the right strip up (2 steps of shift out of 3 total items)
-      tl.to(".v4-right-strip", {
-        yPercent: -66.667,
-        ease: "none",
-        duration: 3
-      }, 0);
-
-      // Set initial states for title blocks
-      gsap.set(".v4-title-block-0", { opacity: 1, y: 0 });
-      gsap.set([".v4-title-block-1", ".v4-title-block-2"], { opacity: 0, y: 40 });
-
-      // Crossfade logic for title blocks
-      tl.to(".v4-title-block-0", { opacity: 0, y: -40, duration: 0.3 }, 0.7)
-        .to(".v4-title-block-1", { opacity: 1, y: 0, duration: 0.3 }, 1.0)
-        .to(".v4-title-block-1", { opacity: 0, y: -40, duration: 0.3 }, 1.7)
-        .to(".v4-title-block-2", { opacity: 1, y: 0, duration: 0.3 }, 2.0);
-
-      // Progress bar animation
-      tl.to(".v4-stepper-progress", { width: "100%", duration: 3, ease: "none" }, 0);
-
-    }, container);
-
-    return () => ctx.revert();
-  }, []);
-
-  const renderScrubText = (text: string) => {
-    return text.split(" ").map((w, i) => (
-      <span key={i} className="scrub-word inline-block mr-[0.25em]">{w}</span>
-    ));
-  };
+  useWorkBehindMotion(rootRef);
 
   return (
-    <div className="w-full bg-[var(--color-surface-BG-base)] text-[var(--color-text-primary)]">
-      
-      {/* BLOQUE INTRODUCTORIO (Conexión) */}
-      <section ref={introRef} className="w-full max-w-4xl mx-auto px-gutter-md pt-32 pb-32 text-center flex flex-col items-center">
-        <p className="text-overline text-[var(--color-text-accent-blue)] uppercase tracking-widest mb-10">
-          06 — THE WORK BEHIND A SALE
-        </p>
-        <h2 className="text-display-sm md:text-display font-medium tracking-tight text-[var(--color-text-primary)] leading-snug">
-          {renderScrubText("Every opportunity creates work. Tasks, activities, notes and follow-up keep the sales process moving around a specific opportunity.")}
+    <div ref={rootRef} className="w-full bg-[var(--color-surface-BG-base)] text-[var(--color-text-primary)]">
+      {/* ── INTRO ── */}
+      <section className="v4-intro w-full max-w-4xl mx-auto px-gutter-sm md:px-gutter-md pt-32 pb-32 text-left md:text-center flex flex-col items-start md:items-center">
+        <p className="text-overline text-[var(--color-text-accent-blue)] uppercase tracking-widest mb-static-md">{t("overline")}</p>
+        <h2 className="text-display tracking-tight text-[var(--color-text-primary)] leading-snug">
+          {t("intro")
+            .split(" ")
+            .map((word, i) => (
+              <span key={i} className="scrub-word inline-block mr-[0.25em]">
+                {word}
+              </span>
+            ))}
         </h2>
       </section>
 
-      {/* BLOQUE INTERACTIVO PINNED */}
-      <section ref={container} className="relative w-full h-screen overflow-hidden border-y border-[var(--color-border-Strokes-default)]">
-        
-        <div className="w-full h-full grid grid-cols-1 lg:grid-cols-2">
-          
-          {/* LEFT PANEL: Dynamic Typography */}
-          <div className="h-full flex flex-col justify-center relative border-r border-[var(--color-border-Strokes-default)] z-20 bg-[var(--color-surface-BG-base)]">
-            <div className="w-full max-w-2xl ml-auto relative h-[400px] flex flex-col justify-center">
-              
-              {/* Stacking Title Blocks */}
-              <div className="relative w-full h-[250px]">
-                {ITEMS.map((item, i) => (
-                  <div 
-                    key={item.num}
-                    className={`v4-title-block-${i} absolute top-0 left-0 w-full px-gutter-md md:pl-gutter-lg md:pr-16 flex flex-col justify-center h-full`}
-                    style={{ opacity: i === 0 ? 1 : 0, pointerEvents: i === 0 ? 'auto' : 'none' }}
-                  >
-                    <p className="text-overline text-[var(--color-text-muted)] font-mono tracking-widest mb-4">
-                      STEP {item.num}
-                    </p>
-                    <h2 className="text-display-md lg:text-display-lg font-bold tracking-tighter leading-[0.9] text-[var(--color-text-primary)] mb-6 max-w-md">
-                      {item.title}
-                    </h2>
-                    <p className="text-body-lg text-[var(--color-text-secondary)] mb-8 max-w-md">
-                      {item.desc}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Horizontal Scrollbar / Indicator */}
-              <div className="w-full px-gutter-md md:pl-gutter-lg md:pr-16 absolute bottom-10 left-0">
-                <div className="w-full max-w-md h-1 bg-[var(--color-border-Strokes-default)] rounded-full relative overflow-hidden">
-                  <div className="v4-stepper-progress absolute left-0 top-0 bottom-0 w-0 bg-[var(--color-text-primary)] rounded-full"></div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          {/* RIGHT PANEL: Visual Demonstrations Strip */}
-          <div className="h-full relative overflow-hidden bg-[var(--color-surface-BG-1)] border-l border-[var(--color-border-Strokes-default)] flex flex-col justify-center">
-            
-            {/* Ambient Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[var(--color-brand-blue)]/5 blur-[100px] rounded-full pointer-events-none z-0"></div>
-
-            {/* The scrolling strip */}
-            <div className="v4-right-strip absolute top-0 w-full h-[300vh] flex flex-col z-10">
-              {ITEMS.map((item, i) => (
-                <div key={i} className="h-[100vh] w-full flex items-center justify-center relative">
-                  {item.isVideo ? (
-                    <video
-                      src={item.image}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-auto max-h-[75vh] object-contain object-center block"
-                    />
-                  ) : (
-                    <img 
-                      src={item.image} 
-                      alt={item.title} 
-                      className="w-full h-[75vh] object-cover object-center block"
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
-
-          </div>
-        </div>
-
-      </section>
+      {/* ── LOS 3 PASOS ── */}
+      <div className="hidden lg:block">
+        <StepsPinned steps={steps} stepLabel={t("stepLabel")} />
+      </div>
+      <StepsStacked steps={steps} />
     </div>
   );
 }

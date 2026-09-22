@@ -595,6 +595,25 @@
     },
     "automation": {
       "headline": "Keep the follow-up moving automatically."
+    },
+    "workBehind": {
+      "overline": "Seguimiento",
+      "intro": "Cada venta trae su propio trabajo. Aquí, nada se te escapa.",
+      "stepLabel": "Paso",
+      "steps": [
+        {
+          "title": "Capta o crea una venta",
+          "desc": "Dale un siguiente paso claro desde el primer minuto."
+        },
+        {
+          "title": "Tareas y notas",
+          "desc": "Los detalles que importan, pegados a cada venta."
+        },
+        {
+          "title": "Agenda o actualiza citas",
+          "desc": "Mira todo lo que ya pasó, en orden."
+        }
+      ]
     }
   }
 }
