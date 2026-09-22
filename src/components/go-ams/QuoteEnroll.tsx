@@ -709,7 +709,7 @@ function QuoteEnrollMobile() {
           </div>
         </div>
 
-        <h2 className="mobile-qw-reveal text-display text-left leading-[1.1]">
+        <h2 className="mobile-qw-reveal text-display text-left">
           <span className="text-[var(--color-text-primary)]">
             {t('title1_1')} 
             <InlineGraphic type="unify" rotate="-rotate-3" /> 
@@ -762,7 +762,7 @@ function QuoteEnrollMobile() {
                   </div>
 
                   {/* MIDDLE: TITLE */}
-                  <h3 className="text-h2 text-[var(--color-text-primary)] mb-4 font-bold leading-tight">
+                  <h3 className="text-h2 text-[var(--color-text-primary)] mb-4 font-bold">
                     {feature.title}
                   </h3>
 

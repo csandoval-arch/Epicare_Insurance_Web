@@ -149,7 +149,7 @@ export default function LicensingGridEpicare() {
         {/* Minimalist Header & Search */}
         <div className="flex flex-col items-start justify-start text-left w-full gap-6">
           <div className="flex flex-col gap-2 w-full">
-            <h2 className="text-display-lg text-[var(--color-text-primary)] font-semibold tracking-tight">
+            <h2 className="text-display-lg text-[var(--color-text-primary)] font-semibold">
               {t("title")}
             </h2>
           </div>

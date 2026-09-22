@@ -270,7 +270,7 @@ export default function BackOfficeTour() {
               <span className="text-h5 sm:text-h4 md:text-h2 font-bold text-white/50 mb-1 sm:mb-2 block select-none tracking-widest font-mono">
                 0{panel.id}.
               </span>
-              <h2 className="text-display-sm sm:text-display md:text-display-lg lg:text-display-xl font-black uppercase tracking-tighter text-white mb-2 sm:mb-4 lg:mb-6 leading-[1.05]">
+              <h2 className="text-display-sm sm:text-display md:text-display-lg lg:text-display-xl font-black uppercase text-white mb-2 sm:mb-4 lg:mb-6">
                 {t(panel.titleKey as any)}
               </h2>
               <p className="text-body-sm sm:text-body md:text-body-lg lg:text-body-xl font-medium text-white/70 max-w-lg leading-relaxed">

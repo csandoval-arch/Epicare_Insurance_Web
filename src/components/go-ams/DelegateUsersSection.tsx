@@ -120,7 +120,7 @@ export default function DelegateUsersSection() {
               </span>
             </div>
 
-            <h2 className="text-display-lg font-semibold text-[var(--color-text-primary)] leading-[1.1] tracking-tight mb-space-static-sm max-w-xl">
+            <h2 className="text-display-lg font-semibold text-[var(--color-text-primary)] mb-space-static-sm max-w-xl">
               <span className="block overflow-hidden pb-2">
                 <span className="delegate-title-line block">
                   {t('title1')} <span className="text-[var(--color-text-accent-blue)]">{t('title2')}</span>

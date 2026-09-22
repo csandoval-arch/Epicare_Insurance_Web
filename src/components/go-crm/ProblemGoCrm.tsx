@@ -67,7 +67,7 @@ export default function ProblemGoCrm() {
           <p className="text-meta uppercase tracking-[0.2em] text-[var(--color-brand-blue)] mb-static-xl">
             {t("overline")}
           </p>
-          <h2 className="text-display lg:text-[4.5vw] font-medium tracking-tight leading-[1.05] max-w-4xl">
+          <h2 className="text-display lg:text-[4.5vw] font-medium max-w-4xl">
             {t("h2")}
           </h2>
         </div>
@@ -90,7 +90,7 @@ export default function ProblemGoCrm() {
                   {String(i + 1).padStart(2, "0")}
                 </span>
               )}
-              <p className={`leading-relaxed ${isHighlight ? "text-display-sm font-bold text-[var(--color-text-White-100)] tracking-tight" : "text-display-xs font-light text-[var(--color-text-secondary)]"}`}>
+              <p className={`leading-relaxed ${isHighlight ? "text-display-sm font-bold text-[var(--color-text-White-100)]" : "text-display-xs font-light text-[var(--color-text-secondary)]"}`}>
                 {text}
               </p>
 

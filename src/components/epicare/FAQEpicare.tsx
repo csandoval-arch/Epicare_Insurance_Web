@@ -132,7 +132,7 @@ export default function FAQEpicare() {
           <span className="anim-head-fade text-overline text-[var(--color-brand-blue)] dark:text-[var(--color-brand-cyan)] mb-static-md block">
             {t("overline")}
           </span>
-          <h2 className="overflow-hidden pb-static-xs text-display-xl font-semibold tracking-tight leading-[1] text-[var(--color-text-Black-100)] dark:text-white">
+          <h2 className="overflow-hidden pb-static-xs text-display-xl font-semibold text-[var(--color-text-Black-100)] dark:text-white">
             <span className="anim-head-line block">
               {t("title")}
             </span>
@@ -171,7 +171,7 @@ export default function FAQEpicare() {
                     </div>
                     
                     {/* Massive Typography with Magnetic Shift */}
-                    <h3 className={`text-h4 md:text-h3 font-medium tracking-tight leading-[1.15] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] transform-gpu max-w-[90%] md:max-w-[85%] ${
+                    <h3 className={`text-h4 md:text-h3 font-medium transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] transform-gpu max-w-[90%] md:max-w-[85%] ${
                       isOpen 
                         ? "text-[var(--color-brand-blue)] dark:text-[var(--color-brand-cyan)] translate-x-2 md:translate-x-6" 
                         : "text-[var(--color-text-primary)] group-hover:text-[var(--color-brand-blue)] dark:group-hover:text-[var(--color-brand-cyan)] group-hover:translate-x-2 md:group-hover:translate-x-6"

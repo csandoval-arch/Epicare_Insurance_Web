@@ -260,7 +260,7 @@ export default function DownlineSection() {
               </span>
             </div>
             
-            <h2 className="text-display-lg font-semibold text-[var(--color-text-primary)] leading-[1.05] tracking-tight max-w-[800px]">
+            <h2 className="text-display-lg font-semibold text-[var(--color-text-primary)] max-w-[800px]">
               <span className="block overflow-hidden pb-2">
                 <span className="dl-title-line block">
                   {t('title1')} <span className="text-[var(--color-text-accent-blue)]">{t('title2')}</span>
@@ -303,7 +303,7 @@ export default function DownlineSection() {
                   <div className="p-1.5 sm:p-2.5 rounded-xl sm:rounded-2xl bg-[var(--color-brand-blue)]/10 text-[var(--color-brand-blue)] border border-[var(--color-brand-blue)]/20 shrink-0">
                     {card.icon}
                   </div>
-                  <span className="text-body-md sm:text-h5 md:text-h4 font-semibold text-[var(--color-text-primary)] tracking-tight">
+                  <span className="text-body-md sm:text-h5 md:text-h4 font-semibold text-[var(--color-text-primary)]">
                     {t(card.titleKey as any)}
                   </span>
                 </div>

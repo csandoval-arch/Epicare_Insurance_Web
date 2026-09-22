@@ -180,7 +180,7 @@ function HeroEpicareV1({ t }: { t: any }) {
             <section ref={heroContentRef} className="w-full flex-1 px-[var(--space-gutter-sm)] lg:px-[var(--space-gutter-md)] flex flex-col pt-[120px] lg:pt-[80px] pb-[40px] md:pb-[60px] relative">
               <div className="grid-layout flex-1 max-w-section-xl w-full mx-auto pointer-events-auto">
                 <div className="col-start-1 col-span-full md:col-start-1 md:col-span-7 lg:col-span-9 row-start-2 md:row-start-5 row-span-1 flex flex-row justify-start items-end pb-8">
-                  <h1 className="hero-anim-item text-display-lg md:text-display-xl text-white md:drop-shadow-lg leading-none mb-4">
+                  <h1 className="hero-anim-item text-display-lg md:text-display-xl text-white md:drop-shadow-lg mb-4">
                     {t('title1')}<br/>{t('title2')}
                   </h1>
                 </div>

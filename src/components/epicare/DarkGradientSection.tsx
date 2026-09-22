@@ -58,7 +58,7 @@ const FlipCard = ({ card, t }: { card: any, t: any }) => {
               {card.step}
             </span>
             <div className="flex items-start justify-between gap-2">
-              <h3 className="text-h2 text-[var(--color-text-Black-100)] dark:text-white leading-tight tracking-tight transition-colors duration-300 pr-2">
+              <h3 className="text-h2 text-[var(--color-text-Black-100)] dark:text-white transition-colors duration-300 pr-2">
                 {card.title}
               </h3>
             </div>
@@ -302,7 +302,7 @@ export default function DarkGradientSection() {
           {/* Contenido Central */}
           <div className="relative z-10 flex flex-col items-start md:items-center gap-4 md:gap-6 max-w-4xl w-full md:mx-auto pb-6 md:pb-8">
             
-            <h2 className="overflow-hidden pb-static-xs text-display text-left md:text-center text-[var(--color-text-Black-100)] dark:text-white tracking-tighter leading-[1.05] transition-colors duration-500">
+            <h2 className="overflow-hidden pb-static-xs text-display text-left md:text-center text-[var(--color-text-Black-100)] dark:text-white transition-colors duration-500">
               <span className="dg-head-line block">
                 {t.rich('sectionTitle', {
                   span: (chunks) => <span className="text-[var(--color-brand-blue)]">{chunks}</span>

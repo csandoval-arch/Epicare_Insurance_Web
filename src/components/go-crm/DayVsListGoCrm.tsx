@@ -55,7 +55,7 @@ export default function DayVsListGoCrm() {
           <h2 className="font-mono text-ui-label tracking-widest uppercase text-[var(--color-text-muted)] mb-8">
             {t("overline")}
           </h2>
-          <h3 className="text-display-lg md:text-display-xl font-medium tracking-tight leading-[1.1] mb-12 max-w-4xl">
+          <h3 className="text-display-lg md:text-display-xl font-medium mb-12 max-w-4xl">
             {t.rich("h2", { blue: (chunks) => <span className="text-[var(--color-brand-blue)]">{chunks}</span> })}
           </h3>
           <div className="max-w-3xl flex flex-col md:flex-row gap-8 pt-8 border-t border-[var(--color-border-Strokes-default)]">
@@ -78,7 +78,7 @@ export default function DayVsListGoCrm() {
                
                {/* Header of graphic */}
                <div className="h-16 md:h-20 border-b border-[var(--color-border-Strokes-default)] flex items-center justify-between px-6 md:px-8">
-                  <span className="text-h5 md:text-h4 font-medium tracking-tight">Agenda</span>
+                  <span className="text-h5 md:text-h4 font-medium">Agenda</span>
                   <span className="font-mono text-[10px] text-[var(--color-text-muted)] uppercase tracking-widest">14.02.2026</span>
                </div>
 
@@ -130,7 +130,7 @@ export default function DayVsListGoCrm() {
                <div className="text-h6 font-mono text-[var(--color-brand-blue)] mb-6 border-b border-[var(--color-border-Strokes-default)] inline-block pb-2 tracking-widest uppercase">
                   Paso 01
                </div>
-               <h4 className="text-display-sm font-medium tracking-tight mb-6 uppercase leading-tight text-[var(--color-text-primary)]">
+               <h4 className="text-display-sm font-medium mb-6 uppercase text-[var(--color-text-primary)]">
                   {t("step1Title")}
                </h4>
                <p className="text-body-xl leading-relaxed text-[var(--color-text-secondary)]">
@@ -143,7 +143,7 @@ export default function DayVsListGoCrm() {
                <div className="text-h6 font-mono text-[var(--color-brand-orange)] mb-6 border-b border-[var(--color-border-Strokes-default)] inline-block pb-2 tracking-widest uppercase">
                   Paso 02
                </div>
-               <h4 className="text-display-sm font-medium tracking-tight mb-6 uppercase leading-tight text-[var(--color-text-primary)]">
+               <h4 className="text-display-sm font-medium mb-6 uppercase text-[var(--color-text-primary)]">
                   {t("step2Title")}
                </h4>
                <p className="text-body-xl leading-relaxed text-[var(--color-text-secondary)]">
@@ -156,7 +156,7 @@ export default function DayVsListGoCrm() {
                <div className="text-h6 font-mono text-[var(--color-text-muted)] mb-6 border-b border-[var(--color-border-Strokes-default)] inline-block pb-2 tracking-widest uppercase">
                   Paso 03
                </div>
-               <h4 className="text-display-sm font-medium tracking-tight mb-6 uppercase leading-tight text-[var(--color-text-primary)]">
+               <h4 className="text-display-sm font-medium mb-6 uppercase text-[var(--color-text-primary)]">
                   {t("step3Title")}
                </h4>
                <p className="text-body-xl leading-relaxed text-[var(--color-text-secondary)]">
@@ -170,7 +170,7 @@ export default function DayVsListGoCrm() {
 
         {/* Cierre */}
         <div className="border-t border-[var(--color-border-Strokes-default)] pt-section-md mt-section-md">
-           <h3 className="text-display-sm font-medium tracking-tight text-[var(--color-text-primary)] max-w-2xl">
+           <h3 className="text-display-sm font-medium text-[var(--color-text-primary)] max-w-2xl">
              {t("cierre")}
            </h3>
         </div>

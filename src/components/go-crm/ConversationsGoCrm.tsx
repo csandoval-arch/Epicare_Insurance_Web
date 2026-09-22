@@ -149,7 +149,7 @@ export default function ConversationsGoCrm() {
         </div>
         
         <div className="overflow-hidden pb-4 w-full max-w-[1100px] mx-auto">
-          <h2 className="conv-text-reveal text-display-sm lg:text-display-lg font-bold tracking-tighter leading-[1.0] text-[var(--color-text-primary)]">
+          <h2 className="conv-text-reveal text-display-sm lg:text-display-lg font-bold text-[var(--color-text-primary)]">
             {t("headline", { defaultMessage: "Cada conversación, tarea y documento, conectados a la venta." })}
           </h2>
         </div>

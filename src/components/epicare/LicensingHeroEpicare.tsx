@@ -150,7 +150,7 @@ export default function LicensingHeroEpicare() {
           
           {/* ROW 1: TITLE */}
           <div className="col-span-12 md:col-start-5 md:col-span-9 md:row-start-1 z-10 flex flex-row justify-start items-start md:pb-section-lg">
-            <h1 className="licensing-title-line text-display-2xl md:text-display-3xl text-left text-[var(--color-text-primary)] font-semibold leading-[0.9] tracking-tight">
+            <h1 className="licensing-title-line text-display-2xl md:text-display-3xl text-left text-[var(--color-text-primary)] font-semibold">
               {t('title')}
             </h1>
           </div>

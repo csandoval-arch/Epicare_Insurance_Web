@@ -91,7 +91,7 @@ export default function CalendarGoCrm() {
           </div>
           
           <div className="overflow-hidden mb-5">
-            <h2 className="reveal-text text-display-md lg:text-display-lg font-bold tracking-tight leading-tight">
+            <h2 className="reveal-text text-display-md lg:text-display-lg font-bold">
               {t("headline", { defaultMessage: "Your pipeline meets your calendar." })}
             </h2>
           </div>

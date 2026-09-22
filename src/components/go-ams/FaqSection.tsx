@@ -146,7 +146,7 @@ export default function FaqSection() {
           className="faq-header-wrapper mb-12 sm:mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6 text-left"
         >
           <div>
-            <h2 className="text-display-lg font-display uppercase tracking-tighter text-[var(--color-text-primary)] leading-[0.9]">
+            <h2 className="text-display-lg font-display uppercase text-[var(--color-text-primary)]">
               <span className="block overflow-hidden pb-1">
                 <span className="faq-title-line block">{t('title')}</span>
               </span>
@@ -172,7 +172,7 @@ export default function FaqSection() {
                   className="w-full py-6 md:py-10 flex items-center justify-between gap-6 md:gap-8 text-left outline-none cursor-pointer select-none"
                   aria-expanded={isOpen}
                 >
-                  <h3 className={`text-h5 md:text-h4 font-display tracking-tight transition-colors duration-300 ${isOpen ? 'text-[var(--color-brand-blue)]' : 'text-[var(--color-text-primary)] group-hover:text-[var(--color-brand-blue)]'}`}>
+                  <h3 className={`text-h5 md:text-h4 font-display transition-colors duration-300 ${isOpen ? 'text-[var(--color-brand-blue)]' : 'text-[var(--color-text-primary)] group-hover:text-[var(--color-brand-blue)]'}`}>
                     {t(faq.qKey as any)}
                   </h3>
                   

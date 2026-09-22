@@ -116,7 +116,7 @@ export default function MetricsEpicare() {
         
         {/* ── Header Section ── */}
         <div className="pb-section-xs max-w-4xl">
-          <AnimatedTitle className="text-display-lg tracking-tight text-[var(--color-text-Black-100)] dark:text-white leading-[1.1]">
+          <AnimatedTitle className="text-display-lg text-[var(--color-text-Black-100)] dark:text-white">
             <AnimatedTitleLine>{t('titleLine1')}</AnimatedTitleLine>
             <AnimatedTitleLine>{t('titleLine2')}</AnimatedTitleLine>
             <AnimatedTitleLine className="text-[var(--color-brand-blue)]">{t('titleLine3')}</AnimatedTitleLine>
@@ -158,7 +158,7 @@ export default function MetricsEpicare() {
               <div className="hidden dark:block absolute inset-0 bg-gradient-to-br from-transparent to-[var(--color-brand-blue)]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               
               <div className="relative z-10 flex flex-col h-full justify-between gap-4 md:gap-6 lg:gap-12">
-                <div className="text-display-xs md:text-display-sm lg:text-display tracking-tight md:tracking-tighter text-[var(--color-text-Black-100)] dark:text-white">
+                <div className="text-display-xs md:text-display-sm lg:text-display text-[var(--color-text-Black-100)] dark:text-white">
                   <AnimatedNumber value={metric.value} />
                 </div>
                 <div>

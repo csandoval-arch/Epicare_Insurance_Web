@@ -14,7 +14,7 @@ export default function ThePipeline() {
           <p className="text-overline text-[var(--color-text-accent-blue)] uppercase">{t("overline")}</p>
         </div>
         
-        <h2 className="text-display-lg font-bold tracking-tighter leading-[0.9] text-[var(--color-text-primary)]">
+        <h2 className="text-display-lg font-bold text-[var(--color-text-primary)]">
           {t("headline")}
         </h2>
       </div>

@@ -42,7 +42,7 @@ const MobileAccordion = ({ aud, accent, HERO, isOpen, onClick }: any) => {
              <span className={`text-display-sm font-semibold tabular-nums transition-[transform,opacity,color] duration-500 ${isOpen ? 'bg-gradient-to-br from-[var(--color-brand-blue)] to-[var(--color-brand-cyan)] bg-clip-text text-transparent scale-110 origin-left' : 'text-black/30 dark:text-white/30'}`}>
                {aud.index}
              </span>
-             <h3 className="text-display-sm font-semibold tracking-tighter text-[var(--color-text-Black-100)] dark:text-white">
+             <h3 className="text-display-sm font-semibold text-[var(--color-text-Black-100)] dark:text-white">
                {aud.title}
              </h3>
           </div>
@@ -244,7 +244,7 @@ export default function ForWhoEpicare() {
           <span className="fw-head block text-overline text-[var(--color-brand-blue)] mb-6">
             {t('overline')}
           </span>
-          <h2 className="text-display-xl font-semibold tracking-tight leading-[1] text-[var(--color-text-Black-100)] dark:text-white">
+          <h2 className="text-display-xl font-semibold text-[var(--color-text-Black-100)] dark:text-white">
             <span className="block overflow-hidden pb-static-xs">
               <span className="fw-line inline-block">{t('titleLine1')}</span>
             </span>
@@ -276,7 +276,7 @@ export default function ForWhoEpicare() {
 
               {/* Giant index numeral — top */}
               <span aria-hidden="true"
-                className="fw-num absolute top-6 right-7 z-10 text-display-2xl font-semibold tabular-nums leading-none text-[var(--color-text-White-100)]/15">
+                className="fw-num absolute top-6 right-7 z-10 text-display-2xl font-semibold tabular-nums text-[var(--color-text-White-100)]/15">
                 {aud.index}
               </span>
 
@@ -286,7 +286,7 @@ export default function ForWhoEpicare() {
                   <span className="w-2 h-2 rounded-full" style={{ backgroundColor: accent }} />
                   {aud.kicker}
                 </span>
-                <h3 className="text-display font-semibold tracking-tight text-[var(--color-text-White-100)]">
+                <h3 className="text-display font-semibold text-[var(--color-text-White-100)]">
                   {aud.title}
                 </h3>
 

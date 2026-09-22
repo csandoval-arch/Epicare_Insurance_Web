@@ -99,7 +99,7 @@ export default function SalesLayerGoCrm() {
     
     return (
       <div className="max-w-xl text-left w-full">
-        <h3 className="text-display font-bold tracking-tight mb-8 md:mb-12 leading-tight uppercase break-words xl:break-normal">
+        <h3 className="text-display font-bold mb-8 md:mb-12 uppercase break-words xl:break-normal">
           {t(item.titleKey)}
         </h3>
         <ul className="flex flex-col gap-4">
@@ -126,7 +126,7 @@ export default function SalesLayerGoCrm() {
           <h2 className="text-h5 uppercase tracking-widest text-[var(--color-text-muted)] mb-6 md:mb-12">
             {t("overline")}
           </h2>
-          <p className="text-display-lg md:text-display-xl font-medium tracking-tight leading-tight max-w-5xl">
+          <p className="text-display-lg md:text-display-xl font-medium max-w-5xl">
             {t.rich("title", {
               blue: (chunks) => <span className="text-[var(--color-brand-blue)]">{chunks}</span>
             })}

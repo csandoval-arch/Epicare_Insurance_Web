@@ -159,7 +159,7 @@ export default function CierreGoCrm() {
             </div>
 
             <div className="overflow-hidden mb-6 mt-4">
-              <h2 className="text-display-lg font-display font-bold text-white m-0 pb-2 cierre-title-line origin-bottom leading-tight drop-shadow-sm">
+              <h2 className="text-display-lg font-display font-bold text-white m-0 pb-2 cierre-title-line origin-bottom drop-shadow-sm">
                 GO CRM está en construcción.
               </h2>
             </div>

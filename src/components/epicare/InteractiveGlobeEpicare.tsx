@@ -466,7 +466,7 @@ export default function InteractiveGlobeEpicare({ isWidget = false }: { isWidget
             <span className="map-reveal text-overline text-[var(--color-brand-blue)]">
               {t('overline')}
             </span>
-            <h2 className="map-reveal text-display-lg md:text-display-xl text-[var(--color-text-primary)] font-semibold leading-tight drop-shadow-md">
+            <h2 className="map-reveal text-display-lg md:text-display-xl text-[var(--color-text-primary)] font-semibold drop-shadow-md">
               {t('title')}
             </h2>
           </div>

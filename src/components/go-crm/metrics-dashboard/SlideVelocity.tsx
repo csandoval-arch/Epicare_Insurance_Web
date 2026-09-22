@@ -6,7 +6,7 @@ const KpiCard = ({ title, value, trend, trendUp, isAlert }: { title: string, val
   <div className={`flex flex-col justify-center border ${isAlert ? 'border-red-200 bg-red-50/30' : 'border-[var(--color-border-Strokes-default)] bg-white'} rounded-xl p-4 shadow-elevation-1 hover:shadow-elevation-2 transition-shadow`}>
     <span className="text-meta text-[var(--color-text-muted)] uppercase tracking-wider mb-1">{title}</span>
     <div className="flex items-end justify-between">
-      <span className={`text-h5 font-semibold tracking-tight ${isAlert ? 'text-red-600' : 'text-[var(--color-text-primary)]'}`}>{value}</span>
+      <span className={`text-h5 font-semibold ${isAlert ? 'text-red-600' : 'text-[var(--color-text-primary)]'}`}>{value}</span>
       {trend && (
         <span className={`text-meta font-medium px-1.5 py-0.5 rounded ${trendUp ? 'text-green-700 bg-green-100' : 'text-red-600 bg-red-100'}`}>
           {trendUp ? '↑' : '↓'} {trend}
@@ -26,7 +26,7 @@ const RealImpeccableWidget = ({ title, value, trend, trendDown = true, segments 
       <div className="mb-1">
         <h3 className="text-ui-label text-[var(--color-text-primary)]">{title}</h3>
         <div className="flex items-center gap-2 mt-0.5">
-          <span className="text-h6 font-bold tracking-tight">{value}</span>
+          <span className="text-h6 font-bold">{value}</span>
           <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded ${trendDown ? 'bg-red-50 text-red-600' : 'bg-green-50 text-green-700'}`}>
             {trendDown ? '↓' : '↑'} {trend}
           </span>
@@ -102,7 +102,7 @@ export default function SlideVelocity() {
       {/* ── HEADER ── */}
       <div className="w-full flex justify-between items-end pb-static-sm border-b border-[var(--color-border-Strokes-default)] mb-static-md">
         <div>
-           <h2 className="text-display-xs font-semibold text-[var(--color-text-primary)] tracking-tight mb-2">
+           <h2 className="text-display-xs font-semibold text-[var(--color-text-primary)] mb-2">
              Velocity & Omnichannel
            </h2>
            <span className="text-meta text-[var(--color-text-muted)] uppercase tracking-widest">Estado y Comunicaciones (Tiempo Real)</span>

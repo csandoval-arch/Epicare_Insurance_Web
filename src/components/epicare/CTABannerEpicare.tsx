@@ -184,7 +184,7 @@ export default function CTABannerEpicare({
             </span>
             
             {/* Título Line-by-Line */}
-            <h2 className="text-display-lg md:text-display-xl font-display font-bold text-white leading-[0.95] tracking-tight mb-4 drop-shadow-sm max-w-3xl">
+            <h2 className="text-display-lg md:text-display-xl font-display font-bold text-white mb-4 drop-shadow-sm max-w-3xl">
               <span className="block overflow-hidden pb-2">
                 <span className="cta-title-line block">
                   {title || defaultTitle}

@@ -163,7 +163,7 @@ export default function HowToJoinSection() {
         ref={headerRef}
         className="w-full max-w-section-lg mx-auto px-3.5 sm:px-gutter-sm md:px-gutter-md pb-7 md:pb-14 text-left relative z-20"
       >
-        <h2 className="text-display-lg md:text-display-xl font-semibold text-[var(--color-text-primary)] leading-[1.05] tracking-tight">
+        <h2 className="text-display-lg md:text-display-xl font-semibold text-[var(--color-text-primary)]">
           <span className="block overflow-hidden pb-2">
             <span className="join-title-line block">
               {t('title1')} <span className="text-[var(--color-text-accent-blue)]">{t('title2')}</span>
@@ -194,7 +194,7 @@ export default function HowToJoinSection() {
                 {step.id}
               </span>
               
-              <h3 className="text-h4 font-display uppercase tracking-tight text-[var(--color-text-primary)] mb-2.5">
+              <h3 className="text-h4 font-display uppercase text-[var(--color-text-primary)] mb-2.5">
                 {t(step.titleKey as any)}
               </h3>
               
@@ -241,7 +241,7 @@ export default function HowToJoinSection() {
                 <span className="text-data font-mono text-[var(--color-text-muted)] group-hover:text-[var(--color-brand-blue)] transition-colors mb-6 md:mb-12 block select-none">
                   {step.id}
                 </span>
-                <h3 className="text-h4 font-display uppercase tracking-tight text-[var(--color-text-primary)] mb-3 md:mb-4">
+                <h3 className="text-h4 font-display uppercase text-[var(--color-text-primary)] mb-3 md:mb-4">
                   {t(step.titleKey as any)}
                 </h3>
               </div>

@@ -65,7 +65,7 @@ export default function ContactVsOpportunity() {
 
         <div className="a2-title relative z-10 flex flex-col items-center text-center gap-static-sm max-w-3xl shrink-0">
           <p className="a2-rise text-overline text-white/60 tracking-[0.2em] uppercase">{t("overline")}</p>
-          <h2 className="text-display-sm md:text-display font-semibold text-[var(--color-text-White-100)] tracking-tight leading-[1.05]">
+          <h2 className="text-display-sm md:text-display font-semibold text-[var(--color-text-White-100)]">
             <span className="block overflow-hidden pb-1">
               <span className="a2-birth block">{t.rich("headline", { i: italic })}</span>
             </span>

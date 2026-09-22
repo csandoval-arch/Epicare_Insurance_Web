@@ -277,7 +277,7 @@ export default function BentoGridDesktop() {
               <div className="w-24 h-24 bg-white rounded-3xl flex items-center justify-center mb-8 shadow-elevation-2 transform transition-transform hover:scale-105">
                 <GoHubLogo className="w-16 h-16 text-[var(--color-brand-blue)]" />
               </div>
-              <h2 className="text-display-lg text-white mb-6 leading-tight capitalize">
+              <h2 className="text-display-lg text-white mb-6 capitalize">
                 {t('sectionTitle')}
               </h2>
               <p className="text-body-lg text-white/90 font-light max-w-md leading-relaxed">

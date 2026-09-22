@@ -166,7 +166,7 @@ export function GoAmsProblemSection() {
                 {t("title")}
               </h2>
               {/* Mismo token masivo en mobile y desktop */}
-              <h3 className="section-subtitle text-display font-medium text-[var(--color-text-primary)] dark:text-white leading-tight tracking-tight">
+              <h3 className="section-subtitle text-display font-medium text-[var(--color-text-primary)] dark:text-white">
                 {t.rich("subtitle", {
                   blue: (chunks) => <span className="text-[var(--color-text-accent-blue)]">{chunks}</span>
                 })}
@@ -202,7 +202,7 @@ export function GoAmsProblemSection() {
                       </div>
                       
                       <div className="mt-6 md:mt-8 transform transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-2">
-                        <h4 className="text-h4 font-medium tracking-tight leading-tight mb-3">
+                        <h4 className="text-h4 font-medium mb-3">
                           {pain.title}
                         </h4>
                         <p className="text-body-sm leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity duration-500">
@@ -247,7 +247,7 @@ export function GoAmsProblemSection() {
                   
                   {/* Título: Visible tanto en mobile (persistente) como en desktop */}
                   <h4 className={cn(
-                    "text-h5 md:text-h4 font-medium tracking-tight leading-tight transform transition-all duration-500 flex items-center justify-between gap-4 w-full text-left",
+                    "text-h5 md:text-h4 font-medium transform transition-all duration-500 flex items-center justify-between gap-4 w-full text-left",
                     isOpen ? "text-white" : "text-[var(--color-text-primary)] dark:text-white",
                     "md:group-hover:-translate-y-8 md:group-hover:text-white"
                   )}>

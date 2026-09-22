@@ -42,7 +42,7 @@ export default function OppCard({ opp, index, motionClass, className = "", lite 
       {/* Texto arriba, para que el difuminado inferior no le quite legibilidad */}
       <div className="relative z-10 p-static-lg flex flex-col gap-static-lg">
         <div>
-          <h3 className="opp-text text-h2 font-semibold text-[var(--color-text-White-100)] tracking-tight mb-static-xs">{opp.label}</h3>
+          <h3 className="opp-text text-h2 font-semibold text-[var(--color-text-White-100)] mb-static-xs">{opp.label}</h3>
           <p className="opp-text text-body-md text-white/80 leading-relaxed">{opp.desc}</p>
         </div>
       </div>

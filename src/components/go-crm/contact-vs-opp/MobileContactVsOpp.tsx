@@ -147,7 +147,7 @@ export default function MobileContactVsOpp({ overline, headline, convergeTitle, 
 
         <div className="relative px-gutter-sm flex flex-col gap-static-sm">
           <p className="m2-overline text-overline text-white/60 tracking-[0.2em] uppercase">{overline}</p>
-          <h2 className="text-display-sm font-semibold text-[var(--color-text-White-100)] tracking-tight leading-[1.05]">
+          <h2 className="text-display-sm font-semibold text-[var(--color-text-White-100)]">
             <span className="block overflow-hidden pb-1">
               <span className="m2-title-line block">{headline}</span>
             </span>

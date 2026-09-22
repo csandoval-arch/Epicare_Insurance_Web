@@ -215,7 +215,7 @@ export default function ProductLinesEpicare() {
             <span className="pl-head block text-overline text-[var(--color-brand-blue)] mb-6">
               {t('overline')}
             </span>
-            <h2 className="overflow-hidden pb-static-xs text-display-xl font-semibold tracking-tight leading-[1] text-[var(--color-text-Black-100)] dark:text-white">
+            <h2 className="overflow-hidden pb-static-xs text-display-xl font-semibold text-[var(--color-text-Black-100)] dark:text-white">
               <span className="pl-head-line block">
                 {t('titleLine1')} <span className="text-[var(--color-brand-blue)]">{t('titleLine2')}</span>
               </span>
@@ -244,10 +244,10 @@ export default function ProductLinesEpicare() {
                         : 'opacity-0 blur-[5px] translate-y-4 pointer-events-none'
                     }`}
                   >
-                    <span className="text-display-3xl font-semibold tracking-tighter leading-[0.85] text-[var(--color-brand-blue)] tabular-nums">
+                    <span className="text-display-3xl font-semibold text-[var(--color-brand-blue)] tabular-nums">
                       0{i + 1}
                     </span>
-                    <span className="text-h2 font-medium tracking-tight text-[var(--color-text-Black-100)] dark:text-white mt-6">
+                    <span className="text-h2 font-medium text-[var(--color-text-Black-100)] dark:text-white mt-6">
                       {cat.name}
                     </span>
                   </button>
@@ -267,7 +267,7 @@ export default function ProductLinesEpicare() {
                     <span className="text-caption tabular-nums text-[var(--color-brand-blue)] font-medium">
                       0{i + 1}
                     </span>
-                    <h3 className="text-h4 font-medium tracking-tight text-[var(--color-text-Black-100)] dark:text-white">
+                    <h3 className="text-h4 font-medium text-[var(--color-text-Black-100)] dark:text-white">
                       {cat.name}
                     </h3>
                   </div>
@@ -305,7 +305,7 @@ export default function ProductLinesEpicare() {
                             <span className="text-caption tabular-nums text-[var(--color-text-muted)] w-6 shrink-0">
                               {String(j + 1).padStart(2, '0')}
                             </span>
-                            <span className="text-h2 font-medium tracking-tight text-[var(--color-text-Black-100)] dark:text-white transition-all duration-300 ease-out group-hover:translate-x-2 group-hover:text-[var(--color-brand-blue)]">
+                            <span className="text-h2 font-medium text-[var(--color-text-Black-100)] dark:text-white transition-all duration-300 ease-out group-hover:translate-x-2 group-hover:text-[var(--color-brand-blue)]">
                               {item}
                             </span>
                           </div>

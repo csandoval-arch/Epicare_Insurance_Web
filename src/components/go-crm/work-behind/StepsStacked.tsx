@@ -15,7 +15,7 @@ export default function StepsStacked({ steps }: { steps: StepCopy[] }) {
     <div className="lg:hidden flex flex-col gap-static-2xl pb-section-sm">
       {steps.map((step, i) => (
         <article key={step.title} className="ws-step flex flex-col gap-static-sm">
-          <h3 className="px-gutter-sm text-display-sm font-bold tracking-tighter text-[var(--color-text-primary)]">
+          <h3 className="px-gutter-sm text-display-sm font-bold text-[var(--color-text-primary)]">
             <span className="block overflow-hidden pb-1">
               <span className="ws-title block">{step.title}</span>
             </span>

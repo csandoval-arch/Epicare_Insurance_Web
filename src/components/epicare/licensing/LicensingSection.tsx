@@ -158,7 +158,7 @@ export default function LicensingSection() {
             REGULATORY COMPLIANCE
           </p>
 
-          <h2 className="lgs-reveal text-display-sm md:text-display text-[var(--color-text-White-100)] leading-tight tracking-tight mb-static-xl">
+          <h2 className="lgs-reveal text-display-sm md:text-display text-[var(--color-text-White-100)] mb-static-xl">
             Licensed Across<br />
             <span style={{ color: 'var(--color-brand-blue)' }}>America</span>
           </h2>

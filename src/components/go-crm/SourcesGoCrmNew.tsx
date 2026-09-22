@@ -95,7 +95,7 @@ function Variant1({ copy }: { copy: any }) {
     <div ref={comp} className="w-full h-screen bg-slate-50 relative overflow-hidden flex flex-col items-center justify-center">
       
       <div className="absolute top-16 w-full text-center z-30 px-6">
-        <h2 className="text-display-md font-medium tracking-tight text-slate-900">{copy.h2}</h2>
+        <h2 className="text-display-md font-medium text-slate-900">{copy.h2}</h2>
         <p className="text-meta uppercase font-mono tracking-[0.2em] text-slate-400 mt-4">{copy.overline}</p>
       </div>
 
@@ -146,7 +146,7 @@ function Variant2({ copy }: { copy: any }) {
       
       <div className="max-w-4xl mx-auto text-center px-6 mb-24">
         <p className="text-meta uppercase font-mono tracking-[0.2em] text-[var(--color-brand-blue)] mb-6">{copy.overline}</p>
-        <h2 className="text-display-md lg:text-display-lg font-medium tracking-tight text-slate-900 leading-[1.1] mb-6">{copy.h2}</h2>
+        <h2 className="text-display-md lg:text-display-lg font-medium text-slate-900 mb-6">{copy.h2}</h2>
         <p className="text-body-lg text-slate-500 font-light max-w-2xl mx-auto">{copy.p1}</p>
       </div>
 

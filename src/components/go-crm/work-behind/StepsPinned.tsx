@@ -26,7 +26,7 @@ export default function StepsPinned({ steps, stepLabel }: { steps: StepCopy[]; s
                   <p className="text-overline text-[var(--color-text-muted)] font-mono tracking-widest mb-4">
                     {stepLabel} {stepNumber(i)}
                   </p>
-                  <h2 className="text-display lg:text-display-lg font-bold tracking-tighter leading-[0.9] text-[var(--color-text-primary)] mb-6 max-w-md">
+                  <h2 className="text-display lg:text-display-lg font-bold text-[var(--color-text-primary)] mb-6 max-w-md">
                     {step.title}
                   </h2>
                   <p className="text-body-lg text-[var(--color-text-secondary)] mb-8 max-w-md">{step.desc}</p>

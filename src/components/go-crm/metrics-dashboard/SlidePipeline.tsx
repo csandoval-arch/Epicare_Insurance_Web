@@ -21,7 +21,7 @@ const ImpeccableDonut = ({ value, label, trend, isCurrency = false, isOrange = f
       <div className="flex justify-between items-start mb-6 pr-8">
         <div>
           <h3 className="text-ui-label text-[var(--color-text-muted)] uppercase tracking-wider mb-1">{label}</h3>
-          <div className="text-display-sm font-medium text-[var(--color-text-primary)] tracking-tight">
+          <div className="text-display-sm font-medium text-[var(--color-text-primary)]">
             {value}
           </div>
         </div>
@@ -97,7 +97,7 @@ export default function SlidePipeline() {
       {/* ── HEADER IMPECCABLE ── */}
       <div className="w-full flex justify-between items-end pb-static-md border-b border-[var(--color-border-Strokes-default)] mb-static-lg">
         <div>
-           <h2 className="text-display-xs font-semibold text-[var(--color-text-primary)] tracking-tight mb-2">
+           <h2 className="text-display-xs font-semibold text-[var(--color-text-primary)] mb-2">
              Leads & Revenue Pipeline
            </h2>
            <div className="flex items-center gap-3">
@@ -172,7 +172,7 @@ export default function SlidePipeline() {
              <div>
                <h3 className="text-ui-label text-[var(--color-text-muted)] uppercase tracking-wider mb-1">Opened Opportunities</h3>
                <div className="flex items-baseline gap-2">
-                 <div className="text-display font-medium text-[var(--color-text-primary)] tracking-tighter">3,412</div>
+                 <div className="text-display font-medium text-[var(--color-text-primary)]">3,412</div>
                  <div className="text-body-sm text-[var(--color-text-muted)]">This period</div>
                </div>
              </div>

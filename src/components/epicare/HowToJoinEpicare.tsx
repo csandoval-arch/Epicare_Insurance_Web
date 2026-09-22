@@ -221,7 +221,7 @@ export default function HowToJoinEpicare() {
         <span className="htj-head block text-overline text-[var(--color-brand-blue)] mb-4 md:mb-6">
           {t("overline")}
         </span>
-        <h2 className="overflow-hidden pb-static-xs text-display-xl font-semibold tracking-tight leading-[1] text-[var(--color-text-Black-100)] dark:text-white">
+        <h2 className="overflow-hidden pb-static-xs text-display-xl font-semibold text-[var(--color-text-Black-100)] dark:text-white">
           <span className="htj-head-line block">
             <span className="inline md:block">{t("title1")} </span>
             <span className="inline md:block text-[var(--color-brand-blue)]">{t("title2")}</span>
@@ -299,7 +299,7 @@ export default function HowToJoinEpicare() {
                   <span className={`text-display-sm drop-shadow-md opacity-90 ${isOrange ? 'text-[var(--color-brand-orange)]' : 'text-[var(--color-brand-blue)]'}`}>
                     {step.num}
                   </span>
-                  <h3 className="text-h3 font-semibold text-white drop-shadow-lg leading-tight">
+                  <h3 className="text-h3 font-semibold text-white drop-shadow-lg">
                     {step.title}
                   </h3>
                   <p className="text-body-sm font-light text-white/90 leading-relaxed drop-shadow-md">

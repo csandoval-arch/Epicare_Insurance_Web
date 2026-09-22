@@ -27,7 +27,7 @@ export default function TheWorkBehindASale() {
       {/* ── INTRO ── */}
       <section className="v4-intro w-full max-w-4xl mx-auto px-gutter-sm md:px-gutter-md pt-32 pb-32 text-left md:text-center flex flex-col items-start md:items-center">
         <p className="text-overline text-[var(--color-text-accent-blue)] uppercase tracking-widest mb-static-md">{t("overline")}</p>
-        <h2 className="text-display tracking-tight text-[var(--color-text-primary)] leading-snug">
+        <h2 className="text-display text-[var(--color-text-primary)]">
           {t("intro")
             .split(" ")
             .map((word, i) => (

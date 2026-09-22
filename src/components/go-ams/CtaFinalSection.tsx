@@ -167,7 +167,7 @@ export default function CtaFinalSection() {
             </span>
             
             {/* Título Line-by-Line */}
-            <h2 className="text-display-lg md:text-display-xl font-display font-bold text-white leading-[0.92] tracking-tighter mb-4 drop-shadow-sm">
+            <h2 className="text-display-lg md:text-display-xl font-display font-bold text-white mb-4 drop-shadow-sm">
               <span className="block overflow-hidden pb-2">
                 <span className="cta-title-line block">
                   {t('title1')} {t('title2')}

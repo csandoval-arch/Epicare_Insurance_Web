@@ -397,7 +397,7 @@ export default function AutomationGoCrm() {
         <div className="h-full flex flex-col justify-center relative border-r border-[var(--color-border-Strokes-default)] z-20 bg-[var(--color-surface-BG-base)]">
           <div className="w-full max-w-2xl ml-auto px-gutter-md md:pl-gutter-lg md:pr-16">
             <p className="text-overline text-[var(--color-text-accent-blue)] uppercase tracking-widest mb-4">10 — AUTOMATION</p>
-            <h2 className="text-display-lg font-bold tracking-tighter leading-[0.9] text-[var(--color-text-primary)] mb-12 max-w-md">
+            <h2 className="text-display-lg font-bold text-[var(--color-text-primary)] mb-12 max-w-md">
               Set it once. Keep it moving.
             </h2>
             

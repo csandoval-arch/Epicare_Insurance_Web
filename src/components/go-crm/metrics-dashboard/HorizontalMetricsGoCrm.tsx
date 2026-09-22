@@ -66,7 +66,7 @@ export default function HorizontalMetricsGoCrm() {
              <span className="text-ui-label text-[var(--color-text-accent-blue)] uppercase tracking-widest mb-6 block">
                Real-Time Metrics & Control
              </span>
-             <h2 className="text-display-lg font-bold text-[var(--color-text-primary)] leading-tight tracking-tight">
+             <h2 className="text-display-lg font-bold text-[var(--color-text-primary)]">
                Todo el pulso de tus ventas en un solo ecosistema.
              </h2>
              <div className="mt-10 flex items-center gap-4">

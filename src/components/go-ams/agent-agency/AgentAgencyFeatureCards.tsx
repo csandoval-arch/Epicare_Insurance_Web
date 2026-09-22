@@ -57,7 +57,7 @@ export function AgentAgencyFeatureCards({
 
               <div className="flex flex-col gap-0.5 sm:gap-1">
                 <h4
-                  className={`text-[11px] sm:text-h6 font-semibold leading-tight transition-colors ${
+                  className={`text-[11px] sm:text-h6 font-semibold transition-colors ${
                     isActive
                       ? "text-[var(--color-text-primary)]"
                       : "text-[var(--color-text-secondary)]"

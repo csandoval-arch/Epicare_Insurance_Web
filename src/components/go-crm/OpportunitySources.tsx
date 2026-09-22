@@ -76,7 +76,7 @@ export default function OpportunitySources() {
             {t("overline")}
           </p>
           
-          <h2 className="text-display-sm md:text-display font-medium tracking-tight text-slate-900 leading-snug">
+          <h2 className="text-display-sm md:text-display font-medium text-slate-900">
             {t.rich("description", {
               normal: renderNormal,
               blue: renderBlue

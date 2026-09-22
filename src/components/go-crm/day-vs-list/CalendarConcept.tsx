@@ -43,7 +43,7 @@ export default function CalendarConcept() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 lg:gap-12 xl:gap-16">
           
           <div className="max-w-4xl xl:max-w-5xl flex-1">
-            <h2 className="text-display-sm md:text-display-lg font-semibold tracking-tight leading-[1.12] text-[var(--color-text-primary)]">
+            <h2 className="text-display-sm md:text-display-lg font-semibold text-[var(--color-text-primary)]">
               La mayoría te da una lista. <span className="text-[var(--color-brand-blue)]">GO CRM te arma el día.</span>
             </h2>
           </div>

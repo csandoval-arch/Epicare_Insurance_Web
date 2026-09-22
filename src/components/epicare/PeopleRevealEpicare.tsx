@@ -179,7 +179,7 @@ export default function PeopleRevealEpicare() {
 
       {/* Kinetic marquee ON TOP of the image, along the bottom */}
       <div className="absolute inset-x-0 bottom-6 md:bottom-10 z-20 flex whitespace-nowrap pointer-events-none select-none mix-blend-difference">
-        <div className="pr-marquee-inner flex will-change-transform text-display-2xl md:text-display-3xl tracking-tighter leading-none text-white">
+        <div className="pr-marquee-inner flex will-change-transform text-display-2xl md:text-display-3xl text-white">
           <Group />
           <Group hidden />
         </div>

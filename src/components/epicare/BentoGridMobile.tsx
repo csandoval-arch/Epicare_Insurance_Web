@@ -287,7 +287,7 @@ export default function BentoGridMobile() {
                 <GoHubLogo className="w-9 h-9 text-[var(--color-brand-blue)]" />
               </div>
 
-              <h2 className="text-display-lg text-white text-left leading-[1.1]">
+              <h2 className="text-display-lg text-white text-left">
                 {t('sectionTitle').split('\n').map((line, i, arr) => {
                   return (
                     <span key={i} className="block overflow-hidden pb-1 -mb-1">

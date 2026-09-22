@@ -62,7 +62,7 @@ export default function Coverage52Epicare() {
         {/* Contenido en Grid de 12 columnas */}
         <div ref={elementsRef} className="grid grid-cols-12 gap-[var(--space-fluid-sm)] items-end pb-[var(--space-static-xl)] border-b border-[var(--color-border-Strokes-default)]/30">
           <div className="col-span-full md:col-span-9">
-            <h2 className="text-display-xl text-[var(--color-text-primary)] tracking-tight">
+            <h2 className="text-display-xl text-[var(--color-text-primary)]">
               {t("title")}
             </h2>
           </div>

@@ -86,7 +86,7 @@ function Variant1({ copy }: { copy: any }) {
       
       <div className="absolute top-12 lg:top-24 w-full text-center z-30 px-6">
         <p className="text-meta uppercase font-mono tracking-[0.2em] text-[var(--color-brand-blue)] mb-4">{copy.overline}</p>
-        <h2 className="text-display-sm lg:text-display-md font-medium tracking-tight text-slate-900">{copy.h2}</h2>
+        <h2 className="text-display-sm lg:text-display-md font-medium text-slate-900">{copy.h2}</h2>
       </div>
 
       <div className="relative w-[600px] h-[600px] flex items-center justify-center mt-20">
@@ -143,7 +143,7 @@ function Variant2({ copy }: { copy: any }) {
       
       <div className="max-w-7xl mx-auto px-6 mb-32 text-center">
         <p className="text-meta uppercase font-mono tracking-[0.2em] text-[var(--color-brand-blue)] mb-6">{copy.overline}</p>
-        <h2 className="text-display-md lg:text-display-lg font-medium tracking-tight text-slate-900 leading-[1.1]">{copy.h2}</h2>
+        <h2 className="text-display-md lg:text-display-lg font-medium text-slate-900">{copy.h2}</h2>
         <p className="text-body-lg text-slate-500 font-light mt-6 max-w-2xl mx-auto">{copy.p1}</p>
       </div>
 
@@ -169,7 +169,7 @@ function Variant2({ copy }: { copy: any }) {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] bg-[var(--color-brand-blue)] rounded-full blur-[80px] opacity-20 pointer-events-none"></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-white border border-slate-100 rounded-full shadow-[0_30px_60px_rgba(53,187,253,0.1)] flex flex-col items-center justify-center z-10">
           <span className="text-meta uppercase font-mono tracking-widest text-[var(--color-brand-blue)] mb-2">Result</span>
-          <h3 className="text-h4 font-medium tracking-tight text-slate-900 text-center px-4">{copy.opportunity}</h3>
+          <h3 className="text-h4 font-medium text-slate-900 text-center px-4">{copy.opportunity}</h3>
         </div>
 
       </div>

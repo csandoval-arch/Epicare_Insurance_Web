@@ -91,7 +91,7 @@ export default function ProfileCard({ contacts, rim = false, lite = false, offse
             <div className="w-10 h-10 rounded-full bg-[var(--color-brand-dark)] flex items-center justify-center shadow-elevation-1 shrink-0">
               <span className="text-body-sm font-medium text-[var(--color-text-White-100)]">{contact.initials}</span>
             </div>
-            <h3 className="text-h6 text-[var(--color-text-Black-100)] font-semibold leading-tight truncate">{contact.name}</h3>
+            <h3 className="text-h6 text-[var(--color-text-Black-100)] font-semibold truncate">{contact.name}</h3>
           </div>
 
           {/* ── PUNTOS + TEMPORIZADOR ── */}

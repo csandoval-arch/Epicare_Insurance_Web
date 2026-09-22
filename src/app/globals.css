@@ -518,45 +518,45 @@ body {
    Bare usage (`text-display-xl`) is unchanged.
    ========================================= */
 /* Display + Headings → Inter Display (optical size 32). Weights 400·500·600·700. Never for body. */
-@utility text-display-3xl { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(6rem, 12vw, 12rem); line-height: 0.95; font-weight: 700; letter-spacing: -0.02em; @media (min-width: 768px) { font-weight: 600; } }
-@utility text-display-2xl { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(4.5rem, 8vw, 8rem); line-height: 1; font-weight: 700; letter-spacing: -0.01em; @media (min-width: 768px) { font-weight: 600; } }
-@utility text-display-xl { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(3.5rem, 6vw, 6rem); line-height: 1.1; font-weight: 700; letter-spacing: -0.04em; @media (min-width: 768px) { font-weight: 600; } }
-@utility text-display-lg { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(3rem, 5vw, 4.5rem); line-height: 1.1; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
-@utility text-display { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(2.5rem, 4vw, 3.5rem); line-height: 1.15; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
-@utility text-display-sm { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(2rem, 3vw, 2.5rem); line-height: 1.2; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
-@utility text-display-xs { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(1.375rem, 2vw, 1.75rem); line-height: 1.2; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
+@utility text-display-3xl { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(6rem, 12vw, 12rem); line-height: 0.9; letter-spacing: -0.04em; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
+@utility text-display-2xl { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(4.5rem, 8vw, 8rem); line-height: 0.95; letter-spacing: -0.035em; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
+@utility text-display-xl { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(3.5rem, 6vw, 6rem); line-height: 1; letter-spacing: -0.035em; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
+@utility text-display-lg { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(3rem, 5vw, 4.5rem); line-height: 1.05; letter-spacing: -0.03em; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
+@utility text-display { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(2.5rem, 4vw, 3.5rem); line-height: 1.1; letter-spacing: -0.025em; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
+@utility text-display-sm { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(2rem, 3vw, 2.5rem); line-height: 1.15; letter-spacing: -0.02em; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
+@utility text-display-xs { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(1.375rem, 2vw, 1.75rem); line-height: 1.2; letter-spacing: -0.015em; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
 
-@utility text-h1 { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(1.75rem, 2.5vw, 2.25rem); line-height: 1.2; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
-@utility text-h2 { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(1.5rem, 2vw, 1.875rem); line-height: 1.3; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
-@utility text-h3 { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(1.25rem, 1.5vw, 1.5rem); line-height: 1.3; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
-@utility text-h4 { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(1.1875rem, 1.25vw, 1.25rem); line-height: 1.4; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
-@utility text-h5 { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: 1.125rem; line-height: 1.5; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
-@utility text-h6 { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: 1rem; line-height: 1.5; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
-@utility text-h7 { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: 0.875rem; line-height: 1.6; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
+@utility text-h1 { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(1.75rem, 2.5vw, 2.25rem); line-height: 1.2; letter-spacing: -0.02em; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
+@utility text-h2 { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(1.5rem, 2vw, 1.875rem); line-height: 1.25; letter-spacing: -0.015em; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
+@utility text-h3 { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(1.25rem, 1.5vw, 1.5rem); line-height: 1.3; letter-spacing: -0.01em; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
+@utility text-h4 { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: clamp(1.1875rem, 1.25vw, 1.25rem); line-height: 1.4; letter-spacing: -0.005em; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
+@utility text-h5 { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: 1.125rem; line-height: 1.5; letter-spacing: -0.005em; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
+@utility text-h6 { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: 1rem; line-height: 1.5; letter-spacing: 0; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
+@utility text-h7 { font-family: var(--font-display-stack); font-variation-settings: "opsz" 32; font-size: 0.875rem; line-height: 1.6; letter-spacing: 0; font-weight: 700; @media (min-width: 768px) { font-weight: 600; } }
 
 /* Body · UI → Inter Tight (inherited from body). Weights 300·400·500·600·700. */
-@utility text-subtitle { font-size: clamp(1.125rem, 2vw, 1.5rem); line-height: 1.5; font-weight: 300; opacity: 0.9; }
-@utility text-body-2xl { font-size: 1.5rem; line-height: 1.5; font-weight: 300; }
-@utility text-body-2xl-light { font-size: 1.5rem; line-height: 1.5; font-weight: 300; }
-@utility text-body-xl { font-size: 1.25rem; line-height: 1.5; font-weight: 300; }
-@utility text-body-xl-light { font-size: 1.25rem; line-height: 1.5; font-weight: 300; }
-@utility text-body-lg { font-size: 1.125rem; line-height: 1.6; font-weight: 300; }
-@utility text-body-lg-light { font-size: 1.125rem; line-height: 1.6; font-weight: 300; }
-@utility text-body-md { font-size: 1rem; line-height: 1.6; font-weight: 300; }
-@utility text-body-md-light { font-size: 1rem; line-height: 1.6; font-weight: 300; }
-@utility text-body { font-size: 1rem; line-height: 1.6; font-weight: 300; }
-@utility text-body-light { font-size: 1rem; line-height: 1.6; font-weight: 300; }
-@utility text-body-sm { font-size: 0.875rem; line-height: 1.6; font-weight: 300; }
-@utility text-body-sm-light { font-size: 0.875rem; line-height: 1.6; font-weight: 300; }
-@utility text-body-xs { font-size: 0.75rem; line-height: 1.6; font-weight: 300; }
-@utility text-body-xs-light { font-size: 0.75rem; line-height: 1.6; font-weight: 300; }
-@utility text-caption { font-size: 0.75rem; line-height: 1.5; font-weight: 400; opacity: 0.8; }
+@utility text-subtitle { font-size: clamp(1.125rem, 2vw, 1.5rem); line-height: 1.5; font-weight: 300; letter-spacing: 0; text-wrap: pretty; }
+@utility text-body-2xl { font-size: 1.5rem; line-height: 1.45; font-weight: 300; letter-spacing: -0.01em; text-wrap: pretty; }
+@utility text-body-2xl-light { font-size: 1.5rem; line-height: 1.45; font-weight: 300; letter-spacing: -0.01em; text-wrap: pretty; }
+@utility text-body-xl { font-size: 1.25rem; line-height: 1.5; font-weight: 300; letter-spacing: -0.005em; text-wrap: pretty; }
+@utility text-body-xl-light { font-size: 1.25rem; line-height: 1.5; font-weight: 300; letter-spacing: -0.005em; text-wrap: pretty; }
+@utility text-body-lg { font-size: 1.125rem; line-height: 1.6; font-weight: 300; letter-spacing: 0; text-wrap: pretty; }
+@utility text-body-lg-light { font-size: 1.125rem; line-height: 1.6; font-weight: 300; letter-spacing: 0; text-wrap: pretty; }
+@utility text-body-md { font-size: 1rem; line-height: 1.6; font-weight: 300; letter-spacing: 0; text-wrap: pretty; }
+@utility text-body-md-light { font-size: 1rem; line-height: 1.6; font-weight: 300; letter-spacing: 0; text-wrap: pretty; }
+@utility text-body { font-size: 1rem; line-height: 1.6; font-weight: 300; letter-spacing: 0; text-wrap: pretty; }
+@utility text-body-light { font-size: 1rem; line-height: 1.6; font-weight: 300; letter-spacing: 0; text-wrap: pretty; }
+@utility text-body-sm { font-size: 0.875rem; line-height: 1.6; font-weight: 400; letter-spacing: 0.005em; text-wrap: pretty; }
+@utility text-body-sm-light { font-size: 0.875rem; line-height: 1.6; font-weight: 400; letter-spacing: 0.005em; text-wrap: pretty; }
+@utility text-body-xs { font-size: 0.75rem; line-height: 1.6; font-weight: 400; letter-spacing: 0.01em; text-wrap: pretty; }
+@utility text-body-xs-light { font-size: 0.75rem; line-height: 1.6; font-weight: 400; letter-spacing: 0.01em; text-wrap: pretty; }
+@utility text-caption { font-size: 0.75rem; line-height: 1.5; font-weight: 400; letter-spacing: 0.01em; }
 
 /* Meta · Code → JetBrains Mono. Numbers, hex, labels, metadata only. */
-@utility text-data { font-family: var(--font-mono-stack); font-size: 1rem; font-weight: 600; }
-@utility text-meta { font-family: var(--font-mono-stack); font-size: 0.75rem; line-height: 1.5; font-weight: 500; letter-spacing: 0.01em; opacity: 0.8; }
-@utility text-overline { font-family: var(--font-mono-stack); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
-@utility text-ui-label { font-family: var(--font-mono-stack); font-size: 0.875rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+@utility text-data { font-family: var(--font-mono-stack); font-size: 1rem; line-height: 1.2; font-weight: 600; font-variant-numeric: tabular-nums; }
+@utility text-meta { font-family: var(--font-mono-stack); font-size: 0.75rem; line-height: 1.5; font-weight: 500; letter-spacing: 0.01em; font-variant-numeric: tabular-nums; }
+@utility text-overline { font-family: var(--font-mono-stack); font-size: 0.875rem; line-height: 1.2; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+@utility text-ui-label { font-family: var(--font-mono-stack); font-size: 0.875rem; line-height: 1.2; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
 
 @utility grid-layout {
   display: grid;
