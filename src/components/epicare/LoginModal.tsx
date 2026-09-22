@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
@@ -170,7 +170,7 @@ export default function LoginModal() {
       {/* LAYER 0: IMMERSIVE BACKGROUND (Fixed) */}
       <div className="fixed inset-0 -z-10 bg-[var(--color-surface-BG-base)]/80 backdrop-blur-xl">
         <div className="absolute top-0 right-0 w-[50vw] h-[50vh] bg-[var(--color-brand-blue)] rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[150px] opacity-20 pointer-events-none translate-x-1/4 -translate-y-1/4" />
-        <div className="absolute bottom-0 left-0 w-[50vw] h-[50vh] bg-[var(--color-brand-orange)] rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[150px] opacity-[0.15] pointer-events-none -translate-x-1/4 translate-y-1/4" />
+        <div className="absolute bottom-0 left-0 w-[50vw] h-[50vh] bg-[var(--color-brand-blue)] rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[150px] opacity-[0.15] pointer-events-none -translate-x-1/4 translate-y-1/4" />
       </div>
 
       <button 
@@ -196,7 +196,7 @@ export default function LoginModal() {
           <div ref={descRef} className="flex flex-col md:items-end w-full max-w-[416px] shrink-0 md:pb-3">
             <div className="w-10 h-[3px] bg-[var(--color-brand-blue)] rounded-full mb-3 opacity-80 hidden md:block" />
             <p className="text-body-lg text-[var(--color-text-muted)] leading-relaxed drop-shadow-sm md:text-right">
-              All the <strong className="font-semibold text-[var(--color-text-primary)]">tools, resources, and connections</strong> you need from <span className="text-[var(--color-text-accent-blue)] font-semibold">Epicare</span>ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Âorganized in one easy place. Access support, platforms, and <strong className="font-semibold text-[var(--color-text-primary)]">growth opportunities</strong> anytime, anywhere.
+              All the <strong className="font-semibold text-[var(--color-text-primary)]">tools, resources, and connections</strong> you need from <span className="text-[var(--color-text-accent-blue)] font-semibold">Epicare</span> organized in one easy place. Access support, platforms, and <strong className="font-semibold text-[var(--color-text-primary)]">growth opportunities</strong> anytime, anywhere.
             </p>
           </div>
         </div>

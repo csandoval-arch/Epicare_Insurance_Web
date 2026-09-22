@@ -13,7 +13,7 @@ import TheWorkBehindASale from "@/components/go-crm/TheWorkBehindASale";
 import DayVsListContainer from "@/components/go-crm/day-vs-list";
 import ConversationsGoCrm from "@/components/go-crm/ConversationsGoCrm";
 import AutomationGoCrm from "@/components/go-crm/AutomationGoCrm";
-import CalendarGoCrm from "@/components/go-crm/CalendarGoCrm";
+import HorizontalMetricsGoCrm from "@/components/go-crm/metrics-dashboard/HorizontalMetricsGoCrm";
 import OpportunityJourneyGoCrm from "@/components/go-crm/OpportunityJourneyGoCrm";
 import CierreGoCrm from "@/components/go-crm/CierreGoCrm";
 
@@ -68,7 +68,7 @@ export default function GoCrmPage() {
       <TheWorkBehindASale />
       {/* <ThePipeline /> -> Fusionado en TheWorkBehindASale */}
       <ConversationsGoCrm />
-      <CalendarGoCrm />
+      <HorizontalMetricsGoCrm />
       {/* <AutomationGoCrm /> */}
       <OpportunityJourneyGoCrm />
       <CierreGoCrm />
