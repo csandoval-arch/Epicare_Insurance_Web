@@ -11,6 +11,12 @@ export const STEP_VIDEOS = [
   `${DIR}/Appointments.mp4`,
 ] as const;
 
+/**
+ * Proporción real de cada vídeo, en el mismo orden. Reserva el alto antes de que SmartVideo cargue
+ * el archivo: sin esto la página cambia de alto al cargar y descuadra los pines siguientes.
+ */
+export const STEP_RATIOS = ["2222 / 1224", "2222 / 1224", "2218 / 1140"] as const;
+
 export interface StepCopy {
   title: string;
   desc: string;

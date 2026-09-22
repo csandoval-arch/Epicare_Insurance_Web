@@ -565,24 +565,10 @@
       "description": "Una vista clara del proceso comercial, desde los nuevos prospectos hasta las oportunidades que avanzan."
     },
     "conversations": {
-      "overline": "08 — CONVERSACIONES & CONTACTO TOTAL",
+      "overline": "Conversaciones",
       "headline": "Cada conversación, tarea y documento, conectados a la venta.",
-      "description": "Habla directamente con cada prospecto, realiza llamadas en un clic, solicita contratos y automatiza el seguimiento desde un único centro de mando omnicanal.",
-      "callButton": "Llamar",
-      "emailButton": "Correo",
-      "docButton": "Pedir Documento",
-      "taskButton": "Crear Task",
-      "clientName": "Sarah Jenkins",
-      "opportunity": "Oportunidad: Póliza Comercial Flota",
-      "phone": "+1 (305) 849-2041",
-      "callLogTitle": "Llamada Saliente Registrada",
-      "callLogMeta": "04:18 min • Grabación y notas sincronizadas",
-      "docTitle": "Contrato_Poliza_Comercial_Firmado.pdf",
-      "docMeta": "Documento recibido y verificado por el cliente",
-      "automationTitle": "Automatización de Pipeline Disparada",
-      "automationDesc": "Mensaje automático enviado vía WhatsApp. Tarea creada: 'Confirmar póliza antes del viernes'.",
       "card1Title": "Llamadas & Teléfono Directo",
-      "card1Desc": "Tienes su número siempre a mano. Haz llamadas directas en un clic y mantén el registro sonoro y cronológico dentro de la oportunidad.",
+      "card1Desc": "Tienes su número siempre a mano. Haz llamadas directas en un clic y mantén el registro sonoro y cronológico dentro de cada venta.",
       "card2Title": "Contratos & Documentos Seguros",
       "card2Desc": "Pide identificaciones, formularios y pólizas firmadas en el mismo hilo. Notificación inmediata cuando el cliente sube su archivo.",
       "card3Title": "Tareas & Mensajes Automáticos",
@@ -602,7 +588,7 @@
       "stepLabel": "Paso",
       "steps": [
         {
-          "title": "Capta o crea una venta",
+          "title": "Capta o crea una oportunidad",
           "desc": "Dale un siguiente paso claro desde el primer minuto."
         },
         {

@@ -16,6 +16,9 @@ const TITLE_SWAPS = [
   { out: 1, in: 2, at: 1.7 },
 ] as const;
 
+/** Móvil: desde dónde entra cada pantallazo (xPercent de su propio ancho = fuera de pantalla). */
+const SHOT_ENTRY_X = 100;
+
 const DESKTOP = "(min-width: 1024px)";
 const STACKED = "(max-width: 1023px)";
 const FULL = "(prefers-reduced-motion: no-preference)";
@@ -25,8 +28,6 @@ const BIRTH_FROM = { yPercent: REVEAL.birthPercent, opacity: 0, willChange: "tra
 const BIRTH_TO = { yPercent: 0, opacity: 1, duration: DUR.slow, ease: EASE.dramatic, force3D: true, clearProps: "willChange" };
 const SUB_FROM = { opacity: 0, y: REVEAL.sm, willChange: "transform, opacity" };
 const SUB_TO = { opacity: 1, y: 0, duration: DUR.base, ease: EASE.out, force3D: true, clearProps: "willChange" };
-const CARD_FROM = { opacity: 0, y: REVEAL.md, willChange: "transform, opacity" };
-const CARD_TO = { opacity: 1, y: 0, duration: DUR.base, ease: EASE.out, force3D: true, clearProps: "willChange" };
 
 /**
  * @description Coreografía de "El trabajo detrás de una venta".
@@ -34,7 +35,7 @@ const CARD_TO = { opacity: 1, y: 0, duration: DUR.base, ease: EASE.out, force3D:
  * - Desktop (≥lg): pin de 300%; la tira de pantallazos sube, los títulos de cada paso hacen
  *   crossfade y la barra de progreso se llena (scaleX).
  * - Móvil/tablet (<lg): scroll normal; cada paso entra one-shot al llegar (titular con
- *   text-birth, subtítulo y pantallazo).
+ *   text-birth, pantallazo entrando en zigzag desde los lados y subtítulo).
  * Con reduced-motion no corre nada: todo queda visible.
  */
 export function useWorkBehindMotion(scopeRef: RefObject<HTMLElement | null>) {
@@ -81,12 +82,19 @@ export function useWorkBehindMotion(scopeRef: RefObject<HTMLElement | null>) {
 
     // ── MÓVIL / TABLET: ENTRADA DE CADA PASO ──
     mm.add(`${STACKED} and ${FULL}`, () => {
-      gsap.utils.toArray<HTMLElement>(".ws-step").forEach((step) => {
+      gsap.utils.toArray<HTMLElement>(".ws-step").forEach((step, i) => {
+        // Zigzag: el pantallazo entra desde fuera de pantalla, alternando derecha / izquierda.
+        const fromSide = i % 2 === 0 ? SHOT_ENTRY_X : -SHOT_ENTRY_X;
         gsap
           .timeline({ scrollTrigger: { trigger: step, start: TRIGGER.standard, toggleActions: "play none none reverse" } })
           .fromTo(step.querySelector(".ws-title"), BIRTH_FROM, BIRTH_TO)
-          .fromTo(step.querySelector(".ws-desc"), SUB_FROM, SUB_TO, "-=0.9")
-          .fromTo(step.querySelector(".ws-shot"), CARD_FROM, CARD_TO, "-=0.7");
+          .fromTo(
+            step.querySelector(".ws-shot"),
+            { xPercent: fromSide, opacity: 0, willChange: "transform, opacity" },
+            { xPercent: 0, opacity: 1, duration: DUR.slow, ease: EASE.dramatic, force3D: true, clearProps: "willChange" },
+            "-=1"
+          )
+          .fromTo(step.querySelector(".ws-desc"), SUB_FROM, SUB_TO, "-=0.6");
       });
     });
 
