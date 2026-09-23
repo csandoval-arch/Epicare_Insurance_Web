@@ -113,14 +113,15 @@ export default function ContactVsOpportunity() {
           </div>
 
           <div className="absolute top-0 bottom-0 left-[33.33%] w-[33.33%] p-static-lg lg:p-static-xl flex flex-col justify-center items-start">
+            {/* Texto sobre imagen: blanco fijo en los dos temas (primary-Reverted se oscurecía en dark) */}
             <div className="relative z-10 w-full text-left">
-              <p className="text-h1 md:text-display-sm lg:text-display font-bold text-[var(--color-text-primary-Reverted)] drop-shadow-md">
+              <p className="text-h1 md:text-display-sm lg:text-display font-bold text-[var(--color-text-White-100)] drop-shadow-md">
                 <span className="block overflow-hidden pb-1">
                   <span className="a1-birth block">{t("convergeTitle")}</span>
                 </span>
               </p>
-              <div className="a1-rule w-24 md:w-32 h-1.5 bg-[var(--color-text-primary-Reverted)] opacity-80 my-static-md rounded-full origin-left"></div>
-              <p className="text-h1 md:text-display-sm lg:text-display font-bold text-[var(--color-text-primary-Reverted)] drop-shadow-md">
+              <div className="a1-rule w-24 md:w-32 h-1.5 bg-[var(--color-text-White-100)] opacity-80 my-static-md rounded-full origin-left"></div>
+              <p className="text-h1 md:text-display-sm lg:text-display font-bold text-[var(--color-text-White-100)] drop-shadow-md">
                 <span className="block overflow-hidden pb-1">
                   <span className="a1-birth block">{t("convergeBody")}</span>
                 </span>

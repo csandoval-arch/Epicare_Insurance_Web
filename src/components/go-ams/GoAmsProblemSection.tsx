@@ -16,7 +16,10 @@ if (typeof window !== "undefined") {
 export function GoAmsProblemSection() {
   const t = useTranslations("goAms.problemSection");
   const sectionRef = useRef<HTMLElement>(null);
-  const [openMobileIndex, setOpenMobileIndex] = useState<number | null>(null);
+  // Slider móvil de cuadrados (mismo tratamiento que "El problema" de GO CRM)
+  const trackRef = useRef<HTMLDivElement>(null);
+  const frame = useRef(0);
+  const [activeSlide, setActiveSlide] = useState(0);
 
   const pains = [
     { title: t("pains.0.title"), description: t("pains.0.description") },
@@ -117,6 +120,22 @@ export function GoAmsProblemSection() {
     return () => ctx.revert();
   }, []);
 
+  /** Los 5 dolores (sin la tarjeta azul de solución), que en móvil van en el slider. */
+  const painItems = pains.slice(0, 5);
+
+  // Cuadrado activo del slider móvil (medido como mucho una vez por frame).
+  const onSliderScroll = () => {
+    cancelAnimationFrame(frame.current);
+    frame.current = requestAnimationFrame(() => {
+      const track = trackRef.current;
+      const first = track?.firstElementChild as HTMLElement | null;
+      if (!track || !first) return;
+      const step = first.offsetWidth + parseFloat(getComputedStyle(track).columnGap || "0");
+      const index = Math.min(painItems.length - 1, Math.max(0, Math.round(track.scrollLeft / step)));
+      setActiveSlide((prev) => (prev === index ? prev : index));
+    });
+  };
+
   const getGridSpan = (index: number) => {
     switch(index) {
       case 0: return "md:col-start-3 md:row-start-1 md:col-span-1"; // Item 1
@@ -140,7 +159,8 @@ export function GoAmsProblemSection() {
         <div className="blueprint-grid grid grid-cols-1 md:grid-cols-5 md:grid-rows-2 border-t border-l border-[var(--color-text-Black-100)]/10 dark:border-white/10">
           
           {/* CELL 0: Context Header (Left, spans 2 cols and 2 rows) */}
-          <div className="blueprint-cell md:col-start-1 md:col-span-2 md:row-start-1 md:row-span-2 border-r border-b border-[var(--color-text-Black-100)]/10 dark:border-white/10 p-3.5 md:p-10 flex flex-col justify-between relative overflow-hidden">
+          {/* Móvil: sin borde inferior (los cuadrados del slider hacen de separador) y 48px arriba */}
+          <div className="blueprint-cell md:col-start-1 md:col-span-2 md:row-start-1 md:row-span-2 border-r md:border-b border-[var(--color-text-Black-100)]/10 dark:border-white/10 px-3.5 pt-static-2xl pb-static-lg md:p-10 flex flex-col justify-between relative overflow-hidden">
             
             {/* Glassmorphic Background Layer (Static, Eppigo configuration) */}
             <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
@@ -178,16 +198,44 @@ export function GoAmsProblemSection() {
             <div className="absolute bottom-4 right-4 w-2 h-2 border border-[var(--color-brand-blue)] opacity-50 z-10 pointer-events-none"></div>
           </div>
 
+          {/* MÓVIL (<md): los 5 dolores en un slider horizontal nativo de cuadrados (scroll-snap) +
+              indicador. Mismo tratamiento que "El problema" de GO CRM: solo el mensaje, con el dolor en
+              negrita al inicio. En desktop siguen las celdas del blueprint con hover. */}
+          <div className="md:hidden border-r border-b border-[var(--color-text-Black-100)]/10 dark:border-white/10 pb-static-lg flex flex-col gap-static-md">
+            <div
+              ref={trackRef}
+              onScroll={onSliderScroll}
+              className="card-reveal flex gap-static-sm overflow-x-auto snap-x snap-mandatory overscroll-x-contain px-3.5 scroll-px-3.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {painItems.map((pain) => (
+                <article key={pain.title} className="w-[64vw] max-w-64 aspect-square shrink-0 snap-start flex flex-col justify-start p-static-md border border-[var(--color-text-Black-100)]/10 dark:border-white/10">
+                  <p className="text-body-lg text-[var(--color-text-secondary)]">
+                    <strong className="font-semibold text-[var(--color-text-primary)]">{pain.title}.</strong> {pain.description}
+                  </p>
+                </article>
+              ))}
+            </div>
+            <div className="px-3.5" aria-hidden="true">
+              <div className="relative h-1.5 rounded-full bg-[var(--color-border-Strokes-default)] overflow-hidden" style={{ width: `${painItems.length * 2}rem` }}>
+                <span
+                  className="absolute inset-y-0 left-0 w-static-xl rounded-full bg-[var(--color-brand-blue)] transition-[translate] duration-300 ease-out"
+                  style={{ translate: `${activeSlide * 100}% 0` }}
+                />
+              </div>
+            </div>
+          </div>
+
           {/* PAIN CELLS 1-6 */}
           {pains.map((pain, i) => {
             // AWWWARDS: Objeto Digital (Rounded Pill).
             if (i === 5) {
               return (
                 <div key={i} className={cn(
-                  "blueprint-cell border-r border-b border-[var(--color-text-Black-100)]/10 dark:border-white/10 p-2 md:p-4 flex flex-col group relative overflow-hidden cursor-pointer min-h-[160px] md:min-h-0",
+                  // Móvil: celda azul a sangre (sin inset ni radio), como la resolución de GO CRM; desktop: tarjeta redondeada.
+                  "blueprint-cell border-r border-b border-[var(--color-text-Black-100)]/10 dark:border-white/10 md:p-4 flex flex-col group relative overflow-hidden cursor-pointer min-h-[160px] md:min-h-0",
                   getGridSpan(i)
                 )}>
-                  <div className="relative z-10 w-full h-full bg-[var(--color-brand-blue)] text-white rounded-xl p-3.5 md:p-8 flex flex-col justify-between overflow-hidden transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[0.98]">
+                  <div className="relative z-10 w-full h-full bg-[var(--color-brand-blue)] text-white md:rounded-xl px-3.5 py-static-lg md:p-8 flex flex-col justify-between overflow-hidden transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:scale-[0.98]">
                     
                     {/* Aura Glow animado */}
                     <div className="absolute -top-16 -right-16 w-48 h-48 bg-white opacity-20 group-hover:opacity-40 rounded-full blur-3xl transition-all duration-1000 ease-out group-hover:scale-150 group-hover:translate-x-4 group-hover:-translate-y-4"></div>
@@ -215,67 +263,35 @@ export function GoAmsProblemSection() {
               );
             }
 
-            // Ítems estándar (1 al 5)
-            const isOpen = openMobileIndex === i;
-
+            // Ítems estándar (1 al 5) — solo ≥md; en móvil van en el slider de arriba.
             return (
-              <div 
-                key={i} 
-                onClick={() => {
-                  if (typeof window !== 'undefined' && window.innerWidth < 768) {
-                    setOpenMobileIndex(isOpen ? null : i);
-                  }
-                }}
+              <div
+                key={i}
                 className={cn(
-                  "blueprint-cell border-r border-b border-[var(--color-text-Black-100)]/10 dark:border-white/10 p-3.5 md:p-8 flex flex-col justify-center md:justify-start group relative overflow-hidden cursor-pointer md:cursor-crosshair hover:border-[var(--color-brand-blue)]/30 transition-colors duration-300 min-h-[72px] md:min-h-0 select-none text-left",
+                  "blueprint-cell hidden md:flex border-r border-b border-[var(--color-text-Black-100)]/10 dark:border-white/10 md:p-8 flex-col md:justify-start group relative overflow-hidden md:cursor-crosshair hover:border-[var(--color-brand-blue)]/30 transition-colors duration-300 md:min-h-0 select-none text-left",
                   getGridSpan(i)
                 )}
               >
-                
-                {/* Hover / Tap Kinetics */}
-                <div className={cn(
-                  "absolute inset-0 bg-[var(--color-brand-blue)] transform origin-bottom transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] z-0 md:group-hover:scale-y-100",
-                  isOpen ? "scale-y-100" : "scale-y-0"
-                )}></div>
-                
-                <div className="card-reveal relative z-10 w-full h-full flex flex-col justify-center md:justify-start text-left">
-                  
-                  {/* Número: Oculto en mobile, expulsado hacia arriba en desktop */}
-                  <div className="hidden md:block text-meta text-[var(--color-text-accent-blue)] mb-4 transform transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-8 group-hover:opacity-0 group-hover:text-white/70">
+
+                {/* Hover Kinetics */}
+                <div className="absolute inset-0 bg-[var(--color-brand-blue)] transform origin-bottom transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] z-0 scale-y-0 md:group-hover:scale-y-100"></div>
+
+                <div className="card-reveal relative z-10 w-full h-full flex flex-col md:justify-start text-left">
+
+                  {/* Número: expulsado hacia arriba al hover */}
+                  <div className="text-meta text-[var(--color-text-accent-blue)] mb-4 transform transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-8 group-hover:opacity-0 group-hover:text-white/70">
                     [0{i + 1}]
                   </div>
-                  
-                  {/* Título: Visible tanto en mobile (persistente) como en desktop */}
-                  <h4 className={cn(
-                    "text-h5 md:text-h4 font-medium transform transition-all duration-500 flex items-center justify-between gap-4 w-full text-left",
-                    isOpen ? "text-white" : "text-[var(--color-text-primary)] dark:text-white",
-                    "md:group-hover:-translate-y-8 md:group-hover:text-white"
-                  )}>
-                    <span>{pain.title}</span>
-                    
-                    {/* Affordance táctil en mobile (Icono de barras minimalista que rota al abrir) */}
-                    <span className={cn(
-                      "md:hidden flex-shrink-0 transition-all duration-300",
-                      isOpen ? "text-white opacity-90 rotate-90" : "text-[var(--color-text-primary)] dark:text-white opacity-30"
-                    )}>
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="4" y1="9" x2="20" y2="9"></line>
-                        <line x1="4" y1="15" x2="20" y2="15"></line>
-                      </svg>
-                    </span>
+
+                  <h4 className="md:text-h4 font-medium transform transition-all duration-500 w-full text-left text-[var(--color-text-primary)] dark:text-white md:group-hover:-translate-y-8 md:group-hover:text-white">
+                    {pain.title}
                   </h4>
-                  
-                  {/* Descripción: En mobile se expande fluidamente debajo del título haciendo la tarjeta más alta. En desktop aparece abajo */}
-                  <div className={cn(
-                    "grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
-                    isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0 pointer-events-none",
-                    "md:block md:absolute md:bottom-0 md:left-0 md:w-full md:opacity-0 md:group-hover:opacity-100 md:pointer-events-none md:transition-all md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
-                  )}>
-                    <div className="overflow-hidden md:overflow-visible">
-                      <p className="w-full text-body-md leading-relaxed text-white text-left pt-3 pb-1 md:pt-0 md:pb-0 md:transform md:translate-y-6 md:group-hover:translate-y-0 transition-transform duration-700">
-                        {pain.description}
-                      </p>
-                    </div>
+
+                  {/* Descripción: aparece abajo al hover */}
+                  <div className="md:block md:absolute md:bottom-0 md:left-0 md:w-full md:opacity-0 md:group-hover:opacity-100 md:pointer-events-none md:transition-all md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]">
+                    <p className="w-full text-body-md leading-relaxed text-white text-left md:transform md:translate-y-6 md:group-hover:translate-y-0 transition-transform duration-700">
+                      {pain.description}
+                    </p>
                   </div>
                 </div>
               </div>

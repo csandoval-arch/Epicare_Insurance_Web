@@ -37,7 +37,8 @@ const oneShot = (trigger: Element | null, start: string = TRIGGER.standard) => (
   scrollTrigger: { trigger, start, toggleActions: "play none none reverse" },
 });
 
-const CELL = "bg-[var(--color-surface-BG-base)] p-static-lg lg:p-static-xl";
+/** Relleno de celda: 14px laterales en móvil (gutter-sm), 24px en tablet, 32px en desktop. */
+const CELL = "bg-[var(--color-surface-BG-base)] px-gutter-sm py-static-lg md:px-static-lg lg:p-static-xl";
 
 export default function ProblemGoCrm() {
   const t = useTranslations("goCrm.problem");
@@ -119,7 +120,7 @@ export default function ProblemGoCrm() {
             <div
               ref={trackRef}
               onScroll={onScroll}
-              className="flex gap-static-sm overflow-x-auto snap-x snap-mandatory overscroll-x-contain px-static-lg scroll-px-[var(--spacing-static-lg)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              className="flex gap-static-sm overflow-x-auto snap-x snap-mandatory overscroll-x-contain px-gutter-sm scroll-px-[var(--space-gutter-sm)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
               {STORY_KEYS.map((key) => (
                 <article key={key} className="w-[58vw] max-w-60 aspect-square shrink-0 snap-start flex flex-col justify-start p-static-md border border-[var(--color-border-Strokes-default)]">
@@ -127,7 +128,7 @@ export default function ProblemGoCrm() {
                 </article>
               ))}
             </div>
-            <div className="px-static-lg" aria-hidden="true">
+            <div className="px-gutter-sm" aria-hidden="true">
               <div className="relative h-1.5 rounded-full bg-[var(--color-border-Strokes-default)] overflow-hidden" style={{ width: `${STORY_KEYS.length * 2}rem` }}>
                 <span
                   className="absolute inset-y-0 left-0 w-static-xl rounded-full bg-[var(--color-brand-blue)] transition-[translate] duration-300 ease-out"
@@ -138,7 +139,7 @@ export default function ProblemGoCrm() {
           </div>
 
           {/* Resolución */}
-          <div className={`pg-cell md:col-span-2 bg-[var(--color-brand-blue)] p-static-lg lg:p-static-xl flex flex-col justify-between gap-static-2xl lg:min-h-80`}>
+          <div className={`pg-cell md:col-span-2 bg-[var(--color-brand-blue)] px-gutter-sm py-static-lg md:px-static-lg lg:p-static-xl flex flex-col justify-between gap-static-2xl lg:min-h-80`}>
             <svg aria-hidden="true" viewBox="0 0 24 24" className="w-static-xl h-static-xl text-[var(--color-text-White-100)]" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 5v14" />
               <path d="m19 12-7 7-7-7" />
