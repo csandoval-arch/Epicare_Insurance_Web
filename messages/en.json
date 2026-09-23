@@ -496,7 +496,25 @@
       "p3": "They said they were thinking about it, to write back in two weeks. That <b>stayed in your head</b>.",
       "p4": "They sent their documents via WhatsApp on Friday. They <b>got lost among other chats</b>.",
       "p5": "<b>We centralize your portfolio</b> ",
-      "cierre": "and all your customer history."
+      "cierre": "and all your customer history.",
+      "rows": [
+        {
+          "channel": "Phone",
+          "when": "Tuesday"
+        },
+        {
+          "channel": "Email",
+          "when": "Wednesday"
+        },
+        {
+          "channel": "Memory",
+          "when": "+2 weeks"
+        },
+        {
+          "channel": "WhatsApp",
+          "when": "Friday"
+        }
+      ]
     },
     "salesLayer": {
       "overline": "The sales layer",

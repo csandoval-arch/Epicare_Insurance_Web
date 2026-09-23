@@ -496,7 +496,25 @@
       "p3": "Dijo que lo pensaba, que le escribieras en dos semanas. Eso <b>quedó en tu cabeza</b>.",
       "p4": "Te envió sus documentos por WhatsApp el viernes. Se <b>perdió entre otros chats</b>.",
       "p5": "<b>Centralizamos tu cartera</b> ",
-      "cierre": "y todo tu historial de clientes."
+      "cierre": "y todo tu historial de clientes.",
+      "rows": [
+        {
+          "channel": "Teléfono",
+          "when": "Martes"
+        },
+        {
+          "channel": "Correo",
+          "when": "Miércoles"
+        },
+        {
+          "channel": "Memoria",
+          "when": "+2 semanas"
+        },
+        {
+          "channel": "WhatsApp",
+          "when": "Viernes"
+        }
+      ]
     },
     "salesLayer": {
       "overline": "La capa de venta",
