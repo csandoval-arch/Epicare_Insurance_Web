@@ -657,6 +657,50 @@
         "lead": "How fast you close and where you talk to every client."
       },
       "cta": "See live numbers"
+    },
+    "journey": {
+      "overline": "The journey",
+      "headline": "Follow the whole journey.",
+      "steps": [
+        {
+          "title": "Origin",
+          "desc": "First contact: Google Ads, Facebook, WhatsApp or Eppigo."
+        },
+        {
+          "title": "Contact",
+          "desc": "One record per person, no duplicates."
+        },
+        {
+          "title": "Opportunity",
+          "desc": "A sales process opens, with an owner and a stage."
+        },
+        {
+          "title": "Pipeline",
+          "desc": "It moves through the stages you define."
+        },
+        {
+          "title": "Activity",
+          "desc": "Notes, calls and messages in one history."
+        },
+        {
+          "title": "Follow-up",
+          "desc": "Dated tasks so nothing goes cold."
+        },
+        {
+          "title": "Appointment",
+          "desc": "The meeting lands on your calendar."
+        },
+        {
+          "title": "Outcome",
+          "desc": "Policy issued or client won."
+        }
+      ]
+    },
+    "cierre": {
+      "overline": "Available now",
+      "headline": "GO CRM is here.",
+      "desc": "From first contact to policy, your whole sale in one place. Sign in with your Epicare account.",
+      "cta": "Open GO CRM"
     }
   }
 }

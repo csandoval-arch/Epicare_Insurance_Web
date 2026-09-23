@@ -657,6 +657,50 @@
         "lead": "Qué tan rápido cierras y por dónde hablas con cada cliente."
       },
       "cta": "Ve tus números"
+    },
+    "journey": {
+      "overline": "Recorrido",
+      "headline": "Sigue todo el viaje.",
+      "steps": [
+        {
+          "title": "Origen",
+          "desc": "El primer contacto: Google Ads, Facebook, WhatsApp o Eppigo."
+        },
+        {
+          "title": "Contacto",
+          "desc": "Un solo registro por persona, sin duplicados."
+        },
+        {
+          "title": "Oportunidad",
+          "desc": "Nace un proceso de venta con dueño y etapa."
+        },
+        {
+          "title": "Pipeline",
+          "desc": "Avanza por las etapas que tú defines."
+        },
+        {
+          "title": "Actividad",
+          "desc": "Notas, llamadas y mensajes en un solo historial."
+        },
+        {
+          "title": "Seguimiento",
+          "desc": "Tareas con fecha para que nada se enfríe."
+        },
+        {
+          "title": "Cita",
+          "desc": "La reunión queda en tu calendario."
+        },
+        {
+          "title": "Resultado",
+          "desc": "Póliza emitida o cliente ganado."
+        }
+      ]
+    },
+    "cierre": {
+      "overline": "Disponible",
+      "headline": "GO CRM ya está aquí.",
+      "desc": "Del primer contacto a la póliza, toda tu venta en un solo lugar. Entra con tu cuenta de Epicare.",
+      "cta": "Entra a GO CRM"
     }
   }
 }
