@@ -81,37 +81,47 @@ export default function HeroEpicare() {
 
     const ctx = gsap.context(() => {
       if (prefersReducedMotion) {
-        gsap.set('.hero-title-line, .hero-eyebrow, .hero-subtitle, .hero-cta, .hero-visual', {
-          opacity: 1, y: 0, yPercent: 0, scale: 1
+        gsap.set('.hero-title-line, .hero-eyebrow, .hero-subtitle, .hero-cta, .hero-visual-left, .hero-visual-right', {
+          opacity: 1, x: 0, y: 0, yPercent: 0, xPercent: 0, scale: 1
         });
         return;
       }
 
       const tl = gsap.timeline({ paused: true });
 
-      tl.fromTo('.hero-eyebrow', 
-        { opacity: 0, y: REVEAL.sm, willChange: 'transform, opacity' },
-        { opacity: 1, y: 0, duration: DUR.fast, ease: EASE.out, clearProps: 'willChange' }
-      )
-      .fromTo('.hero-title-line', 
+      // 1. Title
+      tl.fromTo('.hero-title-line', 
         { yPercent: REVEAL.birthPercent, opacity: 0, willChange: 'transform, opacity' },
-        { yPercent: 0, opacity: 1, duration: DUR.slow, ease: EASE.dramatic, stagger: STAGGER.base, force3D: true, clearProps: 'willChange' },
-        "-=0.3"
+        { yPercent: 0, opacity: 1, duration: DUR.slow, ease: EASE.dramatic, force3D: true, clearProps: 'willChange' }
       )
+      // 2. Big Subtitle
       .fromTo('.hero-subtitle', 
         { opacity: 0, y: REVEAL.sm, willChange: 'transform, opacity' },
         { opacity: 1, y: 0, duration: DUR.base, ease: EASE.out, stagger: 0.05, clearProps: 'willChange' },
         "-=0.5"
       )
+      // 3. Small Subtitle / Avatar Block
+      .fromTo('.hero-eyebrow', 
+        { opacity: 0, y: REVEAL.sm, willChange: 'transform, opacity' },
+        { opacity: 1, y: 0, duration: DUR.base, ease: EASE.out, clearProps: 'willChange' },
+        "-=0.4"
+      )
+      // 4. Videos (Left enters from left, Right enters from right)
+      .fromTo('.hero-visual-left', 
+        { opacity: 0, x: -100, willChange: 'transform, opacity' },
+        { opacity: 1, x: 0, duration: DUR.slow, ease: EASE.dramatic, force3D: true, clearProps: 'willChange' },
+        "-=0.4"
+      )
+      .fromTo('.hero-visual-right', 
+        { opacity: 0, x: 100, willChange: 'transform, opacity' },
+        { opacity: 1, x: 0, duration: DUR.slow, ease: EASE.dramatic, force3D: true, clearProps: 'willChange' },
+        "<" // Sync with left video
+      )
+      // 5. CTAs (Pop in slightly after videos, separated by stagger)
       .fromTo('.hero-cta', 
         { opacity: 0, scale: 0.9, willChange: 'transform, opacity' },
-        { opacity: 1, scale: 1, duration: DUR.base, ease: EASE.snap, stagger: 0.1, clearProps: 'willChange' },
-        "-=0.6"
-      )
-      .fromTo('.hero-visual', 
-        { opacity: 0, y: REVEAL.lg, scale: 0.96, willChange: 'transform, opacity' },
-        { opacity: 1, y: 0, scale: 1, duration: DUR.slow, ease: EASE.dramatic, force3D: true, stagger: 0.1, clearProps: 'willChange' },
-        "-=0.8"
+        { opacity: 1, scale: 1, duration: DUR.base, ease: EASE.snap, stagger: 0.15, clearProps: 'willChange' },
+        "-=0.5" // Start during the video slide-in
       );
 
       if ((window as any).epicareLoaderFinished) {
@@ -134,13 +144,13 @@ export default function HeroEpicare() {
         {/* ==================================
             LAYER 20: VIDEOS
             ================================== */}
-        <div className="hero-visual opacity-0 col-start-10 col-span-3 row-start-1 row-span-2 w-full z-[20]">
+        <div className="hero-visual-right opacity-0 col-start-10 col-span-3 row-start-1 row-span-2 w-full z-[20]">
           <div style={{ height: `240px` }} className="w-full">
              <WindowedVideo />
           </div>
         </div>
 
-        <div className="hero-visual opacity-0 col-start-1 col-span-5 row-start-2 row-span-2 w-full z-[20]">
+        <div className="hero-visual-left opacity-0 col-start-1 col-span-5 row-start-2 row-span-2 w-full z-[20]">
           <div style={{ height: `480px` }} className="w-full">
              <WindowedVideo />
           </div>
