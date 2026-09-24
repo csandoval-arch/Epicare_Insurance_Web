@@ -529,11 +529,22 @@ export function ImageLiveEditor({ id, initialSrc, options, alt = "", className =
 export function LiveEditorCopier() {
   const [copied, setCopied] = useState(false);
   const [showGrid, setShowGrid] = useState(false);
+  const [showJson, setShowJson] = useState(false); // Toggle para ver el JSON manual
+  const [jsonText, setJsonText] = useState("");
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(JSON.stringify(layoutState, null, 2));
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      navigator.clipboard.writeText(JSON.stringify(layoutState, null, 2));
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      alert("El botón de copiado falló. Usa el botón 'Show JSON' para copiarlo manualmente.");
+    }
+  };
+
+  const handleShowJson = () => {
+    setJsonText(JSON.stringify(layoutState, null, 2));
+    setShowJson(!showJson);
   };
 
   return (
@@ -552,6 +563,19 @@ export function LiveEditorCopier() {
         </div>
       )}
 
+      {showJson && (
+        <div className="fixed bottom-24 left-6 z-[9999] bg-[#111418] text-green-400 p-4 rounded-xl shadow-2xl border border-white/20 w-[300px]">
+          <h3 className="text-white text-xs font-bold mb-2">Manual Layout JSON:</h3>
+          <textarea 
+            readOnly 
+            className="w-full h-48 bg-black/50 p-2 text-[10px] font-mono outline-none resize-none rounded"
+            value={jsonText}
+            onClick={(e) => (e.target as HTMLTextAreaElement).select()}
+          />
+          <p className="text-gray-400 text-[10px] mt-1 leading-tight">Haz click adentro, presiona Ctrl+C y pégame este texto en el chat.</p>
+        </div>
+      )}
+
       <div className="fixed bottom-6 left-6 z-[9999] flex items-center gap-2">
         <button onClick={() => setShowGrid(!showGrid)} className={`px-4 py-3 rounded-xl text-xs font-bold shadow-elevation-4 transition-all hover:-translate-y-1 ${showGrid ? 'bg-[var(--color-brand-blue)] text-white' : 'bg-[var(--color-surface-BG-1)] border border-[var(--color-border-Strokes-strong)] text-[var(--color-text-primary)]'}`}>
           {showGrid ? 'Hide Grid' : 'Show Grid'}
@@ -559,6 +583,9 @@ export function LiveEditorCopier() {
         <button onClick={handleCopy} className={`px-5 py-3 rounded-xl text-xs font-bold shadow-elevation-4 transition-all hover:-translate-y-1 flex items-center gap-2 ${copied ? 'bg-[var(--color-brand-orange)] text-white' : 'bg-[var(--color-surface-BG-2)] border border-[var(--color-border-Strokes-strong)] text-[var(--color-text-primary)]'}`}>
           <span className={`w-2 h-2 rounded-full ${copied ? 'bg-white' : 'bg-[var(--color-brand-orange)] animate-pulse'}`}></span>
           {copied ? 'JSON Copied!' : 'Copy Final Layout'}
+        </button>
+        <button onClick={handleShowJson} className={`px-4 py-3 rounded-xl text-xs font-bold shadow-elevation-4 transition-all hover:-translate-y-1 ${showJson ? 'bg-[#111418] text-white' : 'bg-[var(--color-surface-BG-1)] border border-[var(--color-border-Strokes-strong)] text-[var(--color-text-primary)]'}`}>
+          {showJson ? 'Close JSON' : 'Show JSON'}
         </button>
       </div>
     </>
