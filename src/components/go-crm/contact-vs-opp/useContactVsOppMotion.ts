@@ -153,7 +153,8 @@ export function useContactVsOppMotion(scopeRef: RefObject<HTMLElement | null>) {
         .timeline({ paused: true })
         .fromTo(".a2-rise", SUB_FROM, SUB_TO)
         .fromTo(".a2-birth", BIRTH_FROM, { ...BIRTH_TO, stagger: STAGGER.base }, "-=0.35")
-        .fromTo(".a2-card", CARD_FROM, { ...CARD_TO, stagger: STAGGER.wave }, "-=0.9")
+        // Las tarjetas entran junto con el titular (antes esperaban a que avanzara: se notaba el retraso)
+        .fromTo(".a2-card", CARD_FROM, { ...CARD_TO, stagger: STAGGER.wave }, "<")
         .fromTo(".a2-card .opp-text", SUB_FROM, { ...SUB_TO, stagger: STAGGER.base }, "-=0.6");
 
       if (tl.scrollTrigger) startArtLoops(el, tl.scrollTrigger);

@@ -21,11 +21,13 @@ interface OppCardProps {
 /**
  * @description Tarjeta de cristal de una oportunidad (Dental · Health · Vida) con su ilustración
  * holográfica. La misma pieza en el grid de desktop y en el carrusel de móvil.
+ * La transición CSS cubre solo lo que toca el hover (`translate`, sombra, borde): con `transition-all`
+ * también suavizaba el `transform`/`opacity` que escribe GSAP en la entrada y la retrasaba.
  */
 export default function OppCard({ opp, index, motionClass, className = "", lite = false }: OppCardProps) {
   return (
     <div
-      className={`${motionClass} group relative flex flex-col justify-start overflow-hidden rounded-t-xl rounded-b-[2rem] border border-white/20 shadow-elevation-3 transition-all duration-500 hover:-translate-y-2 hover:shadow-elevation-5 hover:border-white/40 ${lite ? "bg-[var(--color-surface-BG-white)]/15" : "bg-[var(--color-surface-BG-white)]/8"}${className ? ` ${className}` : ""}`}
+      className={`${motionClass} group relative flex flex-col justify-start overflow-hidden rounded-t-xl rounded-b-[2rem] border border-white/20 shadow-elevation-3 transition-[translate,box-shadow,border-color] duration-500 hover:-translate-y-2 hover:shadow-elevation-5 hover:border-white/40 ${lite ? "bg-[var(--color-surface-BG-white)]/15" : "bg-[var(--color-surface-BG-white)]/8"}${className ? ` ${className}` : ""}`}
       style={{
         backdropFilter: lite ? undefined : "blur(24px)",
         aspectRatio: "3/4",
