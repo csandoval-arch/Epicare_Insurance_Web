@@ -1,13 +1,15 @@
 {
   "landingV2": {
     "hero": {
-      "scrollDown": "Deslizar",
-      "title1": "Ve más allá",
-      "title2": "del crecimiento.",
-      "description": "<bold>130+ carrier appointments</bold> en un solo contrato, el <bold>sistema</bold> para operarlos y el <bold>equipo</bold> que lo sostiene. <bold>Tu book of business sigue siendo tuyo.</bold>",
-      "descriptionMobile": "<bold>130+ carrier appointments</bold> en un solo contrato. El <bold>sistema y el equipo</bold>, incluidos.",
-      "ctaPlans": "Solicita tu contrato",
-      "ctaAgents": "Ver GO AMS"
+      "brandLabel": "EPICARE",
+      "headlineBold1": "Construimos el",
+      "headlineBody": "puente que nadie\nquiso construir,\ny seguimos",
+      "headlineBold2": "construyendo.",
+      "supportingCopy": "130+ carrier\nappointments\nen un solo contrato,\nel sistema para\noperarlos y el equipo\nque lo sostiene.\nTu book of business\nsigue siendo tuyo.",
+      "ctaPrimary": "Solicita tu contrato",
+      "ctaSecondary": "Ver GO AMS →",
+      "imageAlt": "Estructura de acero de un puente en construcción vista desde abajo, representando infraestructura y conexión",
+      "scrollDown": "Deslizar"
     },
     "licensingHero": {
       "title": "Licensing",

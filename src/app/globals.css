@@ -155,6 +155,9 @@ html.lenis body { height: auto; }
   --color-status-red-text-strong: var(--color-status-red-text-strong);
   --color-overlay-backdrop: var(--color-overlay-backdrop);
   --color-overlay-tooltip-bg: var(--color-overlay-tooltip-bg);
+  --color-hero-ivory: var(--color-hero-ivory);
+  --color-hero-blue: var(--color-hero-blue);
+  --color-hero-dark: var(--color-hero-dark);
 
 }
 
@@ -619,3 +622,16 @@ body {
 }
 
 /* --- End of File --- */
+
+/* -- EDITORIAL HERO TOKENS -- */
+:root {
+  --color-hero-ivory: #F1EEE5;
+  --color-hero-blue: #327BA5;
+  --color-hero-dark: #20242A;
+}
+
+.dark {
+  --color-hero-ivory: #151617;
+  --color-hero-blue: #3A8FBE;
+  --color-hero-dark: #2A2E34;
+}

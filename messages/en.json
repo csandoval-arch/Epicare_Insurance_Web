@@ -1,13 +1,15 @@
 {
   "landingV2": {
     "hero": {
-      "scrollDown": "Scroll Down",
-      "title1": "Go Beyond",
-      "title2": "Growth.",
-      "description": "<bold>130+ carrier appointments</bold> under one contract, the <bold>system</bold> to run them, and the <bold>team</bold> behind it. <bold>Your book of business stays yours.</bold>",
-      "descriptionMobile": "<bold>130+ carrier appointments</bold> under one contract. <bold>System and team</bold> included.",
-      "ctaPlans": "Get contracted",
-      "ctaAgents": "See GO AMS"
+      "brandLabel": "EPICARE",
+      "headlineBold1": "We built the",
+      "headlineBody": "bridge no one\nwanted to build,\nand we keep",
+      "headlineBold2": "building.",
+      "supportingCopy": "130+ carrier\nappointments\nunder one contract,\nthe system to run\nthem, and the team\nbehind it.\nYour book of business\nstays yours.",
+      "ctaPrimary": "Request your contract",
+      "ctaSecondary": "View GO AMS →",
+      "imageAlt": "Steel structure of a bridge under construction viewed from below, representing infrastructure and connection",
+      "scrollDown": "Scroll Down"
     },
     "licensingHero": {
       "title": "Licensing",
