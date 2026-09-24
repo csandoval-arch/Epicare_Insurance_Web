@@ -86,7 +86,7 @@ export default function HeroEpicare() {
           </div>
         </div>
 
-        <div className="col-start-1 col-span-5 row-start-2 row-span-2 w-full self-end z-[20]">
+        <div className="col-start-1 col-span-5 row-start-2 row-span-2 w-full z-[20]">
           <div style={{ height: `480px` }} className="w-full">
              <WindowedVideo />
           </div>
@@ -114,7 +114,6 @@ export default function HeroEpicare() {
           {/* Este div empuja los CTAs al centro exacto del espacio restante */}
           <div className="flex-1 flex flex-col justify-center pb-8">
             <div className="flex flex-wrap items-center gap-4">
-
               <Link href="/contrato" className="group flex h-[48px] pl-6 pr-1.5 w-fit rounded-full justify-between items-center gap-3 bg-[var(--color-brand-blue)] text-white text-[14px] font-semibold normal-case transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] shadow-elevation-2 hover:brightness-105 hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-4 active:scale-95 cursor-pointer">
                 <span className="whitespace-nowrap">Solicita tu contrato</span>
                 <span className="relative w-8 h-8 rounded-full bg-white text-[var(--color-brand-blue)] flex items-center justify-center overflow-hidden shrink-0">
