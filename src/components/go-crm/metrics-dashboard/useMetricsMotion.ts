@@ -15,14 +15,14 @@ const SLIDE_SPEEDS = [-100, -140, -210, -310];
 const PIN_LENGTH = 0.5;
 
 /**
- * Relevo entre dashboards (desktop): mientras el siguiente le pasa por encima, el anterior se apaga
- * con un velo del color del fondo (`.md-veil`) hasta `VEIL_MAX`; el dashboard sigue opaco. La ventana
+ * Relevo entre dashboards (desktop): mientras el siguiente le pasa por encima, el anterior se
+ * oscurece sutilmente con un velo (`.md-veil`, overlay-backdrop) hasta `VEIL_MAX`; el dashboard sigue opaco. La ventana
  * va de cuando el borde izquierdo del entrante cruza `DIM_START` a cuando cruza `DIM_END` (fracciones
  * del viewport). Margen creativo declarado: opacidad de relevo sin token en el DS.
  */
-const VEIL_MAX = 0.75;
-const DIM_START = 0.9;
-const DIM_END = 0.4;
+const VEIL_MAX = 0.15;
+const DIM_START = 0.7;
+const DIM_END = 0.2;
 
 // ── ESTADOS DE ENTRADA (Motion Tokenizer · Sección Híbrida) ──
 const BIRTH_FROM = { yPercent: REVEAL.birthPercent, opacity: 0, willChange: "transform, opacity" };
@@ -37,7 +37,7 @@ const oneShot = (trigger: Element | null, start: string = TRIGGER.standard) => (
  * @description Movimiento de "Métricas" (sección 6).
  * - Todos: overline + titular + CTA con text-birth / fade-up al entrar.
  * - Desktop (≥lg): pin + scroll horizontal con paralaje por acto: los dashboards se enciman como un
- *   mazo y el anterior se apaga (velo) mientras el siguiente le pasa por encima. Hardware Symphony:
+ *   mazo y el anterior se oscurece (velo) mientras el siguiente le pasa por encima. Hardware Symphony:
  *   cada acto en su capa durante el pin (sin re-raster), `scrub: true` (Lenis ya suaviza) y el velo
  *   escrito como `opacity` con `quickSetter` desde las posiciones medidas en cada refresh.
  * - Móvil (<lg): sin pin; el slider de dashboards sube como bloque al entrar. Solo transform/opacity.

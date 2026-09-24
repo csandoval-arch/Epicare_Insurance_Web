@@ -124,9 +124,9 @@ export default function HorizontalMetricsGoCrm() {
                   <h3 className="lg:hidden text-display-xs text-[var(--color-text-primary)]">{t(`${key}.title`)}</h3>
                   <div className="md-board w-full lg:relative lg:max-w-5xl lg:mx-auto">
                     <Board />
-                    {/* Velo del relevo (desktop): apaga el dashboard hacia el fondo sin volverlo
+                    {/* Velo del relevo (desktop): oscurece un poco el dashboard sin volverlo
                         transparente, así sigue tapando lo que tiene detrás en el mazo. */}
-                    <div className="md-veil hidden lg:block absolute inset-0 z-20 rounded-4xl bg-[var(--color-surface-BG-1)] opacity-0 pointer-events-none" aria-hidden="true" />
+                    <div className="md-veil hidden lg:block absolute inset-0 z-20 rounded-4xl bg-[var(--color-overlay-backdrop)] opacity-0 pointer-events-none" aria-hidden="true" />
                   </div>
                   <p className="lg:hidden text-body-md text-[var(--color-text-secondary)]">{t(`${key}.lead`)}</p>
                 </article>
