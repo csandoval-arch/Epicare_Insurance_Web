@@ -48,7 +48,9 @@ function Donut({ data, isActive }: { data: DonutData; isActive: boolean }) {
 
       <div className="flex items-center gap-static-lg mt-auto">
         <div className="relative shrink-0">
-          <svg viewBox="0 0 120 120" className="w-28 h-28 lg:w-35 lg:h-35 -rotate-90">
+          {/* Capa propia (Hardware Symphony): el trazo anima `stroke-dasharray` (paint); aislado, cada
+              frame repinta 140px en vez del dashboard entero dentro de la pista del pin. */}
+          <svg viewBox="0 0 120 120" className="w-28 h-28 lg:w-35 lg:h-35 -rotate-90 will-change-transform">
             <circle cx="60" cy="60" r={RADIUS} fill="none" stroke="var(--color-surface-BG-2)" strokeWidth="6" />
             {segments.map((seg, i) => {
               const { dash, offset: dashOffset } = arcs[i];

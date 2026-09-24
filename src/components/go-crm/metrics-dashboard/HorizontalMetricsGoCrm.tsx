@@ -4,7 +4,8 @@
  * @file HorizontalMetricsGoCrm.tsx
  * @description Sección 6 de GO CRM — "Métricas". Titular + 3 dashboards (calendario, pipeline,
  * velocidad) de la UI.
- * - Desktop (≥lg): una pista horizontal con pin y paralaje por acto.
+ * - Desktop (≥lg): una pista horizontal con pin y paralaje por acto (los dashboards se enciman como un
+ *   mazo); el dashboard anterior se opaca mientras el siguiente le pasa por encima.
  * - Móvil (<lg): titular y, debajo, los 3 dashboards en un slider horizontal nativo (scroll-snap):
  *   por slide, título fuera del dashboard, dashboard reducido a lo esencial y subtítulo.
  * Los loops (temporizadores de los carruseles, pulsos) son CSS y se pausan fuera de pantalla.
@@ -121,8 +122,11 @@ export default function HorizontalMetricsGoCrm() {
               <div key={key} className={`${SLIDE} ${pad}`}>
                 <article className="md-act w-full flex flex-col gap-static-md lg:block">
                   <h3 className="lg:hidden text-display-xs text-[var(--color-text-primary)]">{t(`${key}.title`)}</h3>
-                  <div className="md-board w-full">
+                  <div className="md-board w-full lg:relative lg:max-w-5xl lg:mx-auto">
                     <Board />
+                    {/* Velo del relevo (desktop): apaga el dashboard hacia el fondo sin volverlo
+                        transparente, así sigue tapando lo que tiene detrás en el mazo. */}
+                    <div className="md-veil hidden lg:block absolute inset-0 z-20 rounded-4xl bg-[var(--color-surface-BG-1)] opacity-0 pointer-events-none" aria-hidden="true" />
                   </div>
                   <p className="lg:hidden text-body-md text-[var(--color-text-secondary)]">{t(`${key}.lead`)}</p>
                 </article>
