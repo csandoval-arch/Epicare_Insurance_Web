@@ -101,17 +101,40 @@ export default function HeroEpicare() {
           </h1>
         </div>
 
-        <div className="col-start-6 col-span-2 row-start-2 row-span-1 z-[30] mt-[14px]">
-          <h2 className="text-display-sm text-[#151617] font-medium tracking-tight flex flex-col" style={{ marginLeft: `32px` }}>
-            <span>el puente que nadie</span>
+        {/* Columna combinada para Subtítulo Grande y CTAs (Centrado Perfecto) */}
+        <div className="col-start-6 col-span-2 row-start-2 row-span-2 z-[30] flex flex-col h-full" style={{ marginLeft: `32px` }}>
+          <h2 className="text-display-sm text-[#151617] font-medium tracking-tight flex flex-col mt-[14px]">
+            <span>El puente</span>
+            <span>que nadie</span>
             <span>quiso construir,</span>
             <span>y seguimos</span>
             <span>construyendo.</span>
           </h2>
+          
+          {/* Este div empuja los CTAs al centro exacto del espacio restante */}
+          <div className="flex-1 flex flex-col justify-center pb-8">
+            <div className="flex flex-wrap items-center gap-4">
+
+              <Link href="/contrato" className="group flex h-[48px] pl-6 pr-1.5 w-fit rounded-full justify-between items-center gap-3 bg-[var(--color-brand-blue)] text-white text-[14px] font-semibold normal-case transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] shadow-elevation-2 hover:brightness-105 hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-4 active:scale-95 cursor-pointer">
+                <span className="whitespace-nowrap">Solicita tu contrato</span>
+                <span className="relative w-8 h-8 rounded-full bg-white text-[var(--color-brand-blue)] flex items-center justify-center overflow-hidden shrink-0">
+                  <ArrowUR className="absolute w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
+                  <ArrowUR className="absolute w-4 h-4 -translate-x-5 translate-y-5 transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
+                </span>
+              </Link>
+
+              <Link href="/go-ams" className="group flex h-[48px] pl-6 pr-1.5 w-fit rounded-full justify-between items-center gap-3 border border-[var(--color-brand-blue)]/40 bg-white/50 text-[#151617] text-[14px] font-semibold normal-case shadow-elevation-1 backdrop-blur-md transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-3 hover:bg-white active:scale-95 cursor-pointer">
+                <span className="whitespace-nowrap">Ver GO AMS</span>
+                <span className="relative w-8 h-8 rounded-full bg-[#151617] text-white flex items-center justify-center overflow-hidden shrink-0">
+                  <ArrowUR className="absolute w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
+                  <ArrowUR className="absolute w-4 h-4 -translate-x-5 translate-y-5 transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
+                </span>
+              </Link>
+            </div>
+          </div>
         </div>
 
         <div className="col-start-9 col-span-2 row-start-2 row-span-1 z-[30] flex flex-col justify-start gap-6 mt-[26px]">
-          
           {/* Avatar Block */}
           <div className="flex items-center gap-3">
             <div className="flex -space-x-3">
@@ -130,24 +153,6 @@ export default function HeroEpicare() {
           <p className="text-h3 text-[#151617] font-medium opacity-80 pr-6 md:pr-12">
             <span className="text-[#347EAC]">130+ aseguradoras</span>, tecnología y equipo de soporte bajo <span className="text-[#347EAC]">un solo contrato</span>. Tu book of business, <span className="text-[#347EAC]">100% tuyo</span>.
           </p>
-        </div>
-
-        <div className="col-start-6 col-span-4 row-start-3 row-span-1 z-[30] flex flex-wrap items-center gap-4 pt-2" style={{ marginLeft: `32px` }}>
-          <Link href="/contrato" className="group flex h-[48px] pl-6 pr-1.5 w-fit rounded-full justify-between items-center gap-3 bg-[var(--color-brand-blue)] text-white text-[14px] font-semibold normal-case transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] shadow-elevation-2 hover:brightness-105 hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-4 active:scale-95 cursor-pointer">
-            <span>Solicita tu contrato</span>
-            <span className="relative w-8 h-8 rounded-full bg-white text-[var(--color-brand-blue)] flex items-center justify-center overflow-hidden shrink-0">
-              <ArrowUR className="absolute w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
-              <ArrowUR className="absolute w-4 h-4 -translate-x-5 translate-y-5 transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
-            </span>
-          </Link>
-
-          <Link href="/go-ams" className="group flex h-[48px] pl-6 pr-1.5 w-fit rounded-full justify-between items-center gap-3 border border-[var(--color-brand-blue)]/40 bg-white/50 text-[#151617] text-[14px] font-semibold normal-case shadow-elevation-1 backdrop-blur-md transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-3 hover:bg-white active:scale-95 cursor-pointer">
-            <span>Ver GO AMS</span>
-            <span className="relative w-8 h-8 rounded-full bg-[#151617] text-white flex items-center justify-center overflow-hidden shrink-0">
-              <ArrowUR className="absolute w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
-              <ArrowUR className="absolute w-4 h-4 -translate-x-5 translate-y-5 transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
-            </span>
-          </Link>
         </div>
 
       </div>
