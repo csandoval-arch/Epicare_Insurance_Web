@@ -5,6 +5,8 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { asset } from '@/lib/asset';
 import HeaderEpicare from './HeaderEpicare';
+import gsap from 'gsap';
+import { EASE, DUR, STAGGER, REVEAL } from '@/lib/motion';
 
 // =========================================================================
 // MAGICAL COMPONENTS: CONTINUOUS VIDEO & EXACT TEXT SYNCHRONIZATION
@@ -69,9 +71,61 @@ const WindowedVideo = () => {
 
 export default function HeroEpicare() {
   const t = useTranslations("landingV2.hero");
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const ctx = gsap.context(() => {
+      if (prefersReducedMotion) {
+        gsap.set('.hero-title-line, .hero-eyebrow, .hero-subtitle, .hero-cta, .hero-visual', {
+          opacity: 1, y: 0, yPercent: 0, scale: 1
+        });
+        return;
+      }
+
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo('.hero-eyebrow', 
+        { opacity: 0, y: REVEAL.sm, willChange: 'transform, opacity' },
+        { opacity: 1, y: 0, duration: DUR.fast, ease: EASE.out, clearProps: 'willChange' }
+      )
+      .fromTo('.hero-title-line', 
+        { yPercent: REVEAL.birthPercent, opacity: 0, willChange: 'transform, opacity' },
+        { yPercent: 0, opacity: 1, duration: DUR.slow, ease: EASE.dramatic, stagger: STAGGER.base, force3D: true, clearProps: 'willChange' },
+        "-=0.3"
+      )
+      .fromTo('.hero-subtitle', 
+        { opacity: 0, y: REVEAL.sm, willChange: 'transform, opacity' },
+        { opacity: 1, y: 0, duration: DUR.base, ease: EASE.out, stagger: 0.05, clearProps: 'willChange' },
+        "-=0.5"
+      )
+      .fromTo('.hero-cta', 
+        { opacity: 0, scale: 0.9, willChange: 'transform, opacity' },
+        { opacity: 1, scale: 1, duration: DUR.base, ease: EASE.snap, stagger: 0.1, clearProps: 'willChange' },
+        "-=0.6"
+      )
+      .fromTo('.hero-visual', 
+        { opacity: 0, y: REVEAL.lg, scale: 0.96, willChange: 'transform, opacity' },
+        { opacity: 1, y: 0, scale: 1, duration: DUR.slow, ease: EASE.dramatic, force3D: true, stagger: 0.1, clearProps: 'willChange' },
+        "-=0.8"
+      );
+
+      if ((window as any).epicareLoaderFinished) {
+        tl.play();
+      } else {
+        window.addEventListener('epicareLoaderFinished', () => tl.play(), { once: true });
+      }
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section className="relative w-full min-h-screen bg-[#F1EEE5] text-[#151617] overflow-hidden">
+    <section ref={sectionRef} className="relative w-full min-h-screen bg-[#F1EEE5] text-[#151617] overflow-hidden">
       <HeaderEpicare isHeaderPill={false} isHeaderForcedDark={false} scrollSafeZone={150} />
 
       {/* GRID EDITORIAL */}
@@ -80,13 +134,13 @@ export default function HeroEpicare() {
         {/* ==================================
             LAYER 20: VIDEOS
             ================================== */}
-        <div className="col-start-10 col-span-3 row-start-1 row-span-2 w-full z-[20]">
+        <div className="hero-visual opacity-0 col-start-10 col-span-3 row-start-1 row-span-2 w-full z-[20]">
           <div style={{ height: `240px` }} className="w-full">
              <WindowedVideo />
           </div>
         </div>
 
-        <div className="col-start-1 col-span-5 row-start-2 row-span-2 w-full z-[20]">
+        <div className="hero-visual opacity-0 col-start-1 col-span-5 row-start-2 row-span-2 w-full z-[20]">
           <div style={{ height: `480px` }} className="w-full">
              <WindowedVideo />
           </div>
@@ -95,8 +149,8 @@ export default function HeroEpicare() {
         {/* ==================================
             LAYER 30: TEXTS & CTAs
             ================================== */}
-        <div className="col-start-1 col-span-12 row-start-1 row-span-1 w-full pl-6 md:pl-12 pt-[12vh] z-[30]">
-          <h1 className="text-[clamp(60px,11.5vw,175px)] leading-[0.9] font-medium tracking-tight text-[#151617] whitespace-nowrap">
+        <div className="col-start-1 col-span-12 row-start-1 row-span-1 w-full pl-6 md:pl-12 pt-[12vh] z-[30] overflow-hidden">
+          <h1 className="hero-title-line opacity-0 text-[clamp(60px,11.5vw,175px)] leading-[0.9] font-medium tracking-tight text-[#151617] whitespace-nowrap">
             Construimos
           </h1>
         </div>
@@ -104,17 +158,17 @@ export default function HeroEpicare() {
         {/* Columna combinada para Subtítulo Grande y CTAs (Centrado Perfecto) */}
         <div className="col-start-6 col-span-2 row-start-2 row-span-2 z-[30] flex flex-col h-full" style={{ marginLeft: `32px` }}>
           <h2 className="text-display-sm text-[#151617] font-medium tracking-tight flex flex-col mt-[14px]">
-            <span>El puente</span>
-            <span>que nadie</span>
-            <span>quiso construir,</span>
-            <span>y seguimos</span>
-            <span>construyendo.</span>
+            <span className="hero-subtitle opacity-0">El puente</span>
+            <span className="hero-subtitle opacity-0">que nadie</span>
+            <span className="hero-subtitle opacity-0">quiso construir,</span>
+            <span className="hero-subtitle opacity-0">y seguimos</span>
+            <span className="hero-subtitle opacity-0">construyendo.</span>
           </h2>
           
           {/* Este div empuja los CTAs al centro exacto del espacio restante */}
           <div className="flex-1 flex flex-col justify-center pb-8">
             <div className="flex flex-wrap items-center gap-4">
-              <Link href="/contrato" className="group flex h-[48px] pl-6 pr-1.5 w-fit rounded-full justify-between items-center gap-3 bg-[var(--color-brand-blue)] text-white text-[14px] font-semibold normal-case transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] shadow-elevation-2 hover:brightness-105 hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-4 active:scale-95 cursor-pointer">
+              <Link href="/contrato" className="hero-cta opacity-0 group flex h-[48px] pl-6 pr-1.5 w-fit rounded-full justify-between items-center gap-3 bg-[var(--color-brand-blue)] text-white text-[14px] font-semibold normal-case transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] shadow-elevation-2 hover:brightness-105 hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-4 active:scale-95 cursor-pointer">
                 <span className="whitespace-nowrap">Solicita tu contrato</span>
                 <span className="relative w-8 h-8 rounded-full bg-white text-[var(--color-brand-blue)] flex items-center justify-center overflow-hidden shrink-0">
                   <ArrowUR className="absolute w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
@@ -122,7 +176,7 @@ export default function HeroEpicare() {
                 </span>
               </Link>
 
-              <Link href="/go-ams" className="group flex h-[48px] pl-6 pr-1.5 w-fit rounded-full justify-between items-center gap-3 border border-[var(--color-brand-blue)]/40 bg-white/50 text-[#151617] text-[14px] font-semibold normal-case shadow-elevation-1 backdrop-blur-md transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-3 hover:bg-white active:scale-95 cursor-pointer">
+              <Link href="/go-ams" className="hero-cta opacity-0 group flex h-[48px] pl-6 pr-1.5 w-fit rounded-full justify-between items-center gap-3 border border-[var(--color-brand-blue)]/40 bg-white/50 text-[#151617] text-[14px] font-semibold normal-case shadow-elevation-1 backdrop-blur-md transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-3 hover:bg-white active:scale-95 cursor-pointer">
                 <span className="whitespace-nowrap">Ver GO AMS</span>
                 <span className="relative w-8 h-8 rounded-full bg-[#151617] text-white flex items-center justify-center overflow-hidden shrink-0">
                   <ArrowUR className="absolute w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
@@ -133,7 +187,7 @@ export default function HeroEpicare() {
           </div>
         </div>
 
-        <div className="col-start-9 col-span-2 row-start-2 row-span-1 z-[30] flex flex-col justify-start gap-6 mt-[26px]">
+        <div className="hero-eyebrow opacity-0 col-start-9 col-span-2 row-start-2 row-span-1 z-[30] flex flex-col justify-start gap-6 mt-[26px]">
           {/* Avatar Block */}
           <div className="flex items-center gap-3">
             <div className="flex -space-x-3">
