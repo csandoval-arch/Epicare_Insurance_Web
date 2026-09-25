@@ -641,11 +641,13 @@ body {
 }
 
 /* Titular gigante del hero editorial ("Construimos"). Único en la página: fuera de la escala
-   display a propósito. Móvil: la palabra llena el ancho (17vw). Desktop: clamp aprobado. */
+   display a propósito. Móvil: 17vw menos 4px (excepción pedida por el usuario). Tablet: la
+   palabra llena el ancho (17vw). Desktop: clamp aprobado. */
 @utility text-hero-display {
-  font-size: 17vw;
+  font-size: calc(17vw - 0.25rem);
   line-height: 0.9;
   font-weight: 500;
   letter-spacing: -0.025em;
+  @media (min-width: 768px) { font-size: 17vw; }
   @media (min-width: 1024px) { font-size: clamp(3.75rem, 11.5vw, 10.9375rem); }
 }

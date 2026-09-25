@@ -60,7 +60,7 @@ export default function HeroEpicare() {
         </div>
 
         {/* Subtítulo + CTAs. Desktop: los CTAs se centran en el alto que queda en la columna. */}
-        <div className="z-30 col-span-full row-start-2 row-span-2 flex flex-col px-gutter-sm pt-static-lg lg:px-0 lg:pt-0 lg:col-start-6 lg:col-span-2 lg:h-full lg:ml-static-xl">
+        <div className="z-30 col-span-full row-start-2 row-span-2 flex flex-col px-gutter-sm pt-static-sm md:pt-static-lg lg:px-0 lg:pt-0 lg:col-start-6 lg:col-span-2 lg:h-full lg:ml-static-xl">
           <h2 className="text-display-sm font-medium tracking-tight flex flex-col lg:mt-3.5">
             {subtitle.map((line) => (
               <span key={line} className="hero-subtitle">
