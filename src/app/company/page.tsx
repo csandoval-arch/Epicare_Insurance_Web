@@ -5,6 +5,7 @@ import LoaderEpicare from "@/components/epicare/LoaderEpicare";
 import HeaderEpicare from "@/components/epicare/HeaderEpicare";
 import FooterEpicare from "@/components/epicare/FooterEpicare";
 import HeroCompany from "@/components/company/HeroCompany";
+import PurposeCompany from "@/components/company/PurposeCompany";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -50,6 +51,7 @@ export default function CompanyPage() {
 
       {/* ── COMPANY SECTIONS ── */}
       <HeroCompany />
+      <PurposeCompany />
 
       {/* ── GLOBAL FOOTER ── */}
       <FooterEpicare />
