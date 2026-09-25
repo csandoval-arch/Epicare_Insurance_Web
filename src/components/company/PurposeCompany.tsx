@@ -118,7 +118,7 @@ export default function PurposeCompany() {
   return (
     <section 
       ref={containerRef} 
-      className="relative w-full h-screen bg-[#111111] text-[#F3EFE9] overflow-hidden z-10"
+      className="relative w-full h-screen bg-[#F1EEE5] text-[#111111] overflow-hidden z-10"
     >
       {/* =========================================
           ACT 02: THE PURPOSE (Panel 1)
@@ -127,7 +127,7 @@ export default function PurposeCompany() {
         <div className="w-full px-[96px] grid grid-cols-12 gap-x-[24px]">
           
           <div className="col-start-1 col-end-13 mb-[8vh] flex items-center gap-4 opacity-50">
-            <div className="w-2 h-2 bg-[#F3EFE9] rounded-full" />
+            <div className="w-2 h-2 bg-[#111111] rounded-full" />
             <span className="text-[13px] font-semibold tracking-[0.1em] uppercase">Why we exist</span>
           </div>
 
@@ -144,7 +144,7 @@ export default function PurposeCompany() {
           </div>
 
           <div className="col-start-8 col-end-11 mt-[12vh]" ref={dramaticTurnRef}>
-            <p className="text-[20px] 2xl:text-[24px] leading-[1.5] text-[#F3EFE9]/70 font-medium">
+            <p className="text-[20px] 2xl:text-[24px] leading-[1.5] text-[#111111]/70 font-medium">
               The market rewards big agencies. We bet the independent agent, with the right tools, delivers the best experience for the end client.
             </p>
           </div>
@@ -155,7 +155,7 @@ export default function PurposeCompany() {
       {/* =========================================
           ACT 03: THE HORIZON (Panel 2)
           ========================================= */}
-      <div className="absolute inset-0 panel-vision z-20 opacity-0 flex flex-col justify-center bg-[#111111]">
+      <div className="absolute inset-0 panel-vision z-20 opacity-0 flex flex-col justify-center bg-[#F1EEE5]">
         <div className="w-full px-[96px] grid grid-cols-12 gap-x-[24px]">
           
           <div className="col-start-4 col-end-13 mb-[6vh] flex items-center justify-end gap-4 opacity-50">
@@ -165,7 +165,7 @@ export default function PurposeCompany() {
 
           {/* Grid Rupture: Massive Right-Aligned Typography */}
           <div className="col-start-4 col-end-13 mt-4">
-            <h2 className="text-[clamp(2rem,3.8vw,4.8rem)] leading-[1.05] font-bold tracking-tight text-right text-[#F3EFE9] flex flex-wrap justify-end">
+            <h2 className="text-[clamp(2rem,3.8vw,4.8rem)] leading-[1.05] font-bold tracking-tight text-right flex flex-wrap justify-end">
               {visionWords.map((word, i) => (
                 <span key={i} className="vision-word ml-[0.25em] will-change-[filter,transform,opacity]">
                   {word}
@@ -177,7 +177,7 @@ export default function PurposeCompany() {
           {/* Text Paragraph: Heavy Left Anchor (3 columns wide) */}
           <div className="col-start-2 col-end-5 mt-[12vh]" ref={visionParagraphRef}>
             <div className="border-l border-[#35BBFD]/50 pl-6">
-              <p className="text-[18px] 2xl:text-[20px] leading-[1.6] text-[#F3EFE9]/70 font-medium">
+              <p className="text-[18px] 2xl:text-[20px] leading-[1.6] text-[#111111]/70 font-medium">
                 We grow when the agent grows. Tools, training, brand, compliance, and commissions, all in one place, so no one has to choose between scaling and doing it right.
               </p>
             </div>
