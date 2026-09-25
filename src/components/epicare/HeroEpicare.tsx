@@ -69,7 +69,7 @@ export default function HeroEpicare() {
             ))}
           </h2>
 
-          <div className="flex flex-col pt-static-xl lg:pt-0 lg:flex-1 lg:justify-center lg:pb-static-xl">
+          <div className="flex flex-col pt-static-xl pb-static-sm md:pb-0 lg:pt-0 lg:flex-1 lg:justify-center lg:pb-static-xl">
             <div className="flex flex-wrap items-center gap-static-md">
               <HeroCta href={HERO_LINKS.primary} label={t("ctaPrimary")} variant="primary" />
               <HeroCta href={HERO_LINKS.secondary} label={t("ctaSecondary")} variant="secondary" />
