@@ -1,15 +1,13 @@
 {
   "landingV2": {
     "hero": {
-      "brandLabel": "EPICARE",
-      "headlineBold1": "We built the",
-      "headlineBody": "bridge no one\nwanted to build,\nand we keep",
-      "headlineBold2": "building.",
-      "supportingCopy": "130+ carrier\nappointments\nunder one contract,\nthe system to run\nthem, and the team\nbehind it.\nYour book of business\nstays yours.",
+      "title": "We build",
+      "subtitle": ["The bridge", "no one", "wanted to build,", "and we keep", "building."],
+      "agentsCount": "100+",
+      "agentsLabel": ["Active", "agents"],
+      "supporting": "<b>130+ carriers</b>, technology and a support team under <b>one contract</b>. Your book of business, <b>100% yours</b>.",
       "ctaPrimary": "Request your contract",
-      "ctaSecondary": "View GO AMS →",
-      "imageAlt": "Steel structure of a bridge under construction viewed from below, representing infrastructure and connection",
-      "scrollDown": "Scroll Down"
+      "ctaSecondary": "View GO AMS"
     },
     "licensingHero": {
       "title": "Licensing",

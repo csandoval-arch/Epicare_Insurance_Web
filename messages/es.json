@@ -1,15 +1,13 @@
 {
   "landingV2": {
     "hero": {
-      "brandLabel": "EPICARE",
-      "headlineBold1": "Construimos el",
-      "headlineBody": "puente que nadie\nquiso construir,\ny seguimos",
-      "headlineBold2": "construyendo.",
-      "supportingCopy": "130+ carrier\nappointments\nen un solo contrato,\nel sistema para\noperarlos y el equipo\nque lo sostiene.\nTu book of business\nsigue siendo tuyo.",
+      "title": "Construimos",
+      "subtitle": ["El puente", "que nadie", "quiso construir,", "y seguimos", "construyendo."],
+      "agentsCount": "100+",
+      "agentsLabel": ["Agentes", "activos"],
+      "supporting": "<b>130+ aseguradoras</b>, tecnología y equipo de soporte bajo <b>un solo contrato</b>. Tu book of business, <b>100% tuyo</b>.",
       "ctaPrimary": "Solicita tu contrato",
-      "ctaSecondary": "Ver GO AMS →",
-      "imageAlt": "Estructura de acero de un puente en construcción vista desde abajo, representando infraestructura y conexión",
-      "scrollDown": "Deslizar"
+      "ctaSecondary": "Ver GO AMS"
     },
     "licensingHero": {
       "title": "Licensing",

@@ -156,6 +156,7 @@ html.lenis body { height: auto; }
   --color-overlay-backdrop: var(--color-overlay-backdrop);
   --color-overlay-tooltip-bg: var(--color-overlay-tooltip-bg);
   --color-hero-ivory: var(--color-hero-ivory);
+  --color-hero-ink: var(--color-hero-ink);
   --color-hero-blue: var(--color-hero-blue);
   --color-hero-dark: var(--color-hero-dark);
 
@@ -624,14 +625,27 @@ body {
 /* --- End of File --- */
 
 /* -- EDITORIAL HERO TOKENS -- */
+/* ivory = fondo del hero · ink = su texto (se invierten en dark) · blue = énfasis del copy */
 :root {
   --color-hero-ivory: #F1EEE5;
-  --color-hero-blue: #327BA5;
+  --color-hero-ink: #151617;
+  --color-hero-blue: #347EAC;
   --color-hero-dark: #20242A;
 }
 
 .dark {
   --color-hero-ivory: #151617;
+  --color-hero-ink: #F1EEE5;
   --color-hero-blue: #3A8FBE;
   --color-hero-dark: #2A2E34;
+}
+
+/* Titular gigante del hero editorial ("Construimos"). Único en la página: fuera de la escala
+   display a propósito. Móvil: la palabra llena el ancho (17vw). Desktop: clamp aprobado. */
+@utility text-hero-display {
+  font-size: 17vw;
+  line-height: 0.9;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  @media (min-width: 1024px) { font-size: clamp(3.75rem, 11.5vw, 10.9375rem); }
 }

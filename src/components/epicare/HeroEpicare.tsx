@@ -1,223 +1,108 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
-import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { asset } from '@/lib/asset';
-import HeaderEpicare from './HeaderEpicare';
-import gsap from 'gsap';
-import { EASE, DUR, STAGGER, REVEAL } from '@/lib/motion';
+/**
+ * @file HeroEpicare.tsx
+ * @description Hero editorial de la landing ("Construimos"). Titular gigante + dos ventanas a un
+ * mismo plano de vídeo + subtítulo en líneas + bloque de prueba (agentes, aseguradoras) + CTAs.
+ * - Desktop (≥lg): retícula de 12 columnas, composición aprobada (ventana pequeña arriba a la
+ *   derecha, ventana grande a sangre a la izquierda, subtítulo y CTAs al centro, prueba a la derecha).
+ * - Móvil / tablet (<lg): una columna con el mismo orden de lectura — titular, subtítulo, CTAs, las
+ *   dos ventanas a sangre (asimétricas, como en desktop) y el bloque de prueba.
+ * Motion en `hero/useHeroEntrance.ts`. Colores: tokens `--color-hero-*` (bimodales).
+ */
 
-// =========================================================================
-// MAGICAL COMPONENTS: CONTINUOUS VIDEO & EXACT TEXT SYNCHRONIZATION
-// =========================================================================
+import { useRef, type ReactNode } from "react";
+import { useTranslations } from "next-intl";
+import HeaderEpicare from "./HeaderEpicare";
+import HeroCta from "./hero/HeroCta";
+import WindowedVideo from "./hero/WindowedVideo";
+import { AGENT_AVATARS, HERO_LINKS } from "./hero/data";
+import { useHeroEntrance } from "./hero/useHeroEntrance";
 
-const ArrowUR = ({ className = '' }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <line x1="7" y1="17" x2="17" y2="7"></line>
-    <polyline points="7 7 17 7 17 17"></polyline>
-  </svg>
-);
-
-const WindowedVideo = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const [size, setSize] = useState({ w: '100vw', h: '100vh' });
-
-  useEffect(() => {
-    let frame: number;
-    const update = () => {
-      if (ref.current) {
-        const section = ref.current.closest('section');
-        if (section) {
-          const secRect = section.getBoundingClientRect();
-          const cellRect = ref.current.getBoundingClientRect();
-          setOffset({ 
-            x: -(cellRect.left - secRect.left), 
-            y: -(cellRect.top - secRect.top) 
-          });
-          setSize({ 
-            w: `${secRect.width}px`, 
-            h: `${secRect.height}px` 
-          });
-        }
-      }
-      frame = requestAnimationFrame(update);
-    };
-    frame = requestAnimationFrame(update);
-    return () => cancelAnimationFrame(frame);
-  }, []);
-
-  return (
-    <div ref={ref} className="w-full h-full overflow-hidden relative">
-      <video 
-        autoPlay loop muted playsInline preload="metadata"
-        className="absolute max-w-none object-cover grayscale opacity-90 mix-blend-multiply"
-        style={{ 
-          width: size.w, 
-          height: size.h,
-          transform: `translate(${offset.x}px, ${offset.y}px)`
-        }}
-      >
-        <source src={asset('Files/Epicare_Landing/Hero/Hero_02.mp4')} type="video/mp4" />
-      </video>
-    </div>
-  );
-};
-
-// =========================================================================
-// MAIN HERO COMPONENT (Purged & Production Ready)
-// =========================================================================
+/** Avatar del bloque de prueba (retrato o contador), con el borde del color del fondo. */
+const AVATAR = "w-static-2xl h-static-2xl rounded-full border-3 border-[var(--color-hero-ivory)] relative";
 
 export default function HeroEpicare() {
   const t = useTranslations("landingV2.hero");
   const sectionRef = useRef<HTMLElement>(null);
+  const subtitle = t.raw("subtitle") as string[];
+  const agentsLabel = t.raw("agentsLabel") as string[];
+  const accent = (chunks: ReactNode) => <span className="text-[var(--color-hero-blue)]">{chunks}</span>;
 
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    const ctx = gsap.context(() => {
-      if (prefersReducedMotion) {
-        gsap.set('.hero-title-line, .hero-eyebrow, .hero-subtitle, .hero-cta, .hero-visual-left, .hero-visual-right', {
-          opacity: 1, x: 0, y: 0, yPercent: 0, xPercent: 0, scale: 1
-        });
-        return;
-      }
-
-      const tl = gsap.timeline({ paused: true });
-
-      // 1. Title
-      tl.fromTo('.hero-title-line', 
-        { yPercent: REVEAL.birthPercent, opacity: 0, willChange: 'transform, opacity' },
-        { yPercent: 0, opacity: 1, duration: DUR.slow, ease: EASE.dramatic, force3D: true, clearProps: 'willChange' }
-      )
-      // 2. Big Subtitle
-      .fromTo('.hero-subtitle', 
-        { opacity: 0, y: REVEAL.sm, willChange: 'transform, opacity' },
-        { opacity: 1, y: 0, duration: DUR.base, ease: EASE.out, stagger: 0.05, clearProps: 'willChange' },
-        "-=0.5"
-      )
-      // 3. Small Subtitle / Avatar Block
-      .fromTo('.hero-eyebrow', 
-        { opacity: 0, y: REVEAL.sm, willChange: 'transform, opacity' },
-        { opacity: 1, y: 0, duration: DUR.base, ease: EASE.out, clearProps: 'willChange' },
-        "-=0.4"
-      )
-      // 4. Videos (Left enters from left, Right enters from right)
-      .fromTo('.hero-visual-left', 
-        { opacity: 0, x: -100, willChange: 'transform, opacity' },
-        { opacity: 1, x: 0, duration: DUR.slow, ease: EASE.dramatic, force3D: true, clearProps: 'willChange' },
-        "-=0.4"
-      )
-      .fromTo('.hero-visual-right', 
-        { opacity: 0, x: 100, willChange: 'transform, opacity' },
-        { opacity: 1, x: 0, duration: DUR.slow, ease: EASE.dramatic, force3D: true, clearProps: 'willChange' },
-        "<" // Sync with left video
-      )
-      // 5. CTAs (Pop in slightly after videos, separated by stagger)
-      .fromTo('.hero-cta', 
-        { opacity: 0, scale: 0.9, willChange: 'transform, opacity' },
-        { opacity: 1, scale: 1, duration: DUR.base, ease: EASE.snap, stagger: 0.15, clearProps: 'willChange' },
-        "-=0.5" // Start during the video slide-in
-      );
-
-      if ((window as any).epicareLoaderFinished) {
-        tl.play();
-      } else {
-        window.addEventListener('epicareLoaderFinished', () => tl.play(), { once: true });
-      }
-    }, el);
-
-    return () => ctx.revert();
-  }, []);
+  useHeroEntrance(sectionRef);
 
   return (
-    <section ref={sectionRef} className="relative w-full min-h-screen bg-[#F1EEE5] text-[#151617] overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative w-full lg:min-h-screen pb-section-sm lg:pb-0 bg-[var(--color-hero-ivory)] text-[var(--color-hero-ink)] overflow-hidden"
+    >
       <HeaderEpicare isHeaderPill={false} isHeaderForcedDark={false} scrollSafeZone={150} />
 
-      {/* GRID EDITORIAL */}
-      <div className="grid-layout w-full min-h-screen max-w-none px-0 relative z-10 gap-x-0">
-        
-        {/* ==================================
-            LAYER 20: VIDEOS
-            ================================== */}
-        <div className="hero-visual-right opacity-0 col-start-10 col-span-3 row-start-1 row-span-2 w-full z-[20]">
-          <div style={{ height: `240px` }} className="w-full">
-             <WindowedVideo />
+      {/* Retícula editorial: 6 col (móvil) · 8 (tablet) · 12 (desktop). Sin gutter horizontal:
+          las ventanas de vídeo sangran hasta el borde y el texto lleva su propio margen. */}
+      <div className="grid-layout relative z-10 w-full lg:min-h-screen gap-x-0">
+        {/* ── VENTANAS DE VÍDEO (capa 20) ── */}
+        <div className="hero-visual-right z-20 w-full col-start-5 col-span-2 md:col-start-6 md:col-span-3 row-start-4 pl-static-sm mt-static-2xl lg:pl-0 lg:mt-0 lg:col-start-10 lg:col-span-3 lg:row-start-1 lg:row-span-2">
+          <div className="w-full h-40 md:h-60">
+            <WindowedVideo />
           </div>
         </div>
 
-        <div className="hero-visual-left opacity-0 col-start-1 col-span-5 row-start-2 row-span-2 w-full z-[20]">
-          <div style={{ height: `480px` }} className="w-full">
-             <WindowedVideo />
+        <div className="hero-visual-left z-20 w-full col-start-1 col-span-4 md:col-span-5 row-start-4 lg:col-span-5 lg:row-start-2 lg:row-span-2">
+          <div className="w-full h-72 md:h-96 lg:h-120">
+            <WindowedVideo />
           </div>
         </div>
 
-        {/* ==================================
-            LAYER 30: TEXTS & CTAs
-            ================================== */}
-        <div className="col-start-1 col-span-12 row-start-1 row-span-1 w-full pl-6 md:pl-12 pt-[12vh] z-[30] overflow-hidden">
-          <h1 className="hero-title-line opacity-0 text-[clamp(60px,11.5vw,175px)] leading-[0.9] font-medium tracking-tight text-[#151617] whitespace-nowrap">
-            Construimos
-          </h1>
+        {/* ── TEXTOS Y CTAs (capa 30) ── */}
+        <div className="z-30 col-span-full row-start-1 px-gutter-sm lg:px-0 lg:pl-static-2xl pt-[12vh] overflow-hidden">
+          <h1 className="hero-title-line text-hero-display whitespace-nowrap">{t("title")}</h1>
         </div>
 
-        {/* Columna combinada para Subtítulo Grande y CTAs (Centrado Perfecto) */}
-        <div className="col-start-6 col-span-2 row-start-2 row-span-2 z-[30] flex flex-col h-full" style={{ marginLeft: `32px` }}>
-          <h2 className="text-display-sm text-[#151617] font-medium tracking-tight flex flex-col mt-[14px]">
-            <span className="hero-subtitle opacity-0">El puente</span>
-            <span className="hero-subtitle opacity-0">que nadie</span>
-            <span className="hero-subtitle opacity-0">quiso construir,</span>
-            <span className="hero-subtitle opacity-0">y seguimos</span>
-            <span className="hero-subtitle opacity-0">construyendo.</span>
+        {/* Subtítulo + CTAs. Desktop: los CTAs se centran en el alto que queda en la columna. */}
+        <div className="z-30 col-span-full row-start-2 row-span-2 flex flex-col px-gutter-sm pt-static-lg lg:px-0 lg:pt-0 lg:col-start-6 lg:col-span-2 lg:h-full lg:ml-static-xl">
+          <h2 className="text-display-sm font-medium tracking-tight flex flex-col lg:mt-3.5">
+            {subtitle.map((line) => (
+              <span key={line} className="hero-subtitle">
+                {line}
+              </span>
+            ))}
           </h2>
-          
-          {/* Este div empuja los CTAs al centro exacto del espacio restante */}
-          <div className="flex-1 flex flex-col justify-center pb-8">
-            <div className="flex flex-wrap items-center gap-4">
-              <Link href="/contrato" className="hero-cta opacity-0 group flex h-[48px] pl-6 pr-1.5 w-fit rounded-full justify-between items-center gap-3 bg-[var(--color-brand-blue)] text-white text-[14px] font-semibold normal-case transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] shadow-elevation-2 hover:brightness-105 hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-4 active:scale-95 cursor-pointer">
-                <span className="whitespace-nowrap">Solicita tu contrato</span>
-                <span className="relative w-8 h-8 rounded-full bg-white text-[var(--color-brand-blue)] flex items-center justify-center overflow-hidden shrink-0">
-                  <ArrowUR className="absolute w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
-                  <ArrowUR className="absolute w-4 h-4 -translate-x-5 translate-y-5 transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
-                </span>
-              </Link>
 
-              <Link href="/go-ams" className="hero-cta opacity-0 group flex h-[48px] pl-6 pr-1.5 w-fit rounded-full justify-between items-center gap-3 border border-[var(--color-brand-blue)]/40 bg-white/50 text-[#151617] text-[14px] font-semibold normal-case shadow-elevation-1 backdrop-blur-md transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-3 hover:bg-white active:scale-95 cursor-pointer">
-                <span className="whitespace-nowrap">Ver GO AMS</span>
-                <span className="relative w-8 h-8 rounded-full bg-[#151617] text-white flex items-center justify-center overflow-hidden shrink-0">
-                  <ArrowUR className="absolute w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
-                  <ArrowUR className="absolute w-4 h-4 -translate-x-5 translate-y-5 transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
-                </span>
-              </Link>
+          <div className="flex flex-col pt-static-xl lg:pt-0 lg:flex-1 lg:justify-center lg:pb-static-xl">
+            <div className="flex flex-wrap items-center gap-static-md">
+              <HeroCta href={HERO_LINKS.primary} label={t("ctaPrimary")} variant="primary" />
+              <HeroCta href={HERO_LINKS.secondary} label={t("ctaSecondary")} variant="secondary" />
             </div>
           </div>
         </div>
 
-        <div className="hero-eyebrow opacity-0 col-start-9 col-span-2 row-start-2 row-span-1 z-[30] flex flex-col justify-start gap-6 mt-[26px]">
-          {/* Avatar Block */}
+        {/* ── BLOQUE DE PRUEBA: agentes + aseguradoras ── */}
+        <div className="hero-proof z-30 col-span-full row-start-5 flex flex-col justify-start gap-static-lg px-gutter-sm pt-static-2xl lg:px-0 lg:pt-0 lg:col-start-9 lg:col-span-2 lg:row-start-2 lg:mt-6.5">
           <div className="flex items-center gap-3">
-            <div className="flex -space-x-3">
-              <div className="w-[48px] h-[48px] rounded-full border-[3px] border-[#F1EEE5] bg-cover bg-center relative z-[4] grayscale mix-blend-multiply" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200&auto=format&fit=crop)' }}></div>
-              <div className="w-[48px] h-[48px] rounded-full border-[3px] border-[#F1EEE5] bg-cover bg-center relative z-[3] grayscale mix-blend-multiply" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop)' }}></div>
-              <div className="w-[48px] h-[48px] rounded-full border-[3px] border-[#F1EEE5] bg-cover bg-center relative z-[2] grayscale mix-blend-multiply" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=200&auto=format&fit=crop)' }}></div>
-              <div className="w-[48px] h-[48px] rounded-full border-[3px] border-[#F1EEE5] bg-[#151617] relative z-[1] flex items-center justify-center">
-                <span className="text-[#F1EEE5] text-[13px] font-semibold tracking-tighter">100+</span>
+            <div className="flex -space-x-3" aria-hidden="true">
+              {AGENT_AVATARS.map((src, i) => (
+                <div
+                  key={src}
+                  className={`${AVATAR} bg-cover bg-center grayscale mix-blend-multiply dark:mix-blend-normal`}
+                  style={{ backgroundImage: `url(${src})`, zIndex: AGENT_AVATARS.length + 1 - i }}
+                />
+              ))}
+              <div className={`${AVATAR} z-1 bg-[var(--color-hero-ink)] flex items-center justify-center`}>
+                <span className="text-caption font-semibold tracking-tighter text-[var(--color-hero-ivory)]">{t("agentsCount")}</span>
               </div>
             </div>
-            <div className="text-[#151617] font-medium text-[12px] leading-[1.2] opacity-80">
-              Agentes<br/>activos
-            </div>
+            <p className="text-caption font-medium leading-tight opacity-80">
+              {agentsLabel.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </p>
           </div>
-          
-          <p className="text-h3 text-[#151617] font-medium opacity-80 pr-6 md:pr-12">
-            <span className="text-[#347EAC]">130+ aseguradoras</span>, tecnología y equipo de soporte bajo <span className="text-[#347EAC]">un solo contrato</span>. Tu book of business, <span className="text-[#347EAC]">100% tuyo</span>.
-          </p>
-        </div>
 
+          <p className="text-h3 font-medium opacity-80 lg:pr-static-2xl">{t.rich("supporting", { b: accent })}</p>
+        </div>
       </div>
     </section>
   );
