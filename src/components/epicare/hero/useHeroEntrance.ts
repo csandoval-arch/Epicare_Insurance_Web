@@ -11,7 +11,7 @@ const CTA_START_SCALE = 0.9;
 /** Si el loader nunca avisa (p. ej. navegación SPA sin loader), la entrada arranca igual. */
 const LOADER_FALLBACK_MS = 4000;
 
-const TARGETS = ".hero-title-line, .hero-subtitle, .hero-proof, .hero-visual-left, .hero-visual-right, .hero-video-counter, .hero-cta";
+const TARGETS = ".hero-title-line, .hero-subtitle, .hero-proof > *, .hero-visual-left, .hero-visual-right, .hero-video-counter, .hero-cta";
 
 type LoaderWindow = Window & { epicareLoaderFinished?: boolean };
 
@@ -59,9 +59,9 @@ export function useHeroEntrance(scopeRef: RefObject<HTMLElement | null>) {
           { opacity: 1, y: 0, duration: DUR.base, ease: EASE.out, stagger: STAGGER.tight, clearProps: "willChange" },
           "-=0.5"
         )
-        // 3 · Bloque de prueba (avatares + copy)
+        // 3 · Bloque de prueba (avatares + copy). Se animan sus hijos: el contenedor lo mueve el acto 2.
         .fromTo(
-          ".hero-proof",
+          ".hero-proof > *",
           { opacity: 0, y: REVEAL.sm, willChange: "transform, opacity" },
           { opacity: 1, y: 0, duration: DUR.base, ease: EASE.out, clearProps: "willChange" },
           "-=0.4"

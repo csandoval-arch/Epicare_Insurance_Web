@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { asset } from "@/lib/asset";
 import { HERO_VIDEO } from "./data";
+import { offsetWithin } from "./geometry";
 
 /**
  * @description Una "ventana" al vídeo del hero. El vídeo mide lo que la sección entera y se
@@ -27,14 +28,7 @@ export default function WindowedVideo() {
     if (!frame || !video || !section) return;
 
     const measure = () => {
-      let x = 0;
-      let y = 0;
-      let node: HTMLElement | null = frame;
-      while (node && node !== section) {
-        x += node.offsetLeft;
-        y += node.offsetTop;
-        node = node.offsetParent as HTMLElement | null;
-      }
+      const { x, y } = offsetWithin(frame, section);
       video.style.width = `${section.clientWidth}px`;
       video.style.height = `${section.clientHeight}px`;
       video.style.transform = `translate3d(${-x}px, ${-y}px, 0)`;
@@ -57,19 +51,25 @@ export default function WindowedVideo() {
   }, []);
 
   return (
-    <div ref={windowRef} className="relative w-full h-full overflow-hidden" aria-hidden="true">
+    // Fondo marfil opaco: el vídeo (90 %) se asienta sobre el mismo color que la sección, así que se ve
+    // igual, y en el acto 2 una ventana no transparenta a la otra cuando se solapan.
+    <div ref={windowRef} className="hero-window relative w-full h-full overflow-hidden bg-[var(--color-hero-ivory)]" aria-hidden="true">
       <div className="hero-video-counter absolute top-0 left-0">
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          className="absolute top-0 left-0 max-w-none object-cover grayscale opacity-90 mix-blend-multiply dark:mix-blend-normal"
-        >
-          <source src={asset(HERO_VIDEO)} type="video/mp4" />
-        </video>
+        {/* Capa del acto 2 (desktop): la inversa de la escala del marco, para que el plano no se
+            deforme ni se mueva mientras la ventana crece (ver `useHeroAct2`). */}
+        <div className="hero-video-act absolute top-0 left-0">
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className="absolute top-0 left-0 max-w-none object-cover grayscale opacity-90"
+          >
+            <source src={asset(HERO_VIDEO)} type="video/mp4" />
+          </video>
+        </div>
       </div>
     </div>
   );

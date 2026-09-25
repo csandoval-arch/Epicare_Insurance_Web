@@ -8,7 +8,10 @@
  *   derecha, ventana grande a sangre a la izquierda, subtítulo y CTAs al centro, prueba a la derecha).
  * - Móvil / tablet (<lg): una columna con el mismo orden de lectura — titular, subtítulo, CTAs, las
  *   dos ventanas a sangre (asimétricas, como en desktop) y el bloque de prueba.
- * Motion en `hero/useHeroEntrance.ts`. Colores: tokens `--color-hero-*` (bimodales).
+ * - Acto 2 (solo desktop, pin): la ventana grande crece hasta la pantalla completa y empuja fuera
+ *   lo que tiene alrededor (titular y ventana pequeña por arriba, copy y prueba por la derecha).
+ * Motion en `hero/useHeroEntrance.ts` (entrada) y `hero/useHeroAct2.ts` (acto 2). Colores: tokens
+ * `--color-hero-*` (bimodales).
  */
 
 import { useRef, type ReactNode } from "react";
@@ -17,6 +20,7 @@ import HeaderEpicare from "./HeaderEpicare";
 import HeroCta from "./hero/HeroCta";
 import WindowedVideo from "./hero/WindowedVideo";
 import { AGENT_AVATARS, HERO_LINKS } from "./hero/data";
+import { useHeroAct2 } from "./hero/useHeroAct2";
 import { useHeroEntrance } from "./hero/useHeroEntrance";
 
 /** Avatar del bloque de prueba (retrato o contador), con el borde del color del fondo. */
@@ -30,6 +34,7 @@ export default function HeroEpicare() {
   const accent = (chunks: ReactNode) => <span className="text-[var(--color-hero-blue)]">{chunks}</span>;
 
   useHeroEntrance(sectionRef);
+  useHeroAct2(sectionRef);
 
   return (
     <section
@@ -37,6 +42,7 @@ export default function HeroEpicare() {
       className="relative w-full lg:min-h-screen pb-section-sm lg:pb-0 bg-[var(--color-hero-ivory)] text-[var(--color-hero-ink)] overflow-hidden"
     >
       <HeaderEpicare isHeaderPill={false} isHeaderForcedDark={false} scrollSafeZone={150} />
+
 
       {/* Retícula editorial: 6 col (móvil) · 8 (tablet) · 12 (desktop). Sin gutter horizontal:
           las ventanas de vídeo sangran hasta el borde y el texto lleva su propio margen. */}
@@ -55,12 +61,12 @@ export default function HeroEpicare() {
         </div>
 
         {/* ── TEXTOS Y CTAs (capa 30) ── */}
-        <div className="z-30 col-span-full row-start-1 px-gutter-sm lg:px-0 lg:pl-static-2xl pt-[12vh] overflow-hidden">
+        <div className="hero-heading z-30 col-span-full row-start-1 px-gutter-sm lg:px-0 lg:pl-static-2xl pt-[12vh] overflow-hidden">
           <h1 className="hero-title-line text-hero-display whitespace-nowrap">{t("title")}</h1>
         </div>
 
         {/* Subtítulo + CTAs. Desktop: los CTAs se centran en el alto que queda en la columna. */}
-        <div className="z-30 col-span-full row-start-2 row-span-2 flex flex-col px-gutter-sm pt-static-sm md:pt-static-lg lg:px-0 lg:pt-0 lg:col-start-6 lg:col-span-2 lg:h-full lg:ml-static-xl">
+        <div className="hero-copy z-30 col-span-full row-start-2 row-span-2 flex flex-col px-gutter-sm pt-static-sm md:pt-static-lg lg:px-0 lg:pt-0 lg:col-start-6 lg:col-span-2 lg:h-full lg:ml-static-xl">
           <h2 className="text-display-sm font-medium tracking-tight flex flex-col lg:mt-3.5">
             {subtitle.map((line) => (
               <span key={line} className="hero-subtitle">
