@@ -16,8 +16,10 @@ import { offsetWithin } from "./geometry";
  *   de la entrada; mientras el marco entra deslizándose, `.hero-video-counter` hace el movimiento
  *   inverso (ver `useHeroEntrance`) y el plano se queda quieto.
  * - Fuera de pantalla el vídeo se pausa. `autoPlay` se mantiene: es el LCP de la página.
+ * @param surface fondo opaco del marco (sobre el que se asienta el vídeo al 90 %): el de la sección
+ *   que la contiene. Por defecto, el marfil del hero.
  */
-export default function WindowedVideo() {
+export default function WindowedVideo({ surface = "bg-[var(--color-hero-ivory)]" }: { surface?: string }) {
   const windowRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -51,9 +53,9 @@ export default function WindowedVideo() {
   }, []);
 
   return (
-    // Fondo marfil opaco: el vídeo (90 %) se asienta sobre el mismo color que la sección, así que se ve
-    // igual, y en el acto 2 una ventana no transparenta a la otra cuando se solapan.
-    <div ref={windowRef} className="hero-window relative w-full h-full overflow-hidden bg-[var(--color-hero-ivory)]" aria-hidden="true">
+    // Fondo opaco (`surface`): el vídeo (90 %) se asienta sobre el mismo color que la sección, así que se
+    // ve igual, y en el acto 2 del hero una ventana no transparenta a la otra cuando se solapan.
+    <div ref={windowRef} className={`hero-window relative w-full h-full overflow-hidden ${surface}`} aria-hidden="true">
       <div className="hero-video-counter absolute top-0 left-0">
         {/* Capa del acto 2 (desktop): la inversa de la escala del marco, para que el plano no se
             deforme ni se mueva mientras la ventana crece (ver `useHeroAct2`). */}

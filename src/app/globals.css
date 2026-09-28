@@ -651,3 +651,12 @@ body {
   @media (min-width: 768px) { font-size: 17vw; }
   @media (min-width: 1024px) { font-size: clamp(3.75rem, 11.5vw, 10.9375rem); }
 }
+
+/* Wordmark "Epicare" del footer: llena el ancho de su contenedor (`@container`, fuera de escala a
+   propósito). En cqi para respetar los márgenes laterales de su caja. */
+@utility text-footer-wordmark {
+  font-size: 24.5cqi;
+  line-height: 0.78;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+}
