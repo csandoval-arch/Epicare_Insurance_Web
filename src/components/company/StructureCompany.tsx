@@ -1,9 +1,8 @@
-﻿"use client";
+"use client";
 
 import React, { useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { asset } from "@/lib/asset";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,73 +18,80 @@ export default function StructureCompany() {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=150%",
+          end: "+=200%", 
           pin: true,
-          scrub: 1.2,
+          scrub: 1,
         }
       });
 
-      // V2: ARCHITECTURAL PARALLAX (Minimalist Gallery Style)
-      gsap.set(".v2-image", { yPercent: 30, opacity: 0, scale: 1.05 });
-      gsap.set(".v2-text", { y: 20, opacity: 0 });
-      
-      tl.to(".v2-image", {
-        yPercent: 0,
-        opacity: 1,
-        scale: 1,
-        ease: "power2.out",
+      // The mask container holds both the image and the solid white text.
+      // We animate the single mask container to reveal both perfectly in sync.
+      gsap.set(".structure-mask", { clipPath: "inset(50% 0% 0% 0%)" });
+      tl.to(".structure-mask", {
+        clipPath: "inset(0% 0% 0% 0%)",
+        ease: "power2.inOut",
         duration: 2
-      }, 0)
-      .to(".v2-text", {
-        y: 0,
-        opacity: 1,
-        stagger: 0.1,
-        ease: "power2.out",
-        duration: 1.5
-      }, 0.5);
+      }, 0);
 
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
+  // Shared content block to avoid DRY violations in the duplicated layers
+  const TextContent = () => (
+    <>
+      <div className="w-full px-[96px] grid grid-cols-12 gap-x-[24px]">
+        <div className="col-start-2 col-end-8">
+          <div className="flex items-center gap-4 mb-6 opacity-80">
+            <div className="w-2 h-2 bg-current rounded-full" />
+            <span className="text-[13px] font-semibold tracking-[0.1em] uppercase">The Epicare standard behind every product.</span>
+          </div>
+          <h2 className="text-[clamp(1.5rem,2.2vw,3rem)] leading-[1.3] font-semibold tracking-tight max-w-[85%]">
+            Epicare Insurance Corp is the parent company. Everything else is a product or platform it operates. Each has its own audience, but they all share the same DNA.
+          </h2>
+        </div>
+        <div className="col-start-11 col-end-13 flex justify-end">
+          <div className="border border-current opacity-60 rounded-full px-5 py-2 flex items-center gap-2 h-fit">
+            <span className="text-[13px] font-mono tracking-wider uppercase">1 foundation</span>
+          </div>
+        </div>
+      </div>
+      <div className="w-full px-[96px] mt-auto flex justify-center opacity-40">
+        <span className="text-[11px] font-mono uppercase tracking-[0.2em]">Clarity · Control · Confidence</span>
+      </div>
+    </>
+  );
+
   return (
-    <section ref={containerRef} className="relative w-full h-screen bg-[#111111] overflow-hidden flex flex-col pt-[12vh] pb-[8vh] px-[96px] z-20">
+    <section 
+      ref={containerRef} 
+      className="relative w-full h-screen bg-[#F1EEE5] overflow-hidden z-20 flex flex-col"
+      style={{ perspective: "1500px" }}
+    >
       
-      {/* Centered Gallery Image */}
-      <div className="absolute inset-0 w-full h-full flex items-center justify-center z-0 pointer-events-none">
-         <div className="w-[35vw] h-[65vh] overflow-hidden">
-           <img 
-             src={asset("/Files/company_structure_arch.jpg")} 
-             className="w-full h-full object-cover grayscale-[80%] opacity-70 v2-image" 
-             alt="Epicare Foundation" 
-           />
-         </div>
+      {/* 1. BASE LAYER: Dark text on the light #F1EEE5 background */}
+      <div className="absolute inset-0 w-full h-full z-0 flex flex-col pt-[10vh] pb-[8vh] text-[#111111]">
+        <TextContent />
       </div>
 
-      <div className="relative w-full flex-1 grid grid-cols-12 gap-[24px] z-10 pointer-events-auto">
+      {/* 2. REVEAL MASK: Image + Solid White Text */}
+      <div className="absolute inset-0 w-full h-full z-10 structure-mask pointer-events-none" style={{ clipPath: "inset(50% 0% 0% 0%)" }}>
         
-        {/* Title Block */}
-        <div className="col-start-2 col-span-5 flex flex-col gap-3 v2-text w-full">
-           <div className="opacity-50 flex items-center gap-3">
-             <div className="w-1.5 h-1.5 bg-[#F1EEE5] rounded-full" />
-             <span className="text-caption text-left font-semibold tracking-[0.2em] uppercase text-[#F1EEE5]">
-               The Parent Company
-             </span>
-           </div>
-           <h2 className="text-display-lg text-left text-[#F1EEE5] font-semibold tracking-tight">
-             Epicare Insurance Corp.
-           </h2>
-        </div>
-
-        {/* Paragraph Block */}
-        <div className="col-start-8 col-span-3 mt-auto v2-text w-full">
-           <p className="text-subtitle text-left leading-[1.6] text-[#F1EEE5]/70 font-medium">
-             Everything else is a product or platform it operates. Each has its own audience, but they all share the exact same structural DNA.
-           </p>
+        {/* Background Image */}
+        <img 
+          src="/Files/company_structure_arch.jpg" 
+          alt="Epicare Structural Foundation" 
+          className="absolute inset-0 w-full h-full object-cover object-center grayscale-[50%] contrast-125 opacity-90"
+        />
+        
+        {/* Pure White Duplicate Text */}
+        <div className="absolute inset-0 w-full h-full z-20 flex flex-col pt-[10vh] pb-[8vh] text-white">
+          <TextContent />
         </div>
 
       </div>
+
     </section>
   );
 }
