@@ -6,6 +6,7 @@ import HeaderEpicare from "@/components/epicare/HeaderEpicare";
 import FooterEpicare from "@/components/epicare/FooterEpicare";
 import HeroCompany from "@/components/company/HeroCompany";
 import PurposeCompany from "@/components/company/PurposeCompany";
+import HistoryCompany from "@/components/company/HistoryCompany";
 import StructureCompany from "@/components/company/StructureCompany";
 import PromiseCompany from "@/components/company/PromiseCompany";
 
@@ -54,6 +55,7 @@ export default function CompanyPage() {
       {/* "?"? COMPANY SECTIONS "?"? */}
       <HeroCompany />
       <PurposeCompany />
+      <HistoryCompany />
       <StructureCompany />
       <PromiseCompany />
 
