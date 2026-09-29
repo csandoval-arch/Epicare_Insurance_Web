@@ -1,8 +1,9 @@
-"use client";
+﻿"use client";
 
 import React, { useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { asset } from "@/lib/asset";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,120 +20,114 @@ export default function PurposeCompany() {
   const visionWords = visionText.split(" ");
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
+    let ctx = gsap.context(() => {
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (prefersReducedMotion) return;
 
-      // ==========================================
-      // ACT 02: AUTOMATIC ENTRANCE (Triggered once)
-      // ==========================================
-      const tlIntro = gsap.timeline({
+      ScrollTrigger.refresh();
+
+      gsap.set(".panel-purpose", { y: "100vh", opacity: 1 });
+      gsap.set(".panel-vision", { y: "100vh", opacity: 1 });
+      gsap.set(".v2-word", { opacity: 0, filter: "blur(16px)", y: 20 });
+      gsap.set(".vision-word", { opacity: 0, filter: "blur(16px)", y: 20 });
+      gsap.set(dramaticTurnRef.current, { opacity: 0 });
+      gsap.set(visionParagraphRef.current, { opacity: 0 });
+      
+      // NUEVO ESTADO DEL MAPA: Deep Parallax Fade (Elegancia pura)
+      gsap.set(".map-video-wrapper", { clipPath: "none" }); // Quitamos los recortes
+      gsap.set(".map-video-el", { scale: 1.25, opacity: 0, filter: "blur(10px)" }); // Iniciamos desenfocado, grande e invisible
+
+      // COREOGRAFÍA ELEGANTE Y RÁPIDA (Opacity + Scale + Blur)
+      const mapRevealTl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top top",
-          once: true,
+          start: "top 75%", 
         }
       });
 
-      // 1. BLUR-REVEAL (Automatic Play on Enter)
-      gsap.set(".v2-word", { opacity: 0, filter: "blur(16px)", y: 20 });
-      tlIntro.to(".v2-word", {
-        opacity: 1,
+      mapRevealTl.to(".map-video-el", {
+        scale: 1,
+        opacity: 0.8,
         filter: "blur(0px)",
-        y: 0,
-        stagger: 0.05,
-        ease: "power2.out",
-        duration: 0.8
-      });
+        ease: "power2.out", 
+        duration: 1.5, // Rápido pero súper premium
+      }, 0);
 
-      // 2. Dramatic Turn (Fades in)
-      gsap.set(dramaticTurnRef.current, { opacity: 0 });
-      tlIntro.to(dramaticTurnRef.current, {
-        opacity: 1,
-        duration: 0.8,
-        ease: "power2.out"
-      }, "-=0.4");
 
-      // ==========================================
-      // ACT 02 -> ACT 03: SCRUB TRANSITION (Pinned)
-      // ==========================================
-      
-      // Dramatic Turn Vertical Parallax (Applies to Act 2 paragraph during initial scroll)
-      gsap.fromTo(dramaticTurnRef.current,
-        { y: 100 },
-        {
-          y: -100,
-          ease: "none",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top",
-            end: "+=100%", // First third of the pin
-            scrub: 1,
-          }
-        }
-      );
-
-      // The Master Scrub Timeline (Controls the scene transition)
+      // LÍNEA DE TIEMPO PRINCIPAL PINNED (Scrub)
       const scrubTl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=300%", // Massive 3-screen pin duration
+          end: "+=400%", 
           pin: true,
           scrub: 1,
         }
       });
 
-      // Phase 1: Hold Act 2 steady so the user can read it (0 to 33% of scroll)
+      // Phase 1
+      scrubTl.to({}, { duration: 0.5 }); 
+
+      // Phase 2
+      scrubTl.to(".panel-purpose", { y: "0vh", duration: 1.5, ease: "power2.inOut" }, "missionIn");
+      scrubTl.to(".v2-word", {
+        opacity: 1, filter: "blur(0px)", y: 0, stagger: 0.05, ease: "power2.out", duration: 1
+      }, "missionIn+=0.8");
+      scrubTl.to(dramaticTurnRef.current, {
+        opacity: 1, duration: 0.8, ease: "power2.out"
+      }, "missionIn+=1.2");
+
+      // Phase 3
       scrubTl.to({}, { duration: 1 });
 
-      // Phase 2: KINETIC SLIDE & SCALE (Locomotive Classic Transition)
+      // Phase 4
       scrubTl.to(".panel-purpose", { y: "-100vh", scale: 0.9, opacity: 0, duration: 1.5, ease: "power2.inOut" }, "transition");
-      gsap.set(".panel-vision", { y: "100vh", scale: 0.9, opacity: 1 });
-      scrubTl.to(".panel-vision", { y: "0vh", scale: 1, duration: 1.5, ease: "power2.inOut" }, "transition");
-
-      // Phase 2.5: Blur Reveal Vision Text (Scrubbed along with the transition finish)
-      gsap.set(".vision-word", { opacity: 0, filter: "blur(16px)", y: 20 });
+      scrubTl.to(".panel-vision", { y: "0vh", duration: 1.5, ease: "power2.inOut" }, "transition");
       scrubTl.to(".vision-word", {
-        opacity: 1,
-        filter: "blur(0px)",
-        y: 0,
-        stagger: 0.05,
-        ease: "power2.out",
-        duration: 0.5
-      }, "transition+=1.0"); // Starts slightly before the slide finishes
+        opacity: 1, filter: "blur(0px)", y: 0, stagger: 0.05, ease: "power2.out", duration: 1
+      }, "transition+=0.8");
+      
+      // Phase 4.5
+      scrubTl.to(visionParagraphRef.current, { 
+        opacity: 1, duration: 0.8, ease: "power2.out" 
+      }, "transition+=1.2");
 
-      // Phase 3: Hold Act 3 steady so the user can read it (66% to 100% of scroll)
-      // Act 3 Paragraph Vertical Parallax
-      scrubTl.fromTo(visionParagraphRef.current,
-        { y: 100 },
-        { y: -100, ease: "none", duration: 1 },
-        "transition+=1.5" // Starts immediately after the slide transition finishes
-      );
+      // Phase 5
+      scrubTl.to({}, { duration: 1 });
 
     }, containerRef);
 
     return () => ctx.revert();
-  }, []); // Run once on mount
+  }, []); 
 
   return (
     <section 
       ref={containerRef} 
       className="relative w-full h-screen bg-[#F1EEE5] text-[#111111] overflow-hidden z-10"
     >
-      {/* =========================================
-          ACT 02: THE PURPOSE (Panel 1)
-          ========================================= */}
-      <div className="absolute inset-0 panel-purpose z-10 flex flex-col justify-center">
-        <div className="w-full px-[96px] grid grid-cols-12 gap-x-[24px]">
+      {/* GLOBAL VIDEO MAP */}
+      <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none map-video-wrapper">
+        <video 
+          src={asset("/Files/About_Company/Pins_fading_on_US_map_20260929131832.mp4")}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover mix-blend-multiply map-video-el will-change-transform transform-gpu"
+        />
+      </div>
+
+      {/* ACT 02: THE PURPOSE */}
+      <div className="absolute inset-0 panel-purpose z-10 flex flex-col justify-start pt-[15vh]">
+        <div className="w-full px-[96px] grid grid-cols-12 gap-[24px]">
           
-          <div className="col-start-1 col-end-13 mb-[8vh] flex items-center gap-4 opacity-50">
+          <div className="col-start-1 col-end-13 mb-[4vh] flex items-center gap-4 opacity-50">
             <div className="w-2 h-2 bg-[#111111] rounded-full" />
             <span className="text-[13px] font-semibold tracking-[0.1em] uppercase">Why we exist</span>
           </div>
 
-          <div className="col-start-1 col-end-12 flex flex-col" ref={textContainerRef}>
-            <h2 className="text-[clamp(2.5rem,4.5vw,5.5rem)] leading-[1.1] font-bold tracking-tight">
+          <div className="col-start-1 col-end-12 flex flex-col mb-10" ref={textContainerRef}>
+            <h2 className="text-display tracking-tight font-semibold max-w-3xl ml-0">
               <div className="flex flex-wrap">
                 {words.map((word, i) => (
                   <span key={i} className="v2-word mr-[0.25em] will-change-[filter,transform,opacity]">
@@ -142,30 +137,27 @@ export default function PurposeCompany() {
               </div>
             </h2>
           </div>
-
-          <div className="col-start-8 col-end-11 mt-[12vh]" ref={dramaticTurnRef}>
-            <p className="text-[20px] 2xl:text-[24px] leading-[1.5] text-[#111111]/70 font-medium">
-              The market rewards big agencies. We bet the independent agent, with the right tools, delivers the best experience for the end client.
-            </p>
+          
+          {/* MISION SUBTEXT */}
+          <div ref={dramaticTurnRef} className="col-start-4 col-end-7 text-left">
+             <p className="text-[18px] 2xl:text-[20px] leading-[1.6] text-[#111111]/80 font-medium">
+               The market rewards big agencies. We bet the <strong className="font-bold text-[#35BBFD]">independent agent</strong>, with the right tools, delivers the <strong className="font-bold text-[#35BBFD]">best experience</strong> for the end client.
+             </p>
           </div>
         </div>
       </div>
 
-
-      {/* =========================================
-          ACT 03: THE HORIZON (Panel 2)
-          ========================================= */}
-      <div className="absolute inset-0 panel-vision z-20 opacity-0 flex flex-col justify-center bg-[#F1EEE5]">
-        <div className="w-full px-[96px] grid grid-cols-12 gap-x-[24px]">
+      {/* ACT 03: THE HORIZON */}
+      <div className="absolute inset-0 panel-vision z-20 flex flex-col justify-start pt-[15vh]">
+        <div className="w-full px-[96px] grid grid-cols-12 gap-[24px]">
           
-          <div className="col-start-4 col-end-13 mb-[6vh] flex items-center justify-end gap-4 opacity-50">
+          <div className="col-start-4 col-end-13 mb-[4vh] flex items-center justify-end gap-4 opacity-50">
             <span className="text-[13px] font-semibold tracking-[0.1em] uppercase text-[#F26023]">Where we're headed</span>
             <div className="w-2 h-2 bg-[#F26023] rounded-full" />
           </div>
 
-          {/* Grid Rupture: Massive Right-Aligned Typography */}
-          <div className="col-start-4 col-end-13 mt-4">
-            <h2 className="text-[clamp(2rem,3.8vw,4.8rem)] leading-[1.05] font-bold tracking-tight text-right flex flex-wrap justify-end">
+          <div className="col-start-4 col-end-13 flex justify-end mb-10">
+            <h2 className="text-display tracking-tight font-semibold text-right flex flex-wrap justify-end max-w-3xl mr-0">
               {visionWords.map((word, i) => (
                 <span key={i} className="vision-word ml-[0.25em] will-change-[filter,transform,opacity]">
                   {word}
@@ -173,14 +165,12 @@ export default function PurposeCompany() {
               ))}
             </h2>
           </div>
-
-          {/* Text Paragraph: Heavy Left Anchor (3 columns wide) */}
-          <div className="col-start-2 col-end-5 mt-[12vh]" ref={visionParagraphRef}>
-            <div className="border-l border-[#35BBFD]/50 pl-6">
-              <p className="text-[18px] 2xl:text-[20px] leading-[1.6] text-[#111111]/70 font-medium">
-                We grow when the agent grows. Tools, training, brand, compliance, and commissions, all in one place, so no one has to choose between scaling and doing it right.
-              </p>
-            </div>
+          
+          {/* VISION SUBTEXT */}
+          <div ref={visionParagraphRef} className="col-start-2 col-end-5 text-left mt-16">
+             <p className="text-[18px] 2xl:text-[20px] leading-[1.6] text-[#111111]/80 font-medium">
+               We grow when the <strong className="font-bold text-[#35BBFD]">agent grows</strong>. Tools, training, brand, compliance, and commissions, <strong className="font-bold text-[#35BBFD]">all in one place</strong>, so no one has to choose between scaling and doing it right.
+             </p>
           </div>
 
         </div>

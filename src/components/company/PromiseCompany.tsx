@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
@@ -48,15 +48,6 @@ export default function PromiseCompany() {
       });
 
       // PILLAR 3: The Breathing Canvas (Latent Organic Life)
-      // Watermark numbers slowly float endlessly
-      gsap.to(".breathing-element", {
-        y: "-=15px",
-        yoyo: true,
-        repeat: -1,
-        duration: 4,
-        ease: "sine.inOut"
-      });
-
       // Vida Latente de la cruz suiza (rota infinitamente)
       gsap.to(".swiss-latent", { rotation: 360, duration: 15, ease: "linear", repeat: -1 });
 
@@ -100,7 +91,6 @@ export default function PromiseCompany() {
               </div>
             </div>
             <div className="col-span-12 md:col-span-4 p-12 flex flex-col justify-end relative overflow-hidden">
-              <span className="text-[12vw] leading-none absolute -right-4 -bottom-4 font-bold opacity-10 pointer-events-none breathing-element" style={{ WebkitMaskImage: "linear-gradient(to bottom, black 30%, transparent 100%)" }}>01</span>
               <div className="layered-unveil relative z-10">
                 <h4 className="text-h5 mb-4 block">{promises[0].outcome}</h4>
                 <p className="text-body-md font-medium max-w-[90%]">{promises[0].text}</p>
@@ -111,7 +101,6 @@ export default function PromiseCompany() {
           {/* Row 2: Right Heavy (A1: Asimetría estructural) */}
           <div className="grid grid-cols-12 bg-[var(--color-brand-blue)] group border-b border-[var(--color-brand-dark)]">
             <div className="col-span-12 md:col-span-4 border-r border-[var(--color-brand-dark)] p-12 flex flex-col justify-end relative overflow-hidden">
-              <span className="text-[12vw] leading-none absolute -left-4 -bottom-4 font-bold opacity-10 pointer-events-none breathing-element" style={{ WebkitMaskImage: "linear-gradient(to bottom, black 30%, transparent 100%)" }}>02</span>
               <div className="layered-unveil relative z-10">
                 <h4 className="text-h5 mb-4 block">{promises[1].outcome}</h4>
                 <p className="text-body-md font-medium max-w-[90%]">{promises[1].text}</p>
@@ -138,7 +127,6 @@ export default function PromiseCompany() {
               </div>
             </div>
             <div className="col-span-12 md:col-span-4 p-12 flex flex-col justify-end relative overflow-hidden">
-              <span className="text-[12vw] leading-none absolute -right-4 -bottom-4 font-bold opacity-10 pointer-events-none breathing-element" style={{ WebkitMaskImage: "linear-gradient(to bottom, black 30%, transparent 100%)" }}>03</span>
               <div className="layered-unveil relative z-10">
                 <h4 className="text-h5 mb-4 block">{promises[2].outcome}</h4>
                 <p className="text-body-md font-medium max-w-[90%]">{promises[2].text}</p>

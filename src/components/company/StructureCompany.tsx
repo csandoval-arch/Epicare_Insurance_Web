@@ -17,62 +17,44 @@ export default function StructureCompany() {
       gsap.set(".act4-image", { scale: 1.1 });
       gsap.set([".act4-tag", ".act4-title"], { y: 30, opacity: 0 });
 
-      // 1. Coreografía de Entrada (Trigger normal)
-      const entranceTl = gsap.timeline({
+      // 1. Coreografía de Entrada de Texto (Trigger normal)
+      const textTl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 70%",
         }
       });
 
-      entranceTl.to(".act4-image-mask", {
-        clipPath: "inset(0% 0% 47% 0%)",
-        ease: "power4.out",
-        duration: 1.6
-      }, 0)
-      .to(".act4-image", {
-        scale: 1,
-        ease: "power4.out",
-        duration: 1.6
-      }, 0)
-      .to(".act4-tag", {
+      textTl.to(".act4-tag", {
         y: 0,
         opacity: 1,
         ease: "power3.out",
         duration: 1.2
-      }, 0.2)
+      }, 0)
       .to(".act4-title", {
         y: 0,
         opacity: 1,
         ease: "power3.out",
         duration: 1.2
-      }, 0.35);
+      }, 0.15);
 
-      // 2. Coreografía de Scrub (Pin y expansión hacia abajo)
+      // 2. Coreografía de Imagen (Scrub)
       const scrubTl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top top",
-          end: "+=120%", // Distancia de scroll adicional
-          pin: true,
-          scrub: 1.5,
+          start: "top 48%", 
+          end: "top 0%",
+          scrub: 1, 
         }
       });
 
-      // Baja el cutout de la imagen hasta cubrir todo (0%)
       scrubTl.to(".act4-image-mask", {
         clipPath: "inset(0% 0% 0% 0%)",
-        ease: "none"
+        ease: "none",
       }, 0)
-      // Ligero parallax de la foto hacia adentro
       .to(".act4-image", {
-        scale: 1.05,
-        ease: "none"
-      }, 0)
-      // Los textos suben suavemente para dar sensación de inercia
-      .to([".act4-tag", ".act4-title"], {
-        y: -100,
-        ease: "none"
+        scale: 1,
+        ease: "none",
       }, 0);
 
     }, containerRef);
@@ -102,19 +84,19 @@ export default function StructureCompany() {
   );
 
   return (
-    <section ref={containerRef} className="relative w-full h-screen bg-[#F1EEE5] overflow-hidden z-20 flex flex-col">
+    <section ref={containerRef} className="relative w-full h-[120vh] bg-[#F1EEE5] overflow-hidden z-20 flex flex-col">
       
       {/* 1. BASE LAYER: Dark text */}
       <div className="absolute inset-0 w-full h-full z-0 text-[#111111]">
         <TextContent />
       </div>
 
-      {/* 2. DYNAMIC MASK LAYER */}
-      <div className="absolute inset-0 w-full h-full z-10 pointer-events-none act4-image-mask">
+      {/* 2. DYNAMIC MASK LAYER (Optimizada para GPU) */}
+      <div className="absolute inset-0 w-full h-full z-10 pointer-events-none act4-image-mask will-change-[clip-path] transform-gpu">
         <img 
           src={asset("/Files/company_structure_arch.jpg")} 
           alt="Epicare Structural Foundation" 
-          className="absolute inset-0 w-full h-full object-cover object-center grayscale contrast-125 act4-image"
+          className="absolute inset-0 w-full h-full object-cover object-center grayscale contrast-125 act4-image will-change-transform transform-gpu"
         />
         <div className="absolute inset-0 w-full h-full z-20 text-white pointer-events-none">
           <TextContent />
