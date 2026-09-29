@@ -48,16 +48,36 @@ export function FooterContact({ className = "", linkClass }: { className?: strin
   );
 }
 
-/** Copyright + legales. Términos y privacidad aún no tienen página: se muestran como texto. */
+type LenisWindow = Window & { lenis?: { scrollTo: (target: number) => void } };
+
+/** Sube al inicio de la página por Lenis (el scroll nativo pelea con él), con fallback nativo. */
+const scrollToTop = () => {
+  const { lenis } = window as unknown as LenisWindow;
+  if (lenis) lenis.scrollTo(0);
+  else window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+/**
+ * @description Barra de cierre del footer: copyright · legales · "Volver arriba".
+ * Términos y privacidad aún no tienen página: se muestran como texto.
+ */
 export function FooterLegal({ className = "" }: { className?: string }) {
   const t = useTranslations("landingV2.footer");
   return (
-    <div className={`flex flex-col md:flex-row md:items-center justify-between gap-static-xs text-meta ${className}`}>
+    <div className={`grid grid-cols-1 md:grid-cols-3 items-center gap-static-sm text-body-sm ${className}`}>
       <p>{t("copyright")}</p>
-      <p className="flex gap-static-lg">
+      <p className="flex gap-static-md md:justify-center [&>span]:underline [&>span]:underline-offset-4 [&>span]:decoration-1">
         <span>{t("terms")}</span>
         <span>{t("privacy")}</span>
       </p>
+      <button
+        type="button"
+        onClick={scrollToTop}
+        className="group w-fit md:justify-self-end inline-flex items-center gap-static-sm transition-colors duration-200 hover:text-[var(--color-brand-blue)] cursor-pointer"
+      >
+        {t("backToTop")}
+        <ArrowUR className="w-static-md h-static-md -rotate-45 transition-[translate] duration-200 group-hover:-translate-y-0.5" />
+      </button>
     </div>
   );
 }

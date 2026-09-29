@@ -260,12 +260,13 @@
       "cta": "Check active licenses"
     },
     "footer": {
-      "statement": "We keep building.",
+      "statement": ["Go beyond growth."],
       "cta": "Contact us",
       "contact": "Contact",
       "copyright": "© 2025 Epicare Insurance Corp. All Rights Reserved.",
       "terms": "Terms & Conditions",
-      "privacy": "Privacy Policy"
+      "privacy": "Privacy Policy",
+      "backToTop": "Back to top"
     },
     "footerCta": {
       "marquee": "EPICARE ✦ REAL OPERATION ✦",
