@@ -12,6 +12,8 @@ interface SecondaryCtaProps {
   tone?: "dark" | "light";
   /** Sin `backdrop-filter` (Hardware Symphony): para capas que se escalan en móvil. Solo `dark`. */
   lite?: boolean;
+  /** Acción propia (p. ej. scroll a una sección). Sin ella, abre el modal de login. */
+  onClick?: () => void;
   className?: string;
 }
 
@@ -33,11 +35,11 @@ const TONES = {
  * @description CTA secundario de GO CRM (el mismo del header, "Más de Epicare"): píldora con borde
  * y flecha en burbuja con swap diagonal al hover. Abre el modal de login, igual que `PrimaryCta`.
  */
-export default function SecondaryCta({ label, tone = "dark", lite = false, className = "" }: SecondaryCtaProps) {
+export default function SecondaryCta({ label, tone = "dark", lite = false, onClick, className = "" }: SecondaryCtaProps) {
   const { pill, bubble } = TONES[tone];
   const blur = tone === "dark" && !lite ? " backdrop-blur-md" : "";
   return (
-    <button type="button" onClick={() => loginModalStore.open()} className={`${BASE} ${pill}${blur}${className ? ` ${className}` : ""}`}>
+    <button type="button" onClick={onClick ?? (() => loginModalStore.open())} className={`${BASE} ${pill}${blur}${className ? ` ${className}` : ""}`}>
       <span>{label}</span>
       <span className={`relative w-static-xl h-static-xl rounded-full ${bubble} flex items-center justify-center overflow-hidden shrink-0`}>
         <ArrowUR className="absolute w-static-md h-static-md transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />

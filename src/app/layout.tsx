@@ -109,7 +109,10 @@ export default function RootLayout({
       lang="en"
       className={`${interDisplay.variable} ${interTight.variable} ${jetBrainsMono.variable} font-body antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[var(--color-surface-BG-1)] text-[var(--color-text-primary)] overflow-x-hidden">
+      <body
+        // Extensiones del navegador inyectan atributos en <body> antes de hidratar; sin esto React lo reporta como mismatch.
+        suppressHydrationWarning
+        className="min-h-full flex flex-col bg-[var(--color-surface-BG-1)] text-[var(--color-text-primary)] overflow-x-hidden">
         <SmoothScrollProvider>
           <I18nProviderClient>
             {children}
