@@ -61,7 +61,7 @@ export default function HistoryCompany() {
     >
       {/* ── TITULAR ── */}
       <div className="w-full max-w-section-xl mx-auto px-gutter-sm md:px-gutter-md grid-layout mb-static-2xl lg:mb-[var(--space-section-xs)]">
-        <h2 className="col-span-full lg:col-start-3 lg:col-span-8 lg:text-center text-display-lg overflow-hidden pb-static-xs">
+        <h2 className="col-span-full lg:col-span-8 text-display-lg overflow-hidden pb-static-xs">
           <span className="hs-title-line block">{t("title")}</span>
         </h2>
       </div>
