@@ -6,7 +6,7 @@
 const DIR = "/Files/Go_CRM/THE WORK BEHIND A SALE";
 
 export const STEP_VIDEOS = [
-  `${DIR}/Catch_Opportunity.mp4`,
+  `${DIR}/Catch_Opportunity_V2.mp4`,
   `${DIR}/Tasks and notes.mp4`,
   `${DIR}/Appointments.mp4`,
 ] as const;
@@ -15,7 +15,7 @@ export const STEP_VIDEOS = [
  * Proporción real de cada vídeo, en el mismo orden. Reserva el alto antes de que SmartVideo cargue
  * el archivo: sin esto la página cambia de alto al cargar y descuadra los pines siguientes.
  */
-export const STEP_RATIOS = ["2222 / 1224", "2222 / 1224", "2218 / 1140"] as const;
+export const STEP_RATIOS = ["1746 / 1216", "2222 / 1224", "2218 / 1140"] as const;
 
 export interface StepCopy {
   title: string;

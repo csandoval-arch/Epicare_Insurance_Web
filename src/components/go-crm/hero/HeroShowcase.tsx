@@ -4,7 +4,7 @@ import { asset } from "@/lib/asset";
 import BleedRight from "@/components/BleedRight";
 import { HeroScrollButtonDesktop } from "./HeroScrollButtons";
 
-const HERO_VIDEO = "/Files/Go_CRM/Hero/crm_UI_Hero_video.mp4";
+const HERO_VIDEO = "/Files/Go_CRM/Hero/crm_UI_Hero_video_V2.mp4";
 
 /**
  * @description Panel inferior del Hero: ventana tipo macOS con el video de la UI de GO CRM,
