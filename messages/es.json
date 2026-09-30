@@ -729,5 +729,72 @@
       "desc": "Del primer contacto a la póliza, toda tu venta en un solo lugar. Entra con tu cuenta de Epicare.",
       "cta": "Entra a GO CRM"
     }
+  },
+  "company": {
+    "hero": {
+      "title": [
+        "La base",
+        "detrás de la ambición",
+        "independiente."
+      ],
+      "subhead": "Construimos la infraestructura, la marca, la tecnología y las operaciones que ayudan a los agentes independientes a competir y ganar.",
+      "cta": "Nuestra historia"
+    },
+    "purpose": {
+      "mission": {
+        "overline": "Nuestra misión",
+        "title": "Existimos para construir la infraestructura, la marca, la tecnología y las operaciones que permiten a los agentes independientes competir y ganar en todo Estados Unidos.",
+        "body": "El mercado premia a las grandes agencias. Apostamos a que el <b>agente independiente</b>, con las herramientas correctas, ofrece la <b>mejor experiencia</b> al cliente final."
+      },
+      "vision": {
+        "overline": "Nuestra visión",
+        "title": "Vamos a ser la agencia de referencia en Estados Unidos, donde el agente independiente tiene todo lo que necesita para crecer.",
+        "body": "Crecemos cuando el <b>agente crece</b>. Herramientas, formación, marca, cumplimiento y comisiones, <b>todo en un solo lugar</b>, para que nadie tenga que elegir entre escalar y hacerlo bien."
+      }
+    },
+    "history": {
+      "title": "La historia detrás de la base.",
+      "items": [
+        {
+          "meta": "01 · Antes de 2021",
+          "title": "El problema",
+          "body": "Los seguros siempre han tenido una puerta, y <b>no todos tienen la llave</b>. Tecnicismos, letra pequeña, capas de intermediarios. Para un agente independiente, eso significa <b>competir contra agencias muchas veces más grandes</b>, con menos aseguradoras, menos herramientas y sin un equipo de marketing detrás. Para el cliente, significa que su cobertura a menudo depende de conocer a alguien o de hablar el idioma correcto. El mercado premia a las grandes agencias. <b>No creímos que tuviera que seguir así.</b>"
+        },
+        {
+          "meta": "02 · Junio 2021",
+          "title": "La decisión",
+          "body": "En junio de 2021, Epicare Insurance Corp empezó a operar como <b>agencia de seguros con licencia en Miami, Florida</b>. La apuesta era simple: <b>darle al agente independiente lo que solo tenían las grandes agencias</b>. Tecnología que reemplaza un stack disperso. Marketing en inglés y español que trae prospectos calificados. Y respaldo de la industria: aseguradoras, contratación, cumplimiento y formación, con un equipo experto detrás de cada caso. No como servicios sueltos, sino como <b>una sola base</b> sobre la que construir una cartera, en los términos del agente."
+        },
+        {
+          "meta": "03 · Hoy",
+          "title": "La base",
+          "body": "Hoy atendemos <b>los 50 estados, el Distrito de Columbia y Puerto Rico</b>, con <b>más de 130 aseguradoras activas</b> y una marca registrada ante la USPTO. Lo que empezó como una agencia es hoy un sistema de cinco líneas: Insurance Corp, Plans, B2C Verticals, Epicare GO y Academy. Cada una tiene su audiencia. Todas comparten el mismo estándar. Y la regla no ha cambiado: <b>respaldamos al agente, no competimos con él</b>. Seguimos construyendo."
+        }
+      ]
+    },
+    "structure": {
+      "overline": "El estándar Epicare detrás de cada producto.",
+      "title": "Epicare Insurance Corp es la empresa matriz. Todo lo demás es un producto o una plataforma que opera. Cada uno tiene su propia audiencia, pero todos comparten el mismo ADN."
+    },
+    "promise": {
+      "overline": "El estándar Epicare",
+      "items": [
+        {
+          "word": "Claridad.",
+          "outcome": "Supervisión sin ruido",
+          "text": "Cada métrica, cada operación y cada riesgo están a la vista. No nos escondemos detrás de la complejidad. Nuestra plataforma lleva transparencia inmediata a cada capa de tu negocio."
+        },
+        {
+          "word": "Control.",
+          "outcome": "Precisión en la ejecución",
+          "text": "Tú gobiernas la plataforma, no la plataforma a ti. Construimos sistemas que se adaptan a tus protocolos, para que tus decisiones estratégicas se conviertan al instante en realidad operativa."
+        },
+        {
+          "word": "Confianza.",
+          "outcome": "Fiabilidad a escala",
+          "text": "La confianza se sostiene porque se puede verificar. Nuestra infraestructura garantiza 99.99% de disponibilidad, seguridad sin concesiones y certeza matemática en cada transacción."
+        }
+      ]
+    }
   }
 }

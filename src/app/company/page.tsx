@@ -55,8 +55,8 @@ export default function CompanyPage() {
       {/* "?"? COMPANY SECTIONS "?"? */}
       <HeroCompany />
       <PurposeCompany />
-      <HistoryCompany />
       <StructureCompany />
+      <HistoryCompany />
       <PromiseCompany />
 
       {/* "?"? GLOBAL FOOTER "?"? */}
