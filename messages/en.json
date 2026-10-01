@@ -367,12 +367,15 @@
       "card1Title": "Real-Time Downline Hierarchy",
       "card1Badge": "8 Active Agents · Salesforce",
       "card1Alt": "Real-Time Downline Hierarchy · Production Metrics per Agent",
+      "card1Desc": "Every agent’s production, retention and compliance, up to date.",
       "card2Title": "Licenses & Continuing Education",
       "card2Badge": "NIPR Live Sync",
       "card2Alt": "License Verification and State Expiration Details",
+      "card2Desc": "Licenses and expiration dates by state, synced with NIPR.",
       "card3Title": "Digital Agent Onboarding",
       "card3Badge": "1-Click Direct Invite",
-      "card3Alt": "Digital Onboarding and Producer Invitation Workflow"
+      "card3Alt": "Digital Onboarding and Producer Invitation Workflow",
+      "card3Desc": "Invite a new producer and add them to your agency in one click."
     },
     "quoteWays": {
       "title1_1": "We unify",

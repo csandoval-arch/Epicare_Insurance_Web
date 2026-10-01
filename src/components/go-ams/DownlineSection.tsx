@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslations } from "next-intl";
@@ -12,11 +12,13 @@ import {
 } from "@phosphor-icons/react";
 import { asset } from "@/lib/asset";
 import { EASE, DUR, STAGGER, REVEAL, TRIGGER, SCRUB } from "@/lib/motion";
+import DownlineStacked from "./downline/DownlineStacked";
 
 const CARDS_DATA = [
   {
     id: 1,
     titleKey: "card1Title",
+    descKey: "card1Desc",
     altKey: "card1Alt",
     image: "/Files/Go_AMS/downline/go-ams-downline-overview.webp",
     icon: <TreeStructure weight="duotone" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
@@ -24,6 +26,7 @@ const CARDS_DATA = [
   {
     id: 2,
     titleKey: "card2Title",
+    descKey: "card2Desc",
     altKey: "card2Alt",
     image: "/Files/Go_AMS/downline/go-ams-downline-license-details.webp",
     icon: <Certificate weight="duotone" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
@@ -31,11 +34,20 @@ const CARDS_DATA = [
   {
     id: 3,
     titleKey: "card3Title",
+    descKey: "card3Desc",
     altKey: "card3Alt",
     image: "/Files/Go_AMS/downline/go-ams-downline-invite.webp",
     icon: <UserPlus weight="duotone" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
   }
 ];
+
+// ── MÓVIL: ENTRADA DE CADA PASO (la misma de "El trabajo detrás de una venta" de GO CRM) ──
+/** Desde dónde entra cada pantallazo (xPercent de su propio ancho = fuera de pantalla), en zigzag. */
+const SHOT_ENTRY_X = 100;
+const BIRTH_FROM = { yPercent: REVEAL.birthPercent, opacity: 0, willChange: "transform, opacity" };
+const BIRTH_TO = { yPercent: 0, opacity: 1, duration: DUR.slow, ease: EASE.dramatic, force3D: true, clearProps: "willChange" };
+const SUB_FROM = { opacity: 0, y: REVEAL.sm, willChange: "transform, opacity" };
+const SUB_TO = { opacity: 1, y: 0, duration: DUR.base, ease: EASE.out, force3D: true, clearProps: "willChange" };
 
 export default function DownlineSection() {
   const t = useTranslations('goAms.downline');
@@ -45,7 +57,6 @@ export default function DownlineSection() {
   const trackRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const [activeMobileIndex, setActiveMobileIndex] = useState(0);
 
   // Calcular la alineación fija en desktop sin forzar re-renders (evita hydration mismatch)
   useEffect(() => {
@@ -74,24 +85,6 @@ export default function DownlineSection() {
       window.removeEventListener("load", updateOffset);
     };
   }, []);
-
-  // Scroll handler para carrusel táctil en mobile
-  const handleMobileScroll = () => {
-    const track = trackRef.current;
-    if (!track || window.innerWidth >= 768) return;
-    const scrollLeft = track.scrollLeft;
-    const firstCard = cardsRef.current[0];
-    const cardWidth = firstCard ? firstCard.offsetWidth + 16 : track.clientWidth * 0.88;
-    const index = Math.round(scrollLeft / cardWidth);
-    setActiveMobileIndex(Math.min(Math.max(index, 0), CARDS_DATA.length - 1));
-  };
-
-  const scrollToMobileCard = (index: number) => {
-    const card = cardsRef.current[index];
-    if (card) {
-      card.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-    }
-  };
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -205,30 +198,22 @@ export default function DownlineSection() {
         );
       });
 
-      // ── 3. MOBILE (< 768px): Entrada de Cards ──
+      // ── 3. MOBILE (< 768px): pasos apilados — titular con text-birth, pantallazo entrando en zigzag
+      //    desde los lados y subtítulo (one-shot al llegar a cada paso) ──
       mm.add("(max-width: 767px)", () => {
-        const validCards = cardsRef.current.filter(Boolean);
-        if (validCards.length > 0) {
-          gsap.fromTo(
-            validCards,
-            { opacity: 0, y: 20, scale: 0.98 },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 0.5,
-              stagger: 0.08,
-              ease: EASE.out,
-              force3D: true,
-              clearProps: "willChange",
-              scrollTrigger: {
-                trigger: el,
-                start: TRIGGER.standard,
-                toggleActions: "play none none reverse"
-              }
-            }
-          );
-        }
+        gsap.utils.toArray<HTMLElement>(".dl-step").forEach((step, i) => {
+          const fromSide = i % 2 === 0 ? SHOT_ENTRY_X : -SHOT_ENTRY_X;
+          gsap
+            .timeline({ scrollTrigger: { trigger: step, start: TRIGGER.standard, toggleActions: "play none none reverse" } })
+            .fromTo(step.querySelector(".dl-step-title"), BIRTH_FROM, BIRTH_TO)
+            .fromTo(
+              step.querySelector(".dl-step-shot"),
+              { xPercent: fromSide, opacity: 0, willChange: "transform, opacity" },
+              { xPercent: 0, opacity: 1, duration: DUR.slow, ease: EASE.dramatic, force3D: true, clearProps: "willChange" },
+              "-=1"
+            )
+            .fromTo(step.querySelector(".dl-step-desc"), SUB_FROM, SUB_TO, "-=0.6");
+        });
       });
 
     }, el);
@@ -284,11 +269,20 @@ export default function DownlineSection() {
           </div>
         </div>
 
-        {/* ── 2. Track de Tarjetas con Título Encima y Formato Natural de Imagen ── */}
-        <div className="w-full flex-1 flex items-center relative z-20 overflow-visible py-2 sm:py-4">
+        {/* ── 2a. MÓVIL: pasos apilados (título · pantallazo · subtítulo sangrado) ── */}
+        <DownlineStacked
+          steps={CARDS_DATA.map((card) => ({
+            title: t(card.titleKey),
+            desc: t(card.descKey),
+            image: card.image,
+            alt: t(card.altKey),
+          }))}
+        />
+
+        {/* ── 2b. TABLET/DESKTOP: Track de Tarjetas con Título Encima y Formato Natural de Imagen ── */}
+        <div className="w-full flex-1 hidden md:flex items-center relative z-20 overflow-visible py-2 sm:py-4">
           <div
             ref={trackRef}
-            onScroll={handleMobileScroll}
             className="flex items-start gap-4 sm:gap-6 lg:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-none -mx-gutter-sm px-gutter-sm md:mx-0 md:px-0 md:pr-[20vw] will-change-transform w-full"
           >
             
@@ -300,7 +294,7 @@ export default function DownlineSection() {
               >
                 {/* Nombre con icono encima de la imagen */}
                 <div className="flex items-center gap-2.5 sm:gap-3.5 pb-2.5 sm:pb-4 px-1">
-                  <div className="p-1.5 sm:p-2.5 rounded-xl sm:rounded-2xl bg-[var(--color-brand-blue)]/10 text-[var(--color-brand-blue)] border border-[var(--color-brand-blue)]/20 shrink-0">
+                  <div className="p-1.5 sm:p-2.5 rounded-md sm:rounded-lg bg-[var(--color-brand-blue)]/10 text-[var(--color-brand-blue)] border border-[var(--color-brand-blue)]/20 shrink-0">
                     {card.icon}
                   </div>
                   <span className="text-body-md sm:text-h5 md:text-h4 font-semibold text-[var(--color-text-primary)]">
@@ -309,7 +303,7 @@ export default function DownlineSection() {
                 </div>
 
                 {/* Screenshot en su formato natural */}
-                <div className="relative w-full rounded-2xl md:rounded-[2rem] border border-[var(--color-border-Strokes-default)] shadow-elevation-3 overflow-hidden bg-[var(--color-surface-BG-1)]">
+                <div className="relative w-full rounded-lg md:rounded-xl border border-[var(--color-border-Strokes-default)] shadow-elevation-3 overflow-hidden bg-[var(--color-surface-BG-1)]">
                   <img
                     src={asset(card.image)}
                     alt={t(card.altKey as any)}
@@ -321,25 +315,6 @@ export default function DownlineSection() {
             ))}
 
           </div>
-        </div>
-
-        {/* ── 3. Puntos de Paginación Táctil (Solo Mobile) ── */}
-        <div className="flex md:hidden items-center justify-center gap-2 mt-4">
-          {CARDS_DATA.map((_, idx) => {
-            const isActive = idx === activeMobileIndex;
-            return (
-              <button
-                key={idx}
-                onClick={() => scrollToMobileCard(idx)}
-                aria-label={`Slide ${idx + 1}`}
-                className={`transition-all duration-300 rounded-full cursor-pointer ${
-                  isActive
-                    ? "w-6 h-1.5 bg-[var(--color-brand-blue)] shadow-[0_0_8px_rgba(53,187,253,0.6)]"
-                    : "w-1.5 h-1.5 bg-[var(--color-border-Strokes-strong)]/40 hover:bg-[var(--color-border-Strokes-strong)]"
-                }`}
-              />
-            );
-          })}
         </div>
 
       </section>

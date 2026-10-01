@@ -367,12 +367,15 @@
       "card1Title": "Downline en Tiempo Real",
       "card1Badge": "8 Agentes Activos · Salesforce",
       "card1Alt": "Downline en Tiempo Real · Métricas de Producción por Agente",
+      "card1Desc": "Producción, retención y cumplimiento de cada agente, al día.",
       "card2Title": "Licencias & Continuing Education",
       "card2Badge": "NIPR Sincronizado",
       "card2Alt": "Detalles de Licencias y Vigencia por Estado",
+      "card2Desc": "Licencias y vigencias por estado, sincronizadas con NIPR.",
       "card3Title": "Onboarding de Nuevos Agentes",
       "card3Badge": "Invitación en 1 Clic",
-      "card3Alt": "Onboarding e Invitación de Nuevos Productores a la Agencia"
+      "card3Alt": "Onboarding e Invitación de Nuevos Productores a la Agencia",
+      "card3Desc": "Invita a un nuevo productor y súmalo a tu agencia en un clic."
     },
     "quoteWays": {
       "title1_1": "Unificamos",
