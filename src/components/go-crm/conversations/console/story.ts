@@ -187,12 +187,13 @@ export function buildDesktopStory(scope: Scope) {
     .add(resetScene(q), `+=${HOLD}`);
 }
 
-/** Móvil · hilo: envío y respuesta (el compositor queda fuera del recorte, no hay tecleo). */
+/** Móvil · hilo: el slide muestra el panel entero, así que tiene tecleo, envío y respuesta. */
 export function buildThreadStory(scope: Scope) {
   const q = scoped(scope);
   return loop()
     .to({}, { duration: IDLE })
-    .add(sendScene(q))
+    .add(typeScene(q))
+    .add(sendScene(q), `+=${DUR.fast}`)
     .add(replyScene(q), `+=${DUR.slow}`)
     .add(resetScene(q), `+=${HOLD}`);
 }

@@ -7,14 +7,15 @@
  * ficha del contacto → llamadas · hilo → documentos · actividad → automatización. Los paneles
  * son UI real (réplica 1:1 de la captura en `console/`, siempre clara), escalada como un artboard.
  * - Desktop (≥md): scrub ligado al scroll, solo transform/opacity.
- * - Móvil (<md): ya despiezado; cada panel (recorte apaisado) con su feature debajo.
+ * - Móvil (<md): slider horizontal nativo (`ConvMobileSlider`): un slide por panel + su feature.
  */
 
 import { useLayoutEffect, useRef, type CSSProperties } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { EASE, REVEAL } from "@/lib/motion";
-import { CONV_ICONS } from "./ConvIcons";
+import FeatureTitle from "./FeatureTitle";
+import ConvMobileSlider from "./ConvMobileSlider";
 import { PANELS, type ConvFeature } from "./convData";
 import { CARD_FROM, CARD_TO, DESKTOP, FULL, MOBILE, oneShot } from "./useConversationsMotion";
 import { Artboard, UI_CSS } from "./console/ui";
@@ -58,17 +59,6 @@ function playWhileVisible(trigger: Element, start: string, story: gsap.core.Time
   });
 }
 
-/** Título de feature con su icono (el mismo en desktop y móvil). */
-function FeatureTitle({ card, index, className = "" }: { card: ConvFeature; index: number; className?: string }) {
-  const Icon = CONV_ICONS[index];
-  return (
-    <h3 className={`flex items-start gap-static-sm text-h5 text-[var(--color-text-primary)] ${className}`}>
-      <Icon className="w-4 h-4 shrink-0 mt-[0.3em] text-[var(--color-brand-blue)]" />
-      {card.title}
-    </h3>
-  );
-}
-
 export default function ConvExploded({ cards }: { cards: ConvFeature[] }) {
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -106,11 +96,11 @@ export default function ConvExploded({ cards }: { cards: ConvFeature[] }) {
     });
 
     mm.add(`${MOBILE} and ${FULL}`, () => {
+      // El slider entra como bloque (Pilar 1 móvil: nunca sus hijos).
+      const slider = el.querySelector(".cx-slider");
+      gsap.fromTo(slider, CARD_FROM, { ...CARD_TO, ...oneShot(slider) });
+      // Móvil: el hilo y la actividad tienen su propio loop (las etiquetas no caen en el recorte del contacto).
       const items = gsap.utils.toArray<HTMLElement>(".cx-item", el);
-      items.forEach((item) => {
-        gsap.fromTo(item, CARD_FROM, { ...CARD_TO, ...oneShot(item) });
-      });
-      // Móvil: el hilo y la actividad tienen su propio loop (el compositor y las etiquetas no caen en su recorte).
       if (items.length !== 3) return;
       playWhileVisible(items[1], STORY_START_MOBILE, buildThreadStory(items[1]), items[1]);
       playWhileVisible(items[2], STORY_START_MOBILE, buildActivityStory(items[2]), items[2]);
@@ -127,7 +117,7 @@ export default function ConvExploded({ cards }: { cards: ConvFeature[] }) {
   }, []);
 
   return (
-    <div ref={rootRef} className="w-full max-w-section-xl px-gutter-sm md:px-gutter-md mt-static-xl lg:mt-static-2xl">
+    <div ref={rootRef} className="w-full max-w-section-xl md:px-gutter-md mt-static-xl lg:mt-static-2xl">
       <style href="go-crm-console-ui" precedence="default">{UI_CSS}</style>
       {/* ── DESKTOP: PANELES (montados → despiezados) + FEATURES BAJO CADA UNO ── */}
       <div className="cx-desktop hidden md:block">
@@ -157,25 +147,8 @@ export default function ConvExploded({ cards }: { cards: ConvFeature[] }) {
         </div>
       </div>
 
-      {/* ── MÓVIL: PANEL APAISADO + FEATURE, UNO TRAS OTRO ── */}
-      <div className="md:hidden flex flex-col gap-static-2xl">
-        {cards.map((card, i) => {
-          const Ui = PANEL_UI[i];
-          return (
-            <div key={card.title} className="cx-item flex flex-col gap-static-md">
-              <div className={`overflow-hidden ${PANEL}`}>
-                <Artboard w={PANELS[i].w} h={PANELS[i].h} view={PANELS[i].mobile}>
-                  <Ui />
-                </Artboard>
-              </div>
-              <div>
-                <FeatureTitle card={card} index={i} />
-                <p className="mt-static-sm text-body-md text-[var(--color-text-secondary)]">{card.desc}</p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      {/* ── MÓVIL: SLIDER HORIZONTAL (panel + feature por slide) ── */}
+      <ConvMobileSlider cards={cards} panels={PANEL_UI} panelClass={PANEL} />
     </div>
   );
 }

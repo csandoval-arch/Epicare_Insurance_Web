@@ -18,16 +18,23 @@ export interface ConvFeature {
 export interface PanelGeometry {
   w: number;
   h: number;
-  /**
-   * Móvil: recorte apaisado de la parte que importa (teléfono · tarjeta enviada · actividad);
-   * el panel entero mediría ~800 px de alto a 390.
-   */
+  /** Móvil: vista del slide (todas con la misma proporción, ver `MOBILE_RATIO`). */
   mobile: ArtView;
 }
 
+/**
+ * Proporción alto/ancho de los slides móviles: la del hilo entero (su panel es casi cuadrado y es
+ * el que más necesita verse completo). Los otros dos recortan su alto a esa misma proporción.
+ */
+const MOBILE_RATIO = THREAD_SIZE.h / THREAD_SIZE.w;
+const mobileView = (w: number, y: number): ArtView => ({ x: 0, y, w, h: Math.round(w * MOBILE_RATIO) });
+
 /** En el orden de las features: contacto (llamadas) · hilo (documentos) · actividad (automatización). */
 export const PANELS: readonly PanelGeometry[] = [
-  { ...CONTACT_SIZE, mobile: { x: 0, y: 521, w: CONTACT_SIZE.w, h: 527 } },
-  { ...THREAD_SIZE, mobile: { x: 0, y: 153, w: THREAD_SIZE.w, h: 490 } },
-  { ...ACTIVITY_SIZE, mobile: { x: 0, y: 0, w: ACTIVITY_SIZE.w, h: 490 } },
+  // Contacto: de la sección "Contact" al teléfono.
+  { ...CONTACT_SIZE, mobile: mobileView(CONTACT_SIZE.w, 420) },
+  // Hilo: entero (cabecera, mensajes y compositor).
+  { ...THREAD_SIZE, mobile: mobileView(THREAD_SIZE.w, 0) },
+  // Actividad: cabecera y eventos (donde entra la historia).
+  { ...ACTIVITY_SIZE, mobile: mobileView(ACTIVITY_SIZE.w, 0) },
 ];
