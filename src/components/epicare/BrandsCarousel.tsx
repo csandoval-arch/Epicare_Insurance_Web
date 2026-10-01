@@ -99,7 +99,7 @@ export default function BrandsCarousel() {
   );
 
   return (
-    <section className="relative w-full rounded-t-[32px] overflow-hidden bg-[var(--color-surface-BG-white)] dark:bg-[var(--color-surface-BG-black)] text-[var(--color-text-Black-100)] dark:text-white z-20 flex flex-col justify-start pt-section-sm md:pt-[15vh] pb-section-sm md:pb-section-md transition-colors duration-500">
+    <section className="relative w-full rounded-t-lg md:rounded-t-xl overflow-hidden bg-[var(--color-surface-BG-white)] dark:bg-[var(--color-surface-BG-black)] text-[var(--color-text-Black-100)] dark:text-white z-20 flex flex-col justify-start pt-section-sm md:pt-[15vh] pb-section-sm md:pb-section-md transition-colors duration-500">
       
       <div className="w-full flex flex-col items-center px-4">
         

@@ -154,10 +154,10 @@ export default function ProductSpotlightEpicare({ variant }: { variant: Spotligh
           <div className="w-full px-1 sm:px-4 lg:px-8" style={{ maxWidth: 'calc(var(--max-w-section-lg, 1440px) / 2)' }}>
             
             {/* LIQUID GLASS TEXT CARD */}
-            <div className={`relative z-10 w-full max-w-[540px] mx-auto lg:mx-0 ${isEppigo ? 'lg:mr-auto' : 'lg:ml-auto'} rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-[2.5rem] border border-[var(--color-border-Strokes-default)] shadow-[0_40px_80px_rgba(0,0,0,0.05)] transform hover:-translate-y-1 transition-transform duration-500 overflow-hidden`}>
+            <div className={`relative z-10 w-full max-w-[540px] mx-auto lg:mx-0 ${isEppigo ? 'lg:mr-auto' : 'lg:ml-auto'} rounded-lg md:rounded-xl border border-[var(--color-border-Strokes-default)] shadow-[0_40px_80px_rgba(0,0,0,0.05)] transform hover:-translate-y-1 transition-transform duration-500 overflow-hidden`}>
             
             {/* Glassmorphic Background Layer (Static) */}
-            <div className="absolute inset-0 rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-[2.5rem] -z-10">
+            <div className="absolute inset-0 rounded-lg md:rounded-xl -z-10">
             {/* Pure Background Mesh (Brand Blue) */}
             <img 
               src={asset(SPOTLIGHT_BG)}

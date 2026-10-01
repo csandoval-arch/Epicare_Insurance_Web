@@ -232,10 +232,10 @@ export default function HeroSection() {
                 </button>
               </div>
 
-              <div id="visual-panel" className="hero-video-card relative bg-[var(--color-surface-BG-1)] shadow-elevation-3 w-full h-auto flex items-center justify-center rounded-2xl lg:rounded-l-[16px] lg:rounded-r-none border border-[var(--color-border-Strokes-default)]/60 overflow-hidden p-0">
+              <div id="visual-panel" className="hero-video-card relative bg-[var(--color-surface-BG-1)] shadow-elevation-3 w-full h-auto flex items-center justify-center rounded-lg lg:rounded-l-xl lg:rounded-r-none border border-[var(--color-border-Strokes-default)]/60 overflow-hidden p-0">
                 
                 {/* Media Editor (Video) */}
-                <div id="hero-video" className="relative z-0 flex items-center justify-center w-full overflow-hidden rounded-2xl lg:rounded-l-[16px] lg:rounded-r-none h-auto">
+                <div id="hero-video" className="relative z-0 flex items-center justify-center w-full overflow-hidden rounded-lg lg:rounded-l-xl lg:rounded-r-none h-auto">
                   <video
                     autoPlay
                     muted
@@ -244,12 +244,12 @@ export default function HeroSection() {
                     preload="auto"
                     poster={asset("/Files/Go_AMS/hero/posters/go-ams-hero-poster.webp")}
                     aria-hidden="true"
-                    className="w-full h-auto block object-contain rounded-2xl lg:rounded-l-[16px] lg:rounded-r-none"
+                    className="w-full h-auto block object-contain rounded-lg lg:rounded-l-xl lg:rounded-r-none"
                   >
                     <source src={asset("/Files/Go_AMS/hero/go-ams-hero.mp4")} type="video/mp4" />
                   </video>
                   {/* Textura de ruido optimizada */}
-                  <div className="absolute inset-0 bg-noise pointer-events-none z-10 mix-blend-overlay opacity-80 rounded-2xl lg:rounded-l-[16px] lg:rounded-r-none" />
+                  <div className="absolute inset-0 bg-noise pointer-events-none z-10 mix-blend-overlay opacity-80 rounded-lg lg:rounded-l-xl lg:rounded-r-none" />
                 </div>
 
               </div>

@@ -188,7 +188,7 @@ export default function HowToJoinSection() {
             <div 
               key={step.id}
               ref={(el) => { cardsRef.current[idx] = el; }}
-              className="shrink-0 w-[78vw] sm:w-[300px] aspect-square snap-center p-6 rounded-2xl border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-base)] shadow-elevation-2 flex flex-col justify-start select-none relative overflow-hidden"
+              className="shrink-0 w-[78vw] sm:w-[300px] aspect-square snap-center p-6 rounded-lg border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-base)] shadow-elevation-2 flex flex-col justify-start select-none relative overflow-hidden"
             >
               <span className="text-data font-mono text-[var(--color-brand-blue)] mb-3 block select-none">
                 {step.id}
@@ -228,7 +228,7 @@ export default function HowToJoinSection() {
         </div>
 
         {/* ── Desktop Swiss Data Table (≥ 768px) ── */}
-        <div className="hidden md:grid grid-cols-4 border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-base)] shadow-elevation-2 rounded-3xl overflow-hidden">
+        <div className="hidden md:grid grid-cols-4 border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-base)] shadow-elevation-2 rounded-xl overflow-hidden">
           {STEPS.map((step) => (
             <div 
               key={step.id} 

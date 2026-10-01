@@ -519,12 +519,12 @@ function QuoteEnrollDesktop() {
               {features.filter((_, i) => i % 2 === 0).map((feature) => (
                 <div 
                   key={feature.id}
-                  className="qw-card relative w-full rounded-[2.5rem] border border-[var(--color-brand-blue)]/30 shadow-elevation-3 hover:shadow-elevation-5 overflow-hidden group transition-all duration-700 hover:-translate-y-4 will-change-transform"
+                  className="qw-card relative w-full rounded-lg md:rounded-xl border border-[var(--color-brand-blue)]/30 shadow-elevation-3 hover:shadow-elevation-5 overflow-hidden group transition-all duration-700 hover:-translate-y-4 will-change-transform"
                 >
                   {/* GLASS BACKGROUND LAYER (Hardware Accelerated) */}
                   <div className="absolute inset-0 -z-10 bg-[var(--color-surface-BG-1)]/50 dark:bg-black/40 backdrop-blur-[24px] transform-gpu" />
                   <div className="absolute inset-0 -z-10 bg-white/30 dark:bg-white/5 backdrop-blur-[16px] saturate-[1.5] transform-gpu" />
-                  <div className="absolute inset-0 -z-10 rounded-[2.5rem] bg-gradient-to-b from-white/40 to-transparent dark:from-white/10 opacity-70 pointer-events-none transform-gpu" />
+                  <div className="absolute inset-0 -z-10 rounded-lg md:rounded-xl bg-gradient-to-b from-white/40 to-transparent dark:from-white/10 opacity-70 pointer-events-none transform-gpu" />
 
                   <div className="card-bg-number absolute -bottom-4 right-0 lg:right-4 text-[25vw] lg:text-[12vw] leading-none font-display font-bold text-[var(--color-text-primary)] opacity-[0.03] dark:opacity-[0.05] pointer-events-none select-none z-0 transition-colors duration-500 group-hover:text-[var(--color-brand-blue)]">
                     {feature.id}
@@ -562,12 +562,12 @@ function QuoteEnrollDesktop() {
               {features.filter((_, i) => i % 2 !== 0).map((feature) => (
                 <div 
                   key={feature.id}
-                  className="qw-card relative w-full rounded-[2.5rem] border border-[var(--color-brand-blue)]/30 shadow-elevation-3 hover:shadow-elevation-5 overflow-hidden group transition-all duration-700 hover:-translate-y-4 will-change-transform"
+                  className="qw-card relative w-full rounded-lg md:rounded-xl border border-[var(--color-brand-blue)]/30 shadow-elevation-3 hover:shadow-elevation-5 overflow-hidden group transition-all duration-700 hover:-translate-y-4 will-change-transform"
                 >
                   {/* GLASS BACKGROUND LAYER (Hardware Accelerated) */}
                   <div className="absolute inset-0 -z-10 bg-[var(--color-surface-BG-1)]/50 dark:bg-black/40 backdrop-blur-[24px] transform-gpu" />
                   <div className="absolute inset-0 -z-10 bg-white/30 dark:bg-white/5 backdrop-blur-[16px] saturate-[1.5] transform-gpu" />
-                  <div className="absolute inset-0 -z-10 rounded-[2.5rem] bg-gradient-to-b from-white/40 to-transparent dark:from-white/10 opacity-70 pointer-events-none transform-gpu" />
+                  <div className="absolute inset-0 -z-10 rounded-lg md:rounded-xl bg-gradient-to-b from-white/40 to-transparent dark:from-white/10 opacity-70 pointer-events-none transform-gpu" />
 
                   <div className="card-bg-number absolute -bottom-4 right-0 lg:right-4 text-[25vw] lg:text-[12vw] leading-none font-display font-bold text-[var(--color-text-primary)] opacity-[0.03] dark:opacity-[0.05] pointer-events-none select-none z-0 transition-colors duration-500 group-hover:text-[var(--color-brand-blue)]">
                     {feature.id}
@@ -740,10 +740,10 @@ function QuoteEnrollMobile() {
               className={`mobile-stack-card w-full h-[72dvh] max-h-[560px] px-gutter-sm flex flex-col justify-center items-center origin-top transform-gpu will-change-transform [backface-visibility:hidden] mt-static-sm mb-static-md ${!isLastCard ? 'sticky top-5' : 'relative pb-static-xl'}`}
               style={{ zIndex: 11 + idx }}
             >
-              <div className="relative w-full h-full rounded-[24px] sm:rounded-[28px] overflow-hidden shadow-elevation-3 border border-[var(--color-brand-blue)]/30 flex flex-col justify-between p-6 sm:p-8 bg-[var(--color-surface-BG-white)] dark:bg-[#0D0D0E] [transform:translateZ(0)]">
+              <div className="relative w-full h-full rounded-lg sm:rounded-xl overflow-hidden shadow-elevation-3 border border-[var(--color-brand-blue)]/30 flex flex-col justify-between p-6 sm:p-8 bg-[var(--color-surface-BG-white)] dark:bg-[#0D0D0E] [transform:translateZ(0)]">
                 {/* GLASS BACKGROUND LAYER */}
                 <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white/90 to-white dark:from-[#151718] dark:to-[#0D0D0E] backdrop-blur-[24px] transform-gpu" />
-                <div className="absolute inset-0 -z-10 rounded-[24px] sm:rounded-[28px] bg-gradient-to-b from-white/40 to-transparent dark:from-white/10 opacity-70 pointer-events-none transform-gpu" />
+                <div className="absolute inset-0 -z-10 rounded-lg sm:rounded-xl bg-gradient-to-b from-white/40 to-transparent dark:from-white/10 opacity-70 pointer-events-none transform-gpu" />
 
                 {/* GIANT NUMBER */}
                 <div className="absolute -bottom-2 right-2 text-[25vw] sm:text-[20vw] leading-none font-display font-bold text-[var(--color-text-primary)] opacity-[0.03] dark:opacity-[0.05] pointer-events-none select-none z-0">

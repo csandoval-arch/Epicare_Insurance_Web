@@ -249,7 +249,7 @@ export default function BentoGridMobile() {
       <section
         id="plataforma"
         ref={containerRef}
-        className="relative w-full h-auto md:h-screen overflow-x-clip md:overflow-hidden bg-[var(--color-brand-blue)] transition-colors duration-500 z-20 rounded-t-none rounded-b-4xl md:rounded-4xl max-w-full"
+        className="relative w-full h-auto md:h-screen overflow-x-clip md:overflow-hidden bg-[var(--color-brand-blue)] transition-colors duration-500 z-20 rounded-t-none rounded-b-xl md:rounded-xl max-w-full"
         style={{ perspective: '2000px' }}
       >
         {/* AMBIENT ORB — the journey's mood: morphs to the active product's accent */}
@@ -283,7 +283,7 @@ export default function BentoGridMobile() {
           {/* CARD 0: THE TITLE COMPOSITION */}
           <div className="mobile-stack-card sticky top-0 w-full min-h-fit pb-8 sm:pb-[6vh] flex flex-col justify-start pt-static-xl sm:pt-[calc(6vh)] items-start px-gutter-sm origin-top transform-gpu will-change-transform [backface-visibility:hidden] z-[10] relative">
               {/* GoHub Logo Badge above the title */}
-              <div className="gohub-logo-badge w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-5 shadow-elevation-2">
+              <div className="gohub-logo-badge w-14 h-14 bg-white rounded-lg flex items-center justify-center mb-5 shadow-elevation-2">
                 <GoHubLogo className="w-9 h-9 text-[var(--color-brand-blue)]" />
               </div>
 
@@ -320,7 +320,7 @@ export default function BentoGridMobile() {
             >
                 <CardWrapper 
                   {...cardProps}
-                  className={`group relative w-full h-full rounded-[24px] sm:rounded-[28px] overflow-hidden shadow-[0_4px_30px_rgba(0,0,0,0.1)] border border-[var(--color-border-Strokes-default)] flex flex-col pb-static-sm transition-transform duration-[600ms] cursor-pointer [transform:translateZ(0)] ${(card as any).cardClassNameDark ? `bg-[var(--color-surface-BG-white)] ${(card as any).cardClassNameDark}` : 'bg-[var(--color-surface-BG-white)] dark:bg-[var(--color-surface-BG-black)]'}`}
+                  className={`group relative w-full h-full rounded-lg sm:rounded-xl overflow-hidden shadow-[0_4px_30px_rgba(0,0,0,0.1)] border border-[var(--color-border-Strokes-default)] flex flex-col pb-static-sm transition-transform duration-[600ms] cursor-pointer [transform:translateZ(0)] ${(card as any).cardClassNameDark ? `bg-[var(--color-surface-BG-white)] ${(card as any).cardClassNameDark}` : 'bg-[var(--color-surface-BG-white)] dark:bg-[var(--color-surface-BG-black)]'}`}
                 >
                   
                   {/* Brand Blue Action CTA with White Bubble (40px height) */}
@@ -356,7 +356,7 @@ export default function BentoGridMobile() {
                   </div>
 
                   {/* Media Container (Bottom) */}
-                  <div className={`w-full flex-1 relative overflow-hidden pointer-events-none mx-auto rounded-b-[20px] sm:rounded-b-[24px] ${(card as any).isAms ? 'bg-transparent' : (card as any).mediaClassNameDark ? (card as any).mediaClassNameDark : 'bg-black/5 dark:bg-white/5'} ${((card as any).videoDark && (card as any).videoDarkFullBackground) ? 'dark:hidden' : ''}`}>
+                  <div className={`w-full flex-1 relative overflow-hidden pointer-events-none mx-auto rounded-b-lg sm:rounded-b-xl ${(card as any).isAms ? 'bg-transparent' : (card as any).mediaClassNameDark ? (card as any).mediaClassNameDark : 'bg-black/5 dark:bg-white/5'} ${((card as any).videoDark && (card as any).videoDarkFullBackground) ? 'dark:hidden' : ''}`}>
                     {(() => {
                       // Custom Bleed-Right Layout for GO AMS (Bottom-Aligned & Spaced from Subtitle)
                       if ((card as any).isAms) {
@@ -364,7 +364,7 @@ export default function BentoGridMobile() {
                           <SmartVideo 
                             src={(card as any).videoLight}
                             poster={posterFor((card as any).videoLight)}
-                            className="absolute bottom-0 left-3.5 w-[132%] max-w-none h-[88%] object-cover object-left rounded-l-2xl shadow-elevation-3 transition-transform duration-[800ms] ease-out"
+                            className="absolute bottom-0 left-3.5 w-[132%] max-w-none h-[88%] object-cover object-left rounded-l-md shadow-elevation-3 transition-transform duration-[800ms] ease-out"
                           />
                         );
                       }

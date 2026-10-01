@@ -174,13 +174,13 @@ export default function PlatformRevealSection() {
                 WebkitTransformStyle: 'preserve-3d',
                 transform: isBoFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
               }}
-              className="w-full h-full relative rounded-3xl transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group cursor-pointer md:cursor-default select-none"
+              className="w-full h-full relative rounded-lg md:rounded-xl transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group cursor-pointer md:cursor-default select-none"
             >
               
               {/* FRONT FACE */}
               <div 
                 style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
-                className="absolute inset-0 w-full h-full rounded-3xl overflow-hidden bg-[var(--color-surface-BG-black)] border border-[var(--color-border-Strokes-default)] shadow-elevation-2"
+                className="absolute inset-0 w-full h-full rounded-lg md:rounded-xl overflow-hidden bg-[var(--color-surface-BG-black)] border border-[var(--color-border-Strokes-default)] shadow-elevation-2"
               >
                 {/* Imagen con parallax interno */}
                 <div 
@@ -197,7 +197,7 @@ export default function PlatformRevealSection() {
                 <div className="hidden md:flex absolute bottom-0 left-0 w-full p-2 gap-2 z-30 pointer-events-none group-hover:pointer-events-auto">
                   
                   {/* Card 1 */}
-                  <div className="flex-1 aspect-square relative rounded-2xl lg:rounded-[1.5rem] border border-[var(--color-border-Strokes-default)] shadow-elevation-3 overflow-hidden transform translate-y-[120%] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] delay-[100ms] group-hover:delay-[0ms] pointer-events-auto flex flex-col hover:-translate-y-1">
+                  <div className="flex-1 aspect-square relative rounded-md lg:rounded-lg border border-[var(--color-border-Strokes-default)] shadow-elevation-3 overflow-hidden transform translate-y-[120%] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] delay-[100ms] group-hover:delay-[0ms] pointer-events-auto flex flex-col hover:-translate-y-1">
                     <div className="absolute inset-0 -z-10">
                       <div className="absolute inset-0 bg-[var(--color-surface-BG-1)]/80 backdrop-blur-xl" />
                       <div className="absolute inset-0 bg-white/5 saturate-150" />
@@ -214,7 +214,7 @@ export default function PlatformRevealSection() {
                   </div>
 
                   {/* Card 2 */}
-                  <div className="flex-1 aspect-square relative rounded-2xl lg:rounded-[1.5rem] border border-[var(--color-border-Strokes-default)] shadow-elevation-3 overflow-hidden transform translate-y-[120%] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] delay-[50ms] group-hover:delay-[75ms] pointer-events-auto flex flex-col hover:-translate-y-1">
+                  <div className="flex-1 aspect-square relative rounded-md lg:rounded-lg border border-[var(--color-border-Strokes-default)] shadow-elevation-3 overflow-hidden transform translate-y-[120%] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] delay-[50ms] group-hover:delay-[75ms] pointer-events-auto flex flex-col hover:-translate-y-1">
                     <div className="absolute inset-0 -z-10">
                       <div className="absolute inset-0 bg-[var(--color-surface-BG-1)]/80 backdrop-blur-xl" />
                       <div className="absolute inset-0 bg-white/5 saturate-150" />
@@ -231,7 +231,7 @@ export default function PlatformRevealSection() {
                   </div>
 
                   {/* Card 3 (Visual Icon Card) */}
-                  <div className="flex-1 aspect-square relative rounded-2xl lg:rounded-[1.5rem] border border-white/25 shadow-elevation-4 overflow-hidden transform translate-y-[120%] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] delay-[0ms] group-hover:delay-[150ms] pointer-events-auto hover:-translate-y-1 flex items-center justify-center group/card">
+                  <div className="flex-1 aspect-square relative rounded-md lg:rounded-lg border border-white/25 shadow-elevation-4 overflow-hidden transform translate-y-[120%] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] delay-[0ms] group-hover:delay-[150ms] pointer-events-auto hover:-translate-y-1 flex items-center justify-center group/card">
                     <div className="absolute inset-0 bg-gradient-to-br from-[#35BBFD] via-[#0284C7] to-[#0369A1]" />
                     <div className="absolute inset-0 bg-noise opacity-15 mix-blend-overlay" />
                     <div className="relative z-10 flex h-full items-center justify-center">
@@ -266,7 +266,7 @@ export default function PlatformRevealSection() {
                   WebkitBackfaceVisibility: 'hidden', 
                   transform: 'rotateY(180deg)' 
                 }}
-                className="absolute inset-0 w-full h-full p-3.5 sm:p-5 rounded-3xl border border-white/20 dark:border-white/10 shadow-elevation-3 flex items-center justify-center overflow-hidden z-30"
+                className="absolute inset-0 w-full h-full p-3.5 sm:p-5 rounded-lg md:rounded-xl border border-white/20 dark:border-white/10 shadow-elevation-3 flex items-center justify-center overflow-hidden z-30"
               >
                 {/* Liquid Glass Background Layers (Slightly lighter & luminous) */}
                 <div className="absolute inset-0 -z-10 bg-[var(--color-surface-BG-1)]">
@@ -285,7 +285,7 @@ export default function PlatformRevealSection() {
                 <div className="relative z-10 grid grid-cols-2 gap-2.5 sm:gap-4 w-full h-full">
                   
                   {/* Card 1 */}
-                  <div className="relative h-full rounded-2xl border border-white/25 dark:border-white/15 bg-white/15 dark:bg-white/[0.07] backdrop-blur-xl shadow-elevation-2 p-3 sm:p-5 flex flex-col justify-between overflow-hidden">
+                  <div className="relative h-full rounded-md border border-white/25 dark:border-white/15 bg-white/15 dark:bg-white/[0.07] backdrop-blur-xl shadow-elevation-2 p-3 sm:p-5 flex flex-col justify-between overflow-hidden">
                     <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-[var(--color-brand-blue)]/20 flex items-center justify-center text-[var(--color-brand-blue)] shrink-0 border border-[var(--color-brand-blue)]/30 mb-2">
                       <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
                     </div>
@@ -300,7 +300,7 @@ export default function PlatformRevealSection() {
                   </div>
 
                   {/* Card 2 */}
-                  <div className="relative h-full rounded-2xl border border-white/25 dark:border-white/15 bg-white/15 dark:bg-white/[0.07] backdrop-blur-xl shadow-elevation-2 p-3 sm:p-5 flex flex-col justify-between overflow-hidden">
+                  <div className="relative h-full rounded-md border border-white/25 dark:border-white/15 bg-white/15 dark:bg-white/[0.07] backdrop-blur-xl shadow-elevation-2 p-3 sm:p-5 flex flex-col justify-between overflow-hidden">
                     <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-[var(--color-brand-blue)]/20 flex items-center justify-center text-[var(--color-brand-blue)] shrink-0 border border-[var(--color-brand-blue)]/30 mb-2">
                       <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
                     </div>
@@ -336,13 +336,13 @@ export default function PlatformRevealSection() {
                 WebkitTransformStyle: 'preserve-3d',
                 transform: isQeFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
               }}
-              className="w-full h-full relative rounded-3xl transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group cursor-pointer md:cursor-default select-none"
+              className="w-full h-full relative rounded-lg md:rounded-xl transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group cursor-pointer md:cursor-default select-none"
             >
               
               {/* FRONT FACE */}
               <div 
                 style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
-                className="absolute inset-0 w-full h-full rounded-3xl overflow-hidden bg-[var(--color-surface-BG-black)] border border-[var(--color-border-Strokes-default)] shadow-elevation-2"
+                className="absolute inset-0 w-full h-full rounded-lg md:rounded-xl overflow-hidden bg-[var(--color-surface-BG-black)] border border-[var(--color-border-Strokes-default)] shadow-elevation-2"
               >
                 {/* Imagen con parallax interno */}
                 <div 
@@ -359,7 +359,7 @@ export default function PlatformRevealSection() {
                 <div className="hidden md:flex absolute bottom-0 left-0 w-full p-2 gap-2 z-30 pointer-events-none group-hover:pointer-events-auto">
                   
                   {/* Card 1 */}
-                  <div className="flex-1 aspect-square relative rounded-2xl lg:rounded-[1.5rem] border border-[var(--color-border-Strokes-default)] shadow-elevation-3 overflow-hidden transform translate-y-[120%] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] delay-[100ms] group-hover:delay-[0ms] pointer-events-auto flex flex-col hover:-translate-y-1">
+                  <div className="flex-1 aspect-square relative rounded-md lg:rounded-lg border border-[var(--color-border-Strokes-default)] shadow-elevation-3 overflow-hidden transform translate-y-[120%] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] delay-[100ms] group-hover:delay-[0ms] pointer-events-auto flex flex-col hover:-translate-y-1">
                     <div className="absolute inset-0 -z-10">
                       <div className="absolute inset-0 bg-[var(--color-surface-BG-1)]/80 backdrop-blur-xl" />
                       <div className="absolute inset-0 bg-white/5 saturate-150" />
@@ -376,7 +376,7 @@ export default function PlatformRevealSection() {
                   </div>
 
                   {/* Card 2 */}
-                  <div className="flex-1 aspect-square relative rounded-2xl lg:rounded-[1.5rem] border border-[var(--color-border-Strokes-default)] shadow-elevation-3 overflow-hidden transform translate-y-[120%] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] delay-[50ms] group-hover:delay-[75ms] pointer-events-auto flex flex-col hover:-translate-y-1">
+                  <div className="flex-1 aspect-square relative rounded-md lg:rounded-lg border border-[var(--color-border-Strokes-default)] shadow-elevation-3 overflow-hidden transform translate-y-[120%] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] delay-[50ms] group-hover:delay-[75ms] pointer-events-auto flex flex-col hover:-translate-y-1">
                     <div className="absolute inset-0 -z-10">
                       <div className="absolute inset-0 bg-[var(--color-surface-BG-1)]/80 backdrop-blur-xl" />
                       <div className="absolute inset-0 bg-white/5 saturate-150" />
@@ -393,7 +393,7 @@ export default function PlatformRevealSection() {
                   </div>
 
                   {/* Card 3 (Visual Icon Card) */}
-                  <div className="flex-1 aspect-square relative rounded-2xl lg:rounded-[1.5rem] border border-white/25 shadow-elevation-4 overflow-hidden transform translate-y-[120%] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] delay-[0ms] group-hover:delay-[150ms] pointer-events-auto hover:-translate-y-1 flex items-center justify-center group/card">
+                  <div className="flex-1 aspect-square relative rounded-md lg:rounded-lg border border-white/25 shadow-elevation-4 overflow-hidden transform translate-y-[120%] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] delay-[0ms] group-hover:delay-[150ms] pointer-events-auto hover:-translate-y-1 flex items-center justify-center group/card">
                     <div className="absolute inset-0 bg-gradient-to-br from-[#35BBFD] via-[#0284C7] to-[#0369A1]" />
                     <div className="absolute inset-0 bg-noise opacity-15 mix-blend-overlay" />
                     <div className="relative z-10 flex h-full items-center justify-center">
@@ -428,7 +428,7 @@ export default function PlatformRevealSection() {
                   WebkitBackfaceVisibility: 'hidden', 
                   transform: 'rotateY(180deg)' 
                 }}
-                className="absolute inset-0 w-full h-full p-3.5 sm:p-5 rounded-3xl border border-white/20 dark:border-white/10 shadow-elevation-3 flex items-center justify-center overflow-hidden z-30"
+                className="absolute inset-0 w-full h-full p-3.5 sm:p-5 rounded-lg md:rounded-xl border border-white/20 dark:border-white/10 shadow-elevation-3 flex items-center justify-center overflow-hidden z-30"
               >
                 {/* Liquid Glass Background Layers (Slightly lighter & luminous) */}
                 <div className="absolute inset-0 -z-10 bg-[var(--color-surface-BG-1)]">
@@ -447,7 +447,7 @@ export default function PlatformRevealSection() {
                 <div className="relative z-10 grid grid-cols-2 gap-2.5 sm:gap-4 w-full h-full">
                   
                   {/* Card 1 */}
-                  <div className="relative h-full rounded-2xl border border-white/25 dark:border-white/15 bg-white/15 dark:bg-white/[0.07] backdrop-blur-xl shadow-elevation-2 p-3 sm:p-5 flex flex-col justify-between overflow-hidden">
+                  <div className="relative h-full rounded-md border border-white/25 dark:border-white/15 bg-white/15 dark:bg-white/[0.07] backdrop-blur-xl shadow-elevation-2 p-3 sm:p-5 flex flex-col justify-between overflow-hidden">
                     <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-[var(--color-brand-blue)]/20 flex items-center justify-center text-[var(--color-brand-blue)] shrink-0 border border-[var(--color-brand-blue)]/30 mb-2">
                       <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                     </div>
@@ -462,7 +462,7 @@ export default function PlatformRevealSection() {
                   </div>
 
                   {/* Card 2 */}
-                  <div className="relative h-full rounded-2xl border border-white/25 dark:border-white/15 bg-white/15 dark:bg-white/[0.07] backdrop-blur-xl shadow-elevation-2 p-3 sm:p-5 flex flex-col justify-between overflow-hidden">
+                  <div className="relative h-full rounded-md border border-white/25 dark:border-white/15 bg-white/15 dark:bg-white/[0.07] backdrop-blur-xl shadow-elevation-2 p-3 sm:p-5 flex flex-col justify-between overflow-hidden">
                     <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-[var(--color-brand-blue)]/20 flex items-center justify-center text-[var(--color-brand-blue)] shrink-0 border border-[var(--color-brand-blue)]/30 mb-2">
                       <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                     </div>

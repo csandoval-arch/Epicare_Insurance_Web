@@ -109,7 +109,7 @@ function CinematicPanel({
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
-      className="relative w-[85vw] lg:w-[65vw] h-[75vh] shrink-0 rounded-[2.5rem] border border-black/5 dark:border-white/10 shadow-elevation-4 hover:shadow-elevation-6 hover:border-[var(--color-brand-blue)]/50 dark:hover:border-[var(--color-brand-blue)]/50 overflow-hidden flex flex-col md:flex-row group cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+      className="relative w-[85vw] lg:w-[65vw] h-[75vh] shrink-0 rounded-xl border border-black/5 dark:border-white/10 shadow-elevation-4 hover:shadow-elevation-6 hover:border-[var(--color-brand-blue)]/50 dark:hover:border-[var(--color-brand-blue)]/50 overflow-hidden flex flex-col md:flex-row group cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
       style={{
         transform: isHovered 
           ? `perspective(1200px) rotateX(${parallax.y * -3}deg) rotateY(${parallax.x * 3}deg) scale3d(1.02, 1.02, 1.02)` 
@@ -117,7 +117,7 @@ function CinematicPanel({
       }}
     >
       {/* STATIC BACKGROUND LAYER (Minimalist Texture & Ambient Glow) */}
-      <div className="absolute inset-0 -z-10 rounded-[2.5rem] bg-[var(--color-surface-BG-white)] dark:bg-[#0D0D0E] overflow-hidden">
+      <div className="absolute inset-0 -z-10 rounded-xl bg-[var(--color-surface-BG-white)] dark:bg-[#0D0D0E] overflow-hidden">
         {/* Minimalist Micro-Texture Grid with Radial Fade */}
         <div 
           className="absolute inset-0 text-black dark:text-white opacity-[0.12] dark:opacity-[0.05] pointer-events-none transition-opacity duration-500 group-hover:opacity-[0.20] dark:group-hover:opacity-[0.12]"
@@ -169,16 +169,16 @@ function CinematicPanel({
       {/* MEDIA CONTENT (Right side) */}
       <div className="w-full md:w-7/12 h-full relative overflow-hidden bg-transparent flex items-center justify-end">
         {isAms ? (
-          <div className="relative w-full h-[78%] rounded-l-xl md:rounded-l-[18px] border-l border-y border-black/10 dark:border-white/15 overflow-hidden shadow-elevation-3 bg-[var(--color-surface-BG-1)]">
+          <div className="relative w-full h-[78%] rounded-l-md md:rounded-l-lg border-l border-y border-black/10 dark:border-white/15 overflow-hidden shadow-elevation-3 bg-[var(--color-surface-BG-1)]">
             <SmartVideo 
               src={videoLight}
               poster={posterFor(videoLight)}
-              className="w-full h-full object-cover object-left dark:hidden rounded-l-xl md:rounded-l-[18px]" 
+              className="w-full h-full object-cover object-left dark:hidden rounded-l-md md:rounded-l-lg" 
             />
             <SmartVideo 
               src={videoDark}
               poster={posterFor(videoDark)}
-              className="w-full h-full object-cover object-left hidden dark:block rounded-l-xl md:rounded-l-[18px]" 
+              className="w-full h-full object-cover object-left hidden dark:block rounded-l-md md:rounded-l-lg" 
             />
           </div>
         ) : (
@@ -274,7 +274,7 @@ export default function BentoGridDesktop() {
            
            {/* INTRO TITLE PANEL */}
            <div className="w-[70vw] lg:w-[40vw] shrink-0 flex flex-col justify-center">
-              <div className="w-24 h-24 bg-white rounded-3xl flex items-center justify-center mb-8 shadow-elevation-2 transform transition-transform hover:scale-105">
+              <div className="w-24 h-24 bg-white rounded-xl flex items-center justify-center mb-8 shadow-elevation-2 transform transition-transform hover:scale-105">
                 <GoHubLogo className="w-16 h-16 text-[var(--color-brand-blue)]" />
               </div>
               <h2 className="text-display-lg text-white mb-6 capitalize">

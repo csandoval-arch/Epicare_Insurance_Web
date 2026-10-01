@@ -161,7 +161,7 @@ export default function CTABannerEpicare({
       className="w-full relative bg-[var(--color-surface-BG-white)] dark:bg-[var(--color-surface-BG-black)] pt-0 pb-section-xs md:pb-section-sm overflow-hidden transition-colors duration-500"
     >
       <div className="w-full max-w-6xl mx-auto pt-6 pb-8 md:pb-12 px-3.5 sm:px-4 md:px-8">
-        <div className="cta-monolith relative w-full rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-elevation-4 border border-white/10">
+        <div className="cta-monolith relative w-full rounded-lg md:rounded-xl overflow-hidden shadow-elevation-4 border border-white/10">
           
           {/* Fondo de Imagen con Parallax / Zoom Cinemático (Swiss Blue) */}
           <div className="absolute inset-0 z-0 overflow-hidden">

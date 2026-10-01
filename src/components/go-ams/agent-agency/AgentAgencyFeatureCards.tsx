@@ -29,7 +29,7 @@ export function AgentAgencyFeatureCards({
             <button
               key={idx}
               onClick={() => onSelectSlide(idx)}
-              className={`aa-feature-card aspect-square sm:aspect-auto p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl text-left flex flex-col justify-between gap-1 sm:gap-3 transition-all duration-300 sm:min-h-[165px] cursor-pointer relative overflow-hidden will-change-transform ${
+              className={`aa-feature-card aspect-square sm:aspect-auto p-2.5 sm:p-3.5 rounded-md sm:rounded-lg text-left flex flex-col justify-between gap-1 sm:gap-3 transition-all duration-300 sm:min-h-[165px] cursor-pointer relative overflow-hidden will-change-transform ${
                 isActive
                   ? "bg-[var(--color-surface-BG-2)] border-2 border-[var(--color-brand-blue)] shadow-elevation-2"
                   : "bg-[var(--color-surface-BG-1)] border border-[var(--color-border-Strokes-default)] hover:border-[var(--color-border-Strokes-strong)] hover:bg-[var(--color-surface-BG-2)]"

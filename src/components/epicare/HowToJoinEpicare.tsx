@@ -286,7 +286,7 @@ export default function HowToJoinEpicare() {
             const imgSrc = idx < 3 ? ZONE1_IMAGES[idx] : ZONE2_IMAGES[idx - 3];
             const isOrange = idx >= 3;
             return (
-              <div key={idx} className="htj-card relative min-w-[85vw] h-[48dvh] max-h-[460px] snap-center flex flex-col justify-end rounded-3xl overflow-hidden shadow-elevation-3 border border-white/10 dark:border-white/5">
+              <div key={idx} className="htj-card relative min-w-[85vw] h-[48dvh] max-h-[460px] snap-center flex flex-col justify-end rounded-lg overflow-hidden shadow-elevation-3 border border-white/10 dark:border-white/5">
                 {/* Image Background */}
                 <img src={imgSrc} alt="" aria-hidden="true" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover object-[75%_center]" />
                 

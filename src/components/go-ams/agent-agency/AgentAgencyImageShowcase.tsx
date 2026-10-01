@@ -26,7 +26,7 @@ export function AgentAgencyImageShowcase({
             borderTopRightRadius: "1.75rem",
             borderBottomRightRadius: "1.75rem",
           }}
-          className="relative w-full h-full overflow-hidden bg-transparent transition-colors duration-500 shadow-elevation-2 flex items-center justify-center !rounded-tl-none !rounded-bl-none !rounded-tr-[1.75rem] !rounded-br-[1.75rem]"
+          className="relative w-full h-full overflow-hidden bg-transparent transition-colors duration-500 shadow-elevation-2 flex items-center justify-center !rounded-tl-none !rounded-bl-none !rounded-tr-xl !rounded-br-xl"
         >
           {/* Imágenes Bleed-Left: recortando el radio embebido del PNG para que la izquierda sea 100% recta y plana contra el borde */}
           {images.map((img, idx) => {
@@ -41,7 +41,7 @@ export function AgentAgencyImageShowcase({
                   borderTopRightRadius: "1.75rem",
                   borderBottomRightRadius: "1.75rem",
                 }}
-                className="active-screen-img absolute inset-0 w-full h-full overflow-hidden bg-transparent !rounded-tl-none !rounded-bl-none !rounded-tr-[1.75rem] !rounded-br-[1.75rem]"
+                className="active-screen-img absolute inset-0 w-full h-full overflow-hidden bg-transparent !rounded-tl-none !rounded-bl-none !rounded-tr-xl !rounded-br-xl"
               >
                 <img
                   src={img.src}
@@ -55,7 +55,7 @@ export function AgentAgencyImageShowcase({
           })}
           
           {/* Overlay de borde para asegurar que siempre sea visible por encima de la imagen */}
-          <div className="absolute inset-0 border border-l-0 border-[var(--color-border-Strokes-Hover)] !rounded-tl-none !rounded-bl-none !rounded-tr-[1.75rem] !rounded-br-[1.75rem] pointer-events-none z-10" />
+          <div className="absolute inset-0 border border-l-0 border-[var(--color-border-Strokes-Hover)] !rounded-tl-none !rounded-bl-none !rounded-tr-xl !rounded-br-xl pointer-events-none z-10" />
         </div>
       </BleedLeft>
     </div>
