@@ -3,8 +3,9 @@
 /**
  * @file FooterContent.tsx
  * @description Contenido del footer — "El puente" (aprobado el 30/09/2026). Arriba, sobre el claro, el logo completo de Epicare (nace letra a
- * letra). Abajo, la FOTO del puente de hormigón del hero ("el puente que nadie quiso construir") en una
- * banda enmarcada (16px), casi cuadrada y tan alta como su contenido, que se ensancha hasta el marco con
+ * letra). Abajo, una FOTO de arquitectura con una agente al teléfono en su oficina (`Footer/agent-phone*.jpg`, versión vertical en móvil,
+ * elegida el 30/09/2026; antes, el puente de hormigón del hero) en una banda enmarcada (16px), casi
+ * cuadrada y tan alta como su contenido, que se ensancha hasta el marco con
  * el telón (scaleX 0.94 → 1, scrub) mientras la foto viaja más lenta que la página (parallax). Dentro de
  * la foto, en blanco: la frase con "Escríbenos", el índice en 4 columnas y la barra legal.
  */
@@ -24,7 +25,10 @@ import { findStage, useCurtainReveal } from "./useCurtainReveal";
 import { logoBirth, useRevealWhenVisible } from "./useRevealWhenVisible";
 import FooterIndex from "./FooterIndex";
 
-const PHOTO = "/Files/Epicare_Landing/Hero/bridge.webp";
+/** Foto de la banda: horizontal desde tablet (md, donde cambia el layout del footer) y vertical en móvil. */
+const PHOTO = "/Files/Footer/agent-phone.jpg";
+const PHOTO_MOBILE = "/Files/Footer/agent-phone-mobile.jpg";
+const PHOTO_DESKTOP_MEDIA = "(min-width: 768px)";
 const SURFACE = "bg-[var(--color-surface-BG-1)] text-[var(--color-text-primary)]";
 const LINK = "hover:text-[var(--color-brand-blue)]";
 /**
@@ -93,15 +97,18 @@ export default function FooterContent() {
       {/* ── ABAJO: LA FOTO con frase, índice y legales en blanco, dentro de un marco (8px móvil · 16px desde tablet; alto = su contenido) ── */}
       <div className="px-static-sm pb-static-sm md:px-static-md md:pb-static-md">
         <div ref={band} className="relative overflow-hidden rounded-lg md:rounded-xl origin-bottom">
-          <img
-            src={asset(PHOTO)}
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-            decoding="async"
-            className="fp-photo absolute inset-x-0 -top-[12%] w-full h-[124%] object-cover"
-          />
-          {/* Velo: el texto blanco se lee sobre el hormigón claro */}
+          <picture>
+            <source media={PHOTO_DESKTOP_MEDIA} srcSet={asset(PHOTO)} />
+            <img
+              src={asset(PHOTO_MOBILE)}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+              className="fp-photo absolute inset-x-0 -top-[12%] w-full h-[124%] object-cover"
+            />
+          </picture>
+          {/* Velo: el texto blanco se lee sobre la foto */}
           <div className="absolute inset-0 bg-[var(--color-text-Black-100)]/55" aria-hidden="true" />
 
           {/* Móvil: aire compacto (static); desde tablet, el ritmo de sección */}
