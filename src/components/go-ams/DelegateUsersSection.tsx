@@ -113,7 +113,8 @@ export default function DelegateUsersSection() {
           
           {/* ── LADO IZQUIERDO: Copy Simple Permanente ── */}
           <div className="copy-column col-span-12 lg:col-span-6 flex flex-col justify-center relative z-20 text-left">
-            <div className="delegate-eyebrow flex items-center gap-2 mb-space-static-xs">
+            {/* Móvil: aire entre overline y titular (`mb-space-static-xs` no existía: era 0 en todos los tamaños; desktop sigue en 0) */}
+            <div className="delegate-eyebrow flex items-center gap-2 mb-static-md md:mb-0">
               <span className="w-2 h-2 rounded-full bg-[var(--color-brand-blue)] animate-pulse" />
               <span className="text-overline text-[var(--color-brand-blue)]">
                 {t('overline')}
@@ -136,12 +137,13 @@ export default function DelegateUsersSection() {
           </div>
 
           {/* ── LADO DERECHO: Tarjeta 3D Completa con Giro 100% Fluido ── */}
-          <div className="col-span-12 lg:col-span-6 relative flex justify-center items-center h-[420px] sm:h-[480px] lg:h-[600px] perspective-[1500px]">
+          {/* Móvil (<md): el vídeo a todo el ancho del contenedor (solo los 14px de la sección) y alto natural */}
+          <div className="col-span-12 lg:col-span-6 relative flex justify-center items-center h-auto md:h-[480px] lg:h-[600px] perspective-[1500px]">
             
             <div ref={sceneRef} className="relative w-full h-full flex justify-center items-center transform-style-3d">
               
               {/* VIDEO PLAYER INSTEAD OF 3D SCENE */}
-              <div className="w-[320px] sm:w-[360px] lg:w-full max-w-md relative overflow-hidden rounded-xl shadow-[0_30px_60px_rgba(0,0,0,0.1)] border border-white/60">
+              <div className="w-full md:w-[360px] lg:w-full md:max-w-md relative overflow-hidden rounded-lg md:rounded-xl shadow-[0_30px_60px_rgba(0,0,0,0.1)] border border-white/60">
                 <SmartVideo
                   src={asset("/Files/Go_AMS/delegate/go-ams-delegate-users.mp4")}
                   poster={asset("/Files/Go_AMS/delegate/posters/go-ams-delegate-users-poster.webp")}
