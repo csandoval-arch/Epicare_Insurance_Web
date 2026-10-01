@@ -842,5 +842,16 @@
         }
       ]
     }
+  },
+  "team": {
+    "hero": {
+      "eyebrow": "The cast",
+      "title": [
+        "You're the lead.",
+        "We're the crew."
+      ],
+      "subtitle": "An expert team behind every case.",
+      "cta": "Meet the crew"
+    }
   }
 }

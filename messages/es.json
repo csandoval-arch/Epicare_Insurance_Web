@@ -842,5 +842,16 @@
         }
       ]
     }
+  },
+  "team": {
+    "hero": {
+      "eyebrow": "El elenco",
+      "title": [
+        "Tú eres el protagonista.",
+        "Nosotros, el equipo."
+      ],
+      "subtitle": "Un equipo experto detrás de cada caso.",
+      "cta": "Conoce al equipo"
+    }
   }
 }
