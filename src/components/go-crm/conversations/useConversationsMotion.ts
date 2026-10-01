@@ -10,8 +10,8 @@ export const DESKTOP = "(min-width: 768px)";
 export const MOBILE = "(max-width: 767px)";
 export const FULL = "(prefers-reduced-motion: no-preference)";
 
-export const BIRTH_FROM = { yPercent: REVEAL.birthPercent, opacity: 0, willChange: "transform, opacity" };
-export const BIRTH_TO = { yPercent: 0, opacity: 1, duration: DUR.slow, ease: EASE.dramatic, force3D: true, clearProps: "willChange" };
+const BIRTH_FROM = { yPercent: REVEAL.birthPercent, opacity: 0, willChange: "transform, opacity" };
+const BIRTH_TO = { yPercent: 0, opacity: 1, duration: DUR.slow, ease: EASE.dramatic, force3D: true, clearProps: "willChange" };
 export const CARD_FROM = { opacity: 0, y: REVEAL.md, willChange: "transform, opacity" };
 export const CARD_TO = { opacity: 1, y: 0, duration: DUR.base, ease: EASE.out, force3D: true, clearProps: "willChange" };
 export const oneShot = (trigger: Element | null, start: string = TRIGGER.standard) => ({

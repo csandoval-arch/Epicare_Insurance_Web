@@ -5,24 +5,45 @@
  * La consola llega montada, con sus 3 paneles reales juntos. Con el scroll (scrub, sin pin) los
  * paneles se separan hasta quedar en 3 columnas, y bajo cada uno nace la feature que lo explica:
  * ficha del contacto → llamadas · hilo → documentos · actividad → automatización. Los paneles
- * son recortes del fotograma fijo (`StillCrop`), así que el despiece cuesta un solo decode.
+ * son UI real (réplica 1:1 de la captura en `console/`, siempre clara), escalada como un artboard.
  * - Desktop (≥md): scrub ligado al scroll, solo transform/opacity.
  * - Móvil (<md): ya despiezado; cada panel (recorte apaisado) con su feature debajo.
  */
 
 import { useLayoutEffect, useRef, type CSSProperties } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { EASE, REVEAL } from "@/lib/motion";
-import StillCrop from "./StillCrop";
 import { CONV_ICONS } from "./ConvIcons";
-import { PANEL_RECTS, PANEL_RECTS_MOBILE, type ConvFeature } from "./convData";
+import { PANELS, type ConvFeature } from "./convData";
 import { CARD_FROM, CARD_TO, DESKTOP, FULL, MOBILE, oneShot } from "./useConversationsMotion";
+import { Artboard, UI_CSS } from "./console/ui";
+import ContactPanel from "./console/ContactPanel";
+import ThreadPanel from "./console/ThreadPanel";
+import ActivityPanel from "./console/ActivityPanel";
 
 /** Columnas proporcionales al ancho real de cada panel: montados, encajan como en la UI. */
-const PANEL_COLS = PANEL_RECTS.map((r) => `${r.width}fr`).join(" ");
+const PANEL_COLS = PANELS.map((p) => `${p.w}fr`).join(" ");
+const PANEL_UI = [ContactPanel, ThreadPanel, ActivityPanel] as const;
 /** Escala de la consola montada (margen creativo declarado). */
 const ASSEMBLED_SCALE = 0.94;
-const PANEL = "rounded-lg border border-[var(--color-border-Strokes-strong)] bg-[var(--color-surface-BG-1)] shadow-elevation-3";
+const PANEL = "rounded-lg border border-[var(--color-border-Strokes-strong)] shadow-elevation-3";
+/**
+ * Desfase entre columnas dentro del scrub, en fracción del recorrido (el timeline dura 1): el
+ * equivalente de `STAGGER` cuando el tiempo es el scroll y no segundos.
+ */
+const SCRUB_STAGGER = 0.1;
+
+/** Título de feature con su icono (el mismo en desktop y móvil). */
+function FeatureTitle({ card, index, className = "" }: { card: ConvFeature; index: number; className?: string }) {
+  const Icon = CONV_ICONS[index];
+  return (
+    <h3 className={`flex items-start gap-static-sm text-h5 text-[var(--color-text-primary)] ${className}`}>
+      <Icon className="w-4 h-4 shrink-0 mt-[0.3em] text-[var(--color-brand-blue)]" />
+      {card.title}
+    </h3>
+  );
+}
 
 export default function ConvExploded({ cards }: { cards: ConvFeature[] }) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -30,6 +51,8 @@ export default function ConvExploded({ cards }: { cards: ConvFeature[] }) {
   useLayoutEffect(() => {
     const el = rootRef.current;
     if (!el) return;
+    // Registro propio: este efecto corre antes que el del encabezado (los hijos van primero).
+    gsap.registerPlugin(ScrollTrigger);
     const mm = gsap.matchMedia(el);
 
     mm.add(`${DESKTOP} and ${FULL}`, () => {
@@ -49,9 +72,9 @@ export default function ConvExploded({ cards }: { cards: ConvFeature[] }) {
         // El panel central se adelanta un instante (profundidad) y vuelve al plano de la retícula.
         .fromTo(panels[1], { y: 0 }, { y: -REVEAL.sm, duration: 0.5, ease: EASE.out }, 0)
         .to(panels[1], { y: 0, duration: 0.5, ease: EASE.out }, 0.5)
-        .fromTo(".cx-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, stagger: 0.1 }, 0.45)
-        .fromTo(".cx-birth", { yPercent: REVEAL.birthPercent }, { yPercent: 0, duration: 0.45, stagger: 0.1 }, 0.55)
-        .fromTo(".cx-desc", { opacity: 0, y: REVEAL.sm }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.1 }, 0.65);
+        .fromTo(".cx-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, stagger: SCRUB_STAGGER }, 0.45)
+        .fromTo(".cx-birth", { yPercent: REVEAL.birthPercent }, { yPercent: 0, duration: 0.45, stagger: SCRUB_STAGGER }, 0.55)
+        .fromTo(".cx-desc", { opacity: 0, y: REVEAL.sm }, { opacity: 1, y: 0, duration: 0.4, stagger: SCRUB_STAGGER }, 0.65);
     });
 
     mm.add(`${MOBILE} and ${FULL}`, () => {
@@ -65,49 +88,48 @@ export default function ConvExploded({ cards }: { cards: ConvFeature[] }) {
 
   return (
     <div ref={rootRef} className="w-full max-w-section-xl px-gutter-sm md:px-gutter-md mt-static-xl lg:mt-static-2xl">
+      <style href="go-crm-console-ui" precedence="default">{UI_CSS}</style>
       {/* ── DESKTOP: PANELES (montados → despiezados) + FEATURES BAJO CADA UNO ── */}
       <div className="hidden md:block">
         <div className="cx-stage grid items-start gap-x-static-xl" style={{ gridTemplateColumns: PANEL_COLS } as CSSProperties}>
-          {PANEL_RECTS.map((rect, i) => (
-            <div key={i} className={`cx-panel overflow-hidden ${PANEL}`}>
-              <StillCrop rect={rect} />
-            </div>
-          ))}
-        </div>
-        <div className="grid gap-x-static-xl mt-static-xl" style={{ gridTemplateColumns: PANEL_COLS } as CSSProperties}>
-          {cards.map((card, i) => {
-            const Icon = CONV_ICONS[i];
+          {PANELS.map((panel, i) => {
+            const Ui = PANEL_UI[i];
             return (
-              <div key={card.title} className="relative pt-static-lg">
-                <span aria-hidden="true" className="cx-rule absolute top-0 inset-x-0 h-px origin-left bg-[var(--color-border-Strokes-default)]" />
-                <span aria-hidden="true" className="absolute top-0 left-0 w-static-xl h-0.5 bg-[var(--color-brand-blue)]" />
-                <div className="overflow-hidden">
-                  <h3 className="cx-birth flex items-start gap-static-sm text-h5 text-[var(--color-text-primary)]">
-                    <Icon className="w-4 h-4 shrink-0 mt-[0.3em] text-[var(--color-brand-blue)]" />
-                    {card.title}
-                  </h3>
-                </div>
-                <p className="cx-desc mt-static-sm text-body-sm text-[var(--color-text-secondary)] max-w-md">{card.desc}</p>
+              <div key={i} className={`cx-panel overflow-hidden ${PANEL}`}>
+                <Artboard w={panel.w} h={panel.h}>
+                  <Ui />
+                </Artboard>
               </div>
             );
           })}
+        </div>
+        <div className="grid gap-x-static-xl mt-static-xl" style={{ gridTemplateColumns: PANEL_COLS } as CSSProperties}>
+          {cards.map((card, i) => (
+            <div key={card.title} className="relative pt-static-lg">
+              <span aria-hidden="true" className="cx-rule absolute top-0 inset-x-0 h-px origin-left bg-[var(--color-border-Strokes-default)]" />
+              <span aria-hidden="true" className="absolute top-0 left-0 w-static-xl h-0.5 bg-[var(--color-brand-blue)]" />
+              <div className="overflow-hidden">
+                <FeatureTitle card={card} index={i} className="cx-birth" />
+              </div>
+              <p className="cx-desc mt-static-sm text-body-sm text-[var(--color-text-secondary)] max-w-md">{card.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* ── MÓVIL: PANEL APAISADO + FEATURE, UNO TRAS OTRO ── */}
       <div className="md:hidden flex flex-col gap-static-2xl">
         {cards.map((card, i) => {
-          const Icon = CONV_ICONS[i];
+          const Ui = PANEL_UI[i];
           return (
             <div key={card.title} className="cx-item flex flex-col gap-static-md">
               <div className={`overflow-hidden ${PANEL}`}>
-                <StillCrop rect={PANEL_RECTS_MOBILE[i]} />
+                <Artboard w={PANELS[i].w} h={PANELS[i].h} view={PANELS[i].mobile}>
+                  <Ui />
+                </Artboard>
               </div>
               <div>
-                <h3 className="flex items-start gap-static-sm text-h5 text-[var(--color-text-primary)]">
-                  <Icon className="w-4 h-4 shrink-0 mt-[0.3em] text-[var(--color-brand-blue)]" />
-                  {card.title}
-                </h3>
+                <FeatureTitle card={card} index={i} />
                 <p className="mt-static-sm text-body-md text-[var(--color-text-secondary)]">{card.desc}</p>
               </div>
             </div>

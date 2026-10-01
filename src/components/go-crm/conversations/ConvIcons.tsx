@@ -1,7 +1,7 @@
 /**
  * @description Iconos de línea de las 3 features de "Conversaciones" (llamada · documento ·
- * automatización), en `currentColor` para que el color lo ponga quien los usa. Sin halos ni
- * anillos: las variantes nuevas son de retícula, no de holograma.
+ * automatización), en `currentColor` para que el color lo ponga quien los usa. Encabezan cada
+ * feature bajo su panel en el Despiece.
  */
 
 const STROKE = { fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round", strokeLinejoin: "round" } as const;

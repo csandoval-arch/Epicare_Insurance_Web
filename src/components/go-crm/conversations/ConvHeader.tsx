@@ -9,11 +9,11 @@
 import { useTranslations } from "next-intl";
 import PrimaryCta from "../cta/PrimaryCta";
 
-export default function ConvHeader({ className = "" }: { className?: string }) {
+export default function ConvHeader() {
   const t = useTranslations("goCrm.conversations");
 
   return (
-    <div className={`w-full max-w-6xl mx-auto px-gutter-sm md:px-gutter-md text-left md:text-center relative z-20 flex flex-col items-start md:items-center ${className}`}>
+    <div className="w-full max-w-6xl mx-auto px-gutter-sm md:px-gutter-md text-left md:text-center relative z-20 flex flex-col items-start md:items-center">
       <div className="overflow-hidden mb-static-md">
         <p className="conv-text-reveal text-overline text-[var(--color-text-accent-blue)] uppercase tracking-widest flex items-center justify-center gap-3">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand-blue)] relative" aria-hidden="true">

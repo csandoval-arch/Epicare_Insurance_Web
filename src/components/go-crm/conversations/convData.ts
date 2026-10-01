@@ -1,12 +1,12 @@
 /**
- * @description Datos de "Conversaciones": el fotograma fijo de la consola y el mapa de sus 3
- * paneles reales (contacto · hilo · actividad), medidos sobre la imagen en píxeles y pasados a
- * fracciones (0–1) de su ancho/alto.
+ * @description Datos de "Conversaciones": las 3 features y la geometría de los 3 paneles de la
+ * consola (réplica en `console/`), en píxeles del fotograma original (2222×1226).
  */
 
-/** Fotograma de la consola de GO CRM (2222×1226, WebP 104 KB). Un solo archivo, un solo decode. */
-export const STILL = "/Files/Go_CRM/Contact_Conversations/conversation_still.webp";
-export const STILL_ASPECT = 2222 / 1226;
+import type { ArtView } from "./console/ui";
+import { CONTACT_SIZE } from "./console/ContactPanel";
+import { THREAD_SIZE } from "./console/ThreadPanel";
+import { ACTIVITY_SIZE } from "./console/ActivityPanel";
 
 export const CARD_KEYS = [1, 2, 3] as const;
 
@@ -15,30 +15,19 @@ export interface ConvFeature {
   desc: string;
 }
 
-/** Rectángulo de un panel de la UI, en fracciones del fotograma. */
-export interface ZoneRect {
-  left: number;
-  top: number;
-  width: number;
-  height: number;
+export interface PanelGeometry {
+  w: number;
+  h: number;
+  /**
+   * Móvil: recorte apaisado de la parte que importa (teléfono · tarjeta enviada · actividad);
+   * el panel entero mediría ~800 px de alto a 390.
+   */
+  mobile: ArtView;
 }
 
-/**
- * Los 3 paneles, en el orden de las features: ficha del contacto (llamadas) · hilo (documentos) ·
- * actividad + raíl (automatización). Desktop usa el panel entero.
- */
-export const PANEL_RECTS: readonly ZoneRect[] = [
-  { left: 0.01, top: 0.125, width: 0.215, height: 0.858 },
-  { left: 0.234, top: 0.125, width: 0.4885, height: 0.858 },
-  { left: 0.731, top: 0.125, width: 0.264, height: 0.858 },
-];
-
-/**
- * Móvil: recorte más apaisado de la parte que importa de cada panel (teléfono · tarjeta enviada ·
- * actividad); el panel entero mediría ~800 px de alto a 390.
- */
-export const PANEL_RECTS_MOBILE: readonly ZoneRect[] = [
-  { left: 0.01, top: 0.55, width: 0.215, height: 0.43 },
-  { left: 0.234, top: 0.25, width: 0.4885, height: 0.4 },
-  { left: 0.731, top: 0.125, width: 0.264, height: 0.4 },
+/** En el orden de las features: contacto (llamadas) · hilo (documentos) · actividad (automatización). */
+export const PANELS: readonly PanelGeometry[] = [
+  { ...CONTACT_SIZE, mobile: { x: 0, y: 521, w: CONTACT_SIZE.w, h: 527 } },
+  { ...THREAD_SIZE, mobile: { x: 0, y: 153, w: THREAD_SIZE.w, h: 490 } },
+  { ...ACTIVITY_SIZE, mobile: { x: 0, y: 0, w: ACTIVITY_SIZE.w, h: 490 } },
 ];
