@@ -626,7 +626,7 @@
         "from": "De:",
         "to": "Para:",
         "placeholder": "Escribe un mensaje",
-        "counter": "Caract.: 0 | Segs: 0",
+        "counter": "Caract.: <chars>0</chars> | Segs: <segs>0</segs>",
         "activity": "Actividad",
         "today": "HOY",
         "created": "Contacto creado",
@@ -636,7 +636,14 @@
         "fromLabel": "De:",
         "ago": "Hace 2 horas",
         "firstAttr": "Primera atribución:",
-        "lastAttr": "Última atribución:"
+        "lastAttr": "Última atribución:",
+        "docSent": "Documento enviado",
+        "channelLabel": "Canal:",
+        "fileLabel": "Archivo:",
+        "awaiting": "Pendiente de firma",
+        "now": "Ahora",
+        "docSigned": "Documento firmado",
+        "signedBy": "Firmado por el cliente"
       }
     },
     "calendar": {

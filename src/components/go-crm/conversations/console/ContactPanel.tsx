@@ -8,7 +8,7 @@
 import { useId } from "react";
 import { useTranslations } from "next-intl";
 import { Box, Icon, InlineIcon, T } from "./ui";
-import { AGENT, CONTACT, TAG_COUNT, TAG_ROWS } from "./data";
+import { AGENT, CONTACT, STORY, TAG_COUNT, TAG_ROWS } from "./data";
 
 export const CONTACT_SIZE = { w: 478, h: 1052 } as const;
 
@@ -41,6 +41,18 @@ function FlagUS({ x, y }: { x: number; y: number }) {
         <rect width="15" height={(30 / 13) * 7} fill="var(--ui-flag-blue)" />
       </g>
     </svg>
+  );
+}
+
+function TagPill({ tag, className = "" }: { tag: string; className?: string }) {
+  return (
+    <span
+      className={`h-[30px] pl-[11px] pr-[9px] rounded-full inline-flex items-center gap-[6px] whitespace-nowrap ${className}`}
+      style={{ background: "var(--ui-pill)", fontSize: 18, color: "var(--ui-text-2)" }}
+    >
+      {tag}
+      <InlineIcon name="x" size={15} color="var(--ui-text-3)" />
+    </span>
   );
 }
 
@@ -81,17 +93,23 @@ export default function ContactPanel() {
       <Box x={258} y={47} w={72} h={36} style={{ background: "var(--ui-card)", border: BORDER, borderRadius: 18 }} />
 
       <T x={44} y={124} size={20} weight={500} color="var(--ui-text-2)" className="inline-flex items-center gap-[8px]">
-        {t("tags")} ({TAG_COUNT})
+        <span>
+          {t("tags")} (<span className="cx-tag-count">{TAG_COUNT}</span>)
+        </span>
         {PLUS}
       </T>
       {TAG_ROWS.map((row, r) => (
         <div key={r} className="absolute flex gap-[8px]" style={{ left: 44, top: 145 + r * 36 }}>
           {row.map((tag) => (
-            <span key={tag} className="h-[30px] pl-[11px] pr-[9px] rounded-full inline-flex items-center gap-[6px] whitespace-nowrap" style={{ background: "var(--ui-pill)", fontSize: 18, color: "var(--ui-text-2)" }}>
-              {tag}
-              <InlineIcon name="x" size={15} color="var(--ui-text-3)" />
-            </span>
+            <TagPill key={tag} tag={tag} />
           ))}
+          {/* Etiquetas de la historia (las añade la automatización al enviar y al firmar) */}
+          {r === TAG_ROWS.length - 1 && (
+            <>
+              <TagPill tag={STORY.tag} className="cx-tag-sent opacity-0" />
+              <TagPill tag={STORY.signedTag} className="cx-tag-signed opacity-0" />
+            </>
+          )}
         </div>
       ))}
       <T x={44} y={265} size={18} weight={500} color="var(--ui-blue)" className="inline-flex items-center gap-[6px]">

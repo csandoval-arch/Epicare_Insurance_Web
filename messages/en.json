@@ -626,7 +626,7 @@
         "from": "From:",
         "to": "To:",
         "placeholder": "Type a message",
-        "counter": "Chars: 0 | Segs: 0",
+        "counter": "Chars: <chars>0</chars> | Segs: <segs>0</segs>",
         "activity": "Activity",
         "today": "TODAY",
         "created": "Contact Created",
@@ -636,7 +636,14 @@
         "fromLabel": "From:",
         "ago": "2 hours ago",
         "firstAttr": "First attribution source:",
-        "lastAttr": "Latest attribution source:"
+        "lastAttr": "Latest attribution source:",
+        "docSent": "Document sent",
+        "channelLabel": "Channel:",
+        "fileLabel": "File:",
+        "awaiting": "Awaiting signature",
+        "now": "Just now",
+        "docSigned": "Document signed",
+        "signedBy": "Signed by the client"
       }
     },
     "calendar": {

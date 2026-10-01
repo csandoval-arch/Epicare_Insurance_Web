@@ -7,7 +7,7 @@
 
 import { useTranslations } from "next-intl";
 import { Box, Icon, T, type IconName } from "./ui";
-import { ACTIVITY } from "./data";
+import { ACTIVITY, STORY } from "./data";
 
 export const ACTIVITY_SIZE = { w: 587, h: 1052 } as const;
 
@@ -30,12 +30,13 @@ interface EventProps {
   circle: string;
   color: string;
   title: string;
+  pills: [string, string];
   footer: string;
+  ago: string;
 }
 
-/** Evento de la línea de tiempo: icono en círculo, título, tarjeta con datos y "hace 2 horas". */
-function Event({ y, icon, circle, color, title, footer }: EventProps) {
-  const t = useTranslations("goCrm.conversations.ui");
+/** Evento de la línea de tiempo: icono en círculo, título, tarjeta con datos y cuándo pasó. */
+function Event({ y, icon, circle, color, title, pills, footer, ago }: EventProps) {
   return (
     <>
       <Box x={24} y={y - 18} w={36} h={36} className="rounded-full" style={{ background: circle }} />
@@ -44,17 +45,25 @@ function Event({ y, icon, circle, color, title, footer }: EventProps) {
         {title}
       </T>
       <Box x={72} y={y + 15} w={425} h={102} style={{ background: "var(--ui-card)", border: BORDER, borderRadius: 8 }} />
-      <Pill y={y + 37}>{`${t("sourceLabel")} ${ACTIVITY.source}`}</Pill>
-      <Pill y={y + 70}>{`${t("campaignLabel")} ${ACTIVITY.campaign}`}</Pill>
+      <Pill y={y + 37}>{pills[0]}</Pill>
+      <Pill y={y + 70}>{pills[1]}</Pill>
       <T x={82} y={y + 96} size={18} weight={500}>
         {footer}
       </T>
       <T x={W - 497} y={y + 137} size={18} color="var(--ui-text-3)" right>
-        {t("ago")}
+        {ago}
       </T>
     </>
   );
 }
+
+/** Lo que baja la línea de tiempo para dejar sitio a cada evento nuevo (distancia entre eventos). */
+export const EVENT_SHIFT = 197;
+
+/** Tramo de línea que une un evento con el siguiente. Arranca recogido (lo despliega la historia). */
+const Connector = ({ className = "" }: { className?: string }) => (
+  <Box x={41} y={151} w={2} h={161} className={className} style={{ background: "var(--ui-timeline)", transform: "scaleY(0)", transformOrigin: "top" }} />
+);
 
 const RAIL: { name: IconName; y: number }[] = [
   { name: "nodes", y: 86 },
@@ -68,6 +77,7 @@ const RAIL: { name: IconName; y: number }[] = [
 
 export default function ActivityPanel() {
   const t = useTranslations("goCrm.conversations.ui");
+  const pills: [string, string] = [`${t("sourceLabel")} ${ACTIVITY.source}`, `${t("campaignLabel")} ${ACTIVITY.campaign}`];
 
   return (
     <div className="absolute inset-0 overflow-hidden" style={{ background: "var(--ui-page)" }}>
@@ -83,10 +93,40 @@ export default function ActivityPanel() {
         {t("today")}
       </T>
 
-      {/* ── LÍNEA DE TIEMPO ── */}
-      <Box x={41} y={151} w={2} h={161} style={{ background: "var(--ui-timeline)" }} />
-      <Event y={133} icon="user" circle="var(--ui-blue-circle)" color="var(--ui-blue)" title={t("created")} footer={`${t("fromLabel")} ${ACTIVITY.formName}`} />
-      <Event y={330} icon="fileText" circle="var(--ui-green-circle)" color="var(--ui-green)" title={t("leadForm")} footer={ACTIVITY.formName} />
+      {/* ── LÍNEA DE TIEMPO (capa que baja cuando entra un evento nuevo) ── */}
+      <div className="cx-events absolute inset-0">
+        <Box x={41} y={151} w={2} h={161} style={{ background: "var(--ui-timeline)" }} />
+        <Event y={133} icon="user" circle="var(--ui-blue-circle)" color="var(--ui-blue)" title={t("created")} pills={pills} footer={`${t("fromLabel")} ${ACTIVITY.formName}`} ago={t("ago")} />
+        <Event y={330} icon="fileText" circle="var(--ui-green-circle)" color="var(--ui-green)" title={t("leadForm")} pills={pills} footer={ACTIVITY.formName} ago={t("ago")} />
+      </div>
+
+      {/* Eventos de la historia: entran arriba del todo y empujan la línea de tiempo */}
+      <div className="cx-ev-sent absolute inset-0 opacity-0">
+        <Connector className="cx-ev-line" />
+        <Event
+          y={133}
+          icon="send"
+          circle="var(--ui-purple-circle)"
+          color="var(--ui-purple)"
+          title={t("docSent")}
+          pills={[`${t("channelLabel")} SMS`, `${t("fileLabel")} ${STORY.file}`]}
+          footer={t("awaiting")}
+          ago={t("now")}
+        />
+      </div>
+      <div className="cx-ev-signed absolute inset-0 opacity-0">
+        <Connector className="cx-ev-line" />
+        <Event
+          y={133}
+          icon="clipboard"
+          circle="var(--ui-green-circle)"
+          color="var(--ui-green)"
+          title={t("docSigned")}
+          pills={[`${t("channelLabel")} SMS`, `${t("fileLabel")} ${STORY.signedFile}`]}
+          footer={t("signedBy")}
+          ago={t("now")}
+        />
+      </div>
 
       {/* ── ATRIBUCIÓN ── */}
       <Box x={0} y={969} w={521} h={2} style={{ background: "var(--ui-border)" }} />

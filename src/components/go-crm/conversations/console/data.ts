@@ -43,5 +43,20 @@ export const ACTIVITY = {
   formName: "Facebook Lead Form",
 } as const;
 
+/**
+ * La historia animada (`useConsoleStory`): el agente escribe y envía el contrato; la actividad
+ * registra el envío y el contacto gana una etiqueta. Datos de muestra, no se traducen.
+ */
+export const STORY = {
+  typed: "Te envío el contrato para que lo firmes.",
+  file: "Contrato_Dental.pdf",
+  time: "02:40 PM",
+  tag: "contract sent",
+  reply: "¡Listo! Ya lo firmé.",
+  signedFile: "Contrato_firmado.pdf",
+  replyTime: "02:43 PM",
+  signedTag: "signed",
+} as const;
+
 /** Tarjeta de presentación del agente: recorte del fotograma (es una foto, no se rehace en código). */
 export const BUSINESS_CARD = "/Files/Go_CRM/Contact_Conversations/business_card.webp";

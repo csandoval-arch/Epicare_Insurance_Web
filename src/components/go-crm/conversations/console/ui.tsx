@@ -51,6 +51,12 @@ export const UI_CSS = `
   color: var(--ui-text);
   -webkit-font-smoothing: antialiased;
 }
+/* Cursor del compositor: parpadeo de sistema (1 s, cortes secos), pausado fuera de pantalla. */
+@keyframes cx-blink { 0%, 49.9% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@media (prefers-reduced-motion: no-preference) {
+  .cx-ui .cx-caret-blink { animation: cx-blink 1s steps(1) infinite; }
+  .is-offscreen .cx-ui .cx-caret-blink { animation-play-state: paused; }
+}
 `;
 
 /** Vista del artboard que se muestra (unidades del fotograma). */

@@ -21,6 +21,7 @@ import { Artboard, UI_CSS } from "./console/ui";
 import ContactPanel from "./console/ContactPanel";
 import ThreadPanel from "./console/ThreadPanel";
 import ActivityPanel from "./console/ActivityPanel";
+import { buildActivityStory, buildDesktopStory, buildThreadStory, resetStoryText } from "./console/story";
 
 /** Columnas proporcionales al ancho real de cada panel: montados, encajan como en la UI. */
 const PANEL_COLS = PANELS.map((p) => `${p.w}fr`).join(" ");
@@ -33,6 +34,29 @@ const PANEL = "rounded-lg border border-[var(--color-border-Strokes-strong)] sha
  * equivalente de `STAGGER` cuando el tiempo es el scroll y no segundos.
  */
 const SCRUB_STAGGER = 0.1;
+
+/** La historia de la consola empieza al final del scrub (desktop) o con el panel bien dentro (móvil). */
+const STORY_START = "center 45%";
+const STORY_START_MOBILE = "top 70%";
+
+/**
+ * El loop corre solo mientras su panel está a la vista: se pausa al salir por abajo o por arriba y,
+ * si se vuelve por encima del inicio, se rearma al diseño estático (la consola se monta limpia).
+ */
+function playWhileVisible(trigger: Element, start: string, story: gsap.core.Timeline, scope: Element) {
+  ScrollTrigger.create({
+    trigger,
+    start,
+    end: "bottom top",
+    onEnter: () => story.play(),
+    onEnterBack: () => story.play(),
+    onLeave: () => story.pause(),
+    onLeaveBack: () => {
+      story.pause(0);
+      resetStoryText(scope);
+    },
+  });
+}
 
 /** Título de feature con su icono (el mismo en desktop y móvil). */
 function FeatureTitle({ card, index, className = "" }: { card: ConvFeature; index: number; className?: string }) {
@@ -75,22 +99,38 @@ export default function ConvExploded({ cards }: { cards: ConvFeature[] }) {
         .fromTo(".cx-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, stagger: SCRUB_STAGGER }, 0.45)
         .fromTo(".cx-birth", { yPercent: REVEAL.birthPercent }, { yPercent: 0, duration: 0.45, stagger: SCRUB_STAGGER }, 0.55)
         .fromTo(".cx-desc", { opacity: 0, y: REVEAL.sm }, { opacity: 1, y: 0, duration: 0.4, stagger: SCRUB_STAGGER }, 0.65);
+
+      // La historia arranca cuando el despiece termina (fin del scrub).
+      const desk = el.querySelector(".cx-desktop");
+      if (desk) playWhileVisible(stage, STORY_START, buildDesktopStory(desk), desk);
     });
 
     mm.add(`${MOBILE} and ${FULL}`, () => {
-      gsap.utils.toArray<HTMLElement>(".cx-item", el).forEach((item) => {
+      const items = gsap.utils.toArray<HTMLElement>(".cx-item", el);
+      items.forEach((item) => {
         gsap.fromTo(item, CARD_FROM, { ...CARD_TO, ...oneShot(item) });
       });
+      // Móvil: el hilo y la actividad tienen su propio loop (el compositor y las etiquetas no caen en su recorte).
+      if (items.length !== 3) return;
+      playWhileVisible(items[1], STORY_START_MOBILE, buildThreadStory(items[1]), items[1]);
+      playWhileVisible(items[2], STORY_START_MOBILE, buildActivityStory(items[2]), items[2]);
     });
 
-    return () => mm.revert();
+    // Smart Shutdown del parpadeo del cursor (keyframe CSS) fuera de pantalla.
+    const io = new IntersectionObserver(([entry]) => el.classList.toggle("is-offscreen", !entry.isIntersecting));
+    io.observe(el);
+
+    return () => {
+      io.disconnect();
+      mm.revert();
+    };
   }, []);
 
   return (
     <div ref={rootRef} className="w-full max-w-section-xl px-gutter-sm md:px-gutter-md mt-static-xl lg:mt-static-2xl">
       <style href="go-crm-console-ui" precedence="default">{UI_CSS}</style>
       {/* ── DESKTOP: PANELES (montados → despiezados) + FEATURES BAJO CADA UNO ── */}
-      <div className="hidden md:block">
+      <div className="cx-desktop hidden md:block">
         <div className="cx-stage grid items-start gap-x-static-xl" style={{ gridTemplateColumns: PANEL_COLS } as CSSProperties}>
           {PANELS.map((panel, i) => {
             const Ui = PANEL_UI[i];
