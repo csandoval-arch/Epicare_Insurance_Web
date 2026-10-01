@@ -16,7 +16,6 @@
 
 import { useRef, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import HeaderEpicare from "./HeaderEpicare";
 import HeroCta from "./hero/HeroCta";
 import WindowedVideo from "./hero/WindowedVideo";
 import { AGENT_AVATARS, HERO_LINKS } from "./hero/data";
@@ -41,9 +40,6 @@ export default function HeroEpicare() {
       ref={sectionRef}
       className="relative w-full lg:min-h-screen pb-section-sm lg:pb-0 bg-[var(--color-hero-ivory)] text-[var(--color-hero-ink)] overflow-hidden"
     >
-      <HeaderEpicare isHeaderPill={false} isHeaderForcedDark={false} scrollSafeZone={150} />
-
-
       {/* Retícula editorial: 6 col (móvil) · 8 (tablet) · 12 (desktop). Sin gutter horizontal:
           las ventanas de vídeo sangran hasta el borde y el texto lleva su propio margen. */}
       <div className="grid-layout relative z-10 w-full lg:min-h-screen gap-x-0">

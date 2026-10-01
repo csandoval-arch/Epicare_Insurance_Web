@@ -11,6 +11,11 @@ import { DUR, EASE, STAGGER, REVEAL } from "@/lib/motion";
 
 interface HeaderEpicareProps {
   isHeaderPill?: boolean;
+  /**
+   * Píldora de cristal automática: se activa al pasar estos px de scroll. Para páginas que no pueden
+   * llevar el estado (la raíz es un componente de servidor); las demás pasan `isHeaderPill`.
+   */
+  pillAfter?: number;
   isHeaderForcedDark?: boolean;
   scrollSafeZone?: number;
 }
@@ -23,7 +28,8 @@ const ArrowUR = ({ className = '' }: { className?: string }) => (
 );
 
 export default function HeaderEpicare({
-  isHeaderPill = false,
+  isHeaderPill: isHeaderPillProp = false,
+  pillAfter,
   isHeaderForcedDark = false,
   scrollSafeZone,
 }: HeaderEpicareProps) {
@@ -44,6 +50,17 @@ export default function HeaderEpicare({
   const scrollDistance = useRef(0);
 
   const isHeaderDark = isHeaderForcedDark || isDark;
+
+  // ── Píldora automática (`pillAfter`) ──
+  const [isAutoPill, setIsAutoPill] = useState(false);
+  useEffect(() => {
+    if (pillAfter === undefined) return;
+    const update = () => setIsAutoPill(window.scrollY > pillAfter);
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+    return () => window.removeEventListener("scroll", update);
+  }, [pillAfter]);
+  const isHeaderPill = isHeaderPillProp || isAutoPill;
 
   // Clases para dropdowns de navegación (estilo global reutilizado)
   const dropdownBgClass = isHeaderDark 
