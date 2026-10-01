@@ -100,7 +100,7 @@ export default function HeaderEpicare({
       label: t("about"),
       items: [
         { title: t("aboutCompany"), desc: t("aboutCompanyDesc"), href: "/company" },
-        { title: t("aboutTeam"), desc: t("aboutTeamDesc"), href: "#" },
+        { title: t("aboutTeam"), desc: t("aboutTeamDesc"), href: "/team" },
         { title: t("aboutLicensing"), desc: t("aboutLicensingDesc"), href: "/licensing" },
       ]
     },

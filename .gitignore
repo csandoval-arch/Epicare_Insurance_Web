@@ -42,4 +42,7 @@ next-env.d.ts
 
 # Production Sweep Protocol - cuarentena de assets originales
 _quarantine/
+
+# Bandeja de assets originales (el usuario los deja aquí; se optimizan a public/)
+_incoming/
 scripts/reports/
