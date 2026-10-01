@@ -652,14 +652,6 @@ body {
   @media (min-width: 1024px) { font-size: clamp(3.75rem, 11.5vw, 10.9375rem); }
 }
 
-/* Wordmark "Epicare" del footer: llena el ancho de su contenedor (`@container`, fuera de escala a
-   propósito). En cqi para respetar los márgenes laterales de su caja. */
-@utility text-footer-wordmark {
-  font-size: 25.2cqi;
-  line-height: 0.78;
-  font-weight: 500;
-  letter-spacing: -0.05em;
-}
 /* -- /company HERO: cortina de la imagen en móvil/tablet (scroll-driven, sin JS, sin pin) --
    En <lg la cortina (.hc-mask sube, .hc-mask-inner compensa) va atada al scroll con una view timeline
    de CSS: corre en el compositor, pegada al dedo (el ScrollTrigger con JS llegaba un frame tarde y la
