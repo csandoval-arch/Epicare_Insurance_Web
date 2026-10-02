@@ -143,6 +143,34 @@ export default function ColorsSection({ isDark }: { isDark: boolean }) {
               <ColorCard name="overlay-tooltip-bg" variable="--color-overlay-tooltip-bg" hex={isDark ? "#434C56" : "#1A1E21"} colorClass="bg-[var(--color-overlay-tooltip-bg)]" textWhite={false} />
             </div>
           </div>
+          <div className="mb-16">
+            <h3 className="text-h3 text-[var(--color-text-primary)] mb-6">Liquid Glass Tokens</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-10">
+              <ColorCard name="glass-liquid-divider" variable="--glass-liquid-divider · border-glass-divider" hex={isDark ? "rgb(255 255 255 / 0.14)" : "rgb(21 22 23 / 0.14)"} colorClass="bg-[var(--glass-liquid-divider)]" />
+              <ColorCard name="glass-liquid-tile" variable="--glass-liquid-tile" hex={isDark ? "rgb(255 255 255 / 0.06)" : "rgb(255 255 255 / 0.55)"} colorClass="bg-[var(--glass-liquid-tile)]" />
+              <ColorCard name="glass-liquid-edge" variable="--glass-liquid-edge" hex={isDark ? "rgb(255 255 255 / 0.12)" : "rgb(255 255 255 / 0.65)"} colorClass="bg-[var(--glass-liquid-edge)]" />
+              <ColorCard name="glass-liquid-glow" variable="--glass-liquid-glow" hex={isDark ? "rgb(53 187 253 / 0.16)" : "rgb(53 187 253 / 0.18)"} colorClass="bg-[var(--glass-liquid-glow)]" />
+              <ColorCard name="glass-liquid-veil" variable="--glass-liquid-veil" hex={isDark ? "rgb(0 0 0 / 0.4)" : "rgb(21 22 23 / 0.18)"} colorClass="bg-[var(--glass-liquid-veil)]" />
+            </div>
+
+            {/* Specimen: el separador sólo tiene sentido sobre vidrio — fondo con color para que el blur refracte */}
+            <div className="relative overflow-hidden rounded-xl p-static-xl bg-[var(--color-surface-BG-2)]">
+              <div aria-hidden="true" className="absolute -top-10 left-10 w-48 h-48 rounded-full bg-[var(--color-brand-blue)]" />
+              <div aria-hidden="true" className="absolute -bottom-10 left-64 w-40 h-40 rounded-full bg-[var(--color-brand-orange)]" />
+              <div className="relative max-w-sm rounded-xl glass-liquid p-static-lg text-[var(--color-text-primary)]">
+                <div aria-hidden="true" className="glass-liquid-sheen absolute inset-0 rounded-xl pointer-events-none" />
+                <div className="relative grid grid-cols-2 gap-static-md">
+                  {[["About", ["The company", "Team"]], ["Solutions", ["Marketing", "Technology"]]].map(([label, items]) => (
+                    <div key={label as string}>
+                      <p className="text-body-md text-[var(--color-text-secondary)] pb-static-sm mb-static-sm border-b border-glass-divider">{label as string}</p>
+                      {(items as string[]).map((i) => <p key={i} className="py-static-xs text-body-xl">{i}</p>)}
+                    </div>
+                  ))}
+                </div>
+                <p className="relative mt-static-md pt-static-sm border-t border-glass-divider text-meta text-[var(--color-text-secondary)]">.glass-liquid · .border-glass-divider</p>
+              </div>
+            </div>
+          </div>
 
         </section>
     </>
