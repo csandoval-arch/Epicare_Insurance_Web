@@ -12,7 +12,8 @@ export interface MobileNavGroup {
   key: string;
   label: string;
   /** `soon`: producto aún no disponible → tarjeta desactivada con chip "Próximamente". */
-  items: { title: string; desc?: string; href: string; soon?: boolean }[];
+  /** `shortTitle`: nombre corto para las tarjetas cuadradas del móvil (si no, `title`). */
+  items: { title: string; shortTitle?: string; desc?: string; href: string; soon?: boolean }[];
 }
 
 interface MobileMenuProps {
@@ -29,6 +30,9 @@ interface MobileMenuProps {
 // ── CONFIG ──
 /** El grupo de productos se muestra como tiles de vidrio con su descripción; el resto, en columnas. */
 const FEATURED_GROUP = "gohub";
+/** Margen creativo (pedido del usuario): las tarjetas cuadradas llevan padding px-2.5 / py-4.5 (10/18px),
+ *  +2px sobre static-sm/static-md — no hay token intermedio. Ancho calc((100vw-3.25rem)/2): caben 2 y la
+ *  tercera asoma ~12px. */
 /** El cierre corre la misma línea a doble velocidad. */
 const CLOSE_TIMESCALE = 2;
 /** Atributo en <html> que bloquea el scroll (CSS en globals.css). No toca el style inline de <body>,
@@ -182,15 +186,15 @@ export default function MobileMenu({ open, onClose, groups, forceDark, loginLabe
                 className="-mx-2 px-2 scroll-px-2 flex gap-static-sm overflow-x-auto snap-x snap-mandatory overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               >
                 {featured.items.map((item) => (
-                  <li key={item.title} className="w-[50vw] max-w-52 aspect-square shrink-0 snap-start">
+                  <li key={item.title} className="w-[calc((100vw-3.25rem)/2)] aspect-square shrink-0 snap-start">
                     {item.soon ? (
                       // ── Desactivada: no es un link; chip gris en el lugar de la flecha ──
-                      <div aria-disabled="true" className="glass-liquid-tile h-full rounded-lg p-static-md flex flex-col justify-between gap-static-md">
-                        <span className="flex flex-col items-start gap-static-sm">
+                      <div aria-disabled="true" className="glass-liquid-tile h-full rounded-lg px-2.5 py-4.5 flex flex-col justify-between gap-static-sm">
+                        <span className="flex flex-col items-start gap-static-xs">
                           <span className="px-static-sm rounded-full bg-[var(--color-surface-BG-3)] text-body-xs text-[var(--color-text-secondary)] whitespace-nowrap">
                             {soonLabel}
                           </span>
-                          <span className="text-body-xl text-[var(--color-text-secondary)]">{item.title}</span>
+                          <span className="text-body-xl text-[var(--color-text-secondary)]">{item.shortTitle ?? item.title}</span>
                         </span>
                         {item.desc && <span className="text-body-sm text-[var(--color-text-hint)]">{item.desc}</span>}
                       </div>
@@ -198,10 +202,10 @@ export default function MobileMenu({ open, onClose, groups, forceDark, loginLabe
                       <Link
                         href={item.href}
                         onClick={onClose}
-                        className="glass-liquid-tile h-full rounded-lg p-static-md flex flex-col justify-between gap-static-md transition-transform duration-150 active:scale-[0.97]"
+                        className="glass-liquid-tile h-full rounded-lg px-2.5 py-4.5 flex flex-col justify-between gap-static-sm transition-transform duration-150 active:scale-[0.97]"
                       >
                         <span className="flex items-start justify-between gap-static-xs">
-                          <span className="text-body-xl">{item.title}</span>
+                          <span className="text-body-xl">{item.shortTitle ?? item.title}</span>
                           <ArrowUR className="w-static-md h-static-md shrink-0 mt-static-xs text-[var(--color-brand-blue)]" />
                         </span>
                         {item.desc && <span className="text-body-sm text-[var(--color-text-secondary)]">{item.desc}</span>}
