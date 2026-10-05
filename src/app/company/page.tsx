@@ -8,7 +8,6 @@ import HeroCompany from "@/components/company/HeroCompany";
 import PurposeCompany from "@/components/company/PurposeCompany";
 import HistoryCompany from "@/components/company/HistoryCompany";
 import StructureCompany from "@/components/company/StructureCompany";
-import PromiseCompany from "@/components/company/PromiseCompany";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -57,7 +56,6 @@ export default function CompanyPage() {
       <PurposeCompany />
       <StructureCompany />
       <HistoryCompany />
-      <PromiseCompany />
 
       {/* "?"? GLOBAL FOOTER "?"? */}
       <FooterEpicare />

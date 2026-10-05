@@ -5,7 +5,8 @@
  * @description Hero de /company. Dos capas idénticas de titular + copy: la base en tinta sobre
  * marfil y, encima, una máscara con la imagen de arquitectura y el mismo texto en blanco. Al hacer
  * scroll la máscara sube y el texto "cambia" de color a su paso.
- * - Desktop (≥lg): retícula de 12 columnas, titular en col 2-11, copy + CTA en col 8-11, con pin.
+ * - Desktop (≥lg): retícula de 12 columnas, titular en col 2-11, copy + CTA en col 8-11, con pin;
+ *   firma (logotipo completo en blanco) en col 2-4 sobre la imagen.
  * - Móvil / tablet: una columna (copy a todo el ancho); entrada de carga (GSAP) + cortina con CSS
  *   scroll-driven (`.hc-stage` en globals.css): sin JS por frame, sin pin.
  * Motion en `hero/useHeroCompanyMotion.ts`. Colores: tokens `--color-hero-*` (bimodales); el texto
@@ -104,6 +105,11 @@ export default function HeroCompany() {
             </div>
 
             <div className={`${ROW} mt-auto`}>
+              {/* Firma (desktop): logotipo completo en blanco, abajo a la izquierda de la imagen. Entra con
+                  la bajada (.hc-copy) pero no sale con ella: con la cortina arriba quedan titular + firma. */}
+              <div className="hc-copy hidden lg:flex lg:col-start-2 lg:col-span-3 self-end">
+                <img src={asset("/epicare_logo.svg")} alt="" aria-hidden="true" decoding="async" className="h-static-2xl w-auto select-none" />
+              </div>
               <div className={`hc-copy hc-copy-exit ${COPY_COL}`}>
                 <p className={SUBHEAD} aria-hidden="true">{t("subhead")}</p>
                 <SecondaryCta label={t("cta")} tone="dark" lite onClick={scrollToStory} />

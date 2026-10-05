@@ -3,8 +3,9 @@
 /**
  * @file HistoryCompany.tsx
  * @description La historia de Epicare en /company: titular + 3 celdas (antes de 2021 · junio 2021 ·
- * hoy). Cada celda: fecha (mono, azul) → título → texto.
- * - Desktop (≥lg): retícula de hairlines de 3 columnas; al hover, línea azul superior en la celda.
+ * hoy). Cada celda: fecha (mono, gris) → título → texto, sin negritas.
+ * - Desktop (≥lg): "suizo sin caja" — una sola hairline arriba a todo el ancho y 3 columnas separadas
+ *   solo por aire; al hover, el tramo de la hairline sobre la columna se pinta de azul.
  * - Móvil / tablet: slider nativo (`scroll-snap`) de tarjetas con indicador; la siguiente asoma.
  *   Mismo DOM: el track se convierte en la retícula en ≥lg.
  * Destino del CTA "Nuestra historia" del Hero. Motion en `history/useHistoryMotion.ts`.
@@ -17,18 +18,19 @@ import { useHistoryMotion } from "./history/useHistoryMotion";
 
 type HistoryItem = { meta: string; title: string; body: string };
 
-/** Énfasis dentro de los párrafos largos: tinta del titular en seminegrita (el azul saturaría). */
-const bold = (chunks: ReactNode) => <strong className="font-semibold text-[var(--color-hero-ink)]">{chunks}</strong>;
+/** Las etiquetas <b> de los mensajes se renderizan como texto plano: sin negritas el párrafo respira
+ *  (las 3 negritas por párrafo competían con el título). Se conservan en messages por si vuelven. */
+const plain = (chunks: ReactNode) => chunks;
 
 /** Track: slider en <lg (con aire vertical para que el overflow no recorte la sombra de las tarjetas),
  *  retícula de hairlines en ≥lg. */
 const TRACK =
   "hs-grid flex gap-static-sm overflow-x-auto snap-x snap-mandatory overscroll-x-contain px-gutter-sm pt-static-sm pb-[var(--space-section-sm)] -mb-static-2xl lg:mb-0 scroll-px-[var(--space-gutter-sm)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden " +
-  "lg:grid lg:grid-cols-3 lg:gap-px lg:overflow-visible lg:p-0 lg:bg-[var(--color-border-Strokes-default)] lg:border lg:border-[var(--color-border-Strokes-default)]";
-/** Celda: tarjeta con borde en el slider (la siguiente asoma), celda de la retícula en ≥lg. */
+  "lg:grid lg:grid-cols-3 lg:gap-x-static-2xl lg:overflow-visible lg:p-0 lg:border-t lg:border-[var(--color-border-Strokes-default)]";
+/** Celda: tarjeta con borde en el slider (la siguiente asoma); en ≥lg, columna sin caja ni fondo. */
 const CELL =
   "hs-cell group relative flex flex-col shrink-0 snap-start w-[86vw] md:w-[60vw] border border-[var(--color-border-Strokes-default)] max-lg:shadow-[var(--shadow-elevation-2)] bg-[var(--color-hero-ivory)] px-gutter-sm py-static-xl md:p-static-lg " +
-  "lg:w-auto lg:border-0 lg:p-static-xl";
+  "lg:w-auto lg:border-0 lg:bg-transparent lg:px-0 lg:pt-static-xl lg:pb-0";
 
 export default function HistoryCompany() {
   const t = useTranslations("company.history");
@@ -71,14 +73,14 @@ export default function HistoryCompany() {
         <div ref={trackRef} onScroll={onScroll} className={TRACK}>
           {items.map((item, i) => (
             <article key={item.meta} className={CELL}>
-              {/* Detalle al hover (desktop): línea azul superior */}
+              {/* Detalle al hover (desktop): el tramo de la hairline sobre esta columna se pinta de azul */}
               <span
-                className="hs-line hidden lg:block absolute inset-x-0 top-0 h-px bg-[var(--color-brand-blue)] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"
+                className="hs-line hidden lg:block absolute inset-x-0 -top-px h-px bg-[var(--color-brand-blue)] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"
                 aria-hidden="true"
               />
-              <span className="text-meta text-[var(--color-hero-blue)] mb-static-sm">{item.meta}</span>
-              <h3 className="text-h3 mb-static-lg">{item.title}</h3>
-              <p className="text-body-md text-[var(--color-text-secondary)]">{t.rich(`items.${i}.body`, { b: bold })}</p>
+              <span className="text-meta text-[var(--color-text-secondary)] mb-static-md">{item.meta}</span>
+              <h3 className="text-h4 mb-static-md">{item.title}</h3>
+              <p className="text-body-md text-[var(--color-text-secondary)]">{t.rich(`items.${i}.body`, { b: plain })}</p>
             </article>
           ))}
         </div>
