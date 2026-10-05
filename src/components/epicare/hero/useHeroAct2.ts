@@ -5,6 +5,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { offsetWithin } from "./geometry";
 
+type PushDir = "up" | "down" | "left" | "right";
+
 const DESKTOP_FULL = "(min-width: 1024px) and (prefers-reduced-motion: no-preference)";
 
 // ── VALORES FUERA DE TOKEN (margen creativo declarado) ──
@@ -17,10 +19,10 @@ const PUSH_EASE = gsap.parseEase("power1.inOut");
 /**
  * @description Acto 2 del hero (solo desktop, pin + scrub): "el vídeo empuja". Referencia: Codrops,
  * *On-Scroll Expanding Image Animation within Typography* (la imagen crece y aparta el texto).
- * La ventana grande crece hasta la pantalla completa y, al crecer, empuja lo que tiene alrededor:
- * el titular y la ventana pequeña salen por arriba (empujados por su borde superior) y el subtítulo,
- * los CTAs y la prueba salen por la derecha (empujados por su borde derecho, pegados a él). Nada se
- * desvanece ni se corta: es un cambio de composición físico.
+ * La ventana grande crece hasta la pantalla completa y, al crecer, empuja lo que tiene alrededor.
+ * Cada pieza declara por qué borde la empujan con `data-push="up|down|left|right"` (p. ej. el titular
+ * sale por arriba; el copy, la prueba y la ventana pequeña por la derecha), pegada a ese borde. Nada
+ * se desvanece ni se corta: es un cambio de composición físico.
  *
  * Técnica (Hardware Symphony): solo `transform`. El marco (`.hero-window`, con `overflow: hidden`)
  * escala desde su esquina y `.hero-video-act` aplica la inversa, así que el vídeo no se deforma ni
@@ -35,18 +37,17 @@ export function useHeroAct2(sectionRef: RefObject<HTMLElement | null>) {
     const mm = gsap.matchMedia(el);
     mm.add(DESKTOP_FULL, () => {
       const frames = gsap.utils.toArray<HTMLElement>(".hero-window", el);
-      if (frames.length < 2) return;
+      if (!frames.length) return;
       const big = [...frames].sort((a, b) => b.offsetWidth * b.offsetHeight - a.offsetWidth * a.offsetHeight)[0];
       const layer = big.querySelector<HTMLElement>(".hero-video-act");
-      const heading = el.querySelector<HTMLElement>(".hero-heading");
-      const copy = el.querySelector<HTMLElement>(".hero-copy");
-      const proof = el.querySelector<HTMLElement>(".hero-proof");
-      const smallCell = el.querySelector<HTMLElement>(".hero-visual-right");
-      if (!layer || !heading || !copy || !proof || !smallCell) return;
+      if (!layer) return;
 
-      // Empujes: lo de arriba sube, lo de la derecha se va a la derecha (GSAP combina con la entrada).
-      const up = [heading, smallCell].map((node) => gsap.quickSetter(node, "y", "px"));
-      const right = [copy, proof].map((node) => gsap.quickSetter(node, "x", "px"));
+      // Empujes declarados en el markup (GSAP combina con la entrada, que anima a los hijos).
+      const pushed = gsap.utils.toArray<HTMLElement>("[data-push]", el);
+      const pushers = pushed.map((node) => {
+        const dir = node.dataset.push as PushDir;
+        return { dir, set: gsap.quickSetter(node, dir === "up" || dir === "down" ? "y" : "x", "px") };
+      });
 
       let rect = { x: 0, y: 0, w: 0, h: 0 };
       let W = 0;
@@ -70,15 +71,18 @@ export function useHeroAct2(sectionRef: RefObject<HTMLElement | null>) {
         big.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${sx}, ${sy})`;
         // Vídeo: la inversa del marco → el plano queda quieto respecto a la pantalla.
         layer.style.transform = `scale(${1 / sx}, ${1 / sy}) translate3d(${-tx}px, ${-ty}px, 0)`;
-        // Bordes del vídeo en este instante → cuánto empujan.
-        const pushRight = x + tx + w * sx - (x + w);
-        const pushUp = y * t;
-        up.forEach((set) => set(-pushUp));
-        right.forEach((set) => set(pushRight));
+        // Cuánto se ha movido cada borde del vídeo en este instante → cuánto empuja.
+        const moved: Record<PushDir, number> = {
+          up: ty,
+          left: tx,
+          right: x + tx + w * sx - (x + w),
+          down: y + ty + h * sy - (y + h),
+        };
+        pushers.forEach(({ dir, set }) => set(moved[dir]));
       };
 
       gsap.set([big, layer], { transformOrigin: "0 0", willChange: "transform" });
-      gsap.set([heading, copy, proof, smallCell], { willChange: "transform" });
+      gsap.set(pushed, { willChange: "transform" });
 
       ScrollTrigger.create({
         trigger: el,

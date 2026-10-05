@@ -185,8 +185,10 @@ html.lenis body { height: auto; }
   --color-text-secondary: #60707C;
   --color-text-muted: #9AA5B1;
   --color-text-primary-Reverted: #E8ECEF;
-  --color-text-Blue-Vivid: #0297E3;
-  --color-text-accent-blue: #0297E3;
+  /* Azul de texto = azul de marca (un solo azul en toda la web, pedido de dirección 2026-10-05).
+     Antes #0297E3 (claro) / #7DD3FC (oscuro). Ojo: #35BBFD sobre blanco = 2.2:1 de contraste. */
+  --color-text-Blue-Vivid: var(--color-brand-blue);
+  --color-text-accent-blue: var(--color-brand-blue);
   --color-text-accent-dark: #2F3437;
   --color-text-White-100: #FFFFFF;
   --color-text-Black-100: #1A1E21;
@@ -290,8 +292,8 @@ html.lenis body { height: auto; }
   --color-text-secondary: #A3A5A8;
   --color-text-muted: #6B6E71;
   --color-text-primary-Reverted: #1A1E21;
-  --color-text-Blue-Vivid: #7DD3FC;
-  --color-text-accent-blue: #7DD3FC;
+  --color-text-Blue-Vivid: var(--color-brand-blue);
+  --color-text-accent-blue: var(--color-brand-blue);
   --color-text-accent-dark: #E8ECEF;
   --color-text-White-100: #FFFFFF;
   --color-text-Black-100: #1A1E21;
@@ -625,31 +627,39 @@ body {
 /* --- End of File --- */
 
 /* -- EDITORIAL HERO TOKENS -- */
-/* ivory = fondo del hero · ink = su texto (se invierten en dark) · blue = énfasis del copy */
+/* ivory = fondo del hero · ink = su texto (se invierten en dark) · blue = énfasis del copy (= azul de
+   marca desde 2026-10-05; antes #347EAC / #3A8FBE) */
 :root {
   --color-hero-ivory: #F1EEE5;
   --color-hero-ink: #151617;
-  --color-hero-blue: #347EAC;
+  --color-hero-blue: var(--color-brand-blue);
   --color-hero-dark: #20242A;
 }
 
 .dark {
   --color-hero-ivory: #151617;
   --color-hero-ink: #F1EEE5;
-  --color-hero-blue: #3A8FBE;
+  --color-hero-blue: var(--color-brand-blue);
   --color-hero-dark: #2A2E34;
 }
 
-/* Titular gigante del hero editorial ("Construimos"). Único en la página: fuera de la escala
-   display a propósito. Móvil: 17vw menos 4px (excepción pedida por el usuario). Tablet: la
-   palabra llena el ancho (17vw). Desktop: clamp aprobado. */
+/* Titular gigante del hero editorial ("Go beyond growth"). Único en la página: fuera de la escala
+   display a propósito. Móvil: 17vw menos 4px (excepción pedida por el usuario). Tablet: 17vw
+   (titular en dos líneas).
+   Desktop: una línea con el MISMO aire a los dos lados: 3rem (`pl-static-2xl`) antes de "Go" y 3rem
+   entre "growth" y la ventana pequeña (empieza en la col 11 = 83.333vw), en cualquier ancho (sin
+   tope, que rompería la simetría). Ancho del titular = 7.732 × font-size (medido; Inter Display
+   500, tracking −0.025em) → font-size = (83.333vw − 3rem − 3rem) / 7.732.
+   Si cambia el texto del titular, re-medir el 7.732. */
 @utility text-hero-display {
   font-size: calc(17vw - 0.25rem);
-  line-height: 0.9;
+  /* <lg el titular va en dos líneas: la "y" (descendente ~0.21em) y la "h" (ascendente ~0.76em)
+     necesitan ≥0.97 entre líneas; con 0.9 chocaban. Desktop (una línea) mantiene 0.9. */
+  line-height: 1.05;
   font-weight: 500;
   letter-spacing: -0.025em;
   @media (min-width: 768px) { font-size: 17vw; }
-  @media (min-width: 1024px) { font-size: clamp(3.75rem, 11.5vw, 10.9375rem); }
+  @media (min-width: 1024px) { font-size: calc((83.333vw - 6rem) / 7.732); line-height: 0.9; }
 }
 
 /* -- /company HERO: cortina de la imagen en móvil/tablet (scroll-driven, sin JS, sin pin) --
@@ -739,6 +749,17 @@ body {
 html[data-mnav-lock],
 html[data-mnav-lock] body {
   overflow: hidden;
+}
+
+/* -- /team Acto 03 "Your role": la figura que te acompaña respira (vida latente), como el elenco del hero.
+   Pausada fuera de pantalla (.is-offscreen, IntersectionObserver en RoleTeam) y apagada con reduced-motion. -- */
+@keyframes rt-breath {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(0, -0.6%, 0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .rt-root .rt-breath { animation: rt-breath 6s ease-in-out infinite alternate; }
+  .rt-root.is-offscreen .rt-breath { animation-play-state: paused; }
 }
 
 /* Separador sobre vidrio líquido (bimodal por alfa). Usar con border-t / border-b. */

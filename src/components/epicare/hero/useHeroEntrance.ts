@@ -44,36 +44,39 @@ export function useHeroEntrance(scopeRef: RefObject<HTMLElement | null>) {
         { x: 0, duration: DUR.slow, ease: EASE.dramatic, force3D: true },
       ] as const;
 
+      // Arrays (no strings): según la variante del hero, algunas piezas no existen y GSAP avisaría.
+      const $ = (selector: string) => gsap.utils.toArray<HTMLElement>(selector, el);
+
       tl = gsap
         .timeline({ paused: true })
         // 1 · Titular
         .fromTo(
-          ".hero-title-line",
+          $(".hero-title-line"),
           { yPercent: REVEAL.birthPercent, opacity: 0, willChange: "transform, opacity" },
           { yPercent: 0, opacity: 1, duration: DUR.slow, ease: EASE.dramatic, force3D: true, clearProps: "willChange" }
         )
         // 2 · Subtítulo grande, línea a línea
         .fromTo(
-          ".hero-subtitle",
+          $(".hero-subtitle"),
           { opacity: 0, y: REVEAL.sm, willChange: "transform, opacity" },
           { opacity: 1, y: 0, duration: DUR.base, ease: EASE.out, stagger: STAGGER.tight, clearProps: "willChange" },
           "-=0.5"
         )
         // 3 · Bloque de prueba (avatares + copy). Se animan sus hijos: el contenedor lo mueve el acto 2.
         .fromTo(
-          ".hero-proof > *",
+          $(".hero-proof > *"),
           { opacity: 0, y: REVEAL.sm, willChange: "transform, opacity" },
           { opacity: 1, y: 0, duration: DUR.base, ease: EASE.out, clearProps: "willChange" },
           "-=0.4"
         )
         // 4 · Ventanas de vídeo: la izquierda desde la izquierda, la derecha desde la derecha
-        .fromTo(".hero-visual-left", ...slideIn(-VIDEO_SLIDE), "-=0.4")
-        .fromTo(".hero-visual-left .hero-video-counter", ...counter(-VIDEO_SLIDE), "<")
-        .fromTo(".hero-visual-right", ...slideIn(VIDEO_SLIDE), "<")
-        .fromTo(".hero-visual-right .hero-video-counter", ...counter(VIDEO_SLIDE), "<")
+        .fromTo($(".hero-visual-left"), ...slideIn(-VIDEO_SLIDE), "-=0.4")
+        .fromTo($(".hero-visual-left .hero-video-counter"), ...counter(-VIDEO_SLIDE), "<")
+        .fromTo($(".hero-visual-right"), ...slideIn(VIDEO_SLIDE), "<")
+        .fromTo($(".hero-visual-right .hero-video-counter"), ...counter(VIDEO_SLIDE), "<")
         // 5 · CTAs, durante el final de las ventanas
         .fromTo(
-          ".hero-cta",
+          $(".hero-cta"),
           { opacity: 0, scale: CTA_START_SCALE, willChange: "transform, opacity" },
           { opacity: 1, scale: 1, duration: DUR.base, ease: EASE.snap, stagger: STAGGER.wave, clearProps: "willChange" },
           "-=0.5"

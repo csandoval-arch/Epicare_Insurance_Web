@@ -1,8 +1,8 @@
 {
   "landingV2": {
     "hero": {
-      "title": "Construimos",
-      "subtitle": ["El puente", "que nadie", "quiso construir,", "y seguimos", "construyendo."],
+      "title": "Go beyond growth",
+      "subtitle": ["Impulsamos", "a los agentes", "a redefinir", "el éxito."],
       "agentsCount": "100+",
       "agentsLabel": ["Agentes", "activos"],
       "supporting": "<b>130+ aseguradoras</b>, tecnología y equipo de soporte bajo <b>un solo contrato</b>. Tu book of business, <b>100% tuyo</b>.",
@@ -79,7 +79,7 @@
       }
     },
     "darkGradient": {
-      "sectionTitle": "Un solo acuerdo para <span>toda tu organización.</span>",
+      "sectionTitle": "Nosotros llevamos la operación. <span>Tú vendes.</span>",
       "sectionDesc": "Appointments con 130+ carriers, sistema de gestión, visibilidad en tiempo real y equipo de soporte. Todo incluido bajo el mismo contrato.",
       "tiltCard": "Girar",
       "feature1_step": "01 · Contratación",
@@ -844,6 +844,81 @@
     }
   },
   "team": {
+    "role": {
+      "eyebrow": "Tu papel",
+      "title": "4 formas de sumarte al equipo Epicare.",
+      "subtitle": "Cada camino tiene su propio nivel de compromiso e independencia. Son los cuatro modos oficiales de ingresar al ecosistema Epicare, según operes a título individual o con un equipo propio.",
+      "stepOne": "¿Cómo trabajas?",
+      "stepTwo": "¿Desde dónde empiezas?",
+      "guideLabel": "Te acompaña",
+      "allPaths": "Los 4 caminos",
+      "cta": "Empieza tu camino",
+      "groups": [
+        {
+          "key": "agent",
+          "kicker": "Como agente",
+          "sub": "Operas a título individual."
+        },
+        {
+          "key": "agency",
+          "kicker": "Como agencia",
+          "sub": "Operas con tu propio equipo."
+        }
+      ],
+      "paths": [
+        {
+          "key": "licensed",
+          "group": "agent",
+          "n": "01",
+          "tag": "Ya licenciado",
+          "title": "Soy agente",
+          "body": "Ya tienes licencia. Te sumas al equipo Epicare con acceso a 130+ carriers, plataforma, training y soporte para vender más.",
+          "guide": "El equipo de Contracting"
+        },
+        {
+          "key": "get-licensed",
+          "group": "agent",
+          "n": "02",
+          "tag": "Quiero licenciarme",
+          "title": "No soy agente",
+          "body": "Quieres licenciarte. Epicare te acompaña en el proceso de licensing y onboarding, para que empieces a vender desde tu primer día como agente.",
+          "guide": "El equipo de Licensing"
+        },
+        {
+          "key": "agency",
+          "group": "agency",
+          "n": "03",
+          "tag": "Agencia",
+          "title": "Lanza tu Epicare Agency",
+          "body": "Lanza tu agencia bajo la marca Epicare con estructura probada y soporte operativo de Insurance Corp.",
+          "guide": "El equipo de Tecnología"
+        },
+        {
+          "key": "sub-agency",
+          "group": "agency",
+          "n": "04",
+          "tag": "Sub-agencia",
+          "title": "Suma tu agencia al IMO",
+          "body": "Tu agencia opera como sub-agencia dentro de la red Epicare, manteniendo su identidad y sumando infraestructura.",
+          "guide": "El equipo de Compliance"
+        }
+      ]
+    },
+    "credits": {
+      "eyebrow": "Créditos",
+      "departments": {
+        "licensing": "Licencias",
+        "contracting": "Contratación",
+        "compliance": "Cumplimiento",
+        "marketing": "Marketing",
+        "technology": "Tecnología",
+        "support": "Soporte al agente",
+        "training": "Formación"
+      },
+      "starring": "Protagonista: tú.",
+      "statement": "Go beyond growth.",
+      "cta": "Únete al equipo"
+    },
     "hero": {
       "eyebrow": "El elenco",
       "title": [
@@ -852,6 +927,56 @@
       ],
       "subtitle": "Un equipo experto detrás de cada caso.",
       "cta": "Conoce al equipo"
+    },
+    "case": {
+      "eyebrow": "El caso",
+      "title": "Cada caso tiene su equipo.",
+      "subtitle": "3 formas de crecer con Epicare.",
+      "policy": "Póliza",
+      "policyCase": "Plan dental · Mariano Lozano",
+      "inProgress": "En curso",
+      "active": "Activa",
+      "closing": "La industria trabajando para ti, no en tu contra.",
+      "prev": "Etapa anterior",
+      "next": "Etapa siguiente",
+      "stages": [
+        {
+          "key": "licensing",
+          "front": "Soporte de la industria",
+          "name": "Licencias",
+          "line": "Tus licencias, al día."
+        },
+        {
+          "key": "contracting",
+          "front": "Soporte de la industria",
+          "name": "Contratación",
+          "line": "Un solo acuerdo, 130+ aseguradoras."
+        },
+        {
+          "key": "lead",
+          "front": "Marketing",
+          "name": "Prospecto",
+          "line": "Prospectos y contenido en dos idiomas."
+        },
+        {
+          "key": "quote",
+          "front": "Tecnología",
+          "name": "Cotización",
+          "line": "Cotiza en GO AMS."
+        },
+        {
+          "key": "close",
+          "front": "Tú",
+          "name": "Cierre",
+          "line": "Tú cierras."
+        },
+        {
+          "key": "compliance",
+          "front": "Soporte de la industria",
+          "name": "Cumplimiento",
+          "line": "Nosotros cuidamos el resto."
+        }
+      ]
     }
   }
 }

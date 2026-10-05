@@ -1,8 +1,8 @@
 {
   "landingV2": {
     "hero": {
-      "title": "We build",
-      "subtitle": ["The bridge", "no one", "wanted to build,", "and we keep", "building."],
+      "title": "Go beyond growth",
+      "subtitle": ["Empowering agents", "to redefine", "success."],
       "agentsCount": "100+",
       "agentsLabel": ["Active", "agents"],
       "supporting": "<b>130+ carriers</b>, technology and a support team under <b>one contract</b>. Your book of business, <b>100% yours</b>.",
@@ -79,7 +79,7 @@
       }
     },
     "darkGradient": {
-      "sectionTitle": "One single agreement for <span>your entire organization.</span>",
+      "sectionTitle": "We run the operation. <span>You sell.</span>",
       "sectionDesc": "Appointments with 130+ carriers, management system, real-time visibility, and dedicated support. Everything included under one contract.",
       "tiltCard": "Tilt",
       "feature1_step": "01 · Contracting",
@@ -844,6 +844,81 @@
     }
   },
   "team": {
+    "role": {
+      "eyebrow": "Your role",
+      "title": "4 ways to join the Epicare team.",
+      "subtitle": "Each path has its own level of commitment and independence. These are the four official ways to join the Epicare ecosystem, depending on whether you operate individually or with your own team.",
+      "stepOne": "How do you work?",
+      "stepTwo": "Where do you start?",
+      "guideLabel": "Walking with you",
+      "allPaths": "The 4 paths",
+      "cta": "Start my path",
+      "groups": [
+        {
+          "key": "agent",
+          "kicker": "As an agent",
+          "sub": "You operate as an individual."
+        },
+        {
+          "key": "agency",
+          "kicker": "As an agency",
+          "sub": "You operate with your own team."
+        }
+      ],
+      "paths": [
+        {
+          "key": "licensed",
+          "group": "agent",
+          "n": "01",
+          "tag": "Already licensed",
+          "title": "I’m an Agent",
+          "body": "You’re already licensed. Join the Epicare team with access to 130+ carriers, platform, training, and support to sell more.",
+          "guide": "The Contracting team"
+        },
+        {
+          "key": "get-licensed",
+          "group": "agent",
+          "n": "02",
+          "tag": "Want to get licensed",
+          "title": "I’m not an Agent",
+          "body": "You want to get licensed. Epicare guides you through the licensing and onboarding process, so you can start selling from day one as an agent.",
+          "guide": "The Licensing team"
+        },
+        {
+          "key": "agency",
+          "group": "agency",
+          "n": "03",
+          "tag": "Agency",
+          "title": "Launch your Epicare Agency",
+          "body": "Launch your agency under the Epicare brand with a proven structure and operational support from Insurance Corp.",
+          "guide": "The Technology team"
+        },
+        {
+          "key": "sub-agency",
+          "group": "agency",
+          "n": "04",
+          "tag": "Sub-agency",
+          "title": "Bring your agency to the IMO",
+          "body": "Your agency operates as a sub-agency within the Epicare network, keeping its identity and gaining infrastructure.",
+          "guide": "The Compliance team"
+        }
+      ]
+    },
+    "credits": {
+      "eyebrow": "Credits",
+      "departments": {
+        "licensing": "Licensing",
+        "contracting": "Contracting",
+        "compliance": "Compliance",
+        "marketing": "Marketing",
+        "technology": "Technology",
+        "support": "Agent support",
+        "training": "Training"
+      },
+      "starring": "Starring: you.",
+      "statement": "Go beyond growth.",
+      "cta": "Join Our Team"
+    },
     "hero": {
       "eyebrow": "The cast",
       "title": [
@@ -852,6 +927,56 @@
       ],
       "subtitle": "An expert team behind every case.",
       "cta": "Meet the crew"
+    },
+    "case": {
+      "eyebrow": "The case",
+      "title": "Every case has a crew.",
+      "subtitle": "3 ways you grow with Epicare.",
+      "policy": "Policy",
+      "policyCase": "Dental plan · Mariano Lozano",
+      "inProgress": "In progress",
+      "active": "Active",
+      "closing": "The industry working for you, not against you.",
+      "prev": "Previous stage",
+      "next": "Next stage",
+      "stages": [
+        {
+          "key": "licensing",
+          "front": "Industry support",
+          "name": "Licensing",
+          "line": "Your licenses, up to date."
+        },
+        {
+          "key": "contracting",
+          "front": "Industry support",
+          "name": "Contracting",
+          "line": "One agreement, 130+ carriers."
+        },
+        {
+          "key": "lead",
+          "front": "Marketing",
+          "name": "Lead",
+          "line": "Leads and content in two languages."
+        },
+        {
+          "key": "quote",
+          "front": "Technology",
+          "name": "Quote",
+          "line": "Quote in GO AMS."
+        },
+        {
+          "key": "close",
+          "front": "You",
+          "name": "Close",
+          "line": "You close."
+        },
+        {
+          "key": "compliance",
+          "front": "Industry support",
+          "name": "Compliance",
+          "line": "We handle the rest."
+        }
+      ]
     }
   }
 }
