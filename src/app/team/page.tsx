@@ -13,6 +13,9 @@ import LoaderEpicare from "@/components/epicare/LoaderEpicare";
 import HeaderEpicare from "@/components/epicare/HeaderEpicare";
 import FooterEpicare from "@/components/epicare/FooterEpicare";
 import HeroTeam from "@/components/team/HeroTeam";
+import CaseTeam from "@/components/team/CaseTeam";
+import RoleTeam from "@/components/team/RoleTeam";
+import CreditsTeam from "@/components/team/CreditsTeam";
 
 /** A partir de aquí el header pasa a píldora. */
 const HEADER_PILL_AT = 150;
@@ -43,6 +46,9 @@ export default function TeamPage() {
 
       {/* ── ACTOS ── */}
       <HeroTeam />
+      <CaseTeam />
+      <RoleTeam />
+      <CreditsTeam />
 
       <FooterEpicare />
     </main>
