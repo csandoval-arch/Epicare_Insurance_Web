@@ -38,7 +38,7 @@ const CLOSE_TIMESCALE = 2;
 /** Atributo en <html> que bloquea el scroll (CSS en globals.css). No toca el style inline de <body>,
  *  que también usan el loader y el modal de login. */
 const LOCK_ATTR = "data-mnav-lock";
-const DESKTOP_MQ = "(min-width: 768px)";
+const DESKTOP_MQ = "(min-width: 1280px)";
 
 /**
  * @description Menú móvil "Liquid sheet": una hoja de vidrio líquido que baja desde el pill del
@@ -144,7 +144,7 @@ export default function MobileMenu({ open, onClose, groups, forceDark, loginLabe
     };
   }, [open]);
 
-  // ── ESCAPE + PASO A DESKTOP (el menú es md:hidden: abierto en desktop bloquearía el scroll) ──
+  // ── ESCAPE + PASO A DESKTOP (el menú es xl:hidden: abierto en desktop bloquearía el scroll) ──
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
@@ -164,7 +164,7 @@ export default function MobileMenu({ open, onClose, groups, forceDark, loginLabe
       ref={rootRef}
       role="dialog"
       aria-modal="true"
-      className={`fixed inset-0 z-[999997] md:hidden invisible ${open ? "pointer-events-auto" : "pointer-events-none"} text-[var(--color-text-primary)]${forceDark ? " dark" : ""}`}
+      className={`fixed inset-0 z-[999997] xl:hidden invisible ${open ? "pointer-events-auto" : "pointer-events-none"} text-[var(--color-text-primary)]${forceDark ? " dark" : ""}`}
     >
       {/* ── VELO (tap fuera = cerrar) ── */}
       <button type="button" tabIndex={-1} aria-hidden="true" onClick={onClose} className="mnav-veil absolute inset-0 w-full h-full opacity-0 glass-liquid-veil cursor-default" />

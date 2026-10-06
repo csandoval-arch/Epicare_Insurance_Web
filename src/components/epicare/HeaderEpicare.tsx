@@ -7,6 +7,7 @@ import { useLocale } from "./I18nProviderClient";
 import { asset } from "@/lib/asset";
 import { loginModalStore } from "@/lib/loginModalStore";
 import MobileMenu from "./header/MobileMenu";
+import { HERO_COLUMN_EVENT, type HeroColumnDetail } from "./hero/geometry";
 
 interface HeaderEpicareProps {
   isHeaderPill?: boolean;
@@ -58,6 +59,39 @@ export default function HeaderEpicare({
     return () => window.removeEventListener("scroll", update);
   }, [pillAfter]);
   const isHeaderPill = isHeaderPillProp || isAutoPill;
+
+  // ── Links en blanco sobre la columna de vídeo del hero ──
+  // Copia blanca de los links (desktop) recortada a la caja de la columna en pantalla, que publica el
+  // hero en cada frame. Con la píldora de cristal no: su fondo ya da contraste.
+  const navWhiteRef = useRef<HTMLDivElement>(null);
+  const heroColRef = useRef<HeroColumnDetail>(null);
+  const pillRef = useRef(isHeaderPill);
+  const clipNavWhite = useCallback(() => {
+    const el = navWhiteRef.current;
+    if (!el) return;
+    const col = heroColRef.current;
+    if (!col || pillRef.current) {
+      el.style.visibility = "hidden";
+      return;
+    }
+    const r = el.getBoundingClientRect();
+    const left = Math.max(0, col.x0 - r.left);
+    const right = Math.max(0, r.right - col.x1);
+    el.style.visibility = left + right >= r.width ? "hidden" : "visible";
+    el.style.clipPath = `inset(-1rem ${right}px -1rem ${left}px)`;
+  }, []);
+  useEffect(() => {
+    const onCol = (e: Event) => {
+      heroColRef.current = (e as CustomEvent<HeroColumnDetail>).detail;
+      clipNavWhite();
+    };
+    window.addEventListener(HERO_COLUMN_EVENT, onCol);
+    return () => window.removeEventListener(HERO_COLUMN_EVENT, onCol);
+  }, [clipNavWhite]);
+  useEffect(() => {
+    pillRef.current = isHeaderPill;
+    clipNavWhite();
+  }, [isHeaderPill, clipNavWhite]);
 
   // Clases para dropdowns de navegación (estilo global reutilizado)
   const dropdownBgClass = isHeaderDark 
@@ -295,8 +329,30 @@ export default function HeaderEpicare({
           </div>
         </div>
 
+        {/* Copia blanca de los links (solo visual), recortada a la columna de vídeo del hero */}
+        <div
+          ref={navWhiteRef}
+          aria-hidden="true"
+          style={{ visibility: "hidden" }}
+          className="hidden xl:flex items-center gap-fluid-sm absolute left-1/2 -translate-x-1/2 h-full pointer-events-none z-10 text-white"
+        >
+          {navItems.map((item) => (
+            <div className="relative h-full flex items-center" key={item.key}>
+              <span className="flex items-center h-full text-body-sm">
+                <span className="relative flex items-center gap-1.5">
+                  {item.label}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={`opacity-50 transition-transform duration-300 ${activeMenu === item.key ? 'rotate-180' : ''}`}>
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                  <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-[1.2px] bg-current transition-all duration-300 ease-out ${activeMenu === item.key ? 'w-full opacity-100' : 'w-0 opacity-0'}`}></span>
+                </span>
+              </span>
+            </div>
+          ))}
+        </div>
+
         {/* Desktop Navigation (Center) */}
-        <div className="hidden md:flex items-center gap-fluid-sm absolute left-1/2 -translate-x-1/2 h-full">
+        <div className="hidden xl:flex items-center gap-fluid-sm absolute left-1/2 -translate-x-1/2 h-full">
           {navItems.map((item) => (
             <div 
               className="relative h-full flex items-center" 
@@ -367,7 +423,7 @@ export default function HeaderEpicare({
             type="button" 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-controls="mobile-menu"
-            className="md:hidden w-10 h-10 flex items-center justify-center cursor-pointer relative z-[1000000] transition-opacity hover:opacity-70"
+            className="xl:hidden w-10 h-10 flex items-center justify-center cursor-pointer relative z-[1000000] transition-opacity hover:opacity-70"
             aria-label="Toggle mobile menu"
             aria-expanded={isMobileMenuOpen}
           >
@@ -386,7 +442,7 @@ export default function HeaderEpicare({
           </button>
           
           {/* Botón de Login */}
-          <button onClick={() => loginModalStore.open()} className="group hidden md:flex h-[44px] pl-5 pr-1.5 rounded-full flex justify-between items-center gap-3 bg-[var(--color-brand-blue)] text-white text-body-sm font-semibold normal-case transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] shadow-elevation-1 hover:brightness-105 hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-3 active:scale-95 cursor-pointer">
+          <button onClick={() => loginModalStore.open()} className="group hidden xl:flex h-[44px] pl-5 pr-1.5 rounded-full flex justify-between items-center gap-3 bg-[var(--color-brand-blue)] text-white text-body-sm font-semibold normal-case transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] shadow-elevation-1 hover:brightness-105 hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-3 active:scale-95 cursor-pointer">
             <span>{t('login')}</span>
             <span className="relative w-8 h-8 rounded-full bg-white text-[var(--color-brand-blue)] flex items-center justify-center overflow-hidden shrink-0">
               <ArrowUR className="absolute w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
@@ -395,7 +451,7 @@ export default function HeaderEpicare({
           </button>
           
           {/* CTA Desktop Secundario */}
-          <button className={`group hidden md:flex h-[44px] pl-5 pr-1.5 rounded-full flex justify-between items-center gap-3 border text-body-sm font-medium normal-case shadow-elevation-1 backdrop-blur-md transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-3 active:scale-95 ${secondaryCtaClass} cursor-pointer`}>
+          <button className={`group hidden xl:flex h-[44px] pl-5 pr-1.5 rounded-full flex justify-between items-center gap-3 border text-body-sm font-medium normal-case shadow-elevation-1 backdrop-blur-md transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-3 active:scale-95 ${secondaryCtaClass} cursor-pointer`}>
             <span>{t('moreFromEpicare')}</span>
             <span className={`relative w-8 h-8 rounded-full flex items-center justify-center overflow-hidden shrink-0 ${
               isHeaderForcedDark || isDark ? 'bg-white/10 text-white' : 'bg-black/5 text-[var(--color-text-primary)]'
