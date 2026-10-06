@@ -111,7 +111,7 @@ export default function MetricsEpicare() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full relative z-20 bg-[var(--color-surface-BG-white)] dark:bg-[var(--color-surface-BG-black)] transition-colors duration-500 pt-0 pb-section-sm md:pb-section-md">
+    <section ref={sectionRef} className="w-full relative z-20 bg-[var(--color-surface-BG-base)] transition-colors duration-500 pt-0 pb-section-sm md:pb-section-md">
       <div className="max-w-section-lg px-gutter-sm md:px-gutter-md">
         
         {/* ── Header Section ── */}

@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { asset, posterFor } from "@/lib/asset";
 import GoHubLogo from "./GoHubLogo";
-import SmartVideo from "./SmartVideo";
+import ScrollHint from "./ScrollHint";import SmartVideo from "./SmartVideo";
 
 // ----------------------------------------------------------------------
 // LOGOS 
@@ -259,32 +259,29 @@ export default function BentoGridDesktop() {
 
   return (
     // OUTER WRAPPER: Protects the Next.js DOM tree from GSAP's pin-spacer height injection
-    <div className="relative w-full z-10 bg-white dark:bg-black border-y border-black/5 dark:border-white/10 overflow-hidden">
-      
+    // Fondo: gris base del DS (bimodal), elegido en el panel de opciones (2026-10-05).
+    <div className="relative w-full z-10 bg-[var(--color-surface-BG-base)] transition-colors duration-500 overflow-hidden">
+
       <section ref={sectionRef} className="h-screen w-full relative">
-        
-        {/* Immersive Brand Blue Background (Fixed inside sticky container) */}
-        <div className="absolute inset-0 -z-20 bg-[var(--color-brand-blue)]">
-          {/* Subtle light mesh for texture, without darkening the brand color */}
-          <div className="absolute inset-0 bg-white/5" />
-        </div>
 
         {/* The Horizontal Scrolling Track */}
         <div ref={trackRef} className="flex items-center h-full flex-nowrap pl-[15vw] gap-[5vw] lg:gap-[8vw] w-max will-change-transform">
            
            {/* INTRO TITLE PANEL */}
            <div className="w-[70vw] lg:w-[40vw] shrink-0 flex flex-col justify-center">
-              <div className="w-24 h-24 bg-white rounded-xl flex items-center justify-center mb-8 shadow-elevation-2 transform transition-transform hover:scale-105">
+              <div className="w-24 h-24 bg-white dark:bg-[var(--color-surface-BG-1)] rounded-xl border border-black/5 dark:border-white/10 flex items-center justify-center mb-8 shadow-elevation-2 transform transition-transform hover:scale-105">
                 <GoHubLogo className="w-16 h-16 text-[var(--color-brand-blue)]" />
               </div>
-              <h2 className="text-display-lg text-white mb-6 capitalize">
-                {t('sectionTitle')}
+              {/* Un solo titular de 3 líneas (sin subtítulo): cada verbo es un producto del hub
+                  (vende = GO CRM · opera = GO AMS · aprende = Academy). */}
+              <h2 className="text-display-lg text-[var(--color-text-primary)]">
+                {t('sectionTitle').split('\n').map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
               </h2>
-              <p className="text-body-lg text-white/90 font-light max-w-md leading-relaxed">
-                {t.rich('sectionDesc', {
-                  b: (chunks) => <strong className="font-semibold text-white">{chunks}</strong>,
-                })}
-              </p>
+              <ScrollHint className="mt-static-2xl" />
            </div>
 
            {/* PANEL 1: CRM */}

@@ -10,7 +10,6 @@ import { EASE, DUR } from "@/lib/motion";
 import GoHubLogo from "./GoHubLogo";
 import { AcademyIcon } from "./EcosystemIcons";
 import SmartVideo from "./SmartVideo";
-
 // ── INTERNAL ARC: brand accent per card (title + 5 products). The ambient
 // orb morphs to the active card's color so the journey has a beginning,
 // middle and end instead of being a flat carousel.
@@ -151,11 +150,6 @@ export default function BentoGridMobile() {
             { yPercent: 120, willChange: 'transform' },
             { yPercent: 0, duration: 1.0, ease: "power4.out", stagger: 0.1, force3D: true, clearProps: 'all' },
             "-=0.4"
-          )
-          .fromTo(".anim-head-fade",
-            { opacity: 0, y: 24, willChange: 'transform, opacity' },
-            { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", clearProps: 'willChange' },
-            "-=0.5"
           );
 
         // 2. STACKING CARDS EFFECT (Native CSS Sticky + GSAP 3D Shrink)
@@ -249,7 +243,7 @@ export default function BentoGridMobile() {
       <section
         id="plataforma"
         ref={containerRef}
-        className="relative w-full h-auto md:h-screen overflow-x-clip md:overflow-hidden bg-[var(--color-brand-blue)] transition-colors duration-500 z-20 rounded-t-none rounded-b-xl md:rounded-xl max-w-full"
+        className="relative w-full h-auto md:h-screen overflow-x-clip md:overflow-hidden bg-[var(--color-surface-BG-base)] transition-colors duration-500 z-20 rounded-t-none rounded-b-xl md:rounded-xl max-w-full"
         style={{ perspective: '2000px' }}
       >
         {/* AMBIENT ORB — the journey's mood: morphs to the active product's accent */}
@@ -283,12 +277,12 @@ export default function BentoGridMobile() {
           {/* CARD 0: THE TITLE COMPOSITION */}
           <div className="mobile-stack-card sticky top-0 w-full min-h-fit pb-8 sm:pb-[6vh] flex flex-col justify-start pt-static-xl sm:pt-[calc(6vh)] items-start px-gutter-sm origin-top transform-gpu will-change-transform [backface-visibility:hidden] z-[10] relative">
               {/* GoHub Logo Badge above the title */}
-              <div className="gohub-logo-badge w-14 h-14 bg-white rounded-lg flex items-center justify-center mb-5 shadow-elevation-2">
+              <div className="gohub-logo-badge w-14 h-14 bg-white dark:bg-[var(--color-surface-BG-1)] rounded-lg border border-black/5 dark:border-white/10 flex items-center justify-center mb-5 shadow-elevation-2">
                 <GoHubLogo className="w-9 h-9 text-[var(--color-brand-blue)]" />
               </div>
 
-              <h2 className="text-display-lg text-white text-left">
-                {t('sectionTitle').split('\n').map((line, i, arr) => {
+              <h2 className="text-display-lg text-[var(--color-text-primary)] text-left">
+                {t('sectionTitle').split('\n').map((line, i) => {
                   return (
                     <span key={i} className="block overflow-hidden pb-1 -mb-1">
                       <span className="title-line-reveal block">
@@ -298,11 +292,6 @@ export default function BentoGridMobile() {
                   );
                 })}
               </h2>
-              <p className="anim-head-fade text-body-lg text-white/80 font-light max-w-[420px] text-left mt-static-md">
-                {t.rich('sectionDesc', {
-                  b: (chunks) => <span className="font-semibold text-white">{chunks}</span>,
-                })}
-              </p>
           </div>
 
           {/* CARDS 1-5: ECOSYSTEM */}

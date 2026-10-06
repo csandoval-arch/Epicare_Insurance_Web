@@ -285,7 +285,7 @@ export default function DarkGradientSection() {
   return (
     <section 
       ref={sectionRef}
-      className="relative w-full bg-[var(--color-surface-BG-white)] dark:bg-[var(--color-surface-BG-black)] pt-0 pb-section-sm md:pb-section-md z-20 overflow-hidden transition-colors duration-500 px-gutter-sm md:px-gutter-md"
+      className="relative w-full bg-[var(--color-surface-BG-base)] pt-0 pb-section-sm md:pb-section-md z-20 overflow-hidden transition-colors duration-500 px-gutter-sm md:px-gutter-md"
     >
       <div className="max-w-section-lg mx-auto w-full">
         
