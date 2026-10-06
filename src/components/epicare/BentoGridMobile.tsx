@@ -6,10 +6,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { asset, posterFor } from "@/lib/asset";
-import { EASE, DUR } from "@/lib/motion";
-import GoHubLogo from "./GoHubLogo";
+import { EASE, DUR, STAGGER, TRIGGER } from "@/lib/motion";
 import { AcademyIcon } from "./EcosystemIcons";
 import SmartVideo from "./SmartVideo";
+import HubTitle from "./bento-act1/HubTitle";
+import { HubPlaque, renderHubMark, hubMarksTimeline, observeHubLoop } from "./bento-act1/HubIntro";
 // ── INTERNAL ARC: brand accent per card (title + 5 products). The ambient
 // orb morphs to the active card's color so the journey has a beginning,
 // middle and end instead of being a flat carousel.
@@ -108,6 +109,7 @@ export default function BentoGridMobile() {
     const track = trackRef.current;
 
     if (!section || !track) return;
+    const stopLoopObserver = observeHubLoop(section);
 
     // Resolve brand accents from the DS tokens once.
     const styles = getComputedStyle(document.documentElement);
@@ -135,22 +137,25 @@ export default function BentoGridMobile() {
         // 1. Header Entrance Timeline (Logo Badge + Title + Subtitle)
         const headerTl = gsap.timeline({
           scrollTrigger: {
-            trigger: section,
-            start: "top 80%",
+            // Con el titular en pantalla (no con el borde de la sección): la entrada se ve entera.
+            trigger: section.querySelector(".hub-title") ?? section,
+            start: TRIGGER.standard,
             toggleActions: "play none none reverse"
           }
         });
 
+        // Selectores acotados a la sección: el árbol de desktop también está en el DOM (oculto).
         headerTl
-          .fromTo(".gohub-logo-badge",
+          .fromTo(section.querySelectorAll(".hub-plaque"),
             { opacity: 0, scale: 0.85, y: 20, willChange: 'transform, opacity' },
-            { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "power3.out", clearProps: 'willChange' }
+            { opacity: 1, scale: 1, y: 0, duration: DUR.fast, ease: EASE.out, clearProps: 'willChange' }
           )
-          .fromTo(".title-line-reveal",
+          .fromTo(section.querySelectorAll(".hub-line"),
             { yPercent: 120, willChange: 'transform' },
-            { yPercent: 0, duration: 1.0, ease: "power4.out", stagger: 0.1, force3D: true, clearProps: 'all' },
-            "-=0.4"
-          );
+            { yPercent: 0, duration: DUR.base, ease: EASE.dramatic, stagger: STAGGER.base, force3D: true, clearProps: 'all' },
+            0.1
+          )
+          .add(hubMarksTimeline(section), 0.45);
 
         // 2. STACKING CARDS EFFECT (Native CSS Sticky + GSAP 3D Shrink)
         // Arquitectura 100% fluida, elimina el gap falso en la parte inferior de la página.
@@ -188,6 +193,8 @@ export default function BentoGridMobile() {
     });
 
     return () => {
+      stopLoopObserver();
+      section.classList.remove('is-live');
       mm.revert();
       stRef.current?.kill();
     };
@@ -243,7 +250,7 @@ export default function BentoGridMobile() {
       <section
         id="plataforma"
         ref={containerRef}
-        className="relative w-full h-auto md:h-screen overflow-x-clip md:overflow-hidden bg-[var(--color-surface-BG-base)] transition-colors duration-500 z-20 rounded-t-none rounded-b-xl md:rounded-xl max-w-full"
+        className={`relative w-full h-auto md:h-screen overflow-x-clip md:overflow-hidden bg-[var(--color-surface-BG-1)] transition-colors duration-500 z-20 rounded-t-none rounded-b-xl md:rounded-xl max-w-full`}
         style={{ perspective: '2000px' }}
       >
         {/* AMBIENT ORB — the journey's mood: morphs to the active product's accent */}
@@ -275,23 +282,10 @@ export default function BentoGridMobile() {
           className="relative flex flex-col items-center justify-start w-full z-10"
         >
           {/* CARD 0: THE TITLE COMPOSITION */}
-          <div className="mobile-stack-card sticky top-0 w-full min-h-fit pb-8 sm:pb-[6vh] flex flex-col justify-start pt-static-xl sm:pt-[calc(6vh)] items-start px-gutter-sm origin-top transform-gpu will-change-transform [backface-visibility:hidden] z-[10] relative">
-              {/* GoHub Logo Badge above the title */}
-              <div className="gohub-logo-badge w-14 h-14 bg-white dark:bg-[var(--color-surface-BG-1)] rounded-lg border border-black/5 dark:border-white/10 flex items-center justify-center mb-5 shadow-elevation-2">
-                <GoHubLogo className="w-9 h-9 text-[var(--color-brand-blue)]" />
-              </div>
-
-              <h2 className="text-display-lg text-[var(--color-text-primary)] text-left">
-                {t('sectionTitle').split('\n').map((line, i) => {
-                  return (
-                    <span key={i} className="block overflow-hidden pb-1 -mb-1">
-                      <span className="title-line-reveal block">
-                        {line}
-                      </span>
-                    </span>
-                  );
-                })}
-              </h2>
+          <div className="mobile-stack-card sticky top-0 w-full min-h-fit pb-8 sm:pb-[6vh] flex flex-col justify-start pt-section-sm items-start px-gutter-sm origin-top transform-gpu will-change-transform [backface-visibility:hidden] z-[10] relative">
+              {/* Acto 1 (mismo que desktop): logo GO Hub en placa + titular con los glifos de producto */}
+              <HubPlaque className="w-24 h-24 mb-static-lg" logoClassName="w-14 h-14" />
+              <HubTitle className="hub-title text-display-lg text-left" renderMark={renderHubMark} />
           </div>
 
           {/* CARDS 1-5: ECOSYSTEM */}

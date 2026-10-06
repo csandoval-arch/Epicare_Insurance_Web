@@ -809,17 +809,36 @@ html[data-mnav-lock] body {
   }
 }
 
-/* -- ScrollHint (Bento "Tu agencia, un solo ecosistema"): el tramo azul recorre la pista de izquierda
-   a derecha, como el scroll horizontal que sigue. Solo transform; tramo = 40 % de la pista → entra
-   desde −100 % y sale por +250 %. Ritmo: DUR.cinematic (1.8s) con la curva power3.inOut (EASE.inOut).
-   Pausado fuera de pantalla (.is-offscreen); con reduced-motion queda quieto al inicio. -- */
-@keyframes scroll-hint-run {
-  from { transform: translate3d(-100%, 0, 0); }
-  to { transform: translate3d(250%, 0, 0); }
+/* -- Glifos del acto 1 del Bento (HubIntro): UN solo ciclo de 6s en relevo — vende → aprende.
+   Casi todo el ciclo es reposo (tendencia dibujada, birrete apoyado). Al ~58 %
+   la tendencia se apaga y se vuelve a DIBUJAR de izquierda a derecha y la flecha remata con un pop;
+   y después el birrete asiente en su sitio (giro de 6° + escala leve sobre su centro). Transform/opacity (+ stroke-dashoffset de un SVG de 24px, coste nulo).
+   Curva: EASE_CSS.ui (cubic-bezier(0.22,1,0.36,1)).
+   Arranca con .is-live (al terminar la entrada GSAP), se pausa con .is-offscreen y con reduced-motion
+   no existe. Ciclo 6s (Reporte de Margen Creativo: no hay token de ciclo en motion.ts). -- */
+@keyframes hub-trend {
+  0%, 56% { stroke-dashoffset: 0; opacity: 1; }
+  60% { stroke-dashoffset: 0; opacity: 0; }
+  61% { stroke-dashoffset: 1; opacity: 1; }
+  72%, 100% { stroke-dashoffset: 0; opacity: 1; }
+}
+@keyframes hub-trend-head {
+  0%, 56% { transform: scale(1); opacity: 1; }
+  60%, 70% { transform: scale(0); opacity: 0; }
+  75% { transform: scale(1.25); opacity: 1; }
+  79%, 100% { transform: scale(1); opacity: 1; }
+}
+@keyframes hub-cap {
+  0%, 86% { transform: rotate(0deg) scale(1); }
+  90% { transform: rotate(-6deg) scale(1.08); }
+  94% { transform: rotate(2deg) scale(0.98); }
+  98%, 100% { transform: rotate(0deg) scale(1); }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .scroll-hint-bar { animation: scroll-hint-run 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
-  .scroll-hint.is-offscreen .scroll-hint-bar { animation-play-state: paused; }
+  .is-live .mark-trend { animation: hub-trend 6s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+  .is-live .mark-trend-head { animation: hub-trend-head 6s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+  .is-live .mark-cap { animation: hub-cap 6s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+  .is-live.is-offscreen :is(.mark-trend, .mark-trend-head, .mark-cap) { animation-play-state: paused; }
 }
 
 /* Separador sobre vidrio líquido (bimodal por alfa). Usar con border-t / border-b. */

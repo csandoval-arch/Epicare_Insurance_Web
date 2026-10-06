@@ -6,8 +6,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { asset, posterFor } from "@/lib/asset";
-import GoHubLogo from "./GoHubLogo";
-import ScrollHint from "./ScrollHint";import SmartVideo from "./SmartVideo";
+import SmartVideo from "./SmartVideo";
+import PinProgress from "./bento-act1/PinProgress";
+import HubIntro, { hubMarksTimeline, observeHubLoop } from "./bento-act1/HubIntro";
+import type { HubProduct } from "./bento-act1/types";
+import { DUR, EASE, REVEAL, STAGGER, TRIGGER } from "@/lib/motion";
 
 // ----------------------------------------------------------------------
 // LOGOS 
@@ -64,7 +67,7 @@ function CinematicPanel({
   isAcademy,
   isAms,
   href = '#'
-}: { 
+}: {
   title: string;
   desc: string;
   Logo: React.ComponentType<{ className?: string }>;
@@ -109,7 +112,7 @@ function CinematicPanel({
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
-      className="relative w-[85vw] lg:w-[65vw] h-[75vh] shrink-0 rounded-xl border border-black/5 dark:border-white/10 shadow-elevation-4 hover:shadow-elevation-6 hover:border-[var(--color-brand-blue)]/50 dark:hover:border-[var(--color-brand-blue)]/50 overflow-hidden flex flex-col md:flex-row group cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+      className={`relative w-[85vw] lg:w-[65vw] h-[75vh] shrink-0 rounded-xl border border-black/5 dark:border-white/10 shadow-elevation-4 hover:shadow-elevation-6 hover:border-[var(--color-brand-blue)]/50 dark:hover:border-[var(--color-brand-blue)]/50 overflow-hidden flex flex-col md:flex-row group cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]`}
       style={{
         transform: isHovered 
           ? `perspective(1200px) rotateX(${parallax.y * -3}deg) rotateY(${parallax.x * 3}deg) scale3d(1.02, 1.02, 1.02)` 
@@ -142,8 +145,8 @@ function CinematicPanel({
       </div>
 
       {/* TEXT CONTENT (Left side) */}
-      <div className="p-10 md:p-16 lg:p-20 w-full md:w-5/12 flex flex-col justify-center h-full relative z-10 bg-transparent pointer-events-none">
-         <Logo 
+      <div className={`p-10 md:p-16 lg:p-20 w-full md:w-5/12 flex flex-col justify-center h-full relative z-10 bg-transparent pointer-events-none`}>
+         <Logo
            className={`${isAcademy ? 'h-[52px] lg:h-[68px]' : 'h-[40px] lg:h-[56px]'} w-auto self-start mr-auto mb-8 text-[var(--color-brand-blue)] dark:text-white origin-left transform group-hover:scale-105 transition-transform duration-700 ease-out`} 
          />
          <p className="text-body-lg text-black/60 dark:text-white/80 font-light max-w-sm mb-12 leading-relaxed">
@@ -204,8 +207,31 @@ function CinematicPanel({
 }
 
 // ----------------------------------------------------------------------
-// MAIN SECTION (Concept A: True GSAP Horizontal Pin - Flawless Execution)
+// PRODUCTOS DEL TRACK
 // ----------------------------------------------------------------------
+type PanelSpec = Omit<React.ComponentProps<typeof CinematicPanel>, 'ctaText' | 'desc'> & {
+  key: HubProduct;
+  descKey: 'card4Desc' | 'card1Desc' | 'card8Desc';
+};
+
+const AcademyLogo = ({ className }: { className?: string }) => (
+  <img src={asset('/academy-icon-knockout-blue 1.svg')} alt="GO Academy" className={className} />
+);
+
+const PANELS: PanelSpec[] = [
+  { key: 'crm', title: 'GO CRM', descKey: 'card4Desc', Logo: CrmLogo, videoLight: asset('/Files/Features/CRM_Light_Final.mp4'), videoDark: asset('/Files/Features/CRM_Dark_Final.mp4'), href: '/go-crm' },
+  { key: 'ams', title: 'GO AMS', descKey: 'card1Desc', Logo: AmsLogo, videoLight: asset('/Files/Go_AMS/hero/go-ams-hero.mp4'), videoDark: asset('/Files/Go_AMS/hero/go-ams-hero.mp4'), href: '/go-ams', isAms: true },
+  { key: 'academy', title: 'GO ACADEMY', descKey: 'card8Desc', Logo: AcademyLogo, videoLight: asset('/Files/Features/Academy_V2_Light.mp4'), videoDark: asset('/Files/Features/Academy_Dark_Final.mp4'), isAcademy: true },
+];
+
+// ----------------------------------------------------------------------
+// MAIN SECTION — acto 1 + pin horizontal de las tarjetas de producto
+// ----------------------------------------------------------------------
+/**
+ * @description Ecosistema GO Hub en desktop. Acto 1 (`HubIntro`): logo en placa + titular display-xl
+ * con un glifo distinto por producto entre el texto. Después, pin con scroll horizontal de las
+ * tarjetas; un indicador flotante (`PinProgress`) se llena con el recorrido del pin.
+ */
 export default function BentoGridDesktop() {
   const t = useTranslations('landingV2.bento');
   const sectionRef = useRef<HTMLElement>(null);
@@ -213,116 +239,96 @@ export default function BentoGridDesktop() {
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    
+
     let ctx: gsap.Context | undefined;
     const section = sectionRef.current;
     if (!section) return;
+    const stopLoopObserver = observeHubLoop(section);
 
     // We use a slight delay so images/fonts load, preventing miscalculation of scrollWidth
     const timeout = setTimeout(() => {
       ctx = gsap.context(() => {
         const track = trackRef.current;
         if (!track) return;
-
-        // 1. Calculate precise horizontal distance to move the track
         const getHorizontalDist = () => track.scrollWidth - window.innerWidth;
-        
-        // 2. Calculate vertical scroll duration (How long the pin lasts)
         const getVerticalScrollDuration = () => getHorizontalDist() * 0.8;
+        const $ = (sel: string) => section.querySelectorAll(sel);
 
         // TRUE GSAP PIN
         gsap.to(track, {
           x: () => -getHorizontalDist(),
-          ease: "none",
+          ease: EASE.none,
           force3D: true, // HARDWARE SYMPHONY: Force hardware acceleration to prevent compositing lag
           scrollTrigger: {
             trigger: section,
-            start: "top top",
+            start: 'top top',
             end: () => `+=${getVerticalScrollDuration()}`,
             pin: true,
             scrub: true, // Syncs with OS native scroll momentum.
             invalidateOnRefresh: true,
-          }
+          },
+        });
+
+        // Indicador flotante: su tramo azul se llena con el mismo recorrido del pin (scrub, solo scaleX).
+        gsap.to($('.pin-progress-bar'), {
+          scaleX: 1,
+          ease: EASE.none,
+          scrollTrigger: { trigger: section, start: 'top top', end: () => `+=${getVerticalScrollDuration()}`, scrub: true, invalidateOnRefresh: true },
+        });
+
+        const mm = gsap.matchMedia();
+        mm.add('(prefers-reduced-motion: no-preference)', () => {
+          // Acto 1: la placa sube, el símbolo GO Hub se arma, el titular nace por líneas y los glifos se
+          // abren en su hueco (después arranca su bucle CSS en relevo; ver HubIntro / globals.css).
+          // Se dispara con el TITULAR (no con la sección): arranca justo cuando el texto entra en pantalla,
+          // así la entrada se ve entera; tiempos cortos y solapados para que responda sin latencia.
+          gsap
+            .timeline({ scrollTrigger: { trigger: section.querySelector('.hub-title'), start: TRIGGER.standard, once: true } })
+            .from($('.hub-plaque'), { opacity: 0, y: REVEAL.sm, duration: DUR.fast, ease: EASE.out })
+            .from($('.hub-logo .gohub-shape'), {
+              opacity: 0, scale: 0.6, transformOrigin: '50% 50%', duration: DUR.fast, ease: EASE.dramatic, stagger: STAGGER.tight,
+            }, 0)
+            .from($('.hub-logo .gohub-letter'), {
+              opacity: 0, yPercent: 40, duration: DUR.micro, ease: EASE.out, stagger: STAGGER.tight,
+            }, '<0.15')
+            .from($('.hub-title .hub-line'), {
+              yPercent: REVEAL.birthPercent, duration: DUR.base, ease: EASE.dramatic, stagger: STAGGER.base,
+            }, 0.1)
+            .add(hubMarksTimeline(section), 0.45);
         });
 
         // Force ScrollTrigger to recalculate everything after this pin is created
         ScrollTrigger.refresh();
-        
       }, section);
     }, 100);
 
     return () => {
       clearTimeout(timeout);
+      stopLoopObserver();
+      section.classList.remove('is-live');
       ctx?.revert();
     };
   }, []);
 
   return (
     // OUTER WRAPPER: Protects the Next.js DOM tree from GSAP's pin-spacer height injection
-    // Fondo: gris base del DS (bimodal), elegido en el panel de opciones (2026-10-05).
-    <div className="relative w-full z-10 bg-[var(--color-surface-BG-base)] transition-colors duration-500 overflow-hidden">
+    // Fondo: superficie 1 del DS (un paso más clara que el gris base; bimodal), pedido 2026-10-06.
+    <div className="relative w-full z-10 bg-[var(--color-surface-BG-1)] transition-colors duration-500 overflow-hidden">
 
       <section ref={sectionRef} className="h-screen w-full relative">
+        {/* Flota sobre todo el recorrido horizontal: recuerda que se sigue haciendo scroll hacia abajo */}
+        <PinProgress />
 
         {/* The Horizontal Scrolling Track */}
-        <div ref={trackRef} className="flex items-center h-full flex-nowrap pl-[15vw] gap-[5vw] lg:gap-[8vw] w-max will-change-transform">
-           
-           {/* INTRO TITLE PANEL */}
-           <div className="w-[70vw] lg:w-[40vw] shrink-0 flex flex-col justify-center">
-              <div className="w-24 h-24 bg-white dark:bg-[var(--color-surface-BG-1)] rounded-xl border border-black/5 dark:border-white/10 flex items-center justify-center mb-8 shadow-elevation-2 transform transition-transform hover:scale-105">
-                <GoHubLogo className="w-16 h-16 text-[var(--color-brand-blue)]" />
-              </div>
-              {/* Un solo titular de 3 líneas (sin subtítulo): cada verbo es un producto del hub
-                  (vende = GO CRM · opera = GO AMS · aprende = Academy). */}
-              <h2 className="text-display-lg text-[var(--color-text-primary)]">
-                {t('sectionTitle').split('\n').map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </h2>
-              <ScrollHint className="mt-static-2xl" />
-           </div>
+        <div ref={trackRef} className="flex items-center h-full flex-nowrap gap-[5vw] lg:gap-[8vw] w-max will-change-transform">
+          <HubIntro />
 
-           {/* PANEL 1: CRM */}
-           <CinematicPanel 
-              title="GO CRM" 
-              desc={t('card4Desc')} 
-              Logo={CrmLogo} 
-              videoLight={asset("/Files/Features/CRM_Light_Final.mp4")}
-              videoDark={asset("/Files/Features/CRM_Dark_Final.mp4")} 
-              ctaText={t('cardCta')} 
-              href="/go-crm"
-           />
+          {PANELS.map(({ key, descKey, ...panel }) => (
+            <CinematicPanel key={key} {...panel} desc={t(descKey)} ctaText={t('cardCta')} />
+          ))}
 
-           {/* PANEL 2: AMS */}
-           <CinematicPanel 
-              title="GO AMS" 
-              desc={t('card1Desc')} 
-              Logo={AmsLogo} 
-              videoLight={asset("/Files/Go_AMS/hero/go-ams-hero.mp4")}
-              videoDark={asset("/Files/Go_AMS/hero/go-ams-hero.mp4")} 
-              ctaText={t('cardCta')} 
-              href="/go-ams"
-              isAms
-           />
-
-           {/* PANEL 3: ACADEMY */}
-           <CinematicPanel 
-              title="GO ACADEMY" 
-              desc={t('card8Desc')} 
-              Logo={({ className }: { className?: string }) => (
-                <img src={asset('/academy-icon-knockout-blue 1.svg')} alt="GO Academy" className={className} />
-              )}
-              videoLight={asset("/Files/Features/Academy_V2_Light.mp4")}
-              videoDark={asset("/Files/Features/Academy_Dark_Final.mp4")} 
-              ctaText={t('cardCta')} 
-              isAcademy
-           />
-
-           {/* SPACER DIV: Prevents the last card from getting cut off by collapsed padding */}
-           <div className="w-[5vw] lg:w-[15vw] h-full shrink-0" />
-
+          {/* SPACER DIV: Prevents the last card from getting cut off by collapsed padding */}
+          <div className="w-[5vw] lg:w-[15vw] h-full shrink-0" />
         </div>
       </section>
 
