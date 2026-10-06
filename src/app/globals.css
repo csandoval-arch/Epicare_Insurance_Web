@@ -193,7 +193,7 @@ html.lenis body { height: auto; }
   --color-text-White-100: #FFFFFF;
   --color-text-Black-100: #1A1E21;
   /* Border */
-  --color-border-Strokes-default: #E3E6E8;
+  --color-border-Strokes-default: #E0E4E6; /* hsl(204,10%,89%) — antes #E3E6E8 (90%), −1 de luminosidad (2026-10-06) */
   --color-border-Strokes-White-100: #E3E6E8;
   --color-border-Strokes-Hover: #B5BDC5;
   --color-border-Strokes-focus: #35BBFD;

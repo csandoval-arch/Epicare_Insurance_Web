@@ -1,42 +1,44 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { DUR, EASE, REVEAL, STAGGER, TRIGGER } from '@/lib/motion';
 
 interface AnimatedTitleProps {
   children: React.ReactNode;
   className?: string;
 }
 
+/**
+ * @description Titular con entrada de una sola vez: el bloque sube (`REVEAL.sm`) y sus frases
+ * (`AnimatedTitleLine`) se encienden en secuencia. Solo transform/opacity → sin repintado por frame
+ * (sustituye al relleno "scrub" con background-clip, que repintaba el texto en cada scroll y daba lag
+ * en móvil). Las frases siguen siendo inline: la maquetación del titular no cambia.
+ */
 export function AnimatedTitle({ children, className = "" }: AnimatedTitleProps) {
   const containerRef = useRef<HTMLHeadingElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const el = containerRef.current;
     if (!el) return;
-    
-    const ctx = gsap.context(() => {
-      // Target elements inside this container safely
-      const lines = gsap.utils.toArray(".title-fill-line", el);
-      
-      gsap.to(lines, {
-        backgroundPosition: "0% 0%",
-        duration: 1, // 1 second per segment
-        stagger: 1,  // Wait exactly 1 second before starting the next segment
-        ease: "none",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          end: "top 20%", // Massively expanded scroll distance to naturally slow down the scrub speed
-          scrub: 1
-        }
-      });
-    }, el);
 
-    return () => ctx.revert();
-  }, [children]);
+    const mm = gsap.matchMedia(el);
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      gsap
+        .timeline({ scrollTrigger: { trigger: el, start: TRIGGER.standard, once: true } })
+        .from(el, { y: REVEAL.sm, duration: DUR.base, ease: EASE.out, clearProps: 'transform' })
+        .from(gsap.utils.toArray('.title-fill-line', el), {
+          opacity: 0.15,
+          duration: DUR.base,
+          ease: EASE.out,
+          stagger: STAGGER.wave,
+        }, 0);
+    });
+
+    return () => mm.revert();
+  }, []);
 
   return (
     <h2 ref={containerRef} className={className}>
@@ -45,25 +47,10 @@ export function AnimatedTitle({ children, className = "" }: AnimatedTitleProps) 
   );
 }
 
-// True inline wrapper: Zero forced line breaks, sequential background-clip text fill
+/** Frase del titular (inline: no fuerza saltos de línea). */
 export function AnimatedTitleLine({ children, className = "" }: { children: React.ReactNode, className?: string }) {
   return (
-    <span 
-      className={`title-fill-line ${className}`}
-      style={{
-        // Hard 50/50 edge for maximum sharpness
-        backgroundImage: "linear-gradient(to right, currentColor 50%, rgba(128, 128, 128, 0.4) 50%)",
-        backgroundSize: "200% 100%",
-        backgroundPosition: "100% 0%",
-        WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent",
-        backgroundClip: "text",
-        display: "inline",
-        WebkitBoxDecorationBreak: "clone",
-        boxDecorationBreak: "clone",
-        transform: "translateZ(0)" // Critical fix for WebKit compositor bug where text-clip disappears
-      } as React.CSSProperties}
-    >
+    <span className={`title-fill-line ${className}`}>
       {children}{' '}
     </span>
   );

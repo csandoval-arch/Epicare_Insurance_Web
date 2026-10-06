@@ -50,7 +50,15 @@
       "card7Desc": "Production, retention, and persistency per agent. The numbers that decide your month.",
       "card8Title": "Academy",
       "card8Desc": "Certifications, product training, and new-agent onboarding. At your own pace.",
-      "cardCta": "Explore"
+      "cardCta": "Explore",
+      "seeCrm": "See CRM",
+      "seeAms": "See AMS",
+      "comingSoon": "Coming soon",
+      "products": {
+        "crm": { "lead": "You know who to call\ntoday and why.", "body": "Leads, pipeline, and follow-up\nin one place." },
+        "ams": { "lead": "The core of\nyour operation.", "body": "Policies, commissions, licensing,\nand downline. All auditable." },
+        "academy": { "lead": "Learn at\nyour own pace.", "body": "Certifications, product training,\nand new-agent onboarding." }
+      }
     },
     "spotlight": {
       "eppigo": {

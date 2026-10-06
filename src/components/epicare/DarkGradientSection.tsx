@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useLayoutEffect, useRef, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslations } from 'next-intl';
@@ -49,7 +49,7 @@ const FlipCard = ({ card, t }: { card: any, t: any }) => {
       >
         {/* FRONT */}
         <div 
-          className="absolute inset-0 w-full h-full flex flex-col rounded-[12px] bg-white/80 dark:bg-white/[0.03] backdrop-blur-xl border border-[var(--color-border-Strokes-default)] dark:border-white/10 hover:border-[var(--color-border-Strokes-Hover)] dark:hover:border-white/20 transition-all duration-300 shadow-elevation-2 dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:shadow-elevation-4 overflow-hidden"
+          className="absolute inset-0 w-full h-full flex flex-col rounded-[12px] bg-[var(--color-surface-BG-white)] dark:bg-[var(--color-surface-BG-1)] border border-[var(--color-border-Strokes-default)] dark:border-white/10 hover:border-[var(--color-border-Strokes-Hover)] dark:hover:border-white/20 transition-all duration-300 shadow-elevation-2 dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:shadow-elevation-4 overflow-hidden"
           style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
         >
           {/* Bloque de Texto Superior */}
@@ -64,15 +64,16 @@ const FlipCard = ({ card, t }: { card: any, t: any }) => {
             </div>
           </div>
 
-          {/* Contenedor Visual (Medio, flex-1, Transparente) */}
-          <div className="w-full flex-1 min-h-[220px] relative bg-transparent overflow-hidden rounded-b-[12px]">
+          {/* Contenedor Visual (Medio, flex-1). Fondo OPACO igual al de la cara + isolate: los vídeos se funden
+              con él (multiply en claro / screen en oscuro); contra un fondo traslúcido el blend no es limpio. */}
+          <div className="w-full flex-1 min-h-[220px] relative isolate bg-[var(--color-surface-BG-white)] dark:bg-[var(--color-surface-BG-1)] overflow-hidden rounded-b-[12px]">
             {/* Elemento para Light Mode */}
             {card.isVideo || card.isVideoLight ? (
               <SmartVideo
                 disablePictureInPicture
                 src={cardAsset(card.imgLight || card.img)}
                 poster={cardPoster(card.imgLight || card.img)}
-                className={`absolute inset-0 w-full h-full block dark:hidden ${card.imgClassLight || card.imgClass || "object-cover"}`}
+                className={`absolute inset-0 w-full h-full block dark:hidden mix-blend-multiply ${card.imgClassLight || card.imgClass || "object-cover"}`}
               />
             ) : (
               <img
@@ -90,7 +91,7 @@ const FlipCard = ({ card, t }: { card: any, t: any }) => {
                 disablePictureInPicture
                 src={cardAsset(card.img)}
                 poster={cardPoster(card.img)}
-                className={`absolute inset-0 w-full h-full hidden dark:block ${card.imgClassDark || card.imgClass || "object-cover"}`}
+                className={`absolute inset-0 w-full h-full hidden dark:block mix-blend-screen ${card.imgClassDark || card.imgClass || "object-cover"}`}
               />
             ) : (
               <img
@@ -145,77 +146,46 @@ export default function DarkGradientSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const tickingRef = useRef(false);
 
-  useEffect(() => {
+  // ── ENTRADA (Hardware Symphony): todo UNA sola vez y solo transform/opacity, sin escala.
+  // - Titular: text-birth (sube desde su máscara); subtítulo: fade-up.
+  // - Desktop: las 4 tarjetas suben 24px con fade, en ola corta.
+  // - Móvil: el slider entra como BLOQUE; nunca sus tarjetas por separado (hijos de un scroll-snap).
+  useLayoutEffect(() => {
     ScrollTrigger.config({ ignoreMobileResize: true });
-
     const el = sectionRef.current;
     if (!el) return;
+    const once = (trigger: Element | null, start: string = TRIGGER.standard) => ({ scrollTrigger: { trigger, start, once: true } });
+    const mm = gsap.matchMedia(el);
 
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    const ctx = gsap.context(() => {
-      if (prefersReducedMotion) {
-        gsap.set('.dg-head-line, .dg-head-fade, .card-reveal', {
-          opacity: 1, y: 0, yPercent: 0, scale: 1
-        });
-        return;
-      }
-
-      // 1. Synchronized Header Entrance Timeline (Title + Subtitle)
-      const headerTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: el,
-          start: TRIGGER.standard,
-          toggleActions: 'play none none reverse'
-        }
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      gsap
+        .timeline(once(el))
+        .from(".dg-head-line", { yPercent: REVEAL.birthPercent, duration: DUR.base, ease: EASE.dramatic, clearProps: "transform" })
+        .from(".dg-head-fade", { opacity: 0, y: REVEAL.sm, duration: DUR.base, ease: EASE.out, clearProps: "transform,opacity" }, "-=0.6");
+    });
+    mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
+      gsap.from(".card-reveal", {
+        opacity: 0,
+        y: REVEAL.sm,
+        duration: DUR.base,
+        stagger: STAGGER.base,
+        ease: EASE.out,
+        clearProps: "transform,opacity",
+        ...once(scrollContainerRef.current, TRIGGER.early),
       });
+    });
+    mm.add("(max-width: 767px) and (prefers-reduced-motion: no-preference)", () => {
+      gsap.from(scrollContainerRef.current, {
+        opacity: 0,
+        y: REVEAL.sm,
+        duration: DUR.base,
+        ease: EASE.out,
+        clearProps: "transform,opacity",
+        ...once(scrollContainerRef.current, TRIGGER.early),
+      });
+    });
 
-      headerTl
-        .fromTo('.dg-head-line', 
-          { yPercent: REVEAL.birthPercent, opacity: 0, willChange: 'transform, opacity' },
-          { 
-            yPercent: 0, 
-            opacity: 1,
-            duration: DUR.slow, 
-            ease: EASE.dramatic, 
-            force3D: true,
-            clearProps: 'willChange'
-          }
-        )
-        .fromTo('.dg-head-fade', 
-          { opacity: 0, y: REVEAL.sm, willChange: 'transform, opacity' },
-          { 
-            opacity: 1, 
-            y: 0, 
-            duration: DUR.base, 
-            ease: EASE.out, 
-            clearProps: 'willChange'
-          },
-          "-=0.45"
-        );
-
-      // 2. Hardware Symphony: Pure GPU Wave Reveal for Cards
-      gsap.fromTo(".card-reveal", 
-        { opacity: 0, y: REVEAL.md, scale: 0.96, willChange: 'transform, opacity' },
-        {
-          opacity: 1, 
-          y: 0,
-          scale: 1,
-          duration: DUR.base,
-          stagger: STAGGER.base,
-          ease: EASE.out,
-          force3D: true,
-          clearProps: 'willChange',
-          scrollTrigger: {
-            trigger: scrollContainerRef.current || el,
-            start: TRIGGER.early,
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-    }, el);
-
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   const renderRichBody = (key: any) => t.rich(key, { 

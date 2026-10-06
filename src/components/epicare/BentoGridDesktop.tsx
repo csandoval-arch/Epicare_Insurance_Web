@@ -1,16 +1,16 @@
 "use client";
 
-import React, { useRef, useLayoutEffect, useState } from 'react';
+import React, { useRef, useLayoutEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { asset, posterFor } from "@/lib/asset";
-import SmartVideo from "./SmartVideo";
+import { asset } from "@/lib/asset";
 import PinProgress from "./bento-act1/PinProgress";
-import HubIntro, { hubMarksTimeline, observeHubLoop } from "./bento-act1/HubIntro";
+import HubIntro, { observeHubLoop, playHubIntro } from "./bento-act1/HubIntro";
+import { ACT_FRAME } from "./bento-act1/layout";
+import { MediaHover, ProductCopy, ProductMedia } from "./bento-act1/ProductScene";
 import type { HubProduct } from "./bento-act1/types";
-import { DUR, EASE, REVEAL, STAGGER, TRIGGER } from "@/lib/motion";
+import { EASE } from "@/lib/motion";
 
 // ----------------------------------------------------------------------
 // LOGOS 
@@ -45,183 +45,34 @@ function AmsLogo({ className }: { className?: string }) {
   );
 }
 
-const ArrowUR = ({ className = '' }: { className?: string }) => (
-  <svg
-    viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-    strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true"
-  >
-    <path d="M7 17 17 7M7 7h10v10" />
-  </svg>
-);
-
-// ----------------------------------------------------------------------
-// CINEMATIC PANEL (Impeccable Glassmorphism - Hardware Symphony Optimized)
-// ----------------------------------------------------------------------
-function CinematicPanel({ 
-  title, 
-  desc, 
-  Logo, 
-  videoLight, 
-  videoDark, 
-  ctaText, 
-  isAcademy,
-  isAms,
-  href = '#'
-}: {
-  title: string;
-  desc: string;
-  Logo: React.ComponentType<{ className?: string }>;
-  videoLight: string;
-  videoDark: string;
-  ctaText: string;
-  isAcademy?: boolean;
-  isAms?: boolean;
-  href?: string;
-}) {
-  const cardRef = useRef<HTMLAnchorElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [parallax, setParallax] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    setMousePos({ x, y });
-
-    // Parallax calculation (range -1 to 1)
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    setParallax({
-      x: (x - centerX) / centerX,
-      y: (y - centerY) / centerY,
-    });
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    setParallax({ x: 0, y: 0 });
-  };
-
-  return (
-    <Link
-      ref={cardRef}
-      href={href}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
-      className={`relative w-[85vw] lg:w-[65vw] h-[75vh] shrink-0 rounded-xl border border-black/5 dark:border-white/10 shadow-elevation-4 hover:shadow-elevation-6 hover:border-[var(--color-brand-blue)]/50 dark:hover:border-[var(--color-brand-blue)]/50 overflow-hidden flex flex-col md:flex-row group cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]`}
-      style={{
-        transform: isHovered 
-          ? `perspective(1200px) rotateX(${parallax.y * -3}deg) rotateY(${parallax.x * 3}deg) scale3d(1.02, 1.02, 1.02)` 
-          : 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)'
-      }}
-    >
-      {/* STATIC BACKGROUND LAYER (Minimalist Texture & Ambient Glow) */}
-      <div className="absolute inset-0 -z-10 rounded-xl bg-[var(--color-surface-BG-white)] dark:bg-[#0D0D0E] overflow-hidden">
-        {/* Minimalist Micro-Texture Grid with Radial Fade */}
-        <div 
-          className="absolute inset-0 text-black dark:text-white opacity-[0.12] dark:opacity-[0.05] pointer-events-none transition-opacity duration-500 group-hover:opacity-[0.20] dark:group-hover:opacity-[0.12]"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1.5px 1.5px, currentColor 1.5px, transparent 0)`,
-            backgroundSize: '24px 24px',
-            maskImage: `radial-gradient(ellipse at top left, black 10%, transparent 70%)`,
-            WebkitMaskImage: `radial-gradient(ellipse at top left, black 10%, transparent 70%)`
-          }}
-        />
-
-        {/* Ambient Subtle Aura Glow (Mathematically safe for mix-blend-multiply in light & mix-blend-screen in dark) */}
-        <div 
-          className="absolute -top-32 -right-32 w-[32rem] h-[32rem] rounded-full bg-[radial-gradient(circle,rgba(53,187,253,0.07)_0%,transparent_70%)] dark:bg-[radial-gradient(circle,rgba(53,187,253,0.18)_0%,transparent_70%)] pointer-events-none blur-3xl transition-transform duration-700 ease-out group-hover:scale-110" 
-        />
-        <div 
-          className="absolute -bottom-32 -left-32 w-[32rem] h-[32rem] rounded-full bg-[radial-gradient(circle,rgba(242,96,35,0.04)_0%,transparent_70%)] dark:bg-[radial-gradient(circle,rgba(242,96,35,0.09)_0%,transparent_70%)] pointer-events-none blur-3xl transition-transform duration-700 ease-out group-hover:scale-110" 
-        />
-
-        {/* Delicate Glass Highlight */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/40 to-transparent dark:from-white/[0.04] dark:to-transparent pointer-events-none" />
-      </div>
-
-      {/* TEXT CONTENT (Left side) */}
-      <div className={`p-10 md:p-16 lg:p-20 w-full md:w-5/12 flex flex-col justify-center h-full relative z-10 bg-transparent pointer-events-none`}>
-         <Logo
-           className={`${isAcademy ? 'h-[52px] lg:h-[68px]' : 'h-[40px] lg:h-[56px]'} w-auto self-start mr-auto mb-8 text-[var(--color-brand-blue)] dark:text-white origin-left transform group-hover:scale-105 transition-transform duration-700 ease-out`} 
-         />
-         <p className="text-body-lg text-black/60 dark:text-white/80 font-light max-w-sm mb-12 leading-relaxed">
-           {desc}
-         </p>
-         
-         {/* Premium Brand-Blue Action CTA with Dual Arrow Motion */}
-         <div className="mt-auto md:mt-0 w-fit pointer-events-auto">
-           <div className="group/btn h-12 pl-6 pr-2 rounded-full flex items-center gap-3 bg-[var(--color-brand-blue)] text-white shadow-elevation-2 transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:shadow-[0_10px_25px_rgba(53,187,253,0.4)] hover:scale-110 hover:shadow-[0_15px_35px_rgba(53,187,253,0.6)] active:scale-[0.96] overflow-hidden relative">
-              
-              {/* Liquid Wave Hover Background */}
-              <div className="absolute inset-0 bg-white/20 translate-y-full rounded-full transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/btn:translate-y-0" />
-              
-              <span className="relative z-10 text-xs font-bold tracking-[0.15em] uppercase text-white select-none transition-transform duration-300 group-hover/btn:-translate-x-1">{ctaText}</span>
-              <span className="relative z-10 w-8 h-8 rounded-full bg-white text-[var(--color-brand-blue)] flex items-center justify-center overflow-hidden shrink-0 shadow-sm transition-transform duration-500 group-hover/btn:rotate-45 group-hover/btn:scale-110">
-                <ArrowUR className="absolute w-4 h-4 transition-transform duration-300 ease-out group-hover/btn:translate-x-5 group-hover/btn:-translate-y-5" />
-                <ArrowUR className="absolute w-4 h-4 -translate-x-5 translate-y-5 transition-transform duration-300 ease-out group-hover/btn:translate-x-0 group-hover/btn:translate-y-0" />
-              </span>
-           </div>
-         </div>
-      </div>
-
-      {/* MEDIA CONTENT (Right side) */}
-      <div className="w-full md:w-7/12 h-full relative overflow-hidden bg-transparent flex items-center justify-end">
-        {isAms ? (
-          <div className="relative w-full h-[78%] rounded-l-md md:rounded-l-lg border-l border-y border-black/10 dark:border-white/15 overflow-hidden shadow-elevation-3 bg-[var(--color-surface-BG-1)]">
-            <SmartVideo 
-              src={videoLight}
-              poster={posterFor(videoLight)}
-              className="w-full h-full object-cover object-left dark:hidden rounded-l-md md:rounded-l-lg" 
-            />
-            <SmartVideo 
-              src={videoDark}
-              poster={posterFor(videoDark)}
-              className="w-full h-full object-cover object-left hidden dark:block rounded-l-md md:rounded-l-lg" 
-            />
-          </div>
-        ) : (
-          <>
-            {/* Light Video - mix-blend-multiply makes white backgrounds completely transparent! */}
-            <SmartVideo 
-              src={videoLight}
-              poster={posterFor(videoLight)}
-              className={`absolute inset-0 w-full h-full transition-transform duration-[2s] ease-out mix-blend-multiply dark:hidden ${isAcademy ? 'object-contain scale-[0.85] group-hover:scale-95' : 'object-cover group-hover:scale-105'}`}
-            />
-            {/* Dark Video - mix-blend-screen makes black backgrounds completely transparent! */}
-            <SmartVideo 
-              src={videoDark}
-              poster={posterFor(videoDark)}
-              className={`absolute inset-0 w-full h-full transition-transform duration-[2s] ease-out mix-blend-screen hidden dark:block ${isAcademy ? 'object-contain scale-[0.85] group-hover:scale-95' : 'object-cover group-hover:scale-105'}`}
-            />
-          </>
-        )}
-      </div>
-
-    </Link>
-  );
-}
-
 // ----------------------------------------------------------------------
 // PRODUCTOS DEL TRACK
 // ----------------------------------------------------------------------
-type PanelSpec = Omit<React.ComponentProps<typeof CinematicPanel>, 'ctaText' | 'desc'> & {
+export type PanelSpec = {
   key: HubProduct;
-  descKey: 'card4Desc' | 'card1Desc' | 'card8Desc';
+  title: string;
+  Logo: React.ComponentType<{ className?: string }>;
+  videoLight: string;
+  videoDark: string;
+  href?: string;
+  isAcademy?: boolean;
+  isAms?: boolean;
+  /** Texto de la pill que sigue al ratón sobre el vídeo (ver `MediaHover`). */
+  hoverKey: 'seeCrm' | 'seeAms' | 'comingSoon';
+  /** Producto sin página todavía: sin enlace y con "Próximamente" en lugar del CTA. */
+  comingSoon?: boolean;
+  /** Vídeo de fondo plano: se funde con el fondo de la sección (mix-blend, ver `ProductMedia`). */
+  blend?: boolean;
 };
 
 const AcademyLogo = ({ className }: { className?: string }) => (
   <img src={asset('/academy-icon-knockout-blue 1.svg')} alt="GO Academy" className={className} />
 );
 
-const PANELS: PanelSpec[] = [
-  { key: 'crm', title: 'GO CRM', descKey: 'card4Desc', Logo: CrmLogo, videoLight: asset('/Files/Features/CRM_Light_Final.mp4'), videoDark: asset('/Files/Features/CRM_Dark_Final.mp4'), href: '/go-crm' },
-  { key: 'ams', title: 'GO AMS', descKey: 'card1Desc', Logo: AmsLogo, videoLight: asset('/Files/Go_AMS/hero/go-ams-hero.mp4'), videoDark: asset('/Files/Go_AMS/hero/go-ams-hero.mp4'), href: '/go-ams', isAms: true },
-  { key: 'academy', title: 'GO ACADEMY', descKey: 'card8Desc', Logo: AcademyLogo, videoLight: asset('/Files/Features/Academy_V2_Light.mp4'), videoDark: asset('/Files/Features/Academy_Dark_Final.mp4'), isAcademy: true },
+export const PANELS: PanelSpec[] = [
+  { key: 'crm', title: 'GO CRM', Logo: CrmLogo, videoLight: asset('/Files/Features/CRM_Light_Final.mp4'), videoDark: asset('/Files/Features/CRM_Dark_Final.mp4'), href: '/go-crm', hoverKey: 'seeCrm', blend: true },
+  { key: 'ams', title: 'GO AMS', Logo: AmsLogo, videoLight: asset('/Files/Go_AMS/hero/go-ams-hero.mp4'), videoDark: asset('/Files/Go_AMS/hero/go-ams-hero.mp4'), href: '/go-ams', isAms: true, hoverKey: 'seeAms' },
+  { key: 'academy', title: 'GO ACADEMY', Logo: AcademyLogo, videoLight: asset('/Files/Features/Academy_V2_Light.mp4'), videoDark: asset('/Files/Features/Academy_Dark_Final.mp4'), isAcademy: true, hoverKey: 'comingSoon', comingSoon: true, blend: true },
 ];
 
 // ----------------------------------------------------------------------
@@ -236,6 +87,7 @@ export default function BentoGridDesktop() {
   const t = useTranslations('landingV2.bento');
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const pinRef = useRef<ScrollTrigger | null>(null);
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -255,7 +107,7 @@ export default function BentoGridDesktop() {
         const $ = (sel: string) => section.querySelectorAll(sel);
 
         // TRUE GSAP PIN
-        gsap.to(track, {
+        const pinTween = gsap.to(track, {
           x: () => -getHorizontalDist(),
           ease: EASE.none,
           force3D: true, // HARDWARE SYMPHONY: Force hardware acceleration to prevent compositing lag
@@ -268,6 +120,8 @@ export default function BentoGridDesktop() {
             invalidateOnRefresh: true,
           },
         });
+
+        pinRef.current = pinTween.scrollTrigger ?? null;
 
         // Indicador flotante: su tramo azul se llena con el mismo recorrido del pin (scrub, solo scaleX).
         gsap.to($('.pin-progress-bar'), {
@@ -282,19 +136,7 @@ export default function BentoGridDesktop() {
           // abren en su hueco (después arranca su bucle CSS en relevo; ver HubIntro / globals.css).
           // Se dispara con el TITULAR (no con la sección): arranca justo cuando el texto entra en pantalla,
           // así la entrada se ve entera; tiempos cortos y solapados para que responda sin latencia.
-          gsap
-            .timeline({ scrollTrigger: { trigger: section.querySelector('.hub-title'), start: TRIGGER.standard, once: true } })
-            .from($('.hub-plaque'), { opacity: 0, y: REVEAL.sm, duration: DUR.fast, ease: EASE.out })
-            .from($('.hub-logo .gohub-shape'), {
-              opacity: 0, scale: 0.6, transformOrigin: '50% 50%', duration: DUR.fast, ease: EASE.dramatic, stagger: STAGGER.tight,
-            }, 0)
-            .from($('.hub-logo .gohub-letter'), {
-              opacity: 0, yPercent: 40, duration: DUR.micro, ease: EASE.out, stagger: STAGGER.tight,
-            }, '<0.15')
-            .from($('.hub-title .hub-line'), {
-              yPercent: REVEAL.birthPercent, duration: DUR.base, ease: EASE.dramatic, stagger: STAGGER.base,
-            }, 0.1)
-            .add(hubMarksTimeline(section), 0.45);
+          playHubIntro(section);
         });
 
         // Force ScrollTrigger to recalculate everything after this pin is created
@@ -306,9 +148,24 @@ export default function BentoGridDesktop() {
       clearTimeout(timeout);
       stopLoopObserver();
       section.classList.remove('is-live');
+      pinRef.current = null;
       ctx?.revert();
     };
   }, []);
+
+  // Indicadores del acto 1: lleva el scroll hasta dejar el producto i centrado en pantalla.
+  const goToProduct = (i: number) => {
+    const st = pinRef.current;
+    const track = trackRef.current;
+    const card = track?.querySelectorAll<HTMLElement>('article')[i];
+    if (!st || !track || !card) return;
+    const dist = track.scrollWidth - window.innerWidth;
+    const x = Math.min(dist, Math.max(0, card.offsetLeft - (window.innerWidth - card.offsetWidth) / 2));
+    const y = st.start + ((st.end - st.start) * x) / dist;
+    const lenis = (window as unknown as { lenis?: { scrollTo: (y: number) => void } }).lenis;
+    if (lenis) lenis.scrollTo(y);
+    else window.scrollTo({ top: y, behavior: 'smooth' });
+  };
 
   return (
     // OUTER WRAPPER: Protects the Next.js DOM tree from GSAP's pin-spacer height injection
@@ -321,10 +178,26 @@ export default function BentoGridDesktop() {
 
         {/* The Horizontal Scrolling Track */}
         <div ref={trackRef} className="flex items-center h-full flex-nowrap gap-[5vw] lg:gap-[8vw] w-max will-change-transform">
-          <HubIntro />
+          <HubIntro products={PANELS.map(({ key, title }) => ({ key, title }))} onNavigate={goToProduct} />
 
-          {PANELS.map(({ key, descKey, ...panel }) => (
-            <CinematicPanel key={key} {...panel} desc={t(descKey)} ctaText={t('cardCta')} />
+          {/* Actos de producto: columna del mismo alto que el acto 1 (75vh). Arriba la UI en una caja con
+              stroke (ocupa el alto que deja libre el texto); debajo, logo + línea + CTA sin caja. */}
+          {PANELS.map((panel) => (
+            <article key={panel.key} className="w-[70vw] lg:w-[50vw] h-[75vh] shrink-0">
+              {/* La tarjeta entera es el CTA: caja con stroke, UI a sangre arriba y logo + línea abajo. Al
+                  pasar el ratón, un círculo la persigue ("Ver CRM" / "Ver AMS" enlazan; Academy dice
+                  "Próximamente" y no enlaza). */}
+              <MediaHover
+                href={panel.comingSoon ? undefined : panel.href}
+                label={t(panel.hoverKey)}
+                tone={panel.comingSoon ? 'muted' : 'brand'}
+                className={`h-full flex flex-col ${ACT_FRAME}`}
+              >
+                <ProductMedia panel={panel} framed={false} className="w-full flex-1 min-h-0" />
+                {/* Alto FIJO (h-32): así las tres UIs miden lo mismo aunque el logo o la descripción varíen. */}
+                <ProductCopy panel={panel} lead={t(`products.${panel.key}.lead`)} body={t(`products.${panel.key}.body`)} showCta={false} className="h-32 shrink-0 content-end px-static-lg pb-static-lg" />
+              </MediaHover>
+            </article>
           ))}
 
           {/* SPACER DIV: Prevents the last card from getting cut off by collapsed padding */}

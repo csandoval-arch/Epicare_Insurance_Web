@@ -50,7 +50,15 @@
       "card7Desc": "Producción, retención y persistencia por agente. Los números que deciden tu mes.",
       "card8Title": "Academy",
       "card8Desc": "Certificaciones, entrenamiento de producto y onboarding de agentes nuevos. A tu ritmo.",
-      "cardCta": "Explorar"
+      "cardCta": "Explorar",
+      "seeCrm": "Ver CRM",
+      "seeAms": "Ver AMS",
+      "comingSoon": "Próximamente",
+      "products": {
+        "crm": { "lead": "Sabes a quién llamar\nhoy y por qué.", "body": "Leads, pipeline y seguimiento\nen un solo lugar." },
+        "ams": { "lead": "El core de\ntu operación.", "body": "Pólizas, comisiones, licencias\ny downline. Todo auditable." },
+        "academy": { "lead": "Aprende\na tu ritmo.", "body": "Certificaciones, entrenamiento de\nproducto y onboarding de agentes." }
+      }
     },
     "spotlight": {
       "eppigo": {

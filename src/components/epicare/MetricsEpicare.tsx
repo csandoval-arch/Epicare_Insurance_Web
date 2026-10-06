@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useLayoutEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { AnimatedTitle, AnimatedTitleLine } from '@/components/AnimatedTitle';
@@ -33,7 +33,7 @@ const AnimatedNumber = ({ value }: { value: string }) => {
     const ctx = gsap.context(() => {
       gsap.to(obj, {
         val: targetValue,
-        duration: 1.6,
+        duration: DUR.count,
         ease: EASE.out,
         scrollTrigger: {
           trigger: nodeRef.current,
@@ -67,47 +67,25 @@ export default function MetricsEpicare() {
     { value: "2021", label: t('platform') }
   ];
 
-  // ── GSAP: Hardware Symphony GPU Wave Reveal (Zero-Blur, Pure Transform + Opacity) ──
-  useEffect(() => {
+  // ── ENTRADA (Hardware Symphony): las cifras suben 24px con fade, en ola corta y UNA sola vez.
+  // Sin escala (evita re-rasterizar) y sin repetir al volver a pasar. Reduced motion: estado final.
+  useLayoutEffect(() => {
     ScrollTrigger.config({ ignoreMobileResize: true });
-
     const el = sectionRef.current;
     if (!el) return;
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    const ctx = gsap.context(() => {
-      if (prefersReducedMotion) {
-        gsap.set(".metric-bento-reveal", { opacity: 1, y: 0, scale: 1 });
-        return;
-      }
-
-      gsap.fromTo(".metric-bento-reveal", 
-        { 
-          opacity: 0, 
-          y: REVEAL.md, 
-          scale: 0.96,
-          willChange: "transform, opacity"
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: DUR.base,
-          stagger: STAGGER.base,
-          ease: EASE.out,
-          force3D: true,
-          clearProps: "willChange",
-          scrollTrigger: {
-            trigger: ".metric-grid-container",
-            start: TRIGGER.early,
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
-    }, el);
-
-    return () => ctx.revert();
+    const mm = gsap.matchMedia(el);
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      gsap.from(".metric-bento-reveal", {
+        opacity: 0,
+        y: REVEAL.sm,
+        duration: DUR.base,
+        stagger: STAGGER.base,
+        ease: EASE.out,
+        clearProps: "transform,opacity",
+        scrollTrigger: { trigger: el.querySelector(".metric-grid-container"), start: TRIGGER.early, once: true },
+      });
+    });
+    return () => mm.revert();
   }, []);
 
   return (
