@@ -766,16 +766,16 @@ html[data-mnav-lock] body {
    Móvil y tablet (<1024px): todo en flujo (titular → subtítulo → vídeo a sangre → prueba + CTAs), sin
    posicionar aquí. Desktop (≥1024px): composición sobre la retícula, fijada con el panel de debug el
    2026-10-05, por idioma. --a = ancla vertical del titular (45 % menos el ajuste); subtítulo y bloque de
-   prueba alinean su borde superior al 62 %; el subtítulo va 2rem dentro de la columna de vídeo y el
+   prueba alinean su borde superior al 60 %; el subtítulo va 2rem dentro de la columna de vídeo y el
    bloque 2rem después (atados a ella, nunca pisan su borde). 8.333 % = 1 columna. */
 @media (min-width: 1024px) {
   .hero-root[data-locale="es"] { --a: calc(45% - 65px); }
   .hero-root[data-locale="en"] { --a: calc(45% - 61px); }
   .hero-root[data-locale="es"] .hero-title-r { margin-top: -1px; }
   .hero-root[data-locale="en"] .hero-title-r { margin-top: 1px; }
-  .hero-root .hero-tagline { top: 62%; left: calc(var(--col-l) + var(--spacing-static-xl)); }
+  .hero-root .hero-tagline { top: 60%; left: calc(var(--col-l) + var(--spacing-static-xl)); }
   .hero-root[data-locale="en"] .hero-tagline { width: 8.3333%; }
-  .hero-root .hero-cta-block { top: 62%; left: calc(var(--col-l) + var(--col-w) + var(--spacing-static-xl)); max-width: none; }
+  .hero-root .hero-cta-block { top: 60%; left: calc(var(--col-l) + var(--col-w) + var(--spacing-static-xl)); max-width: none; }
   .hero-root[data-locale="es"] .hero-cta-block { width: 326px; }
   .hero-root[data-locale="en"] .hero-cta-block { width: 307px; }
 }

@@ -7,8 +7,8 @@ import { DUR, EASE, REVEAL, STAGGER, TRIGGER } from "@/lib/motion";
 import { HERO_COLUMN_EVENT, HERO_DESKTOP_MQ } from "./geometry";
 
 // ── VALORES FUERA DE TOKEN (margen creativo declarado; los de la versión "Go beyond growth") ──
-/** Distancia (px) con la que la columna de vídeo entra desde su lado. */
-const VIDEO_SLIDE = 100;
+/** Entrada de la columna (desktop): escala vertical inicial (≈ 0; 0 exacto daría 1/0 en la inversa). */
+const GROW_FROM = 0.001;
 const CTA_START_SCALE = 0.9;
 /** Flecha de scroll: segundos quieta y visible, y pausa (fuera de la máscara) antes de repetir. */
 const ARROW_HOLD = 0.6;
@@ -53,11 +53,15 @@ export function useHeroMotion(rootRef: RefObject<HTMLElement | null>, isEn: bool
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     // ── Geometría + render de la columna (transform only) ──
-    // Desktop: la columna entra deslizándose desde la izquierda. Móvil/tablet (banda a sangre): solo aparece.
-    const slide = window.matchMedia(HERO_DESKTOP_MQ).matches ? VIDEO_SLIDE : 0;
-    const state = { enter: reduced ? 0 : -slide, t: 0 };
+    // Desktop: la columna entra CRECIENDO en su sitio, de abajo arriba (de una línea en su borde inferior a
+    // toda la altura;
+    // `grow` = scaleY). Móvil/tablet (banda a sangre): solo aparece.
+    const isDesktop = window.matchMedia(HERO_DESKTOP_MQ).matches;
+    const growFrom = isDesktop && !reduced ? GROW_FROM : 1;
+    const state = { grow: growFrom, t: 0 };
     let W = 0;
-    let col = { x: 0, w: 0 };
+    let H = 0;
+    let col = { x: 0, y: 0, w: 0, h: 0 };
 
     // Avisa al header de dónde está la columna en pantalla (para poner en blanco los links que cruza).
     // `null` = no hay vídeo detrás del header (antes de que la columna aparezca o tras salir del hero).
@@ -79,26 +83,32 @@ export function useHeroMotion(rootRef: RefObject<HTMLElement | null>, isEn: bool
     window.addEventListener("scroll", onScroll, { passive: true });
 
     const render = () => {
-      const { x, w } = col;
+      const { x, y, w, h } = col;
       if (!w) return;
       const tx = -x * state.t; // acto 2: el borde izquierdo viaja a 0
       const sx = (w + (W - w) * state.t) / w; // …y el ancho a W
-      const fx = state.enter + tx;
-      frame.style.transform = `translate3d(${fx}px, 0, 0) scale(${sx}, 1)`;
+      const sy = state.grow; // entrada: la altura crece DESDE ABAJO (anclada a su borde inferior)…
+      const ty = h * (1 - sy); // …así que el marco (origen arriba) baja lo que le falta de altura
+      frame.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${sx}, ${sy})`;
+      // Hasta que empieza a crecer no se ve (si no, quedaría una línea de 1px con su sombra abajo).
+      frame.style.visibility = sy <= GROW_FROM ? "hidden" : "";
       // Plano = la sección entera, quieto en pantalla: la inversa del marco + su posición de layout.
-      plane.style.transform = `scale(${1 / sx}, 1) translate3d(${-fx - x}px, 0, 0)`;
-      // Copia blanca del titular recortada al marco en este frame.
-      const left = x + fx;
+      plane.style.transform = `scale(${1 / sx}, ${1 / sy}) translate3d(${-tx - x}px, ${-ty - y}px, 0)`;
+      // Copia blanca del titular recortada al marco en este frame (también a su altura actual).
+      const left = x + tx;
       const right = W - (left + w * sx);
-      cut.style.clipPath = `inset(0px ${right}px 0px ${left}px)`;
+      const top = y + ty;
+      const bottom = H - (top + h * sy);
+      cut.style.clipPath = `inset(${top}px ${right}px ${bottom}px ${left}px)`;
       publish();
     };
 
     const measure = () => {
       W = el.clientWidth;
-      // La columna la coloca el CSS (--col-l/--col-w en desktop, franja del 28 % en móvil): aquí se lee
+      H = el.clientHeight;
+      // La columna la coloca el CSS (--col-l/--col-w en desktop, banda en el flujo en móvil): aquí se lee
       // su caja de layout (ignora el transform), así cualquier ajuste de CSS la sigue sin tocar el JS.
-      col = { x: frame.offsetLeft, w: frame.offsetWidth };
+      col = { x: frame.offsetLeft, y: frame.offsetTop, w: frame.offsetWidth, h: frame.offsetHeight };
       plane.style.width = `${W}px`;
       // Desktop: el plano es la sección entera (las ventanas a un mismo plano). Móvil/tablet: la banda.
       plane.style.height = `${window.matchMedia(HERO_DESKTOP_MQ).matches ? el.clientHeight : frame.offsetHeight}px`;
@@ -145,10 +155,15 @@ export function useHeroMotion(rootRef: RefObject<HTMLElement | null>, isEn: bool
             { opacity: 1, y: 0, duration: DUR.base, ease: EASE.out, stagger: STAGGER.tight, clearProps: "willChange" },
             "-=0.6"
           )
-          // 3 · Columna de vídeo desde la izquierda; el plano hace la inversa (render) y queda quieto.
-          //     La copia blanca aparece con ella (antes no hay vídeo detrás y se vería blanco sobre marfil).
-          .fromTo([frame, cut], { opacity: 0 }, { opacity: 1, duration: DUR.slow, ease: EASE.dramatic }, "-=0.6")
-          .fromTo(state, { enter: -slide }, { enter: 0, duration: DUR.slow, ease: EASE.dramatic, onUpdate: render }, "<");
+          // 3 · Desktop: la columna CRECE en su sitio (desde su borde inferior hacia arriba); el plano hace la
+          //     inversa y queda quieto, y la copia blanca se recorta a su altura en cada frame (no hay blanco
+          //     sobre el fondo antes de que llegue el vídeo). Móvil/tablet: la banda solo aparece.
+          .add(
+            isDesktop
+              ? gsap.fromTo(state, { grow: GROW_FROM }, { grow: 1, duration: DUR.slow, ease: EASE.dramatic, onUpdate: render, immediateRender: false })
+              : gsap.fromTo(frame, { opacity: 0 }, { opacity: 1, duration: DUR.slow, ease: EASE.dramatic }),
+            "-=0.8" // arranca 0.2s antes que el resto de la cadena (pedido 2026-10-05)
+          );
         // 4-5 · Prueba social y CTAs: en desktop dentro de la entrada (se ven desde el inicio); en
         //       móvil/tablet están bajo el pliegue → se revelan al entrar en vista (más abajo).
         if (isDesktop) revealProof(intro, "-=0.7");
@@ -182,6 +197,16 @@ export function useHeroMotion(rootRef: RefObject<HTMLElement | null>, isEn: bool
       const fallbackId = window.setTimeout(play, LOADER_FALLBACK_MS);
 
       // ── ACTO 2 (desktop): telón + la columna a pantalla completa ──
+      /** Stagger del telón por capa: cada palabra usa su índice dentro de su capa (titular base o copia
+       *  blanca), así las dos capas se mueven exactamente igual y la copia no se separa del texto. */
+      const layerStagger = (step: number) => (i: number, target: Element) => {
+        const layer = target.closest(".hero-cut-layer") ?? el;
+        const peers = Array.from(layer.querySelectorAll(":scope .hero-act-left, :scope .hero-act-right")).filter(
+          (n) => (n.closest(".hero-cut-layer") ?? el) === layer && n.classList.contains(target.classList.contains("hero-act-left") ? "hero-act-left" : "hero-act-right")
+        );
+        return Math.max(0, peers.indexOf(target)) * step;
+      };
+
       const mm = gsap.matchMedia(el);
       mm.add(ACT2_MQ, () => {
         const tl = gsap.timeline({
@@ -195,8 +220,8 @@ export function useHeroMotion(rootRef: RefObject<HTMLElement | null>, isEn: bool
             onRefresh: measure,
           },
         });
-        tl.fromTo($(".hero-act-left"), { x: 0, opacity: 1 }, { x: `-${CURTAIN}`, opacity: 0, duration: 1.5, stagger: 0.05, ease: "power2.inOut", immediateRender: false }, 0)
-          .fromTo($(".hero-act-right"), { x: 0, opacity: 1 }, { x: CURTAIN, opacity: 0, duration: 1.5, stagger: 0.05, ease: "power2.inOut", immediateRender: false }, 0)
+        tl.fromTo($(".hero-act-left"), { x: 0, opacity: 1 }, { x: `-${CURTAIN}`, opacity: 0, duration: 1.5, stagger: layerStagger(0.05), ease: "power2.inOut", immediateRender: false }, 0)
+          .fromTo($(".hero-act-right"), { x: 0, opacity: 1 }, { x: CURTAIN, opacity: 0, duration: 1.5, stagger: layerStagger(0.05), ease: "power2.inOut", immediateRender: false }, 0)
           .fromTo($(".hero-scroll-badge"), { y: 0, opacity: 1, scale: 1 }, { y: REVEAL.lg, opacity: 0, scale: 0.8, duration: 1.5, ease: "power2.inOut", immediateRender: false }, 0)
           .fromTo(state, { t: 0 }, { t: 1, duration: 2, ease: "power3.inOut", onUpdate: render, immediateRender: false }, 0)
           .fromTo($(".hero-col-shade"), { opacity: 1 }, { opacity: 0, duration: 1.5, ease: "power2.inOut", immediateRender: false }, 0.5);
