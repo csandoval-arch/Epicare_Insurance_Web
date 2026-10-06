@@ -762,6 +762,66 @@ html[data-mnav-lock] body {
   .rt-root.is-offscreen .rt-breath { animation-play-state: paused; }
 }
 
+/* -- HERO "corte arquitectónico" (HeroEpicare) --
+   Móvil y tablet (<1024px): todo en flujo (titular → subtítulo → vídeo a sangre → prueba + CTAs), sin
+   posicionar aquí. Desktop (≥1024px): composición sobre la retícula, fijada con el panel de debug el
+   2026-10-05, por idioma. --a = ancla vertical del titular (45 % menos el ajuste); subtítulo y bloque de
+   prueba alinean su borde superior al 62 %; el subtítulo va 2rem dentro de la columna de vídeo y el
+   bloque 2rem después (atados a ella, nunca pisan su borde). 8.333 % = 1 columna. */
+@media (min-width: 1024px) {
+  .hero-root[data-locale="es"] { --a: calc(45% - 65px); }
+  .hero-root[data-locale="en"] { --a: calc(45% - 61px); }
+  .hero-root[data-locale="es"] .hero-title-r { margin-top: -1px; }
+  .hero-root[data-locale="en"] .hero-title-r { margin-top: 1px; }
+  .hero-root .hero-tagline { top: 62%; left: calc(var(--col-l) + var(--spacing-static-xl)); }
+  .hero-root[data-locale="en"] .hero-tagline { width: 8.3333%; }
+  .hero-root .hero-cta-block { top: 62%; left: calc(var(--col-l) + var(--col-w) + var(--spacing-static-xl)); max-width: none; }
+  .hero-root[data-locale="es"] .hero-cta-block { width: 326px; }
+  .hero-root[data-locale="en"] .hero-cta-block { width: 307px; }
+}
+/* Móvil y tablet (<1024px): la banda de vídeo del hero, atada al scroll con CSS scroll-driven (view
+   timeline; corre en el compositor, pegada al dedo — sin pin ni ScrollTrigger scrub, que en móvil llega
+   un frame tarde). La banda nace al 82 % y se abre a sangre mientras entra; el vídeo se desplaza dentro
+   en parallax. Propiedades individuales `scale`/`translate` (solo compositor): no pisan el `transform`
+   que GSAP pone a la columna. Ojo: el hero y la banda recortan con `overflow: clip` (no `hidden`), porque
+   `hidden` los convierte en contenedor de scroll y la view timeline se quedaría quieta.
+   Sin soporte (Safari < 26) o con reduced-motion: estática, a sangre. */
+@keyframes hero-band-open {
+  from { scale: 0.82; }
+  to { scale: 1; }
+}
+@keyframes hero-band-parallax {
+  from { translate: 0 -4%; }
+  to { translate: 0 4%; }
+}
+@media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .hero-root .hero-band {
+      animation: hero-band-open linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 50%;
+    }
+    .hero-root .hero-band-video {
+      animation: hero-band-parallax linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+  }
+}
+
+/* -- ScrollHint (Bento "Tu agencia, un solo ecosistema"): el tramo azul recorre la pista de izquierda
+   a derecha, como el scroll horizontal que sigue. Solo transform; tramo = 40 % de la pista → entra
+   desde −100 % y sale por +250 %. Ritmo: DUR.cinematic (1.8s) con la curva power3.inOut (EASE.inOut).
+   Pausado fuera de pantalla (.is-offscreen); con reduced-motion queda quieto al inicio. -- */
+@keyframes scroll-hint-run {
+  from { transform: translate3d(-100%, 0, 0); }
+  to { transform: translate3d(250%, 0, 0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-hint-bar { animation: scroll-hint-run 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+  .scroll-hint.is-offscreen .scroll-hint-bar { animation-play-state: paused; }
+}
+
 /* Separador sobre vidrio líquido (bimodal por alfa). Usar con border-t / border-b. */
 @utility border-glass-divider {
   border-color: var(--glass-liquid-divider);

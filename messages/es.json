@@ -1,13 +1,14 @@
 {
   "landingV2": {
     "hero": {
-      "title": "Go beyond growth",
       "subtitle": ["Impulsamos", "a los agentes", "a redefinir", "el éxito."],
       "agentsCount": "100+",
       "agentsLabel": ["Agentes", "activos"],
       "supporting": "<b>130+ aseguradoras</b>, tecnología y equipo de soporte bajo <b>un solo contrato</b>. Tu book of business, <b>100% tuyo</b>.",
       "ctaPrimary": "Solicita tu contrato",
-      "ctaSecondary": "Ver GO AMS"
+      "ctaSecondary": "Ver GO AMS",
+      "cutOverline": "Insurance platform",
+      "cutTitle": ["Ve", "más allá", "de crecer."]
     },
     "licensingHero": {
       "title": "Licensing",
@@ -38,8 +39,7 @@
       "itemDiDesc": "Appointments con 130+ carriers gestionados desde el portal, con estado en vivo de cada solicitud.",
       "itemOmsTitle": "Compliance",
       "itemOmsDesc": "Licencias, E&O y renovaciones con alerta antes del vencimiento, no después.",
-      "sectionTitle": "Tu agencia,\nun solo ecosistema",
-      "sectionDesc": "GO AMS, GO CRM y Epicare Academy. <b>Software propio</b>, no licencias de terceros.",
+      "sectionTitle": "Vende, opera\ny aprende\nen un solo lugar.",
       "card1Title": "GO CRM",
       "card1Desc": "Leads, pipeline y seguimiento en un solo lugar. Sabes a quién llamar hoy y por qué.",
       "card4Title": "GO AMS",
