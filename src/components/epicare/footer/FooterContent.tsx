@@ -3,8 +3,8 @@
 /**
  * @file FooterContent.tsx
  * @description Contenido del footer — "El puente" (aprobado el 30/09/2026). Arriba, sobre el claro, el logo completo de Epicare (nace letra a
- * letra). Abajo, una FOTO de arquitectura con una agente al teléfono en su oficina (`Footer/agent-phone*.jpg`, versión vertical en móvil,
- * elegida el 30/09/2026; antes, el puente de hormigón del hero) en una banda enmarcada (16px), casi
+ * letra). Abajo, una FOTO de una agente en su oficina frente a la ciudad (`Footer/footer-bg.jpg`, la misma en desktop y
+ * móvil, elegida el 06/10/2026; antes, la agente al teléfono) en una banda enmarcada (16px), casi
  * cuadrada y tan alta como su contenido, que se ensancha hasta el marco con
  * el telón (scaleX 0.94 → 1, scrub) mientras la foto viaja más lenta que la página (parallax). Dentro de
  * la foto, en blanco: la frase con "Escríbenos", el índice en 4 columnas y la barra legal.
@@ -25,10 +25,8 @@ import { findStage, useCurtainReveal } from "./useCurtainReveal";
 import { logoBirth, useRevealWhenVisible } from "./useRevealWhenVisible";
 import FooterIndex from "./FooterIndex";
 
-/** Foto de la banda: horizontal desde tablet (md, donde cambia el layout del footer) y vertical en móvil. */
-const PHOTO = "/Files/Footer/agent-phone.jpg";
-const PHOTO_MOBILE = "/Files/Footer/agent-phone-mobile.jpg";
-const PHOTO_DESKTOP_MEDIA = "(min-width: 768px)";
+/** Foto de la banda (una sola para todas las anchuras; en móvil el recorte centra a la agente). */
+const PHOTO = "/Files/Footer/footer-bg.jpg";
 const SURFACE = "bg-[var(--color-surface-BG-1)] text-[var(--color-text-primary)]";
 const LINK = "hover:text-[var(--color-brand-blue)]";
 /**
@@ -97,17 +95,14 @@ export default function FooterContent() {
       {/* ── ABAJO: LA FOTO con frase, índice y legales en blanco, dentro de un marco (8px móvil · 16px desde tablet; alto = su contenido) ── */}
       <div className="px-static-sm pb-static-sm md:px-static-md md:pb-static-md">
         <div ref={band} className="relative overflow-hidden rounded-lg md:rounded-xl origin-bottom">
-          <picture>
-            <source media={PHOTO_DESKTOP_MEDIA} srcSet={asset(PHOTO)} />
-            <img
-              src={asset(PHOTO_MOBILE)}
-              alt=""
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-              className="fp-photo absolute inset-x-0 -top-[12%] w-full h-[124%] object-cover"
-            />
-          </picture>
+          <img
+            src={asset(PHOTO)}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            className="fp-photo absolute inset-x-0 -top-[12%] w-full h-[124%] object-cover object-[48%_center]"
+          />
           {/* Velo: el texto blanco se lee sobre la foto */}
           <div className="absolute inset-0 bg-[var(--color-text-Black-100)]/55" aria-hidden="true" />
 
