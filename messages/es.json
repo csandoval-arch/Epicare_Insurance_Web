@@ -63,15 +63,10 @@
     "spotlight": {
       "eppigo": {
         "name": "Eppigo™",
-        "cta": "Únete a Epicare",
+        "cta": "Únete a Eppigo",
         "title": "Insurance that finally makes sense.",
-        "desc": "Donde ellos gestionan sus pólizas y wallets, y tu agencia los asiste en tiempo real.",
-        "f1Title": "Seguros y Wallets",
-        "f1Desc": "Acceso total a coberturas activas y métodos de pago seguros.",
-        "f2Title": "Compras Integradas",
-        "f2Desc": "Descubren y compran nuevos seguros desde su propio ecosistema.",
-        "f3Title": "Asistencia Directa",
-        "f3Desc": "Tu equipo asiste y opera junto al cliente dentro del mismo portal."
+        "subtitle": "<bold>Asiste a tus clientes</bold> dentro de su portal:\n<bold>pólizas, wallet, documentos</bold>, chat directo\ny <bold>enrollment</bold>, todo en tiempo real.",
+        "desc": "Donde ellos gestionan sus pólizas y wallets, y tu agencia los asiste en tiempo real."
       },
       "solutions": {
         "name": "Agency Solutions",

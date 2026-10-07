@@ -63,15 +63,10 @@
     "spotlight": {
       "eppigo": {
         "name": "Eppigo™",
-        "cta": "Join Epicare",
+        "cta": "Join Eppigo",
         "title": "Insurance that finally makes sense.",
-        "desc": "Quote, build the proposal, and enroll the client without leaving the portal.",
-        "f1Title": "Multicarrier quoting",
-        "f1Desc": "Only across your active appointments — nothing you can't sell.",
-        "f2Title": "Interactive proposals",
-        "f2Desc": "Web proposals with open tracking: you know when they're read.",
-        "f3Title": "Traceable links and QR",
-        "f3Desc": "Share by link or QR code and follow every interaction."
+        "subtitle": "<bold>Assist your clients</bold> inside their portal:\n<bold>policies, wallet, documents</bold>, direct chat\nand <bold>enrollment</bold>, all in real time.",
+        "desc": "Quote, build the proposal, and enroll the client without leaving the portal."
       },
       "solutions": {
         "name": "Agency Solutions",
