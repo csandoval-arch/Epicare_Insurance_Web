@@ -10,7 +10,7 @@ import PeopleRevealEpicare from "@/components/epicare/PeopleRevealEpicare";
 import ProductLinesEpicare from "@/components/epicare/ProductLinesEpicare";
 import Coverage52Epicare from "@/components/epicare/Coverage52Epicare";
 import AgentAgencySection from "@/components/go-ams/AgentAgencySection";
-import HowToJoinEpicare from "@/components/epicare/HowToJoinEpicare";
+import StructureCompany from "@/components/company/StructureCompany";
 import FAQEpicare from "@/components/epicare/FAQEpicare";
 import CTABannerEpicare from "@/components/epicare/CTABannerEpicare";
 import FooterEpicare from "@/components/epicare/FooterEpicare";
@@ -107,8 +107,9 @@ export default function EpicareLandingPage() {
       <div className="w-full order-10"><ProductLinesEpicare /></div>
       {/* ── S10 · Coverage52 (mini-pico visual) ── */}
       {/* <div className="w-full order-11"><Coverage52Epicare /></div> */}
-      {/* ── S13 · HowToJoin (fricción cero) ── */}
-      <div className="w-full order-[13]"><HowToJoinEpicare /></div>
+      {/* ── S13 · El estándar Epicare (misma escena que /company, mensaje para el agente). Conserva el
+          ancla #unete, destino de los CTA de Eppigo / Agency Solutions. ── */}
+      <div className="w-full order-[13]"><StructureCompany ns="landingV2.standard" id="unete" /></div>
       {/* ── S14 · FAQ (objeciones) ── */}
       <div className="w-full order-[14]"><FAQEpicare /></div>
       {/* ── S14.5 · CTA Banner ── */}

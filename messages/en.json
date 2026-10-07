@@ -4,10 +4,10 @@
       "subtitle": ["Empowering agents", "to redefine", "success."],
       "agentsCount": "100+",
       "agentsLabel": ["Active", "agents"],
-      "supporting": "<b>130+ carriers</b>, technology and a support team under <b>one contract</b>. Your book of business, <b>100% yours</b>.",
+      "supporting": "<b>130+ carriers</b>, one contract.",
       "ctaPrimary": "Request your contract",
       "ctaSecondary": "View GO AMS",
-      "cutOverline": "Insurance platform",
+      "cutOverline": "Epicare",
       "cutTitle": ["Go", "Beyond", "Growth."]
     },
     "licensingHero": {
@@ -225,6 +225,10 @@
       "agentImg2Alt": "Agent with headset providing support",
       "agencyImg1Alt": "Agency pipeline across stages",
       "agencyImg2Alt": "Aggregated agency composition"
+    },
+    "standard": {
+      "overline": "The Epicare standard behind every agent.",
+      "title": "You build your book, on your terms. Epicare puts the technology, the marketing and the industry backing behind you. Every policy you sell carries the same standard."
     },
     "howToJoin": {
       "overline": "Instant Activation",

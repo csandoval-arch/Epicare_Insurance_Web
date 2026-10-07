@@ -22,8 +22,8 @@ const LAYER = "absolute inset-0 flex flex-col pt-[40svh] pb-section-xs";
 const ROW = "w-full max-w-section-xl mx-auto px-gutter-sm md:px-gutter-md grid-layout";
 
 /** Etiqueta + titular. Se pinta dos veces (tinta / blanco); la copia de la máscara va oculta a lectores. */
-function StructureText({ decorative = false }: { decorative?: boolean }) {
-  const t = useTranslations("company.structure");
+function StructureText({ ns, decorative = false }: { ns: string; decorative?: boolean }) {
+  const t = useTranslations(ns);
   const Title = decorative ? "p" : "h2";
   return (
     <div className={ROW} aria-hidden={decorative || undefined}>
@@ -38,16 +38,17 @@ function StructureText({ decorative = false }: { decorative?: boolean }) {
   );
 }
 
-export default function StructureCompany() {
+/** `ns`: namespace de los textos (overline + title). La landing la reutiliza con su propio mensaje. */
+export default function StructureCompany({ ns = "company.structure", id }: { ns?: string; id?: string }) {
   const containerRef = useRef<HTMLElement>(null);
 
   useStructureMotion(containerRef);
 
   return (
-    <section ref={containerRef} className={SECTION}>
+    <section ref={containerRef} id={id} className={SECTION}>
       {/* ── 1 · CAPA BASE: tinta sobre marfil ── */}
       <div className={`${LAYER} text-[var(--color-hero-ink)]`}>
-        <StructureText />
+        <StructureText ns={ns} />
       </div>
 
       {/* ── 2 · MÁSCARA: imagen + el mismo texto en blanco ── */}
@@ -61,7 +62,7 @@ export default function StructureCompany() {
           className="st-image absolute inset-0 w-full h-full object-cover object-center grayscale contrast-125"
         />
         <div className={`${LAYER} z-20 text-[var(--color-text-White-100)]`}>
-          <StructureText decorative />
+          <StructureText ns={ns} decorative />
         </div>
       </div>
     </section>

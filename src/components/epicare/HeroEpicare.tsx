@@ -95,8 +95,6 @@ function HeroStage({ isEn }: { isEn: boolean }) {
   const subtitle = t.raw("subtitle") as string[];
   const pos = isEn ? TITLE_POS.en : TITLE_POS.es;
   const agentsLabel = t.raw("agentsLabel") as string[];
-  // Acentos en el azul de marca (un solo azul en todo el hero).
-  const accent = (chunks: ReactNode) => <span className="text-[var(--color-brand-blue)]">{chunks}</span>;
 
   const vars = {
     ...columnCssVars(isEn),
@@ -113,9 +111,9 @@ function HeroStage({ isEn }: { isEn: boolean }) {
   const titleWords = (cut: boolean) => (
     <>
       <div className="hero-act-left relative lg:absolute z-30 lg:top-[var(--a)] lg:-translate-y-full lg:left-[var(--title-l)] flex flex-col items-start gap-3 lg:gap-4">
-        <div className={`hero-overline flex items-center font-mono text-[9px] lg:text-[11px] font-semibold tracking-[0.2em] uppercase text-[var(--color-brand-blue)] ${cut ? "invisible" : ""}`}>
+        <div className={`hero-overline flex items-center text-meta lg:text-overline font-semibold tracking-[0.2em] uppercase text-[var(--color-brand-blue)] ${cut ? "invisible" : ""}`}>
           {t("cutOverline")}
-          <sup className="ml-1 text-[13px] lg:text-[15px] -translate-y-0.5 font-body">&reg;</sup>
+          <sup className="ml-1 text-h5 lg:text-h4 font-light! leading-none -translate-y-0.5">&reg;</sup>
         </div>
         <TitleLine>{title[0]}</TitleLine>
       </div>
@@ -237,7 +235,7 @@ function HeroStage({ isEn }: { isEn: boolean }) {
             </p>
           </div>
 
-          <p className="hero-proof-text text-h3 font-medium opacity-80">{t.rich("supporting", { b: accent })}</p>
+          <p className="hero-proof-text text-h3 font-medium text-[var(--color-brand-dark)] dark:text-[var(--color-text-White-100)]">{t.rich("supporting", { b: (chunks) => <span className="text-[var(--color-brand-blue)]">{chunks}</span> })}</p>
         </div>
 
         <div className="hero-ctas flex flex-col items-start gap-static-md shrink-0">

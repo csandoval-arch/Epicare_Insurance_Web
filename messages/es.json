@@ -4,10 +4,10 @@
       "subtitle": ["Impulsamos", "a los agentes", "a redefinir", "el éxito."],
       "agentsCount": "100+",
       "agentsLabel": ["Agentes", "activos"],
-      "supporting": "<b>130+ aseguradoras</b>, tecnología y equipo de soporte bajo <b>un solo contrato</b>. Tu book of business, <b>100% tuyo</b>.",
+      "supporting": "<b>130+ aseguradoras</b>, un solo contrato.",
       "ctaPrimary": "Solicita tu contrato",
       "ctaSecondary": "Ver GO AMS",
-      "cutOverline": "Insurance platform",
+      "cutOverline": "Epicare",
       "cutTitle": ["Ve", "más allá", "de crecer."]
     },
     "licensingHero": {
@@ -225,6 +225,10 @@
       "agentImg2Alt": "Agente con headset dando soporte",
       "agencyImg1Alt": "Pipeline de la agencia por etapas",
       "agencyImg2Alt": "Composición agregada de la agencia"
+    },
+    "standard": {
+      "overline": "El estándar Epicare detrás de cada agente.",
+      "title": "Tú construyes tu cartera, en tus términos. Epicare pone detrás la tecnología, el marketing y el respaldo de la industria. Cada póliza que vendes lleva el mismo estándar."
     },
     "howToJoin": {
       "overline": "Activación Inmediata",
