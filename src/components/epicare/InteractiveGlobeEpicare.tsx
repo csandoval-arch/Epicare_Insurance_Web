@@ -96,6 +96,22 @@ const MD_BREAKPOINT_QUERY = '(min-width: 768px)';
 /** Desvío de altitud tolerado antes de que el bucle rAF corrija la cámara. */
 const ALTITUDE_EPSILON = 0.02;
 
+// ── ENTRADA DE PINES (margen creativo declarado) ──
+// ── RENDIMIENTO ──
+/** Tope de devicePixelRatio del canvas WebGL (1100px): nítido y ~44% menos píxeles que a 2x. */
+const MAX_PIXEL_RATIO = 1.5;
+/** Tras este silencio de scroll, el globo vuelve a rotar. */
+const SCROLL_IDLE_MS = 150;
+
+/** Escala de partida del planeta. */
+const GLOBE_START_SCALE = 0.9;
+/** Los pines empiezan cuando el planeta ya casi asentó. */
+const PIN_DELAY = 0.6;
+/** Separación entre pines: 52 × 0.025s ≈ 1.3s de cascada. */
+const PIN_STAGGER = 0.025;
+/** Pequeño rebote al aparecer (pin que "se clava"). */
+const PIN_EASE = 'back.out(1.5)';
+
 export default function InteractiveGlobeEpicare({ isWidget = false }: { isWidget?: boolean } = {}) {
   const t = useTranslations('landingV2.interactiveMap');
   
@@ -203,6 +219,8 @@ export default function InteractiveGlobeEpicare({ isWidget = false }: { isWidget
     const mql = window.matchMedia(MD_BREAKPOINT_QUERY);
     const syncAltitude = () => {
       targetAltitudeRef.current = mql.matches ? GLOBE_ALTITUDE_DESKTOP : GLOBE_ALTITUDE_MOBILE;
+      // El bucle rAF se apaga tras el arranque: un cambio de breakpoint posterior se aplica aquí.
+      if (povInitializedRef.current) globeEl.current?.pointOfView({ altitude: targetAltitudeRef.current }, 0);
     };
 
     syncAltitude();
@@ -212,26 +230,57 @@ export default function InteractiveGlobeEpicare({ isWidget = false }: { isWidget
 
   // 3. HARDWARE SYMPHONY: Smart Shutdown Protocol
   // Pauses all WebGL rendering loops when the globe scrolls completely out of view
+  // + Pausa durante el scroll (2026-10-07, scroll lag): mientras la página se mueve el globo no
+  // re-renderiza (WebGL + 52 marcadores HTML compitiendo con el scroll en cada frame); retoma la
+  // rotación SCROLL_IDLE_MS después del último evento de scroll. A 0.5 de autoRotate no se percibe.
   useEffect(() => {
     if (!sectionRef.current) return;
+    let isVisible = false;
+    let isScrolling = false;
+    let idleId: ReturnType<typeof setTimeout> | undefined;
+
+    /** Renderiza solo si está a la vista y la página está quieta. */
+    const sync = () => {
+      const globe = globeEl.current;
+      if (!globe) return;
+      const controls = globe.controls();
+      if (isVisible && !isScrolling) {
+        globe.resumeAnimation?.();
+        if (controls) controls.autoRotate = true;
+      } else {
+        globe.pauseAnimation?.();
+        if (controls) controls.autoRotate = false;
+      }
+    };
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (globeEl.current) {
-          const controls = globeEl.current.controls();
-          if (entry.isIntersecting) {
-            globeEl.current.resumeAnimation?.();
-            if (controls) controls.autoRotate = true;
-          } else {
-            globeEl.current.pauseAnimation?.();
-            if (controls) controls.autoRotate = false;
-          }
-        }
+        isVisible = entry.isIntersecting;
+        sync();
       },
       { threshold: 0, rootMargin: '200px' } // Add margin to wake up slightly before view
     );
-    
     observer.observe(sectionRef.current);
-    return () => observer.disconnect();
+
+    const onScroll = () => {
+      if (!isVisible) return;
+      if (!isScrolling) {
+        isScrolling = true;
+        sync();
+      }
+      clearTimeout(idleId);
+      idleId = setTimeout(() => {
+        isScrolling = false;
+        sync();
+      }, SCROLL_IDLE_MS);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', onScroll);
+      clearTimeout(idleId);
+    };
   }, []);
 
   // 4. Globe Setup & Permanent Zoom Prevention
@@ -265,6 +314,8 @@ export default function InteractiveGlobeEpicare({ isWidget = false }: { isWidget
         const targetAltitude = targetAltitudeRef.current;
         if (!povInitializedRef.current) {
           globeEl.current.pointOfView({ ...GLOBE_POV_CENTER, altitude: targetAltitude }, 0);
+          // Tope de resolución: el canvas mide 1100px; a 2x eran ~4.8M px por frame.
+          globeEl.current.renderer?.()?.setPixelRatio(Math.min(window.devicePixelRatio || 1, MAX_PIXEL_RATIO));
           povInitializedRef.current = true;
         } else if (Math.abs(globeEl.current.pointOfView().altitude - targetAltitude) > ALTITUDE_EPSILON) {
           globeEl.current.pointOfView({ altitude: targetAltitude }, 0);
@@ -296,42 +347,39 @@ export default function InteractiveGlobeEpicare({ isWidget = false }: { isWidget
           (window as any).epicareGlobeIsReady = true;
           window.dispatchEvent(new Event('epicareGlobeReady'));
           
-          // Animación de revelado del planeta (escala de 0.8 a 1 al cargar)
-          if (containerRef.current) {
+          // Revelado del planeta: opacidad + escala (transform en compositor; es la ÚNICA entrada del globo,
+          // el hero ya no anima su contenedor). Con reduced-motion aparece sin animación.
+          if (containerRef.current && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             gsap.fromTo(containerRef.current,
-              { opacity: 0, scale: 0.8 },
-              { opacity: 1, scale: 1, duration: 1.5, ease: "power3.out", clearProps: "opacity,scale" }
+              { opacity: 0, scale: GLOBE_START_SCALE },
+              { opacity: 1, scale: 1, duration: DUR.slow, ease: EASE.out, force3D: true, clearProps: "opacity,scale" }
             );
           }
 
-          const markersArray = gsap.utils.toArray(markers) as HTMLElement[];
-          const shuffled = gsap.utils.shuffle(markersArray.slice());
-          
-          shuffled.forEach((marker, i) => {
-            const delay = 1.0 + (i * 0.08);
-            
-            // Animación del Pin (ocurre solo una vez)
-            const tlPin = gsap.timeline({ delay });
-            gsap.set(marker, { visibility: 'visible' });
-            tlPin.fromTo(marker, 
-              { opacity: 0, scale: 0 }, 
-              { 
-                opacity: 1, 
-                scale: 1, 
-                duration: 0.8, 
-                ease: "back.out(1.5)",
-                willChange: "transform, opacity", // HARDWARE SYMPHONY
-                clearProps: "opacity,scale,willChange" 
-              }
-            );
+          // Pines: UN solo tween con stagger aleatorio (antes 52 timelines con 0.08s entre cada uno =
+          // 4.2s de cascada compitiendo con la carga de three.js). Ahora la cascada dura ~1.3s.
+          const shuffled = gsap.utils.shuffle(gsap.utils.toArray<HTMLElement>(markers).slice());
+          gsap.set(shuffled, { visibility: 'visible' });
+          gsap.fromTo(shuffled,
+            { opacity: 0, scale: 0 },
+            {
+              opacity: 1,
+              scale: 1,
+              duration: DUR.fast,
+              ease: PIN_EASE,
+              delay: PIN_DELAY,
+              stagger: PIN_STAGGER,
+              force3D: true,
+              clearProps: "opacity,scale",
+            }
+          );
 
-            // OPTIMIZACIÓN EXTREMA: Animación infinita movida 100% al GPU (CSS Animations)
-            // Se elimina el overhead de 52 timelines de GSAP calculando ticks en cada frame.
+          // Iniciales: animación infinita en CSS (GPU); cada una arranca cuando su pin ya apareció.
+          shuffled.forEach((marker, i) => {
             const initials = marker.querySelector('.pin-initials-anim') as HTMLElement;
             if (initials) {
               initials.style.visibility = 'visible';
-              initials.style.willChange = 'transform, opacity';
-              initials.style.animationDelay = `${delay + 0.4}s`;
+              initials.style.animationDelay = `${PIN_DELAY + i * PIN_STAGGER + DUR.fast}s`;
             }
           });
 
@@ -347,7 +395,9 @@ export default function InteractiveGlobeEpicare({ isWidget = false }: { isWidget
         }
       }
 
-      frameId = requestAnimationFrame(enforceControls);
+      // El bucle solo hace falta hasta dejar cámara, controles y pines listos; después se apaga
+      // (antes corría en cada frame para siempre). El cambio de breakpoint lo aplica `syncAltitude`.
+      if (!(povInitializedRef.current && pinsAnimated)) frameId = requestAnimationFrame(enforceControls);
     };
     enforceControls();
 
@@ -521,6 +571,10 @@ export default function InteractiveGlobeEpicare({ isWidget = false }: { isWidget
             This CSS rule forces the hovered marker to break out and stay absolutely on top,
             ignoring the inline math entirely.
           */
+          /* RENDIMIENTO: globe.gl mueve cada marcador en cada frame; con capa propia el movimiento
+             se compone sin repintar el pin (ni su drop-shadow). */
+          .marker-wrapper { will-change: transform; }
+
           .marker-wrapper:hover {
             z-index: 999999 !important;
           }
@@ -606,7 +660,7 @@ export default function InteractiveGlobeEpicare({ isWidget = false }: { isWidget
                   <div class="tooltip-card absolute bottom-full left-1/2 ml-1.5 mb-1.5 w-max opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 ease-out pointer-events-none z-50 flex flex-col items-start">
                     
                     <!-- Glassmorphic Chat Bubble -->
-                    <div class="px-3.5 py-1.5 bg-white/70 dark:bg-black/70 backdrop-blur-xl border border-[var(--color-border-Strokes-divider)] rounded-2xl rounded-bl-sm shadow-[0_8px_32px_rgba(0,0,0,0.15),inset_0_1px_1px_rgba(255,255,255,0.8)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.1)] flex items-center justify-center gap-1.5 relative z-10">
+                    <div class="tooltip-bubble px-3.5 py-1.5 bg-white/70 dark:bg-black/70 md:group-hover:backdrop-blur-xl border border-[var(--color-border-Strokes-divider)] rounded-2xl rounded-bl-sm shadow-[0_8px_32px_rgba(0,0,0,0.15),inset_0_1px_1px_rgba(255,255,255,0.8)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.1)] flex items-center justify-center gap-1.5 relative z-10">
                       <span class="text-ui-label text-[var(--color-text-primary)] font-semibold tracking-wide drop-shadow-sm">${d.name}</span>
                       <span class="text-ui-label text-[var(--color-text-muted)] opacity-60">·</span>
                       <span class="text-ui-label text-[var(--color-text-secondary)] font-medium tracking-wide">${licenseLabel}</span>
@@ -626,6 +680,7 @@ export default function InteractiveGlobeEpicare({ isWidget = false }: { isWidget
                     // Mostrar manualmente
                     tooltip.classList.remove('opacity-0');
                     tooltip.classList.add('opacity-100');
+                    el.querySelector('.tooltip-bubble')?.classList.add('backdrop-blur-xl');
                     pinAnim.classList.add('-translate-y-1', 'scale-125');
                     
                     // Ocultar tras 2.5s
@@ -633,6 +688,7 @@ export default function InteractiveGlobeEpicare({ isWidget = false }: { isWidget
                     timeoutId = setTimeout(() => {
                       tooltip.classList.remove('opacity-100');
                       tooltip.classList.add('opacity-0');
+                      el.querySelector('.tooltip-bubble')?.classList.remove('backdrop-blur-xl');
                       pinAnim.classList.remove('-translate-y-1', 'scale-125');
                     }, 2500);
                   }

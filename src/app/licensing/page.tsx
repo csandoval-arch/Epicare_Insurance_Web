@@ -5,7 +5,6 @@ import FooterEpicare from "@/components/epicare/FooterEpicare";
 import CTABannerEpicare from "@/components/epicare/CTABannerEpicare";
 import { SITE_URL } from "../layout";
 
-// Note: The rest of the sections (Corporate Info, Map, Grid) will be imported here as they are built.
 
 const structuredData = {
   "@context": "https://schema.org",

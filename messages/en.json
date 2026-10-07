@@ -1,19 +1,37 @@
 {
   "landingV2": {
     "hero": {
-      "subtitle": ["Empowering agents", "to redefine", "success."],
+      "subtitle": [
+        "Empowering agents",
+        "to redefine",
+        "success."
+      ],
       "agentsCount": "100+",
-      "agentsLabel": ["Active", "agents"],
+      "agentsLabel": [
+        "Active",
+        "agents"
+      ],
       "supporting": "<b>130+ carriers</b>, one contract.",
       "ctaPrimary": "Request your contract",
       "ctaSecondary": "View GO AMS",
       "cutOverline": "Epicare",
-      "cutTitle": ["Go", "Beyond", "Growth."]
+      "cutTitle": [
+        "Go",
+        "Beyond",
+        "Growth."
+      ]
     },
     "licensingHero": {
-      "title": "Licensing",
-      "description": "Epicare Insurance holds the necessary state licenses to conduct insurance business. All insurance transactions are carried out through licensed agents in compliance with state regulations.",
-      "cta": "Check Our Active Licenses"
+      "title": "Our Licensing",
+      "description": "Epicare Insurance holds the necessary <b>state licenses</b> to conduct insurance business. All insurance transactions are carried out through <b>licensed agents</b> in compliance with state regulations.",
+      "cta": "Check our active licenses",
+      "legal": {
+        "label": "Legal information",
+        "phone": "Phone",
+        "npn": "National Producer Number",
+        "caDba": "California DBA",
+        "nyDba": "New York DBA"
+      }
     },
     "interactiveMap": {
       "overline": "National Reach",
@@ -23,7 +41,13 @@
     "licensingGrid": {
       "title": "Licenses by state",
       "searchPlaceholder": "Search by state...",
-      "noResults": "No licenses found for"
+      "noResults": "No licenses found for “{query}”"
+    },
+    "ctaBanner": {
+      "eyebrow": "Epicare Insurance",
+      "title": "Your agency deserves <hl>premium</hl> support.",
+      "description": "Join Epicare and get access to our 52-state network, cutting-edge technology, and top-tier carrier contracts.",
+      "button": "Join the network"
     },
     "metrics": {
       "carriers": "Carrier\nAppointments",
@@ -55,9 +79,21 @@
       "seeAms": "See AMS",
       "comingSoon": "Coming soon",
       "products": {
-        "crm": { "lead": "You know who to call\ntoday and why.", "body": "Leads, pipeline, and follow-up\nin one place.", "mobile": "Know who to call today,\nwith your pipeline in order." },
-        "ams": { "lead": "The core of\nyour operation.", "body": "Policies, commissions, licensing,\nand downline. All auditable.", "mobile": "The core of your operation,\nall auditable." },
-        "academy": { "lead": "Learn at\nyour own pace.", "body": "Certifications, product training,\nand new-agent onboarding.", "mobile": "Certifications and onboarding\nat your own pace." }
+        "crm": {
+          "lead": "You know who to call\ntoday and why.",
+          "body": "Leads, pipeline, and follow-up\nin one place.",
+          "mobile": "Know who to call today,\nwith your pipeline in order."
+        },
+        "ams": {
+          "lead": "The core of\nyour operation.",
+          "body": "Policies, commissions, licensing,\nand downline. All auditable.",
+          "mobile": "The core of your operation,\nall auditable."
+        },
+        "academy": {
+          "lead": "Learn at\nyour own pace.",
+          "body": "Certifications, product training,\nand new-agent onboarding.",
+          "mobile": "Certifications and onboarding\nat your own pace."
+        }
       }
     },
     "spotlight": {
@@ -268,7 +304,9 @@
       "cta": "Check active licenses"
     },
     "footer": {
-      "statement": ["Go beyond growth."],
+      "statement": [
+        "Go beyond growth."
+      ],
       "cta": "Contact us",
       "contact": "Contact",
       "copyright": "© 2025 Epicare Insurance Corp. All Rights Reserved.",

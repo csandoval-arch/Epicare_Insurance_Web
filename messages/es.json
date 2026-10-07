@@ -1,19 +1,38 @@
 {
   "landingV2": {
     "hero": {
-      "subtitle": ["Impulsamos", "a los agentes", "a redefinir", "el éxito."],
+      "subtitle": [
+        "Impulsamos",
+        "a los agentes",
+        "a redefinir",
+        "el éxito."
+      ],
       "agentsCount": "100+",
-      "agentsLabel": ["Agentes", "activos"],
+      "agentsLabel": [
+        "Agentes",
+        "activos"
+      ],
       "supporting": "<b>130+ aseguradoras</b>, un solo contrato.",
       "ctaPrimary": "Solicita tu contrato",
       "ctaSecondary": "Ver GO AMS",
       "cutOverline": "Epicare",
-      "cutTitle": ["Ve", "más allá", "de crecer."]
+      "cutTitle": [
+        "Ve",
+        "más allá",
+        "de crecer."
+      ]
     },
     "licensingHero": {
-      "title": "Licensing",
-      "description": "Epicare Insurance holds the necessary state licenses to conduct insurance business. All insurance transactions are carried out through licensed agents in compliance with state regulations.",
-      "cta": "Check Our Active Licenses"
+      "title": "Nuestras licencias",
+      "description": "Epicare Insurance cuenta con las <b>licencias estatales</b> necesarias para operar en seguros. Todas las transacciones se realizan a través de <b>agentes licenciados</b>, en cumplimiento con la normativa de cada estado.",
+      "cta": "Ver nuestras licencias activas",
+      "legal": {
+        "label": "Información legal",
+        "phone": "Teléfono",
+        "npn": "Número Nacional de Productor",
+        "caDba": "DBA en California",
+        "nyDba": "DBA en Nueva York"
+      }
     },
     "interactiveMap": {
       "overline": "Alcance Nacional",
@@ -23,7 +42,13 @@
     "licensingGrid": {
       "title": "Licencias por estado",
       "searchPlaceholder": "Buscar por estado...",
-      "noResults": "No se encontraron licencias para"
+      "noResults": "No se encontraron licencias para “{query}”"
+    },
+    "ctaBanner": {
+      "eyebrow": "Epicare Insurance",
+      "title": "Tu agencia merece un respaldo <hl>premium</hl>.",
+      "description": "Únete a Epicare y accede a nuestra red en 52 jurisdicciones, tecnología de punta y contratos con aseguradoras de primer nivel.",
+      "button": "Únete a la red"
     },
     "metrics": {
       "carriers": "Carrier\nAppointments",
@@ -55,9 +80,21 @@
       "seeAms": "Ver AMS",
       "comingSoon": "Próximamente",
       "products": {
-        "crm": { "lead": "Sabes a quién llamar\nhoy y por qué.", "body": "Leads, pipeline y seguimiento\nen un solo lugar.", "mobile": "Sabes a quién llamar hoy\ny tu pipeline en orden." },
-        "ams": { "lead": "El core de\ntu operación.", "body": "Pólizas, comisiones, licencias\ny downline. Todo auditable.", "mobile": "El core de tu operación,\ntodo auditable." },
-        "academy": { "lead": "Aprende\na tu ritmo.", "body": "Certificaciones, entrenamiento de\nproducto y onboarding de agentes.", "mobile": "Certificaciones y onboarding\na tu ritmo." }
+        "crm": {
+          "lead": "Sabes a quién llamar\nhoy y por qué.",
+          "body": "Leads, pipeline y seguimiento\nen un solo lugar.",
+          "mobile": "Sabes a quién llamar hoy\ny tu pipeline en orden."
+        },
+        "ams": {
+          "lead": "El core de\ntu operación.",
+          "body": "Pólizas, comisiones, licencias\ny downline. Todo auditable.",
+          "mobile": "El core de tu operación,\ntodo auditable."
+        },
+        "academy": {
+          "lead": "Aprende\na tu ritmo.",
+          "body": "Certificaciones, entrenamiento de\nproducto y onboarding de agentes.",
+          "mobile": "Certificaciones y onboarding\na tu ritmo."
+        }
       }
     },
     "spotlight": {
@@ -268,7 +305,9 @@
       "cta": "Ver licencias activas"
     },
     "footer": {
-      "statement": ["Go beyond growth."],
+      "statement": [
+        "Go beyond growth."
+      ],
       "cta": "Escríbenos",
       "contact": "Contacto",
       "copyright": "© 2025 Epicare Insurance Corp. Todos los derechos reservados.",

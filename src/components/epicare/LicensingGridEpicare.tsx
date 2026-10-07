@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
-import { useTranslations } from "next-intl";
-import { EASE, DUR, STAGGER } from "@/lib/motion";
+import { useLocale, useTranslations } from "next-intl";
+import { DUR, EASE, REVEAL, STAGGER } from "@/lib/motion";
 
 const SearchIcon = ({ className }: { className?: string }) => (
   <svg
+    aria-hidden="true"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="none"
@@ -23,6 +24,7 @@ const SearchIcon = ({ className }: { className?: string }) => (
 
 const LicensePlateIcon = ({ className }: { className?: string }) => (
   <svg
+    aria-hidden="true"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="none"
@@ -95,113 +97,113 @@ const LICENSE_DATA = [
   { state: "Puerto Rico", license: "3004132963" }
 ];
 
+/** Nombres en español de los estados que cambian (el resto es igual en los dos idiomas). */
+const STATE_NAMES_ES: Record<string, string> = {
+  DC: "Distrito de Columbia",
+  Hawaii: "Hawái",
+  Louisiana: "Luisiana",
+  Michigan: "Míchigan",
+  Mississippi: "Misisipi",
+  Missouri: "Misuri",
+  "New Hampshire": "Nuevo Hampshire",
+  "New Jersey": "Nueva Jersey",
+  "New Mexico": "Nuevo México",
+  "New York": "Nueva York",
+  "North Carolina": "Carolina del Norte",
+  "North Dakota": "Dakota del Norte",
+  Oregon: "Oregón",
+  Pennsylvania: "Pensilvania",
+  "South Carolina": "Carolina del Sur",
+  "South Dakota": "Dakota del Sur",
+  "West Virginia": "Virginia Occidental",
+};
+/** En inglés "DC" se muestra con su nombre completo. */
+const STATE_NAMES_EN: Record<string, string> = { DC: "District of Columbia" };
+
+// ── VALORES FUERA DE TOKEN (margen creativo declarado) ──
+/** Escala de partida de cada tarjeta al entrar. */
+const CARD_START_SCALE = 0.95;
+
+/** Quita tildes y pasa a minúsculas: "mexico" encuentra "México". */
+const normalize = (s: string) => s.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
+
+/**
+ * @description Lista de licencias por estado de /licensing: buscador + retícula de tarjetas. Los nombres
+ * se muestran y ordenan en el idioma activo; la búsqueda encuentra el estado en inglés o en español.
+ */
 export default function LicensingGridEpicare() {
   const t = useTranslations("landingV2.licensingGrid");
+  const locale = useLocale();
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedLicense, setSelectedLicense] = useState<{ state: string; license: string } | null>(null);
   const gridRef = useRef<HTMLDivElement>(null);
-  const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const filteredData = LICENSE_DATA.filter((item) =>
-    item.state.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const states = useMemo(() => {
+    const names = locale === "es" ? STATE_NAMES_ES : STATE_NAMES_EN;
+    return LICENSE_DATA.map((item) => ({ ...item, name: names[item.state] ?? item.state })).sort((a, b) =>
+      a.name.localeCompare(b.name, locale)
+    );
+  }, [locale]);
 
-  // Animate items on mount and on search
+  const query = normalize(searchTerm.trim());
+  const filteredData = states.filter((item) => normalize(item.name).includes(query) || normalize(item.state).includes(query));
+
+  // Entrada de las tarjetas al montar y en cada búsqueda
   useEffect(() => {
     const el = gridRef.current;
     if (!el) return;
-    
-    const ctx = gsap.context(() => {
-      // Layered Unveiling style animation for the grid items
+    const mm = gsap.matchMedia(el);
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
       gsap.fromTo(
         ".license-card",
-        { y: 40, opacity: 0, scale: 0.95 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: DUR.slow,
-          ease: EASE.dramatic,
-          stagger: STAGGER.tight,
-          clearProps: "all"
-        }
+        { y: REVEAL.md, opacity: 0, scale: CARD_START_SCALE },
+        { y: 0, opacity: 1, scale: 1, duration: DUR.slow, ease: EASE.dramatic, stagger: STAGGER.tight, force3D: true, clearProps: "all" }
       );
-    }, el);
-
-    return () => ctx.revert();
-  }, [searchTerm]);
-
-  // (Body scroll lock removed as we now use an in-place pop-out interaction instead of a full screen overlay)
+    });
+    return () => mm.revert();
+  }, [searchTerm, locale]);
 
   return (
-    <section className="w-full pt-section-lg md:pt-[250px] pb-section-lg px-gutter-sm md:px-gutter-md relative z-10">
-      {/* AWWWARDS MOTION STYLES */}
-      <style>{`
-        @keyframes smoothExpand { 
-          0% { opacity: 0; transform: translate(-50%, -30%) scale(0.95); } 
-          100% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 
-        }
-        .animate-smooth-expand { animation: smoothExpand 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
-      `}</style>
-      
+    <section className="w-full pt-section-lg pb-section-lg px-gutter-sm md:px-gutter-md relative z-10">
       <div className="max-w-section-lg mx-auto w-full flex flex-col items-start gap-fluid-sm">
-        
-        {/* Minimalist Header & Search */}
-        <div className="flex flex-col items-start justify-start text-left w-full gap-6">
-          <div className="flex flex-col gap-2 w-full">
-            <h2 className="text-display-lg text-[var(--color-text-primary)] font-semibold">
-              {t("title")}
-            </h2>
-          </div>
+
+        {/* ── TÍTULO + BUSCADOR ── */}
+        <div className="flex flex-col items-start justify-start text-left w-full gap-static-lg">
+          <h2 className="text-display-lg text-[var(--color-text-primary)] font-semibold">{t("title")}</h2>
 
           <div className="relative w-full max-w-md group">
-            {/* Minimalist 8px rounded search input with transparent background */}
-            <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+            <div className="absolute inset-y-0 left-static-md flex items-center pointer-events-none">
               <SearchIcon className="w-5 h-5 text-[var(--color-text-hint)] group-focus-within:text-[var(--color-brand-blue)] transition-colors duration-300" />
             </div>
             <input
-              ref={searchInputRef}
-              type="text"
+              type="search"
+              aria-label={t("searchPlaceholder")}
               placeholder={t("searchPlaceholder")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full py-4 pl-12 pr-4 bg-transparent border border-[var(--color-border-Strokes-default)] rounded-lg text-body-lg text-[var(--color-text-primary)] placeholder-[var(--color-text-hint)] focus:outline-none focus:border-[var(--color-brand-blue)] focus:ring-1 focus:ring-[var(--color-brand-blue)]/20 transition-all duration-300"
+              className="w-full py-static-md pl-static-2xl pr-static-md bg-transparent border border-[var(--color-border-Strokes-default)] rounded-lg text-body-lg text-[var(--color-text-primary)] placeholder-[var(--color-text-hint)] focus:outline-none focus:border-[var(--color-brand-blue)] focus:ring-1 focus:ring-[var(--color-brand-blue)]/20 transition-all duration-300"
             />
           </div>
         </div>
 
-        {/* Minimalist Grid */}
-        <div 
-          ref={gridRef} 
-          className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 relative z-[60] items-start"
-        >
+        {/* ── RETÍCULA ── */}
+        <div ref={gridRef} className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-static-md items-start">
           {filteredData.length > 0 ? (
             filteredData.map((item) => (
-              <div key={item.state} className="relative w-full z-10">
-                
-                {/* STATIC CARD */}
-                <div
-                  className="license-card w-full relative border bg-[var(--color-surface-BG-white)] dark:bg-[var(--color-surface-BG-black)] border-[var(--color-border-Strokes-default)] shadow-elevation-1 hover:shadow-elevation-2 hover:-translate-y-1 hover:border-[var(--color-brand-blue)]/50 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-lg p-static-md flex flex-col items-start gap-2 overflow-hidden"
-                >
-                  <h3 className="text-body-lg font-medium text-[var(--color-text-primary)]">
-                    {item.state}
-                  </h3>
-                  
-                  <div className="flex items-center gap-2">
-                    <LicensePlateIcon className="w-5 h-5 text-[var(--color-brand-orange)] opacity-80" />
-                    <span className="text-meta text-[var(--color-text-secondary)] font-mono tracking-wide">
-                      {item.license}
-                    </span>
-                  </div>
+              <div
+                key={item.state}
+                className="license-card w-full border bg-[var(--color-surface-BG-white)] dark:bg-[var(--color-surface-BG-black)] border-[var(--color-border-Strokes-default)] shadow-elevation-1 hover:shadow-elevation-2 hover:-translate-y-1 hover:border-[var(--color-brand-blue)]/50 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-lg p-static-md flex flex-col items-start gap-static-sm"
+              >
+                <h3 className="text-body-lg font-medium text-[var(--color-text-primary)]">{item.name}</h3>
+                <div className="flex items-center gap-static-sm">
+                  <LicensePlateIcon className="w-5 h-5 text-[var(--color-brand-orange)] opacity-80" />
+                  <span className="text-meta text-[var(--color-text-secondary)]">{item.license}</span>
                 </div>
               </div>
             ))
           ) : (
-            <div className="col-span-full py-16 flex flex-col items-center justify-center text-center gap-4">
+            <div className="col-span-full py-section-xs flex flex-col items-center justify-center text-center gap-static-md">
               <SearchIcon className="w-6 h-6 text-[var(--color-text-hint)]" />
-              <p className="text-body-lg text-[var(--color-text-secondary)]">
-                {t("noResults")} "{searchTerm}"
-              </p>
+              <p className="text-body-lg text-[var(--color-text-secondary)]">{t("noResults", { query: searchTerm })}</p>
             </div>
           )}
         </div>

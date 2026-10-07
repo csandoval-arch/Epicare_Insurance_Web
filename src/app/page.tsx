@@ -114,11 +114,8 @@ export default function EpicareLandingPage() {
       <div className="w-full order-[14]"><FAQEpicare /></div>
       {/* ── S14.5 · CTA Banner ── */}
       <div className="w-full order-[15] relative z-10">
-        <CTABannerEpicare 
-          title={<>Your agency deserves <span className="text-[var(--color-brand-blue)]">premium</span> support.</>}
-          description="Join Epicare and get access to our 52-state network, cutting-edge technology, and top-tier carrier contracts."
-          buttonText="Join the Network"
-        />
+        {/* Textos desde `landingV2.ctaBanner` (es/en); aquí el botón baja a la sección del estándar. */}
+        <CTABannerEpicare buttonHref="#unete" />
       </div>
       {/* ── S15 · Footer (RESOLUCIÓN) ── */}
       <div className="w-full order-[16]"><FooterEpicare /></div>
