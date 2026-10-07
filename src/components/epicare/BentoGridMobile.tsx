@@ -203,7 +203,7 @@ export default function BentoGridMobile() {
           {/* CARD 0: THE TITLE COMPOSITION */}
           <div className="mobile-stack-card sticky top-0 w-full min-h-fit pb-8 sm:pb-[6vh] flex flex-col justify-start pt-section-sm items-start px-gutter-sm origin-top transform-gpu will-change-transform [backface-visibility:hidden] z-[10] relative">
               {/* Acto 1 (mismo que desktop): caja con stroke con el logo GO Hub en placa + titular con glifos */}
-              <div className="relative w-full h-[72dvh] max-h-[560px] flex flex-col justify-start rounded-lg border border-[var(--color-border-Strokes-default)] p-[var(--space-gutter-sm)]">
+              <div className="relative w-full h-[68dvh] max-h-[528px] flex flex-col justify-start rounded-lg border border-[var(--color-border-Strokes-default)] p-[var(--space-gutter-sm)]">
                 <span aria-hidden="true" className="stack-shade pointer-events-none absolute inset-0 z-20 rounded-lg bg-[var(--color-overlay-backdrop)] opacity-0" />
                 {/* Recuadro de logo común en móvil (w-32 h-16): igual para el GO Hub y los tres productos */}
                 <HubPlaque className="w-32 h-18 mt-static-xl mb-static-lg" logoClassName="w-12 h-12" radiusClass="rounded-md" />
@@ -234,25 +234,26 @@ export default function BentoGridMobile() {
             const body = (
               <>
                 <span aria-hidden="true" className="stack-shade pointer-events-none absolute inset-0 z-20 rounded-lg bg-[var(--color-overlay-backdrop)] opacity-0" />
-                <ProductMedia panel={panel} framed={false} className="w-full flex-1 min-h-0" />
-                <div className="shrink-0 p-[var(--space-gutter-sm)] flex flex-col">
-                  <div className="flex items-center justify-between mb-static-md">
-                    <div className="w-32 h-16 flex items-center justify-center rounded-md border border-[var(--color-border-Strokes-default)]">
-                      <Logo className={`${isAcademy ? "h-10" : "h-9"} w-auto text-[var(--color-brand-blue)] dark:text-[var(--color-text-White-100)]`} />
-                    </div>
-                    {comingSoon ? (
-                      <span className="h-static-xl px-static-md rounded-full flex items-center border border-[var(--color-border-Strokes-default)] text-ui-label text-[var(--color-text-secondary)]">
-                        {t(panel.hoverKey)}
-                      </span>
-                    ) : (
-                      <span aria-hidden="true" className="w-10 h-10 rounded-full flex items-center justify-center bg-[var(--color-brand-blue)] text-[var(--color-text-White-100)] shadow-elevation-2">
-                        <ArrowUR className="w-4 h-4" />
-                      </span>
-                    )}
+                {/* Arriba, antes de la UI: el logo en su recuadro (en Academy, "Próximamente" a la derecha) */}
+                <div className="shrink-0 flex items-center justify-between p-[var(--space-gutter-sm)]">
+                  <div className="w-32 h-16 flex items-center justify-center rounded-md border border-[var(--color-border-Strokes-default)]">
+                    <Logo className={`${isAcademy ? "h-10" : "h-9"} w-auto text-[var(--color-brand-blue)] dark:text-[var(--color-text-White-100)]`} />
                   </div>
-                  {/* Gancho a todo el ancho (sin cortes fijos en móvil: el salto del texto se lee como espacio) */}
-                  <p className="text-h4 text-[var(--color-text-primary)]">{t(`products.${panel.key}.lead`)}</p>
-                  <p className="mt-static-xs text-body-md text-[var(--color-text-accent-dark)]">{lines(t(`products.${panel.key}.body`))}</p>
+                  {comingSoon && (
+                    <span className="h-static-xl px-static-md rounded-full flex items-center border border-[var(--color-border-Strokes-default)] text-ui-label text-[var(--color-text-secondary)]">
+                      {t(panel.hoverKey)}
+                    </span>
+                  )}
+                </div>
+                <ProductMedia panel={panel} framed={false} className="w-full flex-1 min-h-0" />
+                {/* Abajo: un solo titular de 2 líneas (gancho + detalle fundidos) y el CTA a su derecha */}
+                <div className="shrink-0 p-[var(--space-gutter-sm)] flex items-end justify-between gap-static-md">
+                  <p className="text-h4 text-[var(--color-text-primary)]">{lines(t(`products.${panel.key}.mobile`))}</p>
+                  {!comingSoon && (
+                    <span aria-hidden="true" className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center bg-[var(--color-brand-blue)] text-[var(--color-text-White-100)] shadow-elevation-2">
+                      <ArrowUR className="w-4 h-4" />
+                    </span>
+                  )}
                 </div>
               </>
             );

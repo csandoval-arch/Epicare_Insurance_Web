@@ -55,9 +55,9 @@
       "seeAms": "Ver AMS",
       "comingSoon": "Próximamente",
       "products": {
-        "crm": { "lead": "Sabes a quién llamar\nhoy y por qué.", "body": "Leads, pipeline y seguimiento\nen un solo lugar." },
-        "ams": { "lead": "El core de\ntu operación.", "body": "Pólizas, comisiones, licencias\ny downline. Todo auditable." },
-        "academy": { "lead": "Aprende\na tu ritmo.", "body": "Certificaciones, entrenamiento de\nproducto y onboarding de agentes." }
+        "crm": { "lead": "Sabes a quién llamar\nhoy y por qué.", "body": "Leads, pipeline y seguimiento\nen un solo lugar.", "mobile": "Sabes a quién llamar hoy\ny tu pipeline en orden." },
+        "ams": { "lead": "El core de\ntu operación.", "body": "Pólizas, comisiones, licencias\ny downline. Todo auditable.", "mobile": "El core de tu operación,\ntodo auditable." },
+        "academy": { "lead": "Aprende\na tu ritmo.", "body": "Certificaciones, entrenamiento de\nproducto y onboarding de agentes.", "mobile": "Certificaciones y onboarding\na tu ritmo." }
       }
     },
     "spotlight": {

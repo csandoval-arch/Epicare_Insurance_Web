@@ -90,11 +90,11 @@ export const observeHubLoop = (el: Element) => {
   return () => io.disconnect();
 };
 
-/** Logo GO Hub presentado en una placa blanca (hairline + elevación del DS). */
+/** Logo GO Hub en un recuadro solo con stroke (hairline del DS, sin fondo ni sombra). */
 export function HubPlaque({ className = "w-28 h-28", logoClassName = "w-20 h-20", radiusClass = "rounded-xl" }: { className?: string; logoClassName?: string; radiusClass?: string }) {
   return (
     <div
-      className={`hub-plaque ${className} ${radiusClass} border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-white)] dark:bg-[var(--color-surface-BG-1)] shadow-elevation-2 flex items-center justify-center`}
+      className={`hub-plaque ${className} ${radiusClass} border border-[var(--color-border-Strokes-default)] flex items-center justify-center`}
     >
       <GoHubLogo className={`hub-logo ${logoClassName}`} />
     </div>
@@ -126,7 +126,7 @@ export default function HubIntro({
       {/* Caja con stroke (hairline del DS) que enmarca el acto 1; mismo alto que las tarjetas (75vh) */}
       <div className={`w-[70vw] lg:w-[50vw] flex flex-col p-static-2xl ${ACT_BOX}`}>
         <div className="flex-1 flex flex-col justify-center">
-          <HubPlaque className="w-28 h-28 mb-static-2xl" logoClassName="w-20 h-20" />
+          <HubPlaque className="w-40 h-20 mb-static-2xl" logoClassName="w-14 h-14" radiusClass="rounded-md" />
           <HubTitle className="hub-title text-display-lg" renderMark={renderHubMark} />
         </div>
         {/* Lo que viene: tres mini-fichas en fila, solo con el nombre (mismo lenguaje que las cajas: hairline

@@ -68,8 +68,8 @@ export function ProductCopy({ panel, lead, body, cta, comingSoonLabel, className
   const { Logo, isAcademy, href, comingSoon } = panel;
   return (
     <div className={`grid grid-cols-[auto_auto_1fr] gap-x-static-xl items-center ${className}`}>
-      <div className="rounded-md border border-[var(--color-border-Strokes-default)] px-static-lg py-static-md">
-        <Logo className={`${isAcademy ? "h-11" : "h-10"} w-auto text-[var(--color-brand-blue)] dark:text-[var(--color-text-White-100)]`} />
+      <div className="w-40 h-20 shrink-0 flex items-center justify-center rounded-md border border-[var(--color-border-Strokes-default)]">
+        <Logo className={`${isAcademy ? "h-12" : "h-11"} w-auto text-[var(--color-brand-blue)] dark:text-[var(--color-text-White-100)]`} />
       </div>
       <div className="flex flex-col items-start">
         <p className="text-h4 text-[var(--color-text-primary)]">{lines(lead)}</p>
