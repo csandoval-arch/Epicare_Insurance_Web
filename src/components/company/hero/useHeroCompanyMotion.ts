@@ -8,11 +8,10 @@ import { DUR, EASE, REVEAL, SCRUB, STAGGER } from "@/lib/motion";
 gsap.registerPlugin(ScrollTrigger);
 
 // ── VALORES FUERA DE TOKEN (margen creativo declarado) ──
-/** Desplazamiento inicial de la cortina (%): la imagen asoma en el 40% inferior del hero. */
-export const MASK_OFFSET = 60;
-/** Escala de partida de la imagen (reveal cinematográfico) y de salida del bloque de copy. */
+/** Desplazamiento inicial de la cortina (%): la imagen asoma en el 35% inferior del hero (65 = sitio para el titular de 4 líneas; sincronizado con @keyframes hc-curtain en globals.css). */
+export const MASK_OFFSET = 65;
+/** Escala de partida de la imagen (reveal cinematográfico). */
 const IMAGE_START_SCALE = 1.15;
-const COPY_EXIT_SCALE = 0.96;
 /** Recorrido del pin en desktop. */
 const PIN_LENGTH = "+=150%";
 /** Si el loader nunca avisa (navegación SPA sin loader), la entrada arranca igual. */
@@ -24,8 +23,8 @@ type LoaderWindow = Window & { epicareLoaderFinished?: boolean };
  * @description Motion del hero de /company.
  * 1 · Entrada de carga (todas las anchuras, tras `epicareLoaderFinished`): la imagen se asienta, el
  *     titular nace de su máscara (text-birth) y los bloques de copy suben.
- * 2 · Scroll (solo desktop ≥lg, pin): la cortina sube hasta cubrir el hero (el texto pasa a blanco a su paso) y el copy
- *     se retira. La cortina es transform puro — el contenedor sube (`yPercent` 60 → 0) y su contenido
+ * 2 · Scroll (solo desktop ≥lg, pin): la cortina sube hasta cubrir el hero (el texto pasa a blanco a su paso);
+ *     bajada, CTA y firma se quedan. La cortina es transform puro — el contenedor sube (`yPercent` 60 → 0) y su contenido
  *     hace el movimiento inverso — en lugar de animar `clip-path`, que repintaba la capa a pantalla
  *     completa (con la imagen filtrada) en cada frame.
  * Móvil / tablet: la cortina NO usa GSAP — es una animación CSS scroll-driven (`.hc-stage` en
@@ -74,13 +73,7 @@ export function useHeroCompanyMotion(scopeRef: RefObject<HTMLElement | null>) {
           scrollTrigger: { trigger: el, start: "top top", end: PIN_LENGTH, pin: true, scrub: SCRUB.crisp, invalidateOnRefresh: true },
         })
         .fromTo(".hc-mask", { yPercent: MASK_OFFSET }, { yPercent: 0, duration: 2 }, 0)
-        .fromTo(".hc-mask-inner", { yPercent: -MASK_OFFSET }, { yPercent: 0, duration: 2 }, 0)
-        .fromTo(
-          ".hc-copy-exit > *",
-          { y: 0, opacity: 1, scale: 1 },
-          { y: -REVEAL.lg, opacity: 0, scale: COPY_EXIT_SCALE, stagger: STAGGER.wave, duration: 1.5, immediateRender: false },
-          0
-        );
+        .fromTo(".hc-mask-inner", { yPercent: -MASK_OFFSET }, { yPercent: 0, duration: 2 }, 0);
     });
 
     const play = () => intro?.play();

@@ -785,23 +785,24 @@
   "company": {
     "hero": {
       "title": [
-        "La base",
-        "detrás de la ambición",
-        "independiente."
+        "Una compañía",
+        "consolidada, construida",
+        "para que los agentes",
+        "independientes crezcan."
       ],
       "subhead": "Construimos la infraestructura, la marca, la tecnología y las operaciones que ayudan a los agentes independientes a competir y ganar.",
-      "cta": "Nuestra historia"
+      "cta": "Nuestra misión"
     },
     "purpose": {
       "mission": {
         "overline": "Nuestra misión",
-        "title": "Existimos para construir la infraestructura, la marca, la tecnología y las operaciones que permiten a los agentes independientes competir y ganar en todo Estados Unidos.",
-        "body": "El mercado premia a las grandes agencias. Apostamos a que el <b>agente independiente</b>, con las herramientas correctas, ofrece la <b>mejor experiencia</b> al cliente final."
+        "title": "Existimos para construir la infraestructura, la marca, la tecnología y las operaciones que permiten a los <b>agentes independientes competir y ganar</b> en todo Estados Unidos.",
+        "body": "El mercado premia a las grandes agencias.\nApostamos a que el agente independiente, con las herramientas correctas, ofrece la mejor experiencia al cliente final."
       },
       "vision": {
         "overline": "Nuestra visión",
-        "title": "Vamos a ser la agencia de referencia en Estados Unidos, donde el agente independiente tiene todo lo que necesita para crecer.",
-        "body": "Crecemos cuando el <b>agente crece</b>. Herramientas, formación, marca, cumplimiento y comisiones, <b>todo en un solo lugar</b>, para que nadie tenga que elegir entre escalar y hacerlo bien."
+        "title": "Vamos a ser la <b>agencia de referencia</b> en Estados Unidos, donde el agente independiente tiene <b>todo lo que necesita para crecer.</b>",
+        "body": "Crecemos cuando el agente crece.\n<b>Herramientas, formación, marca, cumplimiento y comisiones</b>, todo en un solo lugar, para que nadie tenga que elegir entre escalar y hacerlo bien."
       },
       "mapLabel": "Presencia"
     },
@@ -826,8 +827,8 @@
       ]
     },
     "structure": {
-      "overline": "El estándar Epicare detrás de cada producto.",
-      "title": "Epicare Insurance Corp es la empresa matriz. Todo lo demás es un producto o una plataforma que opera. Cada uno tiene su propia audiencia, pero todos comparten el mismo ADN."
+      "overline": "El estándar Epicare",
+      "title": "Llevamos años poniendo a prueba cada pieza: aseguradoras de primer nivel, el mejor equipo, los mejores mercados y planes pensados para el bolsillo de cada cliente."
     },
     "promise": {
       "overline": "El estándar Epicare",

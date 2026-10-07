@@ -41,6 +41,30 @@ export const PANEL_COPY = {
 
 export type PanelKey = keyof typeof PANEL_COPY;
 
+// ── TITULARES: light con énfasis en semibold ──
+// Margen creativo declarado (feedback del cliente, 2026-10-07): los titulares de misión/visión van en
+// light (300) y solo las frases marcadas con <b> en los mensajes suben a semibold (600). El token
+// `text-display` sigue mandando en tamaño, interlineado y tracking; el peso se pone en cada palabra
+// (hija), así no compite con el `font-weight` responsive del token.
+export const WORD_LIGHT = "font-light";
+export const WORD_BOLD = "font-semibold";
+
+/** Parte un titular con marcas `<b>…</b>` en palabras, cada una con su énfasis. La puntuación pegada
+ *  a una marca va DENTRO de ella (`<b>crecer.</b>`): fuera quedaría como palabra suelta ("crecer ."). */
+export function richWords(text: string) {
+  return text
+    .split(/(<b>.*?<\/b>)/)
+    .filter(Boolean)
+    .flatMap((chunk) => {
+      const bold = chunk.startsWith("<b>");
+      return chunk
+        .replace(/<\/?b>/g, "")
+        .split(" ")
+        .filter(Boolean)
+        .map((word) => ({ word, bold }));
+    });
+}
+
 /**
  * @description Titular en Text-Birth por palabra: cada palabra vive en su máscara (`overflow-hidden`)
  * y su interior (`.pc-bw`) nace desde abajo. El `pb` de la máscara evita recortar descendentes.
@@ -48,10 +72,10 @@ export type PanelKey = keyof typeof PANEL_COPY;
 export function BirthWords({ text }: { text: string }) {
   return (
     <>
-      {text.split(" ").map((word, i) => (
+      {richWords(text).map(({ word, bold }, i) => (
         <span key={i}>
           <span className="inline-block overflow-hidden align-bottom pb-static-xs -mb-static-xs">
-            <span className="pc-bw inline-block">{word}</span>
+            <span className={`pc-bw inline-block ${bold ? WORD_BOLD : WORD_LIGHT}`}>{word}</span>
           </span>{" "}
         </span>
       ))}

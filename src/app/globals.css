@@ -670,11 +670,11 @@ body {
    Pin sutil en móvil (sticky 130svh) probado y RECHAZADO por el usuario.
    Desktop (≥lg) lo anima GSAP con pin (company/hero/useHeroCompanyMotion.ts). */
 @keyframes hc-curtain {
-  from { transform: translateY(60%); }
+  from { transform: translateY(65%); }
   to { transform: translateY(0); }
 }
 @keyframes hc-curtain-inner {
-  from { transform: translateY(-60%); }
+  from { transform: translateY(-65%); }
   to { transform: translateY(0); }
 }
 @supports (animation-timeline: view()) {

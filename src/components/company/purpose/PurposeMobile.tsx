@@ -2,6 +2,7 @@
 
 import { Fragment, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
+import { WORD_BOLD, WORD_LIGHT, richWords } from "./shared";
 
 const PANELS = [
   { key: "mission", dot: "bg-[var(--color-brand-blue)]", overline: "text-[var(--color-hero-blue)]" },
@@ -30,13 +31,11 @@ export default function PurposeMobile({ map }: { map: ReactNode }) {
             </div>
 
             <h2 className="text-display">
-              {t(`${key}.title`)
-                .split(" ")
-                .map((word, i) => (
-                  <span key={i}>
-                    <span className="pcm-word inline-block">{word}</span>{" "}
-                  </span>
-                ))}
+              {richWords(t.raw(`${key}.title`) as string).map(({ word, bold }, i) => (
+                <span key={i}>
+                  <span className={`pcm-word inline-block ${bold ? WORD_BOLD : WORD_LIGHT}`}>{word}</span>{" "}
+                </span>
+              ))}
             </h2>
           </div>
         </Fragment>

@@ -10,6 +10,7 @@
  */
 
 import { useRef } from "react";
+import { COMPANY_MISSION_ID } from "./HeroCompany";
 import PurposeMobile from "./purpose/PurposeMobile";
 import PurposeRail from "./purpose/desktop/PurposeRail";
 import { MapVideo } from "./purpose/shared";
@@ -21,7 +22,7 @@ export default function PurposeCompany() {
   usePurposeMotion(containerRef);
 
   return (
-    <section ref={containerRef} className="relative w-full bg-[var(--color-hero-ivory)] text-[var(--color-hero-ink)] z-10">
+    <section ref={containerRef} id={COMPANY_MISSION_ID} className="relative w-full bg-[var(--color-hero-ivory)] text-[var(--color-hero-ink)] z-10">
       {/* ── DESKTOP ── */}
       <div className="hidden lg:block">
         <PurposeRail />

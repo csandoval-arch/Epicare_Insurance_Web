@@ -20,8 +20,10 @@ import { asset } from "@/lib/asset";
 import SecondaryCta from "@/components/go-crm/cta/SecondaryCta";
 import { MASK_OFFSET, useHeroCompanyMotion } from "./hero/useHeroCompanyMotion";
 
-/** Sección a la que lleva el CTA ("Nuestra historia"). */
+/** Ancla de la sección Historia. */
 export const COMPANY_STORY_ID = "company-story";
+/** Sección a la que lleva el CTA del hero: Misión (la siguiente). */
+export const COMPANY_MISSION_ID = "company-mission";
 
 // ── RETÍCULA COMPARTIDA POR LAS DOS CAPAS ──
 const LAYER = "absolute inset-0 flex flex-col pt-[calc(var(--space-section-md)+var(--spacing-static-lg))] lg:pt-section-md pb-section-xs";
@@ -31,8 +33,8 @@ const COPY_COL = "col-span-full md:col-start-3 md:col-span-6 lg:col-start-8 lg:c
 const SUBHEAD = "text-body-xl border-l border-current pl-static-lg";
 
 /** Siempre por Lenis: `window.scrollTo` smooth pelea con él. */
-function scrollToStory() {
-  const target = document.getElementById(COMPANY_STORY_ID);
+function scrollToMission() {
+  const target = document.getElementById(COMPANY_MISSION_ID);
   if (!target) return;
   const lenis = (window as unknown as { lenis?: Lenis }).lenis;
   if (lenis) lenis.scrollTo(target);
@@ -76,7 +78,7 @@ export default function HeroCompany() {
           <div className={`hc-copy ${COPY_COL}`}>
             <p className={SUBHEAD}>{t("subhead")}</p>
             <div aria-hidden="true" inert>
-              <SecondaryCta label={t("cta")} tone="light" onClick={scrollToStory} />
+              <SecondaryCta label={t("cta")} tone="light" onClick={scrollToMission} />
             </div>
           </div>
         </div>
@@ -97,6 +99,11 @@ export default function HeroCompany() {
             decoding="async"
             className="hc-image absolute inset-0 w-full h-full object-cover object-center grayscale-15 contrast-110 brightness-85"
           />
+          {/* Velo inferior: da contraste a la bajada y la firma (blancas) sobre las zonas claras de la foto. */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-t from-[var(--color-overlay-backdrop)]/60 via-[var(--color-overlay-backdrop)]/25 via-35% to-transparent to-65%"
+          />
           <div className={`${LAYER} z-20 text-[var(--color-text-White-100)]`}>
             <div className={ROW} aria-hidden="true">
               <div className={TITLE_COL}>
@@ -106,13 +113,13 @@ export default function HeroCompany() {
 
             <div className={`${ROW} mt-auto`}>
               {/* Firma (desktop): logotipo completo en blanco, abajo a la izquierda de la imagen. Entra con
-                  la bajada (.hc-copy) pero no sale con ella: con la cortina arriba quedan titular + firma. */}
+                  la bajada (.hc-copy); con la cortina arriba se queda todo: titular, bajada, CTA y firma. */}
               <div className="hc-copy hidden lg:flex lg:col-start-2 lg:col-span-3 self-end">
                 <img src={asset("/epicare_logo.svg")} alt="" aria-hidden="true" decoding="async" className="h-static-2xl w-auto select-none" />
               </div>
-              <div className={`hc-copy hc-copy-exit ${COPY_COL}`}>
+              <div className={`hc-copy ${COPY_COL}`}>
                 <p className={SUBHEAD} aria-hidden="true">{t("subhead")}</p>
-                <SecondaryCta label={t("cta")} tone="dark" lite onClick={scrollToStory} />
+                <SecondaryCta label={t("cta")} tone="dark" lite onClick={scrollToMission} />
               </div>
             </div>
           </div>

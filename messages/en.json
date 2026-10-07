@@ -785,23 +785,24 @@
   "company": {
     "hero": {
       "title": [
-        "The foundation",
-        "behind independent",
-        "ambition."
+        "An established",
+        "company, built",
+        "to help independent",
+        "agents grow."
       ],
       "subhead": "We build the infrastructure, brand, technology, and operations that help independent agents compete and win.",
-      "cta": "Our story"
+      "cta": "Our mission"
     },
     "purpose": {
       "mission": {
         "overline": "Our mission",
-        "title": "We exist to build the infrastructure, brand, technology, and operations, that lets independent agents compete and win across the United States.",
-        "body": "The market rewards big agencies. We bet the <b>independent agent</b>, with the right tools, delivers the <b>best experience</b> for the end client."
+        "title": "We exist to build the infrastructure, brand, technology, and operations, that lets <b>independent agents compete and win</b> across the United States.",
+        "body": "The market rewards big agencies.\nWe bet the independent agent, with the right tools, delivers the best experience for the end client."
       },
       "vision": {
         "overline": "Our vision",
-        "title": "We're headed to be the reference agency in the United States, where the independent agent has everything they need to grow.",
-        "body": "We grow when the <b>agent grows</b>. Tools, training, brand, compliance, and commissions, <b>all in one place</b>, so no one has to choose between scaling and doing it right."
+        "title": "We're headed to be the <b>reference agency</b> in the United States, where the independent agent has <b>everything they need to grow.</b>",
+        "body": "We grow when the agent grows.\n<b>Tools, training, brand, compliance, and commissions</b>, all in one place, so no one has to choose between scaling and doing it right."
       },
       "mapLabel": "Presence"
     },
@@ -826,8 +827,8 @@
       ]
     },
     "structure": {
-      "overline": "The Epicare standard behind every product.",
-      "title": "Epicare Insurance Corp is the parent company. Everything else is a product or platform it operates. Each has its own audience, but they all share the same DNA."
+      "overline": "The Epicare standard",
+      "title": "We've spent years putting every piece to the test: top-tier carriers, the best team, the strongest markets, and plans built around every client's budget."
     },
     "promise": {
       "overline": "The Epicare Standard",

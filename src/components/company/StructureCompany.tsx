@@ -38,6 +38,9 @@ function StructureText({ ns, decorative = false }: { ns: string; decorative?: bo
   );
 }
 
+/** Foto de la máscara: ciudad de noche, a color (sin filtro, para conservar las luces cálidas). */
+const IMAGE_SRC = "/Files/About_Company/company_structure_city.jpg";
+
 /** `ns`: namespace de los textos (overline + title). La landing la reutiliza con su propio mensaje. */
 export default function StructureCompany({ ns = "company.structure", id }: { ns?: string; id?: string }) {
   const containerRef = useRef<HTMLElement>(null);
@@ -54,12 +57,12 @@ export default function StructureCompany({ ns = "company.structure", id }: { ns?
       {/* ── 2 · MÁSCARA: imagen + el mismo texto en blanco ── */}
       <div className="st-mask absolute inset-0 z-10 pointer-events-none">
         <img
-          src={asset("/Files/company_structure_arch.jpg")}
+          src={asset(IMAGE_SRC)}
           alt=""
           aria-hidden="true"
           loading="lazy"
           decoding="async"
-          className="st-image absolute inset-0 w-full h-full object-cover object-center grayscale contrast-125"
+          className="st-image absolute inset-0 w-full h-full object-cover object-center"
         />
         <div className={`${LAYER} z-20 text-[var(--color-text-White-100)]`}>
           <StructureText ns={ns} decorative />
