@@ -10,6 +10,7 @@ import HubTitle from "./bento-act1/HubTitle";
 import { PANELS } from "./BentoGridDesktop";
 import { ProductMedia, lines } from "./bento-act1/ProductScene";
 import { HubPlaque, renderHubMark, hubMarksTimeline, observeHubLoop } from "./bento-act1/HubIntro";
+import { ACT1_ON_BRAND_CLASS, ACT1_ON_BRAND_VARS, CARD_SURFACE } from "./bento-act1/layout";
 // ── INTERNAL ARC: brand accent per card (title + 5 products). The ambient
 // orb morphs to the active card's color so the journey has a beginning,
 // middle and end instead of being a flat carousel.
@@ -203,7 +204,7 @@ export default function BentoGridMobile() {
           {/* CARD 0: THE TITLE COMPOSITION */}
           <div className="mobile-stack-card sticky top-0 w-full min-h-fit pb-8 sm:pb-[6vh] flex flex-col justify-start pt-section-sm items-start px-gutter-sm origin-top transform-gpu will-change-transform [backface-visibility:hidden] z-[10] relative">
               {/* Acto 1 (mismo que desktop): caja con stroke con el logo GO Hub en placa + titular con glifos */}
-              <div className="relative w-full h-[68dvh] max-h-[528px] flex flex-col justify-start rounded-lg border border-[var(--color-border-Strokes-default)] p-[var(--space-gutter-sm)]">
+              <div className={`relative w-full h-[68dvh] max-h-[528px] flex flex-col justify-start rounded-lg border border-[var(--color-border-Strokes-default)] p-[var(--space-gutter-sm)] ${ACT1_ON_BRAND_CLASS}`} style={ACT1_ON_BRAND_VARS}>
                 <span aria-hidden="true" className="stack-shade pointer-events-none absolute inset-0 z-20 rounded-lg bg-[var(--color-overlay-backdrop)] opacity-0" />
                 {/* Recuadro de logo común en móvil (w-32 h-16): igual para el GO Hub y los tres productos */}
                 <HubPlaque className="w-32 h-18 mt-static-xl mb-static-lg" logoClassName="w-12 h-12" radiusClass="rounded-md" />
@@ -215,7 +216,7 @@ export default function BentoGridMobile() {
                       key={p.key}
                       type="button"
                       onClick={() => goToCard(i)}
-                      className="h-static-2xl px-static-sm flex items-center justify-center rounded-md border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-white)] dark:bg-[var(--color-surface-BG-1)] text-meta uppercase tracking-[0.05em] text-[var(--color-text-secondary)] whitespace-nowrap active:border-[var(--color-brand-blue)] active:text-[var(--color-text-primary)]"
+                      className="h-static-2xl px-static-sm flex items-center justify-center rounded-md border border-[var(--act1-line,var(--color-border-Strokes-default))] bg-[var(--act1-tile,var(--color-surface-BG-white))] dark:bg-[var(--act1-tile,var(--color-surface-BG-1))] text-meta uppercase tracking-[0.05em] text-[var(--act1-ink-soft,var(--color-text-secondary))] whitespace-nowrap active:border-[var(--act1-ink,var(--color-brand-blue))] active:text-[var(--act1-ink,var(--color-text-primary))]"
                     >
                       {p.title}
                     </button>
@@ -257,7 +258,7 @@ export default function BentoGridMobile() {
                 </div>
               </>
             );
-            const box = "relative w-full h-full flex flex-col overflow-hidden rounded-lg border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-1)] shadow-elevation-2";
+            const box = `relative w-full h-full flex flex-col overflow-hidden rounded-lg border border-[var(--color-border-Strokes-default)] ${CARD_SURFACE} shadow-elevation-2`;
 
             return (
               <div

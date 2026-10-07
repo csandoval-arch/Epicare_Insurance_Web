@@ -23,14 +23,15 @@ import React from 'react';
  */
 
 // Las formas oscuras del símbolo: el único trazo que necesita invertir por modo.
+// Sobre fondo azul (acto 1) las variables --gohub-* invierten la marca: formas blancas y "HUB" azul.
 const SHAPE_BIMODAL =
-  "gohub-shape fill-[var(--color-brand-dark)] dark:fill-[var(--color-text-White-100)] transition-colors duration-500";
+  "gohub-shape fill-[var(--gohub-dark,var(--color-brand-dark))] dark:fill-[var(--gohub-dark,var(--color-text-White-100))] transition-colors duration-500";
 
 // Las formas azules: el azul de marca se mantiene idéntico en ambos modos.
-const SHAPE_BRAND = "gohub-shape fill-[var(--color-brand-blue)]";
+const SHAPE_BRAND = "gohub-shape fill-[var(--gohub-shape,var(--color-brand-blue))]";
 
 // Las letras viven siempre sobre el panel azul → blanco en ambos modos.
-const LETTER = "gohub-letter fill-[var(--color-text-White-100)]";
+const LETTER = "gohub-letter fill-[var(--gohub-letter,var(--color-text-White-100))]";
 
 export default function GoHubLogo({ className, style }: { className?: string, style?: React.CSSProperties }) {
   return (

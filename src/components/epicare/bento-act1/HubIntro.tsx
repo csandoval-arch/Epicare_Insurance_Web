@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { GraduationCap } from "@phosphor-icons/react";
 import GoHubLogo from "../GoHubLogo";
 import HubTitle from "./HubTitle";
-import { ACT_BOX, CONTENT_EDGE_PL } from "./layout";
+import { ACT_BOX, ACT1_ON_BRAND_CLASS, ACT1_ON_BRAND_VARS, CONTENT_EDGE_PL } from "./layout";
 import type { HubProduct } from "./types";
 import { DUR, EASE, REVEAL, STAGGER, TRIGGER } from "@/lib/motion";
 
@@ -21,7 +21,7 @@ const TrendMark = () => (
     aria-hidden="true"
     viewBox="0 0 24 24"
     fill="none"
-    className="hub-mark inline-block ml-[0.3em] w-[0.86em] h-[0.86em] align-[-0.04em] overflow-visible stroke-[var(--color-brand-blue)]"
+    className="hub-mark inline-block ml-[0.3em] w-[0.86em] h-[0.86em] align-[-0.04em] overflow-visible stroke-[var(--hub-glyph,var(--color-brand-blue))]"
     strokeWidth={2.75}
     strokeLinecap="round"
     strokeLinejoin="round"
@@ -34,7 +34,7 @@ const TrendMark = () => (
 /** GO Academy · sigue aprendiendo → un birrete de graduación (en el bucle asiente en su sitio: leve giro + escala sobre su centro). */
 const CapMark = () => (
   <span aria-hidden="true" className="hub-mark inline-block ml-[0.25em] align-[-0.06em]">
-    <GraduationCap weight="fill" className="mark-cap block w-[0.8em] h-[0.8em] text-[var(--color-brand-blue)] origin-center" />
+    <GraduationCap weight="fill" className="mark-cap block w-[0.8em] h-[0.8em] text-[var(--hub-glyph,var(--color-brand-blue))] origin-center" />
   </span>
 );
 
@@ -94,7 +94,7 @@ export const observeHubLoop = (el: Element) => {
 export function HubPlaque({ className = "w-28 h-28", logoClassName = "w-20 h-20", radiusClass = "rounded-xl" }: { className?: string; logoClassName?: string; radiusClass?: string }) {
   return (
     <div
-      className={`hub-plaque ${className} ${radiusClass} border border-[var(--color-border-Strokes-default)] flex items-center justify-center`}
+      className={`hub-plaque ${className} ${radiusClass} border border-[var(--act1-line,var(--color-border-Strokes-default))] flex items-center justify-center`}
     >
       <GoHubLogo className={`hub-logo ${logoClassName}`} />
     </div>
@@ -124,7 +124,7 @@ export default function HubIntro({
   return (
     <div className={`w-max h-full shrink-0 flex flex-col justify-center ${CONTENT_EDGE_PL}`}>
       {/* Caja con stroke (hairline del DS) que enmarca el acto 1; mismo alto que las tarjetas (75vh) */}
-      <div className={`w-[70vw] lg:w-[50vw] flex flex-col p-static-2xl ${ACT_BOX}`}>
+      <div className={`w-[70vw] lg:w-[50vw] flex flex-col p-static-2xl ${ACT_BOX} ${ACT1_ON_BRAND_CLASS}`} style={ACT1_ON_BRAND_VARS}>
         <div className="flex-1 flex flex-col justify-center">
           <HubPlaque className="w-40 h-20 mb-static-2xl" logoClassName="w-14 h-14" radiusClass="rounded-md" />
           <HubTitle className="hub-title text-display-lg" renderMark={renderHubMark} />
@@ -138,9 +138,9 @@ export default function HubIntro({
                 key={key}
                 type="button"
                 onClick={() => onNavigate?.(i)}
-                className="group h-static-2xl px-static-md flex items-center rounded-lg border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-white)] dark:bg-[var(--color-surface-BG-1)] transition-[translate,border-color] duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[var(--color-brand-blue)]"
+                className="group h-static-2xl px-static-md flex items-center rounded-lg border border-[var(--act1-line,var(--color-border-Strokes-default))] bg-[var(--act1-tile,var(--color-surface-BG-white))] dark:bg-[var(--act1-tile,var(--color-surface-BG-1))] transition-[translate,border-color] duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[var(--act1-ink,var(--color-brand-blue))]"
               >
-                <span className="text-ui-label text-[var(--color-text-secondary)] transition-colors group-hover:text-[var(--color-text-primary)]">{title}</span>
+                <span className="text-ui-label text-[var(--act1-ink-soft,var(--color-text-secondary))] transition-colors group-hover:text-[var(--act1-ink,var(--color-text-primary))]">{title}</span>
               </button>
             ))}
           </div>

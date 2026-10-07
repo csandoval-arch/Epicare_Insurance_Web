@@ -23,7 +23,7 @@ export default function HubTitle({
   const marksAfter = (slot: number) => HUB_PRODUCTS.filter((p) => MARK_SLOTS[p] === slot);
 
   return (
-    <h2 className={`text-[var(--color-text-primary)] ${className}`}>
+    <h2 className={`text-[var(--act1-ink,var(--color-text-primary))] ${className}`}>
       {lines.map((words, l) => (
         <span key={l} className="block overflow-hidden pb-1 -mb-1">
           <span className="hub-line block">

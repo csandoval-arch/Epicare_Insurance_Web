@@ -8,6 +8,7 @@ import { asset, posterFor } from "@/lib/asset";
 import { DUR, EASE } from "@/lib/motion";
 import SmartVideo from "../SmartVideo";
 import type { PanelSpec } from "../BentoGridDesktop";
+import { CARD_SURFACE } from "./layout";
 
 // Piezas de cada acto de producto del Bento (desktop): la UI del producto (vídeo), la pill que sigue al
 // ratón sobre ella, y logo + una línea + CTA. Sin adornos: el producto es el protagonista.
@@ -89,7 +90,7 @@ export function ProductMedia({ panel, className = "", framed = true }: { panel: 
   const frame = framed ? "rounded-xl border border-[var(--color-border-Strokes-default)]" : "";
   // Con blend, la superficie es la MISMA de la sección (BG-1): el track pineado es una capa aislada
   // (will-change), así que el vídeo se mezcla con lo que tenga debajo dentro de ella, no con la página.
-  const surface = panel.blend ? "bg-[var(--color-surface-BG-1)]" : "bg-[var(--color-surface-BG-white)] dark:bg-[var(--color-surface-BG-1)]";
+  const surface = CARD_SURFACE;
   const light = panel.blend ? "mix-blend-multiply" : "";
   const dark = panel.blend ? "mix-blend-screen" : "";
   return (

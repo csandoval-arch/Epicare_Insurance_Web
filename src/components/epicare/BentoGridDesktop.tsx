@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 import { asset } from "@/lib/asset";
 import PinProgress from "./bento-act1/PinProgress";
 import HubIntro, { observeHubLoop, playHubIntro } from "./bento-act1/HubIntro";
-import { ACT_FRAME } from "./bento-act1/layout";
+import { ACT_FRAME, CARD_SURFACE } from "./bento-act1/layout";
 import { MediaHover, ProductCopy, ProductMedia } from "./bento-act1/ProductScene";
 import type { HubProduct } from "./bento-act1/types";
 import { EASE } from "@/lib/motion";
@@ -191,7 +191,7 @@ export default function BentoGridDesktop() {
                 href={panel.comingSoon ? undefined : panel.href}
                 label={t(panel.hoverKey)}
                 tone={panel.comingSoon ? 'muted' : 'brand'}
-                className={`h-full flex flex-col ${ACT_FRAME}`}
+                className={`h-full flex flex-col ${ACT_FRAME} ${CARD_SURFACE}`}
               >
                 <ProductMedia panel={panel} framed={false} className="w-full flex-1 min-h-0" />
                 {/* Alto FIJO (h-32): así las tres UIs miden lo mismo aunque el logo o la descripción varíen. */}
