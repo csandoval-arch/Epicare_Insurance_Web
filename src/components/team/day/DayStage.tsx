@@ -92,7 +92,7 @@ export default function DayStage({ items, names }: { items: DayItem[]; names: (w
   };
 
   return (
-    <div ref={ref} className="dy-stage w-full py-section-md">
+    <div ref={ref} className="dy-stage w-full pt-section-md">
       <div className="w-full max-w-section-xl mx-auto px-gutter-md flex flex-col gap-[var(--space-section-xs)]">
         {/* La escena es decorativa: el contenido lo leen los lectores de pantalla en `DayList` */}
         <div className="grid-layout items-end" aria-hidden="true">

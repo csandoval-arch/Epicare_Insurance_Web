@@ -120,6 +120,9 @@ export default function LanguagesTeam() {
     setLang(l);
   };
 
+  // Sin padding superior: el aire lo pone el final de "Behind the scenes" (antes sumaban ~300 px).
+  // Aire simétrico: el padding superior es el único espacio sobre la sección ("Behind the scenes" no
+  // aporta padding inferior), igual al inferior.
   return (
     <section ref={ref} className="relative w-full bg-[var(--color-hero-ivory)] text-[var(--color-hero-ink)] py-section-md lg:py-section-lg">
       <div className="w-full max-w-section-xl mx-auto px-gutter-sm md:px-gutter-md">

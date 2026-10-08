@@ -13,7 +13,7 @@ import GlassCard from "./GlassCard";
 import CaseHeader from "./CaseHeader";
 import { AGENT_STAGE, STAGE_CARDS, type CaseStage } from "./caseData";
 
-export default function CaseMobileSlider({ stages, closing, className = "" }: { stages: CaseStage[]; closing: string[]; className?: string }) {
+export default function CaseMobileSlider({ stages, closing, header = true, className = "" }: { stages: CaseStage[]; closing: string[]; header?: boolean; className?: string }) {
   const trackRef = useRef<HTMLUListElement>(null);
   const frame = useRef(0);
   const [active, setActive] = useState(0);
@@ -31,16 +31,16 @@ export default function CaseMobileSlider({ stages, closing, className = "" }: { 
   };
 
   return (
-    <div className={`w-full py-section-sm flex-col items-center gap-static-xl ${className}`}>
-      <CaseHeader center large className="px-gutter-sm" />
+    <div className={`w-full ${header ? "py-section-sm" : "pt-static-xl pb-section-sm"} flex-col items-center gap-static-xl ${className}`}>
+      {header && <CaseHeader center large className="px-gutter-sm" />}
       <ul
         ref={trackRef}
         onScroll={onScroll}
         className="w-full flex gap-static-md overflow-x-auto snap-x snap-mandatory overscroll-x-contain px-gutter-sm scroll-px-[var(--space-gutter-sm)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
-        {stages.map((s, i) => (
+        {stages.map((s) => (
           <li key={s.key} className="w-[72vw] max-w-72 shrink-0 snap-start">
-            <GlassCard stage={s} card={STAGE_CARDS[s.key]} index={i} agent={s.key === AGENT_STAGE} className="w-full h-full shadow-elevation-2" />
+            <GlassCard stage={s} card={STAGE_CARDS[s.key]} agent={s.key === AGENT_STAGE} className="w-full h-full shadow-elevation-2" />
           </li>
         ))}
       </ul>

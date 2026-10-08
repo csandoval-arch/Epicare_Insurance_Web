@@ -16,6 +16,7 @@ import { useTranslations } from "next-intl";
 import DayStage from "./day/DayStage";
 import DayList from "./day/DayList";
 import { CREW, type CrewDept } from "./crew/crewData";
+import { TEAM_CREW_ID } from "./HeroTeam";
 import type { DayItem } from "./day/dayData";
 
 export default function DayTeam() {
@@ -25,7 +26,7 @@ export default function DayTeam() {
   const names = (who: DayItem["who"]) => (who === "agent" ? t("agent") : `${CREW[who].name} · ${depts[CREW[who].dept]}`);
 
   return (
-    <section className="relative w-full bg-[var(--color-hero-ivory)] text-[var(--color-hero-ink)] py-section-md motion-safe:lg:py-0">
+    <section id={TEAM_CREW_ID} className="relative w-full bg-[var(--color-hero-ivory)] text-[var(--color-hero-ink)] pt-section-md motion-safe:lg:pt-0">
       <div className="w-full max-w-section-xl mx-auto px-gutter-sm md:px-gutter-md motion-safe:lg:sr-only">
         <DayList items={items} names={names} />
       </div>

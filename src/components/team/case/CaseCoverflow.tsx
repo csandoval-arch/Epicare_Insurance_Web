@@ -34,7 +34,8 @@ const INFO_RISE = 24;
 const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
 const ARROW = "M15 18l-6-6 6-6";
 
-export default function CaseCoverflow({ stages, closing }: { stages: CaseStage[]; closing: string[] }) {
+/** `header`: false cuando el carrusel vive dentro del hero (el titular lo pone el hero). */
+export default function CaseCoverflow({ stages, closing, header = true }: { stages: CaseStage[]; closing: string[]; header?: boolean }) {
   const t = useTranslations("team.case");
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -204,8 +205,8 @@ export default function CaseCoverflow({ stages, closing }: { stages: CaseStage[]
   return (
     <div ref={rootRef}>
       {/* ── DESKTOP: COVERFLOW 3D ── */}
-      <div className="hidden lg:flex motion-reduce:hidden flex-col items-center gap-static-xl py-section-md px-gutter-md overflow-hidden">
-        <CaseHeader center large />
+      <div className={`hidden lg:flex motion-reduce:hidden flex-col items-center gap-static-xl ${header ? "py-section-md" : "pt-static-lg pb-section-md"} px-gutter-md overflow-hidden`}>
+        {header && <CaseHeader center large />}
 
         {/* Alto = el de la ficha (4:5); ancho de ficha y perspectiva salen de la config del carrusel */}
         <div className="co-stage relative w-full mt-static-lg" style={{ height: `${deck.cardWidth * 1.25}rem`, perspective: `${deck.perspective}px` }}>
@@ -219,7 +220,7 @@ export default function CaseCoverflow({ stages, closing }: { stages: CaseStage[]
             <div key={s.key} className={`co-card absolute top-0 left-1/2 will-change-transform cursor-pointer select-none ${i === 0 ? "" : "opacity-0"}`}
               style={{ width: `${deck.cardWidth}rem`, marginLeft: `-${deck.cardWidth / 2}rem` }}
             >
-              <GlassCard stage={s} card={STAGE_CARDS[s.key]} index={i} agent={s.key === AGENT_STAGE} className="shadow-elevation-4" />
+              <GlassCard stage={s} card={STAGE_CARDS[s.key]} agent={s.key === AGENT_STAGE} className="shadow-elevation-4" />
               {/* Velo de profundidad: las fichas que se alejan se funden con el fondo */}
               <span aria-hidden="true" className="co-shade pointer-events-none absolute inset-0 rounded-xl bg-[var(--color-hero-ivory)] opacity-0" />
             </div>
@@ -264,7 +265,7 @@ export default function CaseCoverflow({ stages, closing }: { stages: CaseStage[]
         </div>
       </div>
 
-      <CaseMobileSlider stages={stages} closing={closing} className="flex lg:hidden motion-reduce:flex" />
+      <CaseMobileSlider stages={stages} closing={closing} header={header} className="flex lg:hidden motion-reduce:flex" />
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 /**
  * @file /team — "Every case has a crew." La página se cuenta como una producción de cine:
- * 00 The cast (hero) · 01 The case · C Behind the scenes (pin) ·
+ * 00 Hero (titular + carrusel de "The case") · C Behind the scenes ·
  * B Bilingual · F Signed · 03 Your role.
  * Blueprint: Graph-Design-Framework/project-context/sections/team/context.md
  */
@@ -14,7 +14,6 @@ import LoaderEpicare from "@/components/epicare/LoaderEpicare";
 import HeaderEpicare from "@/components/epicare/HeaderEpicare";
 import FooterEpicare from "@/components/epicare/FooterEpicare";
 import HeroTeam from "@/components/team/HeroTeam";
-import CaseTeam from "@/components/team/CaseTeam";
 import DayTeam from "@/components/team/DayTeam";
 import LanguagesTeam from "@/components/team/LanguagesTeam";
 import TraitsTeam from "@/components/team/TraitsTeam";
@@ -49,7 +48,6 @@ export default function TeamPage() {
 
       {/* ── ACTOS ── */}
       <HeroTeam />
-      <CaseTeam />
       <DayTeam />
       <LanguagesTeam />
       <TraitsTeam />
