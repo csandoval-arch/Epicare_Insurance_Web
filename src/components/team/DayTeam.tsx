@@ -7,8 +7,8 @@
  * en cada hora aparece quien lo hace. Remata en el agente: "Tú vendiste. Nosotros nos encargamos del
  * resto." El mantra interno ("The work behind the work") inspira la idea; no es el título público.
  * Sin encabezado (el usuario lo quitó): la sección abre directo con el reloj.
- * - Desktop con motion: el escenario pineado (`day/DayStage`).
- * - Móvil / reduced-motion: línea de tiempo vertical sin pin (`day/DayList`).
+ * - Con motion (móvil y desktop): el escenario del reloj (`day/DayStage`).
+ * - Reduced-motion: línea de tiempo vertical (`day/DayList`); con motion queda solo para lectores de pantalla.
  * Fondo papel (un solo fondo).
  */
 
@@ -26,12 +26,12 @@ export default function DayTeam() {
   const names = (who: DayItem["who"]) => (who === "agent" ? t("agent") : `${CREW[who].name} · ${depts[CREW[who].dept]}`);
 
   return (
-    <section id={TEAM_CREW_ID} className="relative w-full bg-[var(--color-hero-ivory)] text-[var(--color-hero-ink)] pt-section-md motion-safe:lg:pt-0">
-      <div className="w-full max-w-section-xl mx-auto px-gutter-sm md:px-gutter-md motion-safe:lg:sr-only">
+    <section id={TEAM_CREW_ID} className="relative w-full bg-[var(--color-hero-ivory)] text-[var(--color-hero-ink)] pt-section-md motion-safe:pt-0">
+      <div className="w-full max-w-section-xl mx-auto px-gutter-sm md:px-gutter-md motion-safe:sr-only">
         <DayList items={items} names={names} />
       </div>
-      <div className="hidden motion-safe:lg:block">
-        <DayStage items={items} names={names} />
+      <div className="hidden motion-safe:block">
+        <DayStage items={items} names={names} nextLabel={t("next")} />
       </div>
     </section>
   );

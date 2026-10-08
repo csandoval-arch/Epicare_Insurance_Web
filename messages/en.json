@@ -1066,7 +1066,8 @@
           "who": "agent",
           "task": "You sold. We handled the rest."
         }
-      ]
+      ],
+      "next": "Next"
     },
     "languages": {
       "eyebrow": "Bilingual",

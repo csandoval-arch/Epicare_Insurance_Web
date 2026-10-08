@@ -11,7 +11,7 @@
  * GPU: un transform + opacity por ficha y frame; el vidrio es una capa ya rasterizada (GlassCard).
  */
 
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import gsap from "gsap";
 import { DUR, EASE, REVEAL, STAGGER } from "@/lib/motion";
@@ -34,8 +34,9 @@ const INFO_RISE = 24;
 const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
 const ARROW = "M15 18l-6-6 6-6";
 
-/** `header`: false cuando el carrusel vive dentro del hero (el titular lo pone el hero). */
-export default function CaseCoverflow({ stages, closing, header = true }: { stages: CaseStage[]; closing: string[]; header?: boolean }) {
+/** `header`: false cuando el carrusel vive dentro del hero (el titular lo pone el hero).
+ *  `mobileAfterTrack`: contenido que el slider móvil pone bajo su indicador (subtítulo + CTA del hero). */
+export default function CaseCoverflow({ stages, closing, header = true, mobileAfterTrack }: { stages: CaseStage[]; closing: string[]; header?: boolean; mobileAfterTrack?: ReactNode }) {
   const t = useTranslations("team.case");
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -265,7 +266,7 @@ export default function CaseCoverflow({ stages, closing, header = true }: { stag
         </div>
       </div>
 
-      <CaseMobileSlider stages={stages} closing={closing} header={header} className="flex lg:hidden motion-reduce:flex" />
+      <CaseMobileSlider stages={stages} closing={closing} header={header} afterTrack={mobileAfterTrack} className="flex lg:hidden motion-reduce:flex" />
     </div>
   );
 }

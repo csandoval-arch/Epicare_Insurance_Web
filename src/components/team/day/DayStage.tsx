@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * @description Acto C (desktop con motion): un día del equipo que se cuenta solo — sin pin ni scrub.
+ * @description Acto C (con motion, móvil y desktop): un día del equipo que se cuenta solo — sin pin ni scrub.
  * Al entrar en pantalla el reloj corre de tarea en tarea (avanza de 5 en 5 minutos, escrito directo
  * en el DOM: cero renders por frame) y se detiene en cada una; al llegar a su hora cambia la escena:
  * la tarea nace de su máscara, el retrato de quien la hace sube como un telón dentro de su marco y la
@@ -14,10 +14,12 @@ import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { DUR, EASE, REVEAL } from "@/lib/motion";
+import ArrowUR from "@/components/icons/ArrowUR";
 import CrewPortrait from "../crew/CrewPortrait";
+import { TEAM_GRID } from "../grid";
 import { DAY_END, DAY_START, activeAt, dayFraction, formatClock, toHours, type DayItem } from "./dayData";
 
-const PLAYING = "(min-width: 1024px) and (prefers-reduced-motion: no-preference)";
+const PLAYING = "(prefers-reduced-motion: no-preference)";
 /** Segundos que se queda cada escena antes de que el reloj siga (margen creativo: el mismo respiro
  *  que la pausa del carrusel de "The case"). */
 const SCENE_HOLD = 1.6;
@@ -44,7 +46,7 @@ const TASK_FROM = { yPercent: REVEAL.birthPercent };
 const CURTAIN_FROM = { yPercent: 100 };
 const SIGN_FROM = { y: REVEAL.sm, opacity: 0 };
 
-export default function DayStage({ items, names }: { items: DayItem[]; names: (who: DayItem["who"]) => string }) {
+export default function DayStage({ items, names, nextLabel }: { items: DayItem[]; names: (who: DayItem["who"]) => string; nextLabel: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const clockRef = useRef<HTMLParagraphElement>(null);
   const dayRef = useRef<gsap.core.Timeline | null>(null);
@@ -61,7 +63,7 @@ export default function DayStage({ items, names }: { items: DayItem[]; names: (w
     const mm = gsap.matchMedia(el);
     mm.add(PLAYING, () => {
       // Un solo valor (la hora) mueve el reloj, la línea y la escena.
-      const progress = el.querySelector(".dy-progress");
+      const progress = el.querySelectorAll(".dy-progress"); // regla de desktop + línea mínima de móvil
       const state = { h: DAY_START };
       const render = () => {
         gsap.set(progress, { scaleX: (state.h - DAY_START) / (DAY_END - DAY_START) });
@@ -93,35 +95,53 @@ export default function DayStage({ items, names }: { items: DayItem[]; names: (w
 
   return (
     <div ref={ref} className="dy-stage w-full pt-section-md">
-      <div className="w-full max-w-section-xl mx-auto px-gutter-md flex flex-col gap-[var(--space-section-xs)]">
-        {/* La escena es decorativa: el contenido lo leen los lectores de pantalla en `DayList` */}
-        <div className="grid-layout items-end" aria-hidden="true">
-          {/* ── EL RELOJ + LA ESCENA ── */}
-          <div className="col-span-7 flex flex-col gap-static-lg">
-            <p ref={clockRef} className="text-display-3xl tabular-nums text-[var(--color-text-primary)]">
+      <div className="w-full max-w-section-xl mx-auto px-gutter-sm md:px-gutter-md flex flex-col gap-[var(--space-section-xs)]">
+        {/* La escena es decorativa: el contenido lo leen los lectores de pantalla en `DayList`.
+            Móvil (4 cols): el reloj a todo el ancho; debajo tarea + firma (cols 1-2) y el retrato (cols 3-4).
+            Desktop: el grupo izquierdo es una columna (cols 1-7) y el retrato va en las cols 9-12. */}
+        <div className={`${TEAM_GRID} gap-y-static-md lg:gap-y-0 items-end`} aria-hidden="true">
+          {/* ── EL RELOJ + LA ESCENA (en móvil el grupo se disuelve en la retícula con `contents`) ── */}
+          <div className="contents lg:flex lg:col-span-7 lg:flex-col lg:gap-static-lg">
+            <p ref={clockRef} className="col-span-full text-display-3xl tabular-nums text-[var(--color-text-primary)]">
               {formatClock(DAY_START)}
             </p>
-            <div className="overflow-hidden pb-static-xs min-h-[2lh] text-display-sm">
+            <div className="col-span-2 row-start-2 self-start overflow-hidden pb-static-xs min-h-[5lh] lg:min-h-[2lh] text-h3 lg:text-display-sm">
               <Enter key={idx} from={TASK_FROM}>
                 <p>{item.task}</p>
               </Enter>
             </div>
-            <Enter key={`s${idx}`} from={SIGN_FROM} className="flex items-center gap-static-sm">
+            <Enter key={`s${idx}`} from={SIGN_FROM} className="col-span-2 row-start-3 flex items-center gap-static-sm">
               <span aria-hidden="true" className="h-px w-static-xl bg-[var(--color-brand-blue)]" />
               <span className="text-meta text-[var(--color-text-secondary)]">{names(item.who)}</span>
             </Enter>
           </div>
 
           {/* ── QUIEN LO HACE: telón dentro del marco ── */}
-          <div className="col-start-9 col-span-4 overflow-hidden rounded-lg bg-[var(--color-surface-BG-2)] aspect-square">
+          <div className="col-start-3 col-span-2 row-start-2 row-span-2 self-start lg:self-auto lg:col-start-9 lg:col-span-4 lg:row-start-1 lg:row-span-1 overflow-hidden rounded-lg bg-[var(--color-surface-BG-2)] aspect-square">
             <Enter key={`p${idx}`} from={CURTAIN_FROM} className="h-full">
               <CrewPortrait who={item.who} className="w-full h-full" />
             </Enter>
           </div>
         </div>
 
-        {/* ── LA REGLA DEL DÍA ── */}
-        <div className="relative pt-static-lg">
+        {/* ── MÓVIL: línea mínima — progreso del día · burbuja "siguiente" (la hora ya la dice el reloj) ── */}
+        <div className="lg:hidden flex items-center gap-static-md">
+          <div aria-hidden="true" className="relative flex-1 h-px bg-[var(--color-border-Strokes-default)]">
+            <span className="dy-progress absolute inset-0 origin-left bg-[var(--color-brand-blue)]" />
+          </div>
+          <button
+            type="button"
+            onClick={() => jumpTo((idx + 1) % items.length)}
+            aria-label={nextLabel}
+            className="shrink-0 w-static-2xl h-static-2xl rounded-full bg-[var(--color-brand-blue)] text-[var(--color-text-White-100)] flex items-center justify-center shadow-elevation-2 transition-[scale] duration-200 ease-out active:scale-95 focus-visible:outline-2 focus-visible:outline-[var(--color-border-Strokes-focus)]"
+          >
+            <ArrowUR className="w-static-md h-static-md rotate-45" />
+          </button>
+        </div>
+
+        {/* ── DESKTOP: LA REGLA DEL DÍA con los 8 hitos clicables ── */}
+        {/* pb: las horas cuelgan bajo la línea (posición absoluta); sin este hueco las tapaba la sección siguiente */}
+        <div className="hidden lg:block relative pt-static-lg pb-static-2xl">
           <div className="relative h-px bg-[var(--color-border-Strokes-default)]">
             <span className="dy-progress absolute inset-0 origin-left bg-[var(--color-brand-blue)]" />
           </div>

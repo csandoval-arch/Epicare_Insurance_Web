@@ -6,7 +6,7 @@
  * (brandbook). Una frase del equipo escrita en los dos idiomas — cada versión original en su idioma —
  * como un párrafo por idioma: al cambiar, el párrafo sale hacia arriba por su máscara y el otro
  * idioma entra desde abajo. Un interruptor EN/ES elige; mientras nadie lo toca, el tablero alterna
- * solo (una hairline azul bajo el interruptor mide el tiempo hasta el próximo cambio — vida latente,
+ * solo (la pestaña inactiva se va llenando con un tinte azul hasta el próximo cambio — vida latente,
  * pausada fuera de pantalla). Los tres bloques (encabezado, interruptor y tablero) apilados en las
  * columnas 4–11 de desktop, alineados a la izquierda; en móvil, a todo el ancho.
  * El párrafo vive en `team.languages.paragraph` como par { en, es } (igual en los dos diccionarios).
@@ -17,7 +17,7 @@ import { useLocale, useTranslations } from "next-intl";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
-import { DUR, EASE, STAGGER } from "@/lib/motion";
+import { DUR, EASE, REVEAL, STAGGER } from "@/lib/motion";
 import CaseHeader from "./case/CaseHeader";
 
 type Lang = "en" | "es";
@@ -25,6 +25,8 @@ const LANGS: Lang[] = ["en", "es"];
 /** Segundos que cada idioma se queda en el tablero cuando alterna solo. Margen creativo. */
 const AUTO_HOLD = 4;
 const FULL = "(prefers-reduced-motion: no-preference)";
+const DESKTOP_MQ = "(min-width: 1024px)";
+const MOBILE_MQ = "(max-width: 1023px)";
 
 export default function LanguagesTeam() {
   const t = useTranslations("team.languages");
@@ -49,24 +51,36 @@ export default function LanguagesTeam() {
     const el = boardRef.current;
     if (!el) return;
     gsap.registerPlugin(SplitText);
-    const splits = LANGS.map((l) => {
-      const p = el.querySelector<HTMLElement>(`.lt-${l}`)!;
-      return SplitText.create(p, {
-        type: "lines",
-        mask: "lines",
-        linesClass: "lt-line",
-        autoSplit: true,
-        onSplit: (self) => {
-          gsap.set(self.lines, { yPercent: l === langRef.current ? 0 : 110 });
-          gsap.set(p, { visibility: "visible" });
-        },
+    const mm = gsap.matchMedia(el);
+    // Desktop: líneas reales con máscara (la ola).
+    mm.add(DESKTOP_MQ, () => {
+      const splits = LANGS.map((l) => {
+        const p = el.querySelector<HTMLElement>(`.lt-${l}`)!;
+        return SplitText.create(p, {
+          type: "lines",
+          mask: "lines",
+          linesClass: "lt-line",
+          autoSplit: true,
+          onSplit: (self) => {
+            gsap.set(self.lines, { yPercent: l === langRef.current ? 0 : 110 });
+            gsap.set(p, { visibility: "visible" });
+          },
+        });
       });
+      return () => splits.forEach((s) => s.revert());
     });
-    return () => splits.forEach((s) => s.revert());
+    // Móvil: sin partir — cada párrafo es un bloque; el inactivo, oculto.
+    mm.add(MOBILE_MQ, () => {
+      LANGS.forEach((l) => gsap.set(el.querySelector(`.lt-${l}`), { autoAlpha: l === langRef.current ? 1 : 0, y: 0 }));
+    });
+    return () => mm.revert();
   }, [locale]);
 
-  // ── EL CAMBIO: tablero de salidas — las líneas del idioma que sale suben por su máscara y las del
-  //    que entra suben desde abajo, línea a línea (en ola). ──
+  // ── EL CAMBIO
+  //    Desktop: tablero de salidas — las líneas del idioma que sale suben por su máscara y las del que
+  //    entra suben desde abajo, línea a línea (en ola).
+  //    Móvil: fundido de bloque — el párrafo que sale se desvanece subiendo y el otro entra desde abajo
+  //    (en pantalla estrecha los dos idiomas cortan en líneas distintas y la ola se veía desordenada). ──
   useLayoutEffect(() => {
     langRef.current = lang;
     if (first.current) {
@@ -78,9 +92,16 @@ export default function LanguagesTeam() {
     const instant = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const lines = (l: Lang) => el.querySelectorAll(`.lt-${l} .lt-line`);
     const motion = { duration: instant ? 0 : DUR.base, ease: EASE.dramatic, stagger: instant ? 0 : STAGGER.wave, force3D: true, overwrite: true };
+    const out: Lang = lang === "en" ? "es" : "en";
     const ctx = gsap.context(() => {
-      gsap.to(lines(lang === "en" ? "es" : "en"), { yPercent: -110, ...motion });
-      gsap.fromTo(lines(lang), { yPercent: 110 }, { yPercent: 0, ...motion });
+      if (window.matchMedia(DESKTOP_MQ).matches) {
+        gsap.to(lines(out), { yPercent: -110, ...motion });
+        gsap.fromTo(lines(lang), { yPercent: 110 }, { yPercent: 0, ...motion });
+        return;
+      }
+      const block = (l: Lang) => el.querySelector(`.lt-${l}`);
+      gsap.to(block(out), { autoAlpha: 0, y: -REVEAL.sm, duration: instant ? 0 : DUR.fast, ease: EASE.out, overwrite: true });
+      gsap.fromTo(block(lang), { autoAlpha: 0, y: REVEAL.sm }, { autoAlpha: 1, y: 0, duration: instant ? 0 : DUR.base, ease: EASE.out, delay: instant ? 0 : STAGGER.wave, overwrite: true });
     }, el);
     return () => ctx.kill();
   }, [lang]);
@@ -131,12 +152,23 @@ export default function LanguagesTeam() {
             <CaseHeader ns="team.languages" />
           </div>
 
-          {/* ── INTERRUPTOR EN / ES ── */}
-          <div className="col-span-full lg:col-start-4 lg:col-span-8 w-fit flex flex-col gap-static-sm">
-            <div role="group" aria-label={t("toggleLabel")} className="relative grid grid-cols-2 rounded-full border border-[var(--color-border-Strokes-default)] p-1 w-fit">
+          {/* ── INTERRUPTOR EN / ES: pestañas casi cuadradas (rounded-md). El temporizador de la alternancia
+              vive en la pestaña inactiva: un relleno tenue la llena de izquierda a derecha y, al
+              completarse, el idioma cambia a ella. (Sin barra aparte debajo.) ── */}
+          <div className="col-span-full lg:col-start-4 lg:col-span-8 w-fit">
+            <div role="group" aria-label={t("toggleLabel")} className="relative grid grid-cols-2 rounded-lg border border-[var(--color-border-Strokes-default)] p-1 w-fit">
+              {/* Temporizador: ocupa la mitad inactiva (se mueve con el idioma, como el fondo activo) */}
               <span
                 aria-hidden="true"
-                className="absolute inset-y-1 left-1 w-[calc(50%-0.25rem)] rounded-full bg-[var(--color-hero-ink)] transition-[translate] duration-500 ease-out"
+                className="absolute inset-y-1 left-1 w-[calc(50%-0.25rem)] rounded-md overflow-hidden transition-[translate] duration-500 ease-out"
+                style={{ translate: lang === "en" ? "100% 0" : "0 0" }}
+              >
+                <span className="lt-timer block h-full w-full origin-left bg-[color-mix(in_srgb,var(--color-brand-blue)_18%,transparent)] scale-x-0" />
+              </span>
+              {/* Fondo de la pestaña activa */}
+              <span
+                aria-hidden="true"
+                className="absolute inset-y-1 left-1 w-[calc(50%-0.25rem)] rounded-md bg-[var(--color-hero-ink)] transition-[translate] duration-500 ease-out"
                 style={{ translate: lang === "en" ? "0 0" : "100% 0" }}
               />
               {LANGS.map((l) => (
@@ -145,16 +177,13 @@ export default function LanguagesTeam() {
                   type="button"
                   aria-pressed={lang === l}
                   onClick={() => choose(l)}
-                  className={`relative z-10 h-static-xl px-static-lg rounded-full text-ui-label transition-colors duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--color-border-Strokes-focus)] ${
+                  className={`relative z-10 h-static-xl px-static-lg rounded-md text-ui-label transition-colors duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--color-border-Strokes-focus)] ${
                     lang === l ? "text-[var(--color-hero-ivory)]" : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
                   }`}
                 >
                   {t(`toggle.${l}`)}
                 </button>
               ))}
-            </div>
-            <div aria-hidden="true" className="h-px w-full bg-[var(--color-border-Strokes-default)] overflow-hidden">
-              <span className="lt-timer block h-full origin-left bg-[var(--color-brand-blue)] scale-x-0" />
             </div>
           </div>
 

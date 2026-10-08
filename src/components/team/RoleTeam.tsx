@@ -8,7 +8,7 @@
  * lista compacta debajo: el selector acelera la decisión, no esconde nada (y la lista también elige).
  * Fondo oscuro en los dos temas (`dark` en la sección): es el "fundido a negro" de la página.
  * - Desktop (≥lg): preguntas a la izquierda (col 1-6), resultado a la derecha (col 8-12).
- * - Móvil: todo apilado; las opciones a todo el ancho.
+ * - Móvil: sin preguntas ni lista — los 4 caminos en un slider de 3 infinito (`role/RoleMobileSlider`).
  */
 
 import { useLayoutEffect, useRef, useState } from "react";
@@ -18,6 +18,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { DUR, EASE, REVEAL, STAGGER, TRIGGER } from "@/lib/motion";
 import CaseHeader from "./case/CaseHeader";
 import RoleResult from "./role/RoleResult";
+import RoleMobileSlider from "./role/RoleMobileSlider";
 import type { RoleGroup, RoleGroupKey, RolePath } from "./role/rolePaths";
 
 // ── ESTILOS DE OPCIÓN (seleccionada / libre) ──
@@ -74,7 +75,7 @@ export default function RoleTeam() {
           <div className="col-span-full lg:col-span-6 flex flex-col gap-static-2xl">
             <CaseHeader ns="team.role" />
 
-            <div className="rt-steps flex flex-col gap-static-xl">
+            <div className="rt-steps hidden lg:flex flex-col gap-static-xl">
               <div className="rt-reveal flex flex-col gap-static-sm">
                 <p className="text-meta text-[var(--color-text-secondary)]">{t("stepOne")}</p>
                 <div className="grid sm:grid-cols-2 gap-static-sm">
@@ -107,13 +108,13 @@ export default function RoleTeam() {
           </div>
 
           {/* ── RESULTADO ── */}
-          <div className="col-span-full lg:col-start-8 lg:col-span-5">
+          <div className="hidden lg:block lg:col-start-8 lg:col-span-5">
             <RoleResult key={path.key} path={path} cta={t("cta")} animate={touched} />
           </div>
         </div>
 
         {/* ── LOS 4 CAMINOS (siempre visibles; también eligen) ── */}
-        <div className="rt-list pt-section-sm">
+        <div className="rt-list hidden lg:block pt-section-sm">
           <p className="text-meta text-[var(--color-text-secondary)] mb-static-md">{t("allPaths")}</p>
           <ul className="grid grid-cols-2 lg:grid-cols-4 gap-x-static-lg lg:gap-x-static-xl gap-y-static-lg">
             {paths.map((p) => {
@@ -144,6 +145,8 @@ export default function RoleTeam() {
           </ul>
         </div>
       </div>
+      {/* ── MÓVIL: los 4 caminos en un slider de 3 infinito (como el hero) ── */}
+      <RoleMobileSlider paths={paths} cta={t("cta")} className="flex lg:hidden pt-static-2xl" />
     </section>
   );
 }

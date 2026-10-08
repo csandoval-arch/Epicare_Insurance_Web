@@ -13,7 +13,8 @@ import PrimaryCta from "@/components/go-crm/cta/PrimaryCta";
 import { DUR, EASE, REVEAL, STAGGER } from "@/lib/motion";
 import type { RolePath } from "./rolePaths";
 
-const GLOW: CSSProperties = {
+/** Textura de las tarjetas de camino (también la usa el slider móvil). */
+export const GLOW: CSSProperties = {
   backgroundImage: "radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--color-brand-blue) 16%, transparent), transparent 60%)",
 };
 

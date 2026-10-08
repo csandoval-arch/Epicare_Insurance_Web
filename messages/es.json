@@ -1067,7 +1067,8 @@
           "who": "agent",
           "task": "Tú vendiste. Nosotros nos encargamos del resto."
         }
-      ]
+      ],
+      "next": "Siguiente"
     },
     "languages": {
       "eyebrow": "Bilingüe",
