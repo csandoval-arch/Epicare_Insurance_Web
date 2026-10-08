@@ -540,7 +540,7 @@
   },
   "goCrm": {
     "hero": {
-      "overline": "GO CRM",
+      "overline": "Prospects",
       "title": "Your book of business, <blue>one control center.</blue>",
       "subhead": "The sales layer of <bold>GO Hub</bold>. Everything that happens before a prospect becomes a policy, in one place.",
       "cta": "Open your control center",
@@ -553,7 +553,7 @@
       "p2": "You sent the quote via email. <b>It's still there</b>.",
       "p3": "They said they were thinking about it, to write back in two weeks. That <b>stayed in your head</b>.",
       "p4": "They sent their documents via WhatsApp on Friday. They <b>got lost among other chats</b>.",
-      "p5": "<b>We centralize all your sales opportunities</b> ",
+      "p5": "<b>We centralize all your opportunities</b> ",
       "cierre": "in one place.",
       "rows": [
         {
@@ -602,7 +602,7 @@
       "active": "Active"
     },
     "contactVsOpp": {
-      "overline": "Opportunities",
+      "overline": "Contacts",
       "headline": "One person can mean <i>more than one</i> opportunity.",
       "opps": [
         {
@@ -718,7 +718,7 @@
     },
     "workBehind": {
       "overline": "Follow-up",
-      "intro": "Every sale comes with its own work. Here, nothing slips through.",
+      "intro": "Every prospect comes with its own work. Here, nothing slips through.",
       "stepLabel": "Step",
       "steps": [
         {

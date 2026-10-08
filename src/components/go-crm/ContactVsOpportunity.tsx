@@ -2,41 +2,37 @@
 
 /**
  * @file ContactVsOpportunity.tsx
- * @description Sección 3 de GO CRM — "Cartera" (Fractura · ronda 6, 2026-10-07). Un solo acto:
+ * @description Sección 3 de GO CRM — "Oportunidades" (2026-10-08: un solo acto, sin pin ni scrub).
  *   Titular vivo: "Detrás de *Elena*, más de una venta." — el nombre es el de la persona de la foto y
  *   cambia con ella (texto, foto y oportunidades rotan juntos cada `PERSON_MS`).
- *   Primer plano: la foto grande dentro de los márgenes, con el nombre de la persona en display sobre ella.
- *   Scroll (desktop, pin + scrub): el nombre se retira, la foto se parte en 3 franjas que se separan y cada
- *   franja revela, escrita sobre la imagen, una oportunidad (Dental · Salud · Vida) con su prima y etapa.
- * Sin tarjetas blancas: el texto vive sobre la foto con velo. Solo transform/opacity.
- * Móvil: sin pin; foto con el nombre + lista de hairlines con las 3 oportunidades.
+ *   Desktop: la foto ya partida en 3 franjas; cada una lleva su oportunidad (Dental · Salud · Vida) en una
+ *   tarjeta de liquid glass.
+ *   Entrada one-shot (al asomar la sección): titular por palabras (Text-Birth) → cada franja se descubre con
+ *   una cortina desde abajo (transform, no clip-path) mientras su foto se asienta, izq → centro → der → su
+ *   tarjeta sube y escribe su contenido. Solo transform/opacity; con reduced-motion todo aparece quieto.
+ * Móvil: foto a sangre + fila horizontal de cuadrados de vidrio que entran escalonados.
  * QUEMADOS: ver sections/go-crm/context.md (rondas 1–5 en `_quarantine/go-crm/contact-vs-opp/`).
  */
 
 import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { DUR, EASE, REVEAL, SCRUB, STAGGER, TRIGGER } from "@/lib/motion";
+import { DUR, EASE, REVEAL, STAGGER, TRIGGER } from "@/lib/motion";
 import { CycleTimer, PEOPLE, PeopleStack, SwapStyle, useCvoCopy, usePersonCycle, type Person } from "./contact-vs-opp/shared";
-import type { ContactSource } from "./contact-vs-opp/data";
 import { BellRinging, Clock, Heartbeat, Tooth, Umbrella } from "@phosphor-icons/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 // ── VALORES FUERA DE TOKEN (margen creativo declarado) ──
-const PIN_LENGTH = "+=170%";
-/** Tramo quieto al inicio del pin: la tarjeta de la persona se queda (con su blur) antes de retirarse.
- *  El blur se apaga en cuanto su contenedor baja de opacidad 1, por eso la salida espera. */
-const NAME_HOLD = 0.3;
-/** Escala final de cada franja: al encogerse se abre la separación sin salir de los márgenes. */
-const SLICE_END_SCALE = 0.95;
+/** Zoom de partida de la foto en cada franja mientras se descubre (segunda velocidad). */
+const SLICE_IMAGE_START = 1.08;
+/** Separación entre franjas (token static-lg); la foto se desplaza lo mismo para seguir siendo una sola. */
+const SLICE_GAP = "var(--spacing-static-lg)";
 /** Encuadre de las fotos (verticales) en la escena apaisada. */
 const PHOTO_POSITION = "object-[50%_38%]";
 const SLICES = [0, 1, 2] as const;
 /** Etapa cuyo siguiente paso tiene plazo ("Seguimiento en 2 días"): lleva reloj junto a la campana. */
 const TIMED_STAGE = 0;
-/** Velocidad de la salida de las tarjetas al volver al acto 1 (la entrada va a 1×). */
-const CARDS_EXIT_SPEED = 3;
 
 const firstName = (p: Person) => p.contact.name.split(" ")[0];
 
@@ -92,59 +88,6 @@ const PHOTO_SCRIM =
 
 
 
-/** Sin capa extra: el borde es un stroke blanco claro (1px, 28%) en `.cvo-glass`. */
-const Sheen = () => null;
-
-/** Color de marca de cada fuente (identidad de terceros, no tokens del DS: margen creativo declarado). */
-const SOURCE_COLORS: Record<ContactSource, string> = {
-  Salesforce: "#00A1E0",
-  WhatsApp: "#25D366",
-  Facebook: "#1877F2",
-  "Google Ads": "#FBBC04",
-  Eppigo: "var(--color-brand-blue)",
-};
-
-/** Chip de la fuente del contacto: píldora translúcida con el punto de color de la red. */
-function SourceChip({ source }: { source: ContactSource }) {
-  return (
-    <span className="inline-flex w-fit items-center gap-static-sm rounded-full border border-[var(--glass-liquid-tile-edge)] bg-[var(--glass-liquid-tile)] px-static-sm py-static-xs text-meta text-[var(--color-text-primary)]">
-      <span className="size-static-sm rounded-full" style={{ background: SOURCE_COLORS[source] }} aria-hidden="true" />
-      {source}
-    </span>
-  );
-}
-
-/**
- * Tarjeta de liquid glass claro con la persona sobre la foto: iniciales,
- * nombre, fuente y el reloj del ciclo.
- * Blur moderado (md): vive sobre una foto quieta y en desktop sale antes de la fractura.
- */
-function GlassName({ person, running, onCycle }: { person: Person; running: boolean; onCycle: () => void }) {
-  const c = useCvoCopy();
-  /** Prima mensual total de la persona (suma de sus oportunidades). */
-  const total = person.opps.reduce((sum, o) => sum + Number(o.price.replace(/\D/g, "")), 0);
-  return (
-    <div className={`${GLASS} p-static-lg flex flex-col gap-static-md`}>
-      <Sheen />
-      <div className="relative flex items-center gap-static-md">
-      <span className="relative size-static-2xl shrink-0 rounded-full bg-[var(--color-text-primary)] text-[var(--color-surface-BG-white)] dark:text-[var(--color-surface-BG-black)] text-meta grid place-items-center" aria-hidden="true">
-        {person.contact.initials}
-      </span>
-      <span key={person.contact.name} className="cvo-swap relative flex flex-col gap-static-xs min-w-0">
-        <span className="text-h3 truncate">{person.contact.name}</span>
-        <SourceChip source={person.contact.source} />
-      </span>
-      </div>
-      {/* Segundo dato: sus oportunidades abiertas y la prima total (cambia con la persona) */}
-      <span key={`${person.contact.name}-t`} className="cvo-swap relative block border-t border-[var(--glass-liquid-divider)] pt-static-sm text-body-sm font-medium text-[var(--color-text-primary)]">
-        {c.openOpps(person.opps.length)} · <span className="font-semibold text-[var(--color-action-link-hover)]">${total}
-        {c.perMonth}</span>
-      </span>
-      <CycleTimer running={running} onCycle={onCycle} className="absolute left-0 bottom-0" />
-    </div>
-  );
-}
-
 export default function ContactVsOpportunity() {
   const c = useCvoCopy();
   const rootRef = useRef<HTMLElement>(null);
@@ -165,50 +108,32 @@ export default function ContactVsOpportunity() {
     setRoot(el);
     const mm = gsap.matchMedia(el);
 
-    // ── ENTRADA (todas las anchuras): titular por palabras + cierre ──
+    // ── ENTRADA (one-shot, al asomar la sección) ──
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       gsap.fromTo(".cvo-word", { yPercent: REVEAL.birthPercent }, { yPercent: 0, duration: DUR.birth, ease: EASE.dramatic, stagger: STAGGER.tight, scrollTrigger: { trigger: el, start: TRIGGER.standard } });
-      gsap.fromTo(".cvo-rise", { y: REVEAL.sm, opacity: 0 }, { y: 0, opacity: 1, duration: DUR.base, ease: EASE.out, stagger: STAGGER.tight, scrollTrigger: { trigger: el, start: TRIGGER.standard } });
+      gsap.fromTo(".cvo-rise", { y: REVEAL.sm, opacity: 0 }, { y: 0, opacity: 1, duration: DUR.base, ease: EASE.out, scrollTrigger: { trigger: el, start: TRIGGER.standard } });
     });
 
-    // ── DESKTOP: la foto se parte en 3 ──
+    // Desktop: cortina por franja (izq → centro → der) y, tras cada una, su tarjeta
     mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
-      const tl = gsap
-        .timeline({
-          defaults: { ease: EASE.none, force3D: true },
-          scrollTrigger: { trigger: el, start: "top top", end: PIN_LENGTH, pin: true, scrub: SCRUB.crisp, invalidateOnRefresh: true },
-        })
-        .addLabel("split", NAME_HOLD + 0.15)
-        // 1 · el nombre sobre la foto se retira
-        .to(".cvo-nameblock", { y: -REVEAL.md, opacity: 0, duration: 0.35 }, NAME_HOLD)
-        // 2 · la foto se parte: las franjas se separan con desnivel
-        .to(".cvo-slice", { scale: SLICE_END_SCALE, ease: "power2.inOut", duration: 0.9 }, "split")
-        // Tramo final del scrub sin cambios: las tarjetas entran por tiempo (abajo), no con el scroll
-        .to({}, { duration: 0.6 });
-
-      // 3 · las tarjetas de cada franja entran por TIEMPO (no scrub), en orden izquierda → centro → derecha,
-      // cuando el scrub pasa CARDS_AT del pin; si vuelves arriba, salen en orden inverso.
-      const cardsIn = gsap.timeline({ paused: true, defaults: { force3D: true } });
-      gsap.utils.toArray<HTMLElement>(".cvo-oppcard", el).forEach((card, i) => {
+      const scene = el.querySelector(".cvo-scene");
+      const tl = gsap.timeline({ defaults: { force3D: true }, scrollTrigger: { trigger: scene, start: TRIGGER.standard } });
+      gsap.utils.toArray<HTMLElement>(".cvo-slice", el).forEach((slice, i) => {
         const at = i * STAGGER.wave;
-        cardsIn
-          .fromTo(card, { yPercent: 40, opacity: 0 }, { yPercent: 0, opacity: 1, duration: DUR.base, ease: EASE.out }, at)
-          .fromTo(card.querySelectorAll(".cvo-opp"), { yPercent: REVEAL.birthPercent }, { yPercent: 0, duration: DUR.base, ease: EASE.dramatic }, at + 0.1)
-          .fromTo(card.querySelectorAll(".cvo-oppmeta"), { y: REVEAL.sm, opacity: 0 }, { y: 0, opacity: 1, duration: DUR.fast, ease: EASE.out, stagger: STAGGER.tight }, at + 0.2);
+        const card = slice.querySelector(".cvo-oppcard");
+        tl.fromTo(slice.querySelector(".cvo-curtain"), { yPercent: 100 }, { yPercent: 0, duration: DUR.slow, ease: EASE.dramatic }, at)
+          .fromTo(slice.querySelector(".cvo-curtain-inner"), { yPercent: -100 }, { yPercent: 0, duration: DUR.slow, ease: EASE.dramatic }, at)
+          .fromTo(slice.querySelector(".cvo-slice-img"), { scale: SLICE_IMAGE_START }, { scale: 1, duration: DUR.cinematic, ease: EASE.out }, at);
+        if (!card) return;
+        tl.fromTo(card, { yPercent: 40, opacity: 0 }, { yPercent: 0, opacity: 1, duration: DUR.base, ease: EASE.out }, at + 0.55)
+          .fromTo(card.querySelectorAll(".cvo-opp"), { yPercent: REVEAL.birthPercent }, { yPercent: 0, duration: DUR.base, ease: EASE.dramatic }, at + 0.65)
+          .fromTo(card.querySelectorAll(".cvo-oppmeta"), { y: REVEAL.sm, opacity: 0 }, { y: 0, opacity: 1, duration: DUR.fast, ease: EASE.out, stagger: STAGGER.tight }, at + 0.75);
       });
-      const cardsAt = (tl.labels.split + 0.45) / tl.duration();
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top top",
-        end: PIN_LENGTH,
-        onUpdate: (self) => {
-          // Entrada a ritmo normal y escalonada; salida rápida (CARDS_EXIT_SPEED×) para que las tarjetas se
-          // vayan antes de que la foto se recomponga al volver al acto 1.
-          if (self.progress >= cardsAt) cardsIn.timeScale(1).play();
-          else cardsIn.timeScale(CARDS_EXIT_SPEED).reverse();
-        },
-      });
+    });
 
+    // Móvil: los cuadrados de vidrio suben escalonados al asomar la foto
+    mm.add("(max-width: 767px) and (prefers-reduced-motion: no-preference)", () => {
+      gsap.fromTo(".cvo-m-card", { yPercent: 30, opacity: 0 }, { yPercent: 0, opacity: 1, duration: DUR.base, ease: EASE.out, stagger: STAGGER.wave, force3D: true, scrollTrigger: { trigger: el.querySelector(".cvo-m-photo"), start: TRIGGER.standard } });
     });
 
     return () => mm.revert();
@@ -294,20 +219,27 @@ export default function ContactVsOpportunity() {
         </div>
       </div>
 
-      {/* ── ESCENA (desktop): la foto grande que se parte en 3 ── */}
-      <div className="hidden md:block w-full max-w-section-xl mx-auto px-gutter-md flex-1 min-h-0 pb-section-xs">
-        <div className="relative w-full h-full">
+      {/* ── ESCENA (desktop): la foto partida en 3 franjas, cada una con su oportunidad ── */}
+      <div className="cvo-scene hidden md:block w-full max-w-section-xl mx-auto px-gutter-md flex-1 min-h-0 pb-section-xs">
+        <div className="relative w-full h-full grid grid-cols-3" style={{ columnGap: SLICE_GAP }}>
           {SLICES.map((i) => (
-            <div key={i} className="cvo-slice absolute top-0 bottom-0 overflow-hidden rounded-lg" style={{ left: `${(i * 100) / 3}%`, width: `${100 / 3}%` }}>
-              {/* La misma foto en las 3 franjas, desplazada: juntas recomponen la imagen entera */}
-              <div className="cvo-slice-img absolute top-0 bottom-0" style={{ left: `${-i * 100}%`, width: "300%" }}>
-                <PeopleStack active={index} imgClassName={PHOTO_POSITION} />
+            <div key={i} className="cvo-slice relative h-full overflow-hidden rounded-lg">
+              {/* Cortina: el contenedor sube desde abajo y su interior hace lo inverso (la foto queda quieta) */}
+              <div className="cvo-curtain absolute inset-0 overflow-hidden">
+                <div className="cvo-curtain-inner absolute inset-0">
+                  {/* La misma foto en las 3 franjas, desplazada (con la separación): juntas son una sola imagen */}
+                  <div
+                    className="cvo-slice-img absolute top-0 bottom-0"
+                    style={{ left: `calc(-${i} * (100% + ${SLICE_GAP}))`, width: `calc(300% + 2 * ${SLICE_GAP})` }}
+                  >
+                    <PeopleStack active={index} imgClassName={PHOTO_POSITION} />
+                  </div>
+                  <div className={PHOTO_SCRIM} aria-hidden="true" />
+                </div>
               </div>
-              <div className={PHOTO_SCRIM} aria-hidden="true" />
               {/* La oportunidad de esta franja: tarjeta de liquid glass sobre la foto */}
               <div className="absolute inset-x-0 bottom-0 p-static-sm">
                 <div className={`cvo-oppcard ${GLASS} p-static-lg flex flex-col gap-static-sm`}>
-                  <Sheen />
                   <span className="relative block overflow-hidden pb-static-xs">
                     <span className="cvo-opp block">{oppLabel(i)}</span>
                   </span>
@@ -317,19 +249,15 @@ export default function ContactVsOpportunity() {
               </div>
             </div>
           ))}
-
-          {/* Tarjeta de vidrio con la persona (se retira al partirse la foto). Blur moderado: vive sobre una
-              foto quieta y sale antes de la fractura. */}
-          <div className="cvo-nameblock absolute left-1/2 -translate-x-1/2 bottom-static-md w-96 pointer-events-none">
-            <GlassName person={person} running={running} onCycle={next} />
-          </div>
+          {/* Reloj del cambio de persona (invisible: el ritmo se nota en el titular, las fotos y los datos) */}
+          <CycleTimer running={running} onCycle={next} className="absolute left-0 bottom-0 opacity-0 pointer-events-none" />
         </div>
       </div>
 
       {/* ── MÓVIL: la foto de la persona (sin su tarjeta) y, sobre la parte baja, una fila con scroll
           horizontal nativo de sus 3 oportunidades en cuadrados de liquid glass (sin pin) ── */}
       <div className="md:hidden w-full">
-        <div className="relative aspect-[3/4] overflow-hidden">
+        <div className="cvo-m-photo relative aspect-[3/4] overflow-hidden">
           <PeopleStack active={index} />
           <div className={PHOTO_SCRIM} aria-hidden="true" />
           {/* Sin tarjeta de la persona en móvil: solo su reloj (hairline arriba), que hace rotar a las personas */}
@@ -339,7 +267,7 @@ export default function ContactVsOpportunity() {
             className="absolute inset-x-0 bottom-0 pb-static-lg flex gap-static-sm overflow-x-auto snap-x snap-mandatory scroll-px-static-sm px-static-sm [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {SLICES.map((i) => (
-              <div key={i} className={`${GLASS} shrink-0 w-[54%] aspect-square snap-start p-static-md flex flex-col justify-center gap-static-lg`}>
+              <div key={i} className={`cvo-m-card ${GLASS} shrink-0 w-[54%] aspect-square snap-start p-static-md flex flex-col justify-center gap-static-lg`}>
                 {oppLabel(i, { compact: true })}
                 <div className="flex flex-col gap-static-sm">
                   {oppMeta(i)}

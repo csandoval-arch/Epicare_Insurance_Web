@@ -541,7 +541,7 @@
   },
   "goCrm": {
     "hero": {
-      "overline": "GO CRM",
+      "overline": "Prospectos",
       "title": "Tu Libro de Negocios, <blue>Un Centro de Control.</blue>",
       "subhead": "La capa de venta de <bold>GO Hub</bold>. Todo lo que pasa antes de que un prospecto se vuelva póliza, en un solo lugar.",
       "cta": "Abre tu centro de control",
@@ -554,7 +554,7 @@
       "p2": "Le mandaste la cotización por correo electrónico. <b>Ahí sigue</b>.",
       "p3": "Dijo que lo pensaba, que le escribieras en dos semanas. Eso <b>quedó en tu cabeza</b>.",
       "p4": "Te envió sus documentos por WhatsApp el viernes. Se <b>perdió entre otros chats</b>.",
-      "p5": "<b>Centralizamos todas tus oportunidades de venta</b> ",
+      "p5": "<b>Centralizamos todas tus oportunidades</b> ",
       "cierre": "en un solo lugar.",
       "rows": [
         {
@@ -603,7 +603,7 @@
       "active": "Activo"
     },
     "contactVsOpp": {
-      "overline": "Oportunidades",
+      "overline": "Contactos",
       "headline": "Una persona puede significar <i>más de una</i> oportunidad.",
       "opps": [
         {
@@ -719,7 +719,7 @@
     },
     "workBehind": {
       "overline": "Seguimiento",
-      "intro": "Cada venta trae su propio trabajo. Aquí, nada se te escapa.",
+      "intro": "Cada prospecto trae su propio trabajo. Aquí, nada se te escapa.",
       "stepLabel": "Paso",
       "steps": [
         {

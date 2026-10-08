@@ -32,7 +32,6 @@ export default function HeroGoCrm() {
           {/* ── COL 1-7: EYEBROW + H1 ── */}
           <div className="col-span-12 lg:col-start-1 lg:col-span-7 flex flex-col items-start justify-start gap-static-xs lg:pr-static-md z-10">
             <div className="crm-hero-eyebrow inline-flex items-center gap-static-xs mb-static-xs">
-              <span className="w-static-sm h-static-sm rounded-full bg-[var(--color-brand-blue)] animate-pulse" aria-hidden="true" />
               <span className="text-overline text-[var(--color-text-accent-blue)]">
                 {t("overline")}
               </span>
