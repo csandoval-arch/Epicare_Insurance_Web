@@ -4,14 +4,14 @@
  * @file RoleTeam.tsx
  * @description Acto 03 de /team — "Your role": casting de caminos. En lugar de una lista, dos
  * preguntas (¿cómo trabajas? → ¿desde dónde empiezas?) llevan a uno de los 4 caminos oficiales del
- * brandbook, junto a la figura de quien te acompaña y el CTA. Los 4 caminos quedan visibles en una
+ * brandbook, con el CTA (sin figura ni "te acompaña": el usuario los quitó). Los 4 caminos quedan visibles en una
  * lista compacta debajo: el selector acelera la decisión, no esconde nada (y la lista también elige).
  * Fondo oscuro en los dos temas (`dark` en la sección): es el "fundido a negro" de la página.
  * - Desktop (≥lg): preguntas a la izquierda (col 1-6), resultado a la derecha (col 8-12).
  * - Móvil: todo apilado; las opciones a todo el ancho.
  */
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -60,20 +60,11 @@ export default function RoleTeam() {
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       const st = (trigger: string) => ({ scrollTrigger: { trigger: el.querySelector(trigger), start: TRIGGER.standard } });
       gsap.fromTo(".rt-reveal", { y: REVEAL.md, opacity: 0 }, { y: 0, opacity: 1, duration: DUR.slow, ease: EASE.out, stagger: STAGGER.wave, ...st(".rt-steps") });
-      gsap.fromTo(".rr-figure", { y: REVEAL.lg, opacity: 0 }, { y: 0, opacity: 1, duration: DUR.slow, ease: EASE.out, delay: STAGGER.wave, ...st(".rt-steps") });
       gsap.fromTo(".rt-path", { y: REVEAL.sm, opacity: 0 }, { y: 0, opacity: 1, duration: DUR.base, ease: EASE.out, stagger: STAGGER.base, ...st(".rt-list") });
     });
     return () => mm.revert();
   }, []);
 
-  // ── VIDA LATENTE: la respiración de la figura se pausa fuera de pantalla ──
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(([e]) => el.classList.toggle("is-offscreen", !e.isIntersecting));
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
 
   return (
     <section ref={ref} className="rt-root dark relative w-full bg-[var(--color-hero-ivory)] text-[var(--color-hero-ink)] py-section-md lg:py-section-lg overflow-hidden">
@@ -116,8 +107,8 @@ export default function RoleTeam() {
           </div>
 
           {/* ── RESULTADO ── */}
-          <div className="col-span-full lg:col-start-7 lg:col-span-6">
-            <RoleResult key={path.key} path={path} guideLabel={t("guideLabel")} cta={t("cta")} animate={touched} />
+          <div className="col-span-full lg:col-start-8 lg:col-span-5">
+            <RoleResult key={path.key} path={path} cta={t("cta")} animate={touched} />
           </div>
         </div>
 

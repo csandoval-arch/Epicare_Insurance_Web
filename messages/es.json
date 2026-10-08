@@ -910,10 +910,9 @@
     "role": {
       "eyebrow": "Tu papel",
       "title": "4 formas de sumarte al equipo Epicare.",
-      "subtitle": "Cada camino tiene su propio nivel de compromiso e independencia. Son los cuatro modos oficiales de ingresar al ecosistema Epicare, según operes a título individual o con un equipo propio.",
+      "subtitle": "Elige el tuyo, según trabajes solo o con tu propio equipo.",
       "stepOne": "¿Cómo trabajas?",
       "stepTwo": "¿Desde dónde empiezas?",
-      "guideLabel": "Te acompaña",
       "allPaths": "Los 4 caminos",
       "cta": "Empieza tu camino",
       "groups": [
@@ -935,8 +934,7 @@
           "n": "01",
           "tag": "Ya licenciado",
           "title": "Soy agente",
-          "body": "Ya tienes licencia. Te sumas al equipo Epicare con acceso a 130+ carriers, plataforma, training y soporte para vender más.",
-          "guide": "El equipo de Contracting"
+          "body": "Accede a 130+ carriers, plataforma, training y soporte."
         },
         {
           "key": "get-licensed",
@@ -944,8 +942,7 @@
           "n": "02",
           "tag": "Quiero licenciarme",
           "title": "No soy agente",
-          "body": "Quieres licenciarte. Epicare te acompaña en el proceso de licensing y onboarding, para que empieces a vender desde tu primer día como agente.",
-          "guide": "El equipo de Licensing"
+          "body": "Te guiamos en la licencia y el onboarding para que vendas desde el primer día."
         },
         {
           "key": "agency",
@@ -953,8 +950,7 @@
           "n": "03",
           "tag": "Agencia",
           "title": "Lanza tu Epicare Agency",
-          "body": "Lanza tu agencia bajo la marca Epicare con estructura probada y soporte operativo de Insurance Corp.",
-          "guide": "El equipo de Tecnología"
+          "body": "Tu propia agencia con la marca Epicare y el respaldo de Insurance Corp."
         },
         {
           "key": "sub-agency",
@@ -962,25 +958,9 @@
           "n": "04",
           "tag": "Sub-agencia",
           "title": "Suma tu agencia al IMO",
-          "body": "Tu agencia opera como sub-agencia dentro de la red Epicare, manteniendo su identidad y sumando infraestructura.",
-          "guide": "El equipo de Compliance"
+          "body": "Mantén la identidad de tu agencia y suma nuestra infraestructura."
         }
       ]
-    },
-    "credits": {
-      "eyebrow": "Créditos",
-      "departments": {
-        "licensing": "Licencias",
-        "contracting": "Contratación",
-        "compliance": "Cumplimiento",
-        "marketing": "Marketing",
-        "technology": "Tecnología",
-        "support": "Soporte al agente",
-        "training": "Formación"
-      },
-      "starring": "Protagonista: tú.",
-      "statement": "Go beyond growth.",
-      "cta": "Únete al equipo"
     },
     "hero": {
       "eyebrow": "El elenco",
@@ -999,7 +979,10 @@
       "policyCase": "Plan dental · Mariano Lozano",
       "inProgress": "En curso",
       "active": "Activa",
-      "closing": "La industria trabajando para ti, no en tu contra.",
+      "closing": [
+        "La industria <k>trabajando para ti</k>,",
+        "no en tu contra."
+      ],
       "prev": "Etapa anterior",
       "next": "Etapa siguiente",
       "stages": [
@@ -1040,6 +1023,103 @@
           "line": "Nosotros cuidamos el resto."
         }
       ]
+    },
+    "day": {
+      "agent": "Tú · Agente",
+      "items": [
+        {
+          "time": "08:00",
+          "who": "contracting",
+          "task": "Salen las aprobaciones de contratación."
+        },
+        {
+          "time": "09:30",
+          "who": "licensing",
+          "task": "Renovaciones de licencia, revisadas antes de que venzan."
+        },
+        {
+          "time": "11:00",
+          "who": "marketing",
+          "task": "Sale la campaña de la semana, en inglés y en español."
+        },
+        {
+          "time": "12:30",
+          "who": "contracting",
+          "task": "Nuevos appointments con carriers, enviados."
+        },
+        {
+          "time": "14:00",
+          "who": "compliance",
+          "task": "Revisiones de compliance, cerradas."
+        },
+        {
+          "time": "15:30",
+          "who": "technology",
+          "task": "Sale una nueva mejora en GO."
+        },
+        {
+          "time": "17:00",
+          "who": "compliance",
+          "task": "El problema de la póliza de un cliente, resuelto con el carrier."
+        },
+        {
+          "time": "18:00",
+          "who": "agent",
+          "task": "Tú vendiste. Nosotros nos encargamos del resto."
+        }
+      ]
+    },
+    "languages": {
+      "eyebrow": "Bilingüe",
+      "title": "Dos idiomas. Un equipo.",
+      "toggleLabel": "Idioma",
+      "toggle": {
+        "en": "English",
+        "es": "Español"
+      },
+      "paragraph": {
+        "en": "We walk you through <k>every step</k> and talk to your clients <b>in their language</b>, with <k>the same answer</k> in both.",
+        "es": "Te acompañamos en <k>cada paso</k> y les hablamos a tus clientes <b>en su idioma</b>, con <k>la misma respuesta</k> en los dos."
+      }
+    },
+    "traits": {
+      "eyebrow": "Firmado",
+      "title": "Cinco rasgos, con firma.",
+      "subtitle": "Un valor vale poco hasta que alguien lo firma.",
+      "items": [
+        {
+          "trait": "Moderno",
+          "who": "technology",
+          "quote": "Si GO te frena, ese es mi problema, no el tuyo."
+        },
+        {
+          "trait": "Confiable",
+          "who": "compliance",
+          "quote": "Te digo la verdad sobre un caso, aunque no sea lo que quieres oír."
+        },
+        {
+          "trait": "Solidario",
+          "who": "contracting",
+          "quote": "Si tu contrato se atasca, yo levanto el teléfono. Tú no persigues a nadie."
+        },
+        {
+          "trait": "Accesible",
+          "who": "marketing",
+          "quote": "Todo lo que hago para ti viene en inglés y en español."
+        },
+        {
+          "trait": "Empoderador",
+          "who": "licensing",
+          "quote": "Mi trabajo termina el día que vendes por tu cuenta."
+        }
+      ]
+    },
+    "departments": {
+      "licensing": "Licencias",
+      "contracting": "Contratación",
+      "marketing": "Marketing",
+      "technology": "Tecnología",
+      "compliance": "Cumplimiento"
     }
   }
 }

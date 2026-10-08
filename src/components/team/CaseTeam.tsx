@@ -17,7 +17,7 @@ export default function CaseTeam() {
 
   return (
     <section className="relative w-full bg-[var(--color-hero-ivory)] text-[var(--color-hero-ink)]">
-      <CaseCoverflow stages={stages} closing={t("closing")} />
+      <CaseCoverflow stages={stages} closing={t.raw("closing") as string[]} />
     </section>
   );
 }

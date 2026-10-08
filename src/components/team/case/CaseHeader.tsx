@@ -1,9 +1,9 @@
 "use client";
 
 /**
- * @description Encabezado de acto (01 The case, 03 Your role): eyebrow, titular y subtítulo con
- * Text-Birth one-shot al llegar. `ns` elige el namespace de i18n; `center` lo centra. Con
- * reduced-motion queda estático.
+ * @description Encabezado de acto (01, 03 y los actos A–F): eyebrow, titular y subtítulo (solo si el
+ * namespace trae `subtitle`) con Text-Birth one-shot al llegar. `ns` elige el namespace de i18n;
+ * `center` lo centra. Con reduced-motion queda estático.
  */
 
 import { useLayoutEffect, useRef } from "react";
@@ -22,11 +22,17 @@ export const oneShot = (trigger: Element | null, start = "top 82%") => ({
 export default function CaseHeader({
   className = "",
   center = false,
+  large = false,
+  inverse = false,
   ns = "team.case",
 }: {
   className?: string;
   center?: boolean;
-  ns?: "team.case" | "team.role";
+  /** Titular un paso más grande en la escala (`text-display-lg`). */
+  large?: boolean;
+  /** Sobre fondo de color (azul de marca): eyebrow y subtítulo en blanco. */
+  inverse?: boolean;
+  ns?: `team.${string}`;
 }) {
   const t = useTranslations(ns);
   const ref = useRef<HTMLDivElement>(null);
@@ -38,7 +44,8 @@ export default function CaseHeader({
     const mm = gsap.matchMedia(el);
     mm.add(FULL, () => {
       gsap.fromTo(".ch-birth", { yPercent: REVEAL.birthPercent }, { yPercent: 0, duration: DUR.birth, ease: EASE.dramatic, stagger: STAGGER.base, ...oneShot(el) });
-      gsap.fromTo(".ch-sub", { y: REVEAL.md, opacity: 0 }, { y: 0, opacity: 1, duration: DUR.slow, ease: EASE.out, delay: STAGGER.wave * 2, ...oneShot(el) });
+      // El subtítulo es opcional: sin él no hay nada que animar.
+      if (el.querySelector(".ch-sub")) gsap.fromTo(".ch-sub",{ y: REVEAL.md, opacity: 0 }, { y: 0, opacity: 1, duration: DUR.slow, ease: EASE.out, delay: STAGGER.wave * 2, ...oneShot(el) });
     });
     return () => mm.revert();
   }, []);
@@ -46,14 +53,14 @@ export default function CaseHeader({
   return (
     <div ref={ref} className={`flex flex-col gap-static-md ${center ? "items-center text-center" : ""} ${className}`}>
       <span className="block overflow-hidden">
-        <span className="ch-birth block text-overline text-[var(--color-text-accent-blue)]">{t("eyebrow")}</span>
+        <span className={`ch-birth block text-overline ${inverse ? "text-[var(--color-text-White-100)]/80" : "text-[var(--color-text-accent-blue)]"}`}>{t("eyebrow")}</span>
       </span>
-      <h2 className="text-display">
+      <h2 className={large ? "text-display-lg" : "text-display"}>
         <span className="block overflow-hidden pb-static-xs">
           <span className="ch-birth block">{t("title")}</span>
         </span>
       </h2>
-      <p className="ch-sub text-body-xl text-[var(--color-text-secondary)]">{t("subtitle")}</p>
+      {t.has("subtitle") && <p className={`ch-sub text-body-xl ${inverse ? "text-[var(--color-text-White-100)]/70" : "text-[var(--color-text-secondary)]"}`}>{t("subtitle")}</p>}
     </div>
   );
 }

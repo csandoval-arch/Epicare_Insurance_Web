@@ -15,16 +15,18 @@ import { useLayoutEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import gsap from "gsap";
 import { DUR, EASE, REVEAL, STAGGER } from "@/lib/motion";
+import { keyed } from "./keyed";
 import GlassCard from "./GlassCard";
 import CaseHeader, { DESKTOP, FULL, oneShot } from "./CaseHeader";
 import CaseMobileSlider from "./CaseMobileSlider";
 import { AGENT_STAGE, STAGE_CARDS, type CaseStage } from "./caseData";
-import { fanPose } from "./carouselLayouts";
+import { FAN, deckPose } from "./carouselLayouts";
 
-// ── MARGEN CREATIVO DECLARADO (física del coverflow) ──
+// ── MARGEN CREATIVO DECLARADO (física del coverflow: forma, escenario y ritmo en `FAN`) ──
+const deck = FAN;
 /** Ritmo: pausa en cada ficha y duración del paso (s). */
-const HOLD = 2.6;
-const MOVE = DUR.slow;
+const HOLD = deck.hold;
+const MOVE = deck.move;
 /** El panel y el chip solo en la ficha activa: se van al alejarse este tramo. */
 const INFO_FADE = 0.45;
 const INFO_RISE = 24;
@@ -32,9 +34,10 @@ const INFO_RISE = 24;
 const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
 const ARROW = "M15 18l-6-6 6-6";
 
-export default function CaseCoverflow({ stages, closing }: { stages: CaseStage[]; closing: string }) {
+export default function CaseCoverflow({ stages, closing }: { stages: CaseStage[]; closing: string[] }) {
   const t = useTranslations("team.case");
   const rootRef = useRef<HTMLDivElement>(null);
+
 
 
   useLayoutEffect(() => {
@@ -62,8 +65,8 @@ export default function CaseCoverflow({ stages, closing }: { stages: CaseStage[]
         cards.forEach((c, i) => {
           const d = dist(i, p);
           const a = Math.abs(d);
-          const o = fanPose(d, w);
-          c.style.transform = `translate3d(${o.x.toFixed(1)}px, ${o.y.toFixed(1)}px, ${o.z.toFixed(1)}px) rotateZ(${o.rotZ.toFixed(2)}deg) scale(${o.scale.toFixed(4)})`;
+          const o = deckPose(d, w, deck);
+          c.style.transform = `translate3d(${o.x.toFixed(1)}px, ${o.y.toFixed(1)}px, ${o.z.toFixed(1)}px) rotateY(${o.rotY.toFixed(2)}deg) rotateZ(${o.rotZ.toFixed(2)}deg) scale(${o.scale.toFixed(4)})`;
           c.style.opacity = String(o.opacity);
           c.style.zIndex = String(100 - Math.round(a * 10));
           const shade = shades[i];
@@ -185,7 +188,9 @@ export default function CaseCoverflow({ stages, closing }: { stages: CaseStage[]
       };
     });
 
-    return () => mm.revert();
+    return () => {
+      mm.revert();
+    };
   }, []);
 
   const arrowBtn =
@@ -200,9 +205,10 @@ export default function CaseCoverflow({ stages, closing }: { stages: CaseStage[]
     <div ref={rootRef}>
       {/* ── DESKTOP: COVERFLOW 3D ── */}
       <div className="hidden lg:flex motion-reduce:hidden flex-col items-center gap-static-xl py-section-md px-gutter-md overflow-hidden">
-        <CaseHeader center />
+        <CaseHeader center large />
 
-        <div className="co-stage relative w-full h-[30rem] mt-static-lg [perspective:2000px]">
+        {/* Alto = el de la ficha (4:5); ancho de ficha y perspectiva salen de la config del carrusel */}
+        <div className="co-stage relative w-full mt-static-lg" style={{ height: `${deck.cardWidth * 1.25}rem`, perspective: `${deck.perspective}px` }}>
           {/* Sombra de suelo bajo la ficha activa */}
           <span
             aria-hidden="true"
@@ -210,7 +216,9 @@ export default function CaseCoverflow({ stages, closing }: { stages: CaseStage[]
             style={{ background: "radial-gradient(closest-side, color-mix(in srgb, var(--color-overlay-backdrop) 16%, transparent), transparent)" }}
           />
           {stages.map((s, i) => (
-            <div key={s.key} className={`co-card absolute top-0 left-1/2 -ml-48 w-96 will-change-transform cursor-pointer select-none ${i === 0 ? "" : "opacity-0"}`}>
+            <div key={s.key} className={`co-card absolute top-0 left-1/2 will-change-transform cursor-pointer select-none ${i === 0 ? "" : "opacity-0"}`}
+              style={{ width: `${deck.cardWidth}rem`, marginLeft: `-${deck.cardWidth / 2}rem` }}
+            >
               <GlassCard stage={s} card={STAGE_CARDS[s.key]} index={i} agent={s.key === AGENT_STAGE} className="shadow-elevation-4" />
               {/* Velo de profundidad: las fichas que se alejan se funden con el fondo */}
               <span aria-hidden="true" className="co-shade pointer-events-none absolute inset-0 rounded-xl bg-[var(--color-hero-ivory)] opacity-0" />
@@ -235,14 +243,25 @@ export default function CaseCoverflow({ stages, closing }: { stages: CaseStage[]
           </button>
         </div>
 
-        {/* La resolución del acto */}
-        <p className="text-display-lg text-center max-w-section-md mt-static-2xl">
-          {closing.split(/(?<=,)\s/).map((part) => (
-            <span key={part} className="block overflow-hidden pb-static-xs">
-              <span className="co-closing block">{part}</span>
+        {/* La resolución del acto: a la izquierda desde la columna 4 (misma retícula que "Bilingual"),
+            en peso ligero salvo la idea clave */}
+        {/* Se sale del padding del padre y lo vuelve a aplicar por dentro del ancho máximo, como las
+            demás secciones: así la columna 4 cae en la misma vertical que la de "Bilingual". */}
+        <div className="self-stretch -mx-[var(--space-gutter-md)] mt-static-2xl">
+          <div className="w-full max-w-section-xl mx-auto px-gutter-md grid-layout">
+          {/* Un solo párrafo que fluye (sin corte forzado en la coma: dejaba "ti," huérfano) */}
+          <p className="col-start-4 col-span-8 text-display-lg font-light overflow-hidden pb-static-xs">
+            <span className="co-closing block">
+              {closing.map((line, i) => (
+                <span key={line}>
+                  {i > 0 && " "}
+                  {keyed(line)}
+                </span>
+              ))}
             </span>
-          ))}
-        </p>
+          </p>
+          </div>
+        </div>
       </div>
 
       <CaseMobileSlider stages={stages} closing={closing} className="flex lg:hidden motion-reduce:flex" />

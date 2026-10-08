@@ -2,7 +2,8 @@
 
 /**
  * @file /team — "Every case has a crew." La página se cuenta como una producción de cine:
- * 00 The cast (hero) · 01 The case · 02 The crew · 03 Your role · 04 Credits.
+ * 00 The cast (hero) · 01 The case · C Behind the scenes (pin) ·
+ * B Bilingual · F Signed · 03 Your role.
  * Blueprint: Graph-Design-Framework/project-context/sections/team/context.md
  */
 
@@ -14,8 +15,10 @@ import HeaderEpicare from "@/components/epicare/HeaderEpicare";
 import FooterEpicare from "@/components/epicare/FooterEpicare";
 import HeroTeam from "@/components/team/HeroTeam";
 import CaseTeam from "@/components/team/CaseTeam";
+import DayTeam from "@/components/team/DayTeam";
+import LanguagesTeam from "@/components/team/LanguagesTeam";
+import TraitsTeam from "@/components/team/TraitsTeam";
 import RoleTeam from "@/components/team/RoleTeam";
-import CreditsTeam from "@/components/team/CreditsTeam";
 
 /** A partir de aquí el header pasa a píldora. */
 const HEADER_PILL_AT = 150;
@@ -47,8 +50,10 @@ export default function TeamPage() {
       {/* ── ACTOS ── */}
       <HeroTeam />
       <CaseTeam />
+      <DayTeam />
+      <LanguagesTeam />
+      <TraitsTeam />
       <RoleTeam />
-      <CreditsTeam />
 
       <FooterEpicare />
     </main>
