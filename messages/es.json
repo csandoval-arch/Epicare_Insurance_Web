@@ -603,7 +603,7 @@
       "active": "Activo"
     },
     "contactVsOpp": {
-      "overline": "Cartera",
+      "overline": "Oportunidades",
       "headline": "Una persona puede significar <i>más de una</i> oportunidad.",
       "opps": [
         {
@@ -621,7 +621,23 @@
       ],
       "convergeTitle": "No importa cómo llegue el prospecto",
       "convergeBody": "Facebook, formulario web, WhatsApp o llamada entrante... todo converge en un mismo pipeline estructurado.",
-      "cta": "Conecta tus fuentes"
+      "cta": "Conecta tus fuentes",
+      "v2": {
+        "title": "Detrás de {name}, más de una venta.",
+        "sub": "Llegue por donde llegue, todo queda en una sola ficha.",
+        "stages": [
+          "Cotización enviada",
+          "En enrolamiento",
+          "Primera llamada"
+        ],
+        "perMonth": "/mes",
+        "nextSteps": [
+          "Seguimiento en 2 días",
+          "Firmar solicitud",
+          "Enviar cotización"
+        ],
+        "openOpps": "{count} oportunidades abiertas"
+      }
     },
     "dayVsList": {
       "overline": "La diferencia",

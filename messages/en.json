@@ -602,7 +602,7 @@
       "active": "Active"
     },
     "contactVsOpp": {
-      "overline": "Portfolio",
+      "overline": "Opportunities",
       "headline": "One person can mean <i>more than one</i> opportunity.",
       "opps": [
         {
@@ -620,7 +620,23 @@
       ],
       "convergeTitle": "No matter how the prospect arrives",
       "convergeBody": "Facebook, web form, WhatsApp or inbound call... everything converges into one structured pipeline.",
-      "cta": "Connect your sources"
+      "cta": "Connect your sources",
+      "v2": {
+        "title": "Behind {name}, more than one sale.",
+        "sub": "Wherever they come from, it all lands in one profile.",
+        "stages": [
+          "Quote sent",
+          "Enrolling",
+          "First call"
+        ],
+        "perMonth": "/mo",
+        "nextSteps": [
+          "Follow up in 2 days",
+          "Sign application",
+          "Send quote"
+        ],
+        "openOpps": "{count} open opportunities"
+      }
     },
     "dayVsList": {
       "overline": "The difference",

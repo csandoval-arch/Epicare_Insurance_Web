@@ -63,7 +63,7 @@ export default function GoCrmPage() {
       <HeroGoCrm />
       <ProblemGoCrm />
       {/* <OpportunitySources /> -> Su contenido se movió a ContactVsOpportunity para ahorrar espacio */}
-      <div className="w-full pt-section-sm md:pt-section-md" /><ContactVsOpportunity />
+      <div className="hidden md:block w-full md:pt-section-sm bg-[var(--color-surface-BG-base)]" /><ContactVsOpportunity />
       {/* <DayVsListContainer /> */}
       <TheWorkBehindASale />
       {/* <ThePipeline /> -> Fusionado en TheWorkBehindASale */}
