@@ -165,7 +165,8 @@ export default function MobileMenu({ open, onClose, groups, forceDark, loginLabe
       ref={rootRef}
       role="dialog"
       aria-modal="true"
-      className={`fixed inset-0 z-[999997] xl:hidden invisible ${open ? "pointer-events-auto" : "pointer-events-none"} text-[var(--color-text-primary)]${forceDark ? " dark" : ""}`}
+      // Vidrio lechoso en claro (como los modales); con el header forzado a oscuro, el menú va en oscuro y sin él
+      className={`fixed inset-0 z-[999997] xl:hidden invisible ${open ? "pointer-events-auto" : "pointer-events-none"} text-[var(--color-text-primary)]${forceDark ? " dark" : " glass-milky"}`}
     >
       {/* ── VELO (tap fuera = cerrar) ── */}
       <button type="button" tabIndex={-1} aria-hidden="true" onClick={onClose} className="mnav-veil absolute inset-0 w-full h-full opacity-0 glass-liquid-veil cursor-default" />
@@ -176,7 +177,8 @@ export default function MobileMenu({ open, onClose, groups, forceDark, loginLabe
       <div data-lenis-prevent className="mnav-sheet opacity-0 absolute inset-x-2 top-2 max-h-[calc(100dvh-1rem)] overflow-y-auto overscroll-contain rounded-xl glass-liquid isolate" style={{ scrollbarWidth: "none" }}>
         <div aria-hidden="true" className="glass-liquid-sheen absolute inset-0 pointer-events-none" />
 
-        <nav className="relative px-2 pt-24 pb-2 flex flex-col gap-static-lg">
+        {/* pb-5 (20px): aire bajo los CTAs para que el secundario no quede pegado al borde de la hoja */}
+        <nav className="relative px-2 pt-24 pb-5 flex flex-col gap-static-lg">
           {/* Productos */}
           {featured && (
             <div className="mnav-reveal">
@@ -253,13 +255,17 @@ export default function MobileMenu({ open, onClose, groups, forceDark, loginLabe
           <div className="mnav-reveal flex flex-col items-start gap-static-sm pt-static-sm">
             {/* Login y Join abren su hoja inferior ENCIMA del menú (no lo cierran): al cerrar la hoja, el menú sigue ahí */}
             <PrimaryCta label={loginLabel} />
+            {/* Join: botón secundario (como en desktop): mismo alto que el primario, ancho natural (más corto) → jerarquía */}
             <button
               type="button"
               onClick={() => joinModalStore.open()}
-              className="flex items-center gap-static-xs px-2 py-static-xs whitespace-nowrap text-body-sm text-[var(--color-text-primary)] transition-opacity duration-150 active:opacity-50 cursor-pointer"
+              className="group glass-liquid-tile w-fit h-static-2xl pl-static-lg pr-static-sm rounded-full flex justify-between items-center gap-3 text-[var(--color-text-primary)] shadow-elevation-1 transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.96] active:opacity-80 active:duration-150 cursor-pointer"
             >
-              {moreLabel}
-              <ArrowUR className="w-static-md h-static-md" />
+              <span className="text-body-sm font-medium">{moreLabel}</span>
+              <span className="relative w-static-xl h-static-xl rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center overflow-hidden shrink-0">
+                <ArrowUR className="absolute w-static-md h-static-md transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
+                <ArrowUR className="absolute w-static-md h-static-md -translate-x-5 translate-y-5 transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
+              </span>
             </button>
           </div>
         </nav>

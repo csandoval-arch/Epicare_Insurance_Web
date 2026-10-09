@@ -739,9 +739,9 @@ html[data-glass-modal] .mnav-sheet {
 
 /* VIDRIO LECHOSO (`.glass-milky`, solo modo claro) — variante del vidrio que deja pasar menos luz y color de detrás
    para que el texto no pierda contraste. Se pone en el CONTENEDOR (redefine los tokens para todo lo de dentro):
-   lo usan los modales (GlassModal). El modo oscuro no cambia.
+   lo usan los modales (GlassModal) y el menú móvil. El modo oscuro no cambia (tampoco dentro de un `.dark` local).
    Elegido con el debug panel (preset "Lechoso"; panel en _quarantine/glass/modal-light-debug/). */
-html:not(.dark) .glass-milky {
+html:not(.dark) .glass-milky:not(.dark, .dark *) {
   --glass-liquid-fill: linear-gradient(160deg, rgb(255 255 255 / 0.84), rgb(255 255 255 / 0.66));
   --glass-liquid-blur: 14px;
   --glass-liquid-saturate: 130%;
