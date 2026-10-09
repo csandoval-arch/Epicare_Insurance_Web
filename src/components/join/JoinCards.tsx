@@ -2,16 +2,18 @@
 
 /**
  * @description Piezas del modal "Join Epicare" con el lenguaje del menú móvil (vidrio líquido):
- * - `IconChip`: pastilla de icono (azul de marca tenue) — mismo tratamiento en ramas y resultados.
+ * - `IconChip` (en `glass/IconChip`): pastilla de icono — mismo tratamiento en ramas y resultados.
  * - `BranchHead`: cabecera de una rama (icono + etiqueta, pregunta, texto).
  * - `JoinTile`: un resultado del filtro (p. ej. "Soy agente"). Tile de vidrio entero pulsable: icono, título,
  *   texto y "More Info" con la flecha azul al pie. Lleva al formulario de esa versión (destino en
  *   `joinData.ts`; `href` null = aún no navega).
  */
 
-import type { ComponentType, CSSProperties, PointerEvent } from "react";
+import type { ComponentType } from "react";
 import { Buildings, Certificate, Handshake, SealCheck, Trademark, User, type IconProps } from "@phosphor-icons/react";
 import ArrowUR from "@/components/icons/ArrowUR";
+import { GlassLight, LIGHT_TILE, trackPointer } from "@/components/glass/GlassLight";
+import { IconChip } from "@/components/glass/IconChip";
 import type { JoinBranch } from "@/lib/joinModalStore";
 import type { JoinPathKey } from "./joinData";
 
@@ -24,21 +26,6 @@ export const PATH_ICON: Record<JoinPathKey, Icon> = {
   "agency-fmo": Handshake,
   "agency-trademark": Trademark,
 };
-
-/** `md` es responsive: pastilla compacta en móvil, grande en desktop. `live`: dentro de un tile, se enciende
- * (azul lleno, icono blanco) con el hover del tile en desktop. */
-export function IconChip({ icon: I, size = "md", live = false }: { icon: Icon; size?: "sm" | "md"; live?: boolean }) {
-  return (
-    <span
-      aria-hidden="true"
-      className={`shrink-0 inline-flex items-center justify-center rounded-md bg-[color-mix(in_srgb,var(--color-brand-blue)_14%,transparent)] text-[var(--color-text-accent-blue)] ${
-        size === "sm" ? "w-static-xl h-static-xl" : "w-static-xl h-static-xl lg:w-static-2xl lg:h-static-2xl"
-      }${live ? " transition-colors duration-300 ease-out lg:group-hover/tile:bg-[var(--color-brand-blue)] lg:group-hover/tile:text-[var(--color-text-White-100)]" : ""}`}
-    >
-      <I weight="regular" className={size === "sm" ? "w-static-md h-static-md" : "w-static-md h-static-md lg:w-static-lg lg:h-static-lg"} />
-    </span>
-  );
-}
 
 export function BranchHead({ icon, tag, title, body }: { icon: Icon; tag: string; title: string; body: string }) {
   return (
@@ -59,42 +46,16 @@ export function BranchHead({ icon, tag, title, body }: { icon: Icon; tag: string
   );
 }
 
-/* ── Hover de luz (desktop) ──
-   El puntero escribe --mx/--my en el tile (sin re-render de React); dos capas leen esa posición:
-   - SPOTLIGHT: luz neutra (el relleno del vidrio, `--glass-liquid-tile`) que sigue al cursor: aclara el fondo
-     bajo el texto en vez de teñirlo → el contraste no baja. El azul queda solo en el canto y el icono.
-   - RING: el mismo foco recortado a 1px de borde (máscara content-box exclude) → el canto se ilumina
-     solo cerca del cursor. Ambas entran solo con opacity. Margen creativo: 85 % de azul en el canto, radios 260/200px. */
-const SPOTLIGHT: CSSProperties = {
-  background: "radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%), var(--glass-liquid-tile), transparent 70%)",
-};
-const RING: CSSProperties = {
-  padding: 1,
-  background: "radial-gradient(200px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--color-brand-blue) 85%, transparent), transparent 70%)",
-  WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
-  WebkitMaskComposite: "xor",
-  mask: "linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0)",
-};
-const LIGHT_LAYER = "hidden lg:block absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 transition-opacity duration-300 ease-out group-hover/tile:opacity-100";
-
-const trackPointer = (e: PointerEvent<HTMLButtonElement>) => {
-  if (e.pointerType !== "mouse") return;
-  const el = e.currentTarget;
-  const r = el.getBoundingClientRect();
-  el.style.setProperty("--mx", `${e.clientX - r.left}px`);
-  el.style.setProperty("--my", `${e.clientY - r.top}px`);
-};
-
 export function JoinTile({ icon, title, text, more, href }: { icon: Icon; title: string; text: string; more: string; href: string | null }) {
   return (
     <button
       type="button"
       onClick={() => href && window.location.assign(href)}
       onPointerMove={trackPointer}
-      className="jm-tile glass-liquid-tile group/tile relative overflow-hidden w-full h-full lg:min-h-56 text-left rounded-lg p-static-md lg:p-static-lg flex flex-col gap-static-md lg:gap-static-lg cursor-pointer transition-[translate,scale] duration-300 ease-out hover:-translate-y-1 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-[var(--color-border-Strokes-focus)]"
+      className={`jm-tile ${LIGHT_TILE} w-full h-full lg:min-h-56 p-static-md lg:p-static-lg flex flex-col gap-static-md lg:gap-static-lg`}
     >
-      <span aria-hidden="true" className={LIGHT_LAYER} style={SPOTLIGHT} />
-      <span aria-hidden="true" className={LIGHT_LAYER} style={RING} />
+      {/* Hover de luz (desktop): foco neutro que sigue al cursor + canto azul; ver `GlassLight` */}
+      <GlassLight />
       {/* Móvil (compacto): icono ↔ flecha arriba; título y subtítulo debajo. Desktop: además "More Info" al pie */}
       <span className="relative flex items-start justify-between">
         <IconChip icon={icon} live />

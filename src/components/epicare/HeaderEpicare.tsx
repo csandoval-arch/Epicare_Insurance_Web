@@ -220,12 +220,14 @@ export default function HeaderEpicare({
   };
 
   const navLayoutClass = isHeaderPill
-    ? "top-[6px] md:top-2 h-[72px]"
+    ? "top-2 h-[72px]"
     : "top-4 md:top-6 h-[72px]";
 
-  const navPositionClass = `fixed inset-x-0 mx-auto max-w-section-xl w-full transition-all duration-300 z-[999999] ${
+  // Píldora en móvil: 8px por lado y arriba, como la hoja del menú (`inset-x-2 top-2`). Lleva `!`: la utilidad
+  // `max-w-section-xl` también fija `width: 100%` y, sin él, ganaba (la píldora quedaba a sangre en móvil).
+  const navPositionClass = `fixed inset-x-0 mx-auto max-w-section-xl transition-all duration-300 z-[999999] ${
     isHeaderPill 
-      ? "w-[calc(100%-16px)] md:w-[calc(100%-2*var(--space-gutter-sm))] lg:w-[calc(100%-2*var(--space-gutter-md))]"
+      ? "max-md:w-[calc(100%_-_16px)]! md:w-[calc(100%-2*var(--space-gutter-sm))] lg:w-[calc(100%-2*var(--space-gutter-md))]"
       : "w-full md:w-[calc(100%-2*var(--space-gutter-sm))] lg:w-[calc(100%-2*var(--space-gutter-md))]"
   }`;
 
@@ -251,7 +253,7 @@ export default function HeaderEpicare({
     <>
       {/* Background Pill Layer */}
       <div 
-        className={`${navPositionClass} ${visibilityClass} pointer-events-none ${navLayoutClass} ${navBgClass} z-[999998] max-w-full ${isMobileMenuOpen ? '!opacity-0' : ''}`}
+        className={`hdr-pill-bg ${navPositionClass} ${visibilityClass} pointer-events-none ${navLayoutClass} ${navBgClass} z-[999998] max-w-full ${isMobileMenuOpen ? '!opacity-0' : ''}`}
       />
 
       {/* Controls & Logo Layer */}

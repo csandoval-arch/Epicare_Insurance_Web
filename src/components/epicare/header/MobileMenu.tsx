@@ -251,14 +251,11 @@ export default function MobileMenu({ open, onClose, groups, forceDark, loginLabe
 
           {/* Acceso */}
           <div className="mnav-reveal flex flex-col items-start gap-static-sm pt-static-sm">
-            <PrimaryCta label={loginLabel} onClick={onClose} />
-            {/* Join Epicare: cierra el menú y abre el modal de unirse */}
+            {/* Login y Join abren su hoja inferior ENCIMA del menú (no lo cierran): al cerrar la hoja, el menú sigue ahí */}
+            <PrimaryCta label={loginLabel} />
             <button
               type="button"
-              onClick={() => {
-                onClose();
-                joinModalStore.open();
-              }}
+              onClick={() => joinModalStore.open()}
               className="flex items-center gap-static-xs px-2 py-static-xs whitespace-nowrap text-body-sm text-[var(--color-text-primary)] transition-opacity duration-150 active:opacity-50 cursor-pointer"
             >
               {moreLabel}

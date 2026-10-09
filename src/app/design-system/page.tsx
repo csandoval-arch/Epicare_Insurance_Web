@@ -10,6 +10,7 @@ import InteractiveSection from "./components/InteractiveSection";
 import MaxWidthSection from "./components/MaxWidthSection";
 import { ElevationSection } from "./components/ElevationSection";
 import AnimationsSection from "./components/AnimationsSection";
+import GlassSection from "./components/GlassSection";
 
 
 export default function DesignSystemPage() {
@@ -102,6 +103,7 @@ export default function DesignSystemPage() {
         <TypographySection />
         <SpacingSection />
         <ElevationSection />
+        <GlassSection isDark={isDark} />
         <InteractiveSection />
         <AnimationsSection />
 

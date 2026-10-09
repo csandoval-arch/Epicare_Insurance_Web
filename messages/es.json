@@ -1155,5 +1155,28 @@
         "text": "Opera bajo un nombre de confianza sin perder tu independencia."
       }
     }
+  },
+  "login": {
+    "title": "Iniciar sesión",
+    "close": "Cerrar",
+    "heading": "Tu Link Hub de Epicare",
+    "body": "Tus plataformas y recursos, organizados en un solo lugar.",
+    "open": "Iniciar sesión",
+    "platformsLabel": "Plataformas Epicare",
+    "groups": {
+      "enrollment": "Plataformas de enrollment",
+      "carriers": "Carriers"
+    },
+    "links": {
+      "medicare": "Medicare",
+      "supplementals": "Suplementarios & Life",
+      "aca": "ACA"
+    },
+    "short": {
+      "crm": "Leads, pipeline y seguimiento",
+      "ams": "Pólizas, comisiones y licencias",
+      "eppigo": "Asiste a tus clientes en su portal"
+    },
+    "comingSoon": "Próximamente"
   }
 }

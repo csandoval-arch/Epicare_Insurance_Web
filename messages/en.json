@@ -1154,5 +1154,28 @@
         "text": "Operate under a trusted name while maintaining your independence."
       }
     }
+  },
+  "login": {
+    "title": "Log in",
+    "close": "Close",
+    "heading": "Your Epicare Link Hub",
+    "body": "Your platforms and resources, organized in one place.",
+    "open": "Log in",
+    "platformsLabel": "Epicare platforms",
+    "groups": {
+      "enrollment": "Enrollment Platforms",
+      "carriers": "Carriers"
+    },
+    "links": {
+      "medicare": "Medicare",
+      "supplementals": "Supplementals & Life",
+      "aca": "ACA"
+    },
+    "short": {
+      "crm": "Leads, pipeline & follow-up",
+      "ams": "Policies, commissions & licensing",
+      "eppigo": "Assist clients inside their portal"
+    },
+    "comingSoon": "Coming soon"
   }
 }
