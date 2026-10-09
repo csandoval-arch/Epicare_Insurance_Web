@@ -23,9 +23,10 @@ const RING: CSSProperties = {
 };
 const LIGHT_LAYER = "hidden lg:block absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 transition-opacity duration-300 ease-out group-hover/tile:opacity-100";
 
-/** Clases base de un tile con luz: vidrio, grupo, recorte y elevación al hover. */
+/** Clases base de un tile con luz: vidrio, grupo, recorte y, al hover (desktop), elevación + canto azul de marca
+ *  (redefine `--glass-liquid-tile-edge` en el propio tile; el box-shadow transiciona). */
 export const LIGHT_TILE =
-  "glass-liquid-tile group/tile relative overflow-hidden text-left rounded-lg cursor-pointer transition-[translate,scale] duration-300 ease-out hover:-translate-y-1 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-[var(--color-border-Strokes-focus)]";
+  "glass-liquid-tile group/tile relative overflow-hidden text-left rounded-lg cursor-pointer transition-[translate,scale,box-shadow] duration-300 ease-out hover:-translate-y-1 lg:hover:[--glass-liquid-tile-edge:var(--color-brand-blue)] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-[var(--color-border-Strokes-focus)]";
 
 export const trackPointer = (e: PointerEvent<HTMLElement>) => {
   if (e.pointerType !== "mouse") return;
