@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { useLocale } from "./I18nProviderClient";
 import { asset } from "@/lib/asset";
 import { loginModalStore } from "@/lib/loginModalStore";
+import { joinModalStore } from "@/lib/joinModalStore";
 import MobileMenu from "./header/MobileMenu";
 import { HERO_COLUMN_EVENT, type HeroColumnDetail } from "./hero/geometry";
 
@@ -450,9 +451,9 @@ export default function HeaderEpicare({
             </span>
           </button>
           
-          {/* CTA Desktop Secundario */}
-          <button className={`group hidden xl:flex h-[44px] pl-5 pr-1.5 rounded-full flex justify-between items-center gap-3 border text-body-sm font-medium normal-case shadow-elevation-1 backdrop-blur-md transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-3 active:scale-95 ${secondaryCtaClass} cursor-pointer`}>
-            <span>{t('moreFromEpicare')}</span>
+          {/* CTA Desktop Secundario: abre el modal Join Epicare */}
+          <button onClick={() => joinModalStore.open()} className={`group hidden xl:flex h-[44px] pl-5 pr-1.5 rounded-full flex justify-between items-center gap-3 border text-body-sm font-medium normal-case shadow-elevation-1 backdrop-blur-md transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-3 active:scale-95 ${secondaryCtaClass} cursor-pointer`}>
+            <span>{t('joinEpicare')}</span>
             <span className={`relative w-8 h-8 rounded-full flex items-center justify-center overflow-hidden shrink-0 ${
               isHeaderForcedDark || isDark ? 'bg-white/10 text-white' : 'bg-black/5 text-[var(--color-text-primary)]'
             }`}>
@@ -470,7 +471,7 @@ export default function HeaderEpicare({
         groups={navItems}
         forceDark={isHeaderForcedDark && !isDark}
         loginLabel={t("login")}
-        moreLabel={t("moreFromEpicare")}
+        moreLabel={t("joinEpicare")}
         soonLabel={t("comingSoon")}
       />
     </>

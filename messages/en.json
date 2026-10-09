@@ -163,7 +163,7 @@
       "solTechDesc": "Our own infrastructure — not third-party licenses.",
       "comingSoon": "Coming soon",
       "login": "Login",
-      "moreFromEpicare": "More from Epicare"
+      "joinEpicare": "Join Epicare"
     },
     "productLines": {
       "overline": "Product lines",
@@ -1120,6 +1120,39 @@
       "marketing": "Marketing",
       "technology": "Technology",
       "compliance": "Compliance"
+    }
+  },
+  "join": {
+    "eyebrow": "Join Epicare",
+    "close": "Close",
+    "moreInfo": "More Info",
+    "agent": {
+      "tag": "Agent",
+      "title": "Are you an Agent or just starting your career?",
+      "body": "Join a network that maximizes your potential."
+    },
+    "agency": {
+      "tag": "Agency",
+      "title": "Looking to grow?",
+      "body": "Access the tools and systems you need to scale your business fast."
+    },
+    "paths": {
+      "agent-licensed": {
+        "title": "I’m an Agent",
+        "text": "Join the Epicare team! Be part of the next generation."
+      },
+      "agent-unlicensed": {
+        "title": "I’m Not An Agent",
+        "text": "I want to get licensed as an agent. At Epicare we can help you!"
+      },
+      "agency-fmo": {
+        "title": "Join As An FMO Partner",
+        "text": "Become part of our network. Access resources designed to help you scale your agency faster."
+      },
+      "agency-trademark": {
+        "title": "Trademark License",
+        "text": "Operate under a trusted name while maintaining your independence."
+      }
     }
   }
 }

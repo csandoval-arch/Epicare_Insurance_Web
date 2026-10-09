@@ -7,16 +7,15 @@
  * máscara y el resto le sigue.
  */
 
-import { useLayoutEffect, useRef, type CSSProperties } from "react";
+import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import PrimaryCta from "@/components/go-crm/cta/PrimaryCta";
 import { DUR, EASE, REVEAL, STAGGER } from "@/lib/motion";
+import { BRAND_GLOW } from "@/lib/surfaces";
 import type { RolePath } from "./rolePaths";
 
-/** Textura de las tarjetas de camino (también la usa el slider móvil). */
-export const GLOW: CSSProperties = {
-  backgroundImage: "radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--color-brand-blue) 16%, transparent), transparent 60%)",
-};
+/** Textura de las tarjetas de camino (compartida en `@/lib/surfaces`; también la usa el slider móvil). */
+export const GLOW = BRAND_GLOW;
 
 interface RoleResultProps {
   path: RolePath;

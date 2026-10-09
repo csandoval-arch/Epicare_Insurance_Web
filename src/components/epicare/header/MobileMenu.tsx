@@ -7,6 +7,7 @@ import type Lenis from "lenis";
 import ArrowUR from "@/components/icons/ArrowUR";
 import PrimaryCta from "@/components/go-crm/cta/PrimaryCta";
 import { DUR, EASE, STAGGER, REVEAL } from "@/lib/motion";
+import { joinModalStore } from "@/lib/joinModalStore";
 
 export interface MobileNavGroup {
   key: string;
@@ -251,14 +252,18 @@ export default function MobileMenu({ open, onClose, groups, forceDark, loginLabe
           {/* Acceso */}
           <div className="mnav-reveal flex flex-col items-start gap-static-sm pt-static-sm">
             <PrimaryCta label={loginLabel} onClick={onClose} />
-            <Link
-              href="#"
-              onClick={onClose}
-              className="flex items-center gap-static-xs px-2 py-static-xs whitespace-nowrap text-body-sm text-[var(--color-text-primary)] transition-opacity duration-150 active:opacity-50"
+            {/* Join Epicare: cierra el menú y abre el modal de unirse */}
+            <button
+              type="button"
+              onClick={() => {
+                onClose();
+                joinModalStore.open();
+              }}
+              className="flex items-center gap-static-xs px-2 py-static-xs whitespace-nowrap text-body-sm text-[var(--color-text-primary)] transition-opacity duration-150 active:opacity-50 cursor-pointer"
             >
               {moreLabel}
               <ArrowUR className="w-static-md h-static-md" />
-            </Link>
+            </button>
           </div>
         </nav>
       </div>
