@@ -126,7 +126,12 @@ export default function HubIntro({
       {/* Caja con stroke (hairline del DS) que enmarca el acto 1; mismo alto que las tarjetas (75vh) */}
       <div className={`w-[70vw] lg:w-[50vw] flex flex-col p-static-2xl ${ACT_BOX} ${ACT1_ON_BRAND_CLASS}`} style={ACT1_ON_BRAND_VARS}>
         <div className="flex-1 flex flex-col justify-center">
-          <HubPlaque className="w-40 h-20 mb-static-2xl" logoClassName="w-14 h-14" radiusClass="rounded-md" />
+          {/* Placa cuadrada; en pantallas bajas (<860px de alto) vuelve al tamaño anterior para que las fichas quepan en la caja de 75vh */}
+          <HubPlaque
+            className="w-40 h-40 [@media(max-height:53.75rem)]:w-20 [@media(max-height:53.75rem)]:h-20 mb-static-2xl"
+            logoClassName="w-24 h-24 [@media(max-height:53.75rem)]:w-14 [@media(max-height:53.75rem)]:h-14"
+            radiusClass="rounded-md"
+          />
           <HubTitle className="hub-title text-display-lg" renderMark={renderHubMark} />
         </div>
         {/* Lo que viene: tres mini-fichas en fila, solo con el nombre (mismo lenguaje que las cajas: hairline

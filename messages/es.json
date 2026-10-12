@@ -1178,5 +1178,135 @@
       "eppigo": "Asiste a tus clientes en su portal"
     },
     "comingSoon": "Próximamente"
+  },
+  "joinUs": {
+    "roles": {
+      "agent-licensed": {
+        "title": [
+          "En Epicare Insurance,",
+          "vamos <k>mucho más allá de los contratos.</k>"
+        ],
+        "subtitle": "Te damos un ecosistema completo de tecnología, marketing y formación, pensado para impulsar tu éxito."
+      },
+      "agent-unlicensed": {
+        "title": [
+          "¡Sé un Agente",
+          "<k>Epicare!</k>"
+        ],
+        "subtitle": "Si estás decidido a iniciar tu carrera en ventas de seguros de vida y salud, ¡en Epicare podemos ayudarte!",
+        "contactTitle": "Ponte en contacto hoy",
+        "benefits": {
+          "eyebrow": "Beneficios",
+          "title": "Epicare te prepara para el éxito desde el primer día",
+          "cta": "Regístrate",
+          "items": [
+            {
+              "key": "pre-licensing",
+              "title": "Apoyo en pre-licencia y examen gratuito",
+              "body": "Epicare cubre el costo total de tu curso de pre-licencia y examen, para que comiences tu carrera sin cargos iniciales."
+            },
+            {
+              "key": "certifications",
+              "title": "Ayuda con certificaciones y credenciales",
+              "body": "Te guiamos en todo el proceso para completar las certificaciones y credenciales necesarias para ser un agente licenciado."
+            },
+            {
+              "key": "econtracts",
+              "title": "E-contratos con las mejores aseguradoras",
+              "body": "Epicare gestiona tus e-contratos directamente con las aseguradoras líderes, ahorrándote tiempo y facilitando tu integración."
+            },
+            {
+              "key": "coverage",
+              "title": "Cobertura opcional para AHIP y E&O",
+              "body": "Tienes la opción de que Epicare cubra certificaciones esenciales como AHIP y seguro E&O, manteniéndote protegido y en cumplimiento."
+            }
+          ]
+        },
+        "roadmap": {
+          "eyebrow": "Proceso de Licenciamiento",
+          "title": "Tu camino para convertirte en agente licenciado",
+          "cta": "Regístrate",
+          "badge": "Acreditación Oficial del Estado",
+          "steps": [
+            {
+              "step": "01",
+              "title": "Completa tu curso de pre-licencia",
+              "body": "Cada estado cuenta con un curso de pre-licencia y examen de certificación que debes completar como uno de los primeros pasos para ser agente."
+            },
+            {
+              "step": "02",
+              "title": "Aprueba el examen de licencia estatal",
+              "body": "Este examen es independiente del que tomas para la certificación del curso. Debes aprobarlo para obtener tu licencia emitida por el estado."
+            },
+            {
+              "step": "03",
+              "title": "Completa tu verificación de antecedentes",
+              "body": "Una vez aprobado el examen, se requerirá una verificación estándar de antecedentes. Esto puede incluir toma de huellas y récord según el estado."
+            },
+            {
+              "step": "04",
+              "title": "Solicita tu licencia oficial",
+              "body": "¡Has llegado al último paso! Este trámite se realiza directamente a través de NIPR (Registro Nacional de Productores de Seguros)."
+            }
+          ]
+        }
+      }
+    },
+    "form": {
+      "title": "Regístrate",
+      "loading": "Cargando formulario",
+      "iframeTitle": "Formulario de solicitud de agente de Epicare"
+    },
+    "contact": {
+      "title": "Contacto",
+      "addressLabel": "Dirección",
+      "address": "2600 S Douglas Rd Suite 902, Coral Gables, FL 33134",
+      "phoneLabel": "Teléfono",
+      "phone": "+1 (888) 374-2467",
+      "emailLabel": "Correo",
+      "email": "info@epicareinsurance.com"
+    },
+    "benefits": {
+      "eyebrow": "Beneficios",
+      "title": "¿Por qué unirte a Epicare Insurance?",
+      "cta": "Regístrate",
+      "carriers": {
+        "value": 132,
+        "suffix": "+",
+        "title": "aseguradoras",
+        "subtitle": "en un solo lugar",
+        "body": "Accede a una red nacional en todas las líneas de producto: Salud (ACA), Medicare, Vida y Suplementarios."
+      },
+      "items": [
+        {
+          "key": "marketing",
+          "title": "Marketing\npersonalizado",
+          "body": "Diseñamos campañas de marketing a la medida de tu estilo y de tu mercado objetivo, para que atraigas clientes de forma constante."
+        },
+        {
+          "key": "contracting",
+          "title": "Contratación\nágil",
+          "body": "Simplificamos el proceso de contratación para que empieces a vender antes, sin complicaciones."
+        },
+        {
+          "key": "commissions",
+          "title": "Comisiones de\nprimer nivel",
+          "body": "Gana comisiones muy competitivas, alineadas con tu producción y tu calidad."
+        }
+      ]
+    },
+    "training": {
+      "eyebrow": "Tecnología Epicare",
+      "title": "Formación a demanda",
+      "body": "Aprende lo que necesitas, cuando lo necesitas. Recibe formación práctica en:",
+      "topics": [
+        "Ventas",
+        "Marketing",
+        "CRM y sistemas",
+        "Estrategia de negocio",
+        "Herramientas digitales"
+      ],
+      "cta": "Regístrate"
+    }
   }
 }

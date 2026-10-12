@@ -207,7 +207,7 @@ export default function BentoGridMobile() {
               <div className={`relative w-full h-[68dvh] max-h-[528px] flex flex-col justify-start rounded-lg border border-[var(--color-border-Strokes-default)] p-[var(--space-gutter-sm)] ${ACT1_ON_BRAND_CLASS}`} style={ACT1_ON_BRAND_VARS}>
                 <span aria-hidden="true" className="stack-shade pointer-events-none absolute inset-0 z-20 rounded-lg bg-[var(--color-overlay-backdrop)] opacity-0" />
                 {/* Recuadro de logo común en móvil (w-32 h-16): igual para el GO Hub y los tres productos */}
-                <HubPlaque className="w-32 h-18 mt-static-xl mb-static-lg" logoClassName="w-12 h-12" radiusClass="rounded-md" />
+                <HubPlaque className="w-24 h-24 mt-static-xl mb-static-lg" logoClassName="w-16 h-16" radiusClass="rounded-md" />
                 <HubTitle className="hub-title text-display-lg text-left" renderMark={renderHubMark} />
                 {/* Lo que viene (como en desktop): tres fichas en fila; clic = baja hasta esa tarjeta */}
                 <div className="mt-auto mb-static-xl grid grid-cols-3 gap-static-sm">

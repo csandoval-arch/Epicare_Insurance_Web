@@ -1177,5 +1177,135 @@
       "eppigo": "Assist clients inside their portal"
     },
     "comingSoon": "Coming soon"
+  },
+  "joinUs": {
+    "roles": {
+      "agent-licensed": {
+        "title": [
+          "At Epicare Insurance,",
+          "we go <k>far beyond contracts.</k>"
+        ],
+        "subtitle": "We provide you with a complete ecosystem of technology, marketing, and training designed to supercharge your success."
+      },
+      "agent-unlicensed": {
+        "title": [
+          "Be an",
+          "<k>Epicare Agent!</k>"
+        ],
+        "subtitle": "If you're determined to start your career in life and health insurance sales, at Epicare we can help you!",
+        "contactTitle": "Get in touch today",
+        "benefits": {
+          "eyebrow": "Benefits",
+          "title": "Epicare Sets You Up for Success from Day One",
+          "cta": "Register",
+          "items": [
+            {
+              "key": "pre-licensing",
+              "title": "Free Pre-Licensing and Exam Support",
+              "body": "Epicare covers the full cost of your pre-licensing course and exam, so you can start your career without worrying about upfront fees."
+            },
+            {
+              "key": "certifications",
+              "title": "Help with Certifications and Credentials",
+              "body": "We guide you through the process of completing all the certifications and credentials you need to become a licensed insurance agent."
+            },
+            {
+              "key": "econtracts",
+              "title": "Econtracts with Top Insurance Carriers",
+              "body": "Epicare handles your Econtracts directly with leading insurance companies, saving you time and making onboarding easier."
+            },
+            {
+              "key": "coverage",
+              "title": "Optional Coverage for AHIP and E&O",
+              "body": "You have the option to let Epicare cover the cost of essential certifications like AHIP and E&O insurance, helping you stay compliant and protected."
+            }
+          ]
+        },
+        "roadmap": {
+          "eyebrow": "Licensing Process",
+          "title": "Your Path to Becoming a Licensed Agent",
+          "cta": "Register",
+          "badge": "Official State Accreditation",
+          "steps": [
+            {
+              "step": "01",
+              "title": "Finish your pre-licensing course",
+              "body": "Each state has a pre-licensing course and certification exam you must complete as one of the first steps to become an insurance agent."
+            },
+            {
+              "step": "02",
+              "title": "Pass the state’s licensing exam",
+              "body": "This is a separate examination from the one you take to get pre-licensing course certification. You must pass this exam in order to get a state license."
+            },
+            {
+              "step": "03",
+              "title": "Complete your background check",
+              "body": "Once you have a state license, you will be required to complete a standard background check. This may include fingerprinting, criminal history and checks depending on the state."
+            },
+            {
+              "step": "04",
+              "title": "Apply for your license",
+              "body": "You have reached the last step! This is done through NIPR (National Insurance Producer Registry)."
+            }
+          ]
+        }
+      }
+    },
+    "form": {
+      "title": "Register",
+      "loading": "Loading form",
+      "iframeTitle": "Epicare agent application form"
+    },
+    "contact": {
+      "title": "Contact",
+      "addressLabel": "Address",
+      "address": "2600 S Douglas Rd Suite 902, Coral Gables, FL 33134",
+      "phoneLabel": "Phone",
+      "phone": "+1 (888) 374-2467",
+      "emailLabel": "Email",
+      "email": "info@epicareinsurance.com"
+    },
+    "benefits": {
+      "eyebrow": "Benefits",
+      "title": "Why join Epicare Insurance?",
+      "cta": "Register",
+      "carriers": {
+        "value": 132,
+        "suffix": "+",
+        "title": "Carriers",
+        "subtitle": "in One Place",
+        "body": "Gain access to a nationwide network across all product lines: Health (ACA), Medicare, Life, and Supplemental."
+      },
+      "items": [
+        {
+          "key": "marketing",
+          "title": "Personalized\nMarketing",
+          "body": "We design tailored marketing campaigns adapted to your style and target market helping you consistently attract more clients."
+        },
+        {
+          "key": "contracting",
+          "title": "Fast\nContracting",
+          "body": "We simplify the contracting process so you can start selling faster, with zero hassle."
+        },
+        {
+          "key": "commissions",
+          "title": "Top-Tier\nCommissions",
+          "body": "Earn highly competitive commissions aligned with your production and quality."
+        }
+      ]
+    },
+    "training": {
+      "eyebrow": "Epicare Technology",
+      "title": "On-Demand Training",
+      "body": "Learn what you need, when you need it. Get practical, hands-on training in:",
+      "topics": [
+        "Sales",
+        "Marketing",
+        "CRM & Systems",
+        "Business Strategy",
+        "Digital Tools"
+      ],
+      "cta": "Register"
+    }
   }
 }

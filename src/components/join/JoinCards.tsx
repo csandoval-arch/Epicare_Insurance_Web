@@ -10,11 +10,12 @@
  */
 
 import type { ComponentType } from "react";
+import { useRouter } from "next/navigation";
 import { Buildings, Certificate, Handshake, SealCheck, Trademark, User, type IconProps } from "@phosphor-icons/react";
 import ArrowUR from "@/components/icons/ArrowUR";
 import { GlassLight, LIGHT_TILE, trackPointer } from "@/components/glass/GlassLight";
 import { IconChip } from "@/components/glass/IconChip";
-import type { JoinBranch } from "@/lib/joinModalStore";
+import { joinModalStore, type JoinBranch } from "@/lib/joinModalStore";
 import type { JoinPathKey } from "./joinData";
 
 type Icon = ComponentType<IconProps>;
@@ -47,10 +48,18 @@ export function BranchHead({ icon, tag, title, body }: { icon: Icon; tag: string
 }
 
 export function JoinTile({ icon, title, text, more, href }: { icon: Icon; title: string; text: string; more: string; href: string | null }) {
+  const router = useRouter();
+
+  const handleClick = () => {
+    if (!href) return;
+    joinModalStore.close();
+    router.push(href);
+  };
+
   return (
     <button
       type="button"
-      onClick={() => href && window.location.assign(href)}
+      onClick={handleClick}
       onPointerMove={trackPointer}
       className={`jm-tile ${LIGHT_TILE} w-full h-full lg:min-h-56 p-static-md lg:p-static-lg flex flex-col gap-static-md lg:gap-static-lg`}
     >
