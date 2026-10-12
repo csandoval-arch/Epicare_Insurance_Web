@@ -214,8 +214,10 @@ export default function HeaderEpicare({
     setIsDark(nextDark);
     if (nextDark) {
       document.documentElement.classList.add("dark");
+      try { localStorage.setItem("theme", "dark"); } catch {}
     } else {
       document.documentElement.classList.remove("dark");
+      try { localStorage.setItem("theme", "light"); } catch {}
     }
   };
 

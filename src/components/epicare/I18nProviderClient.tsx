@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { NextIntlClientProvider } from "next-intl";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import esMessages from "../../../messages/es.json";
 import enMessages from "../../../messages/en.json";
 
@@ -25,22 +26,35 @@ export default function I18nProviderClient({
   const [locale, setLocaleState] = useState<Locale>("en");
 
   useEffect(() => {
-    const savedLocale = localStorage.getItem("NEXT_LOCALE") as Locale;
-    if (savedLocale === "en" || savedLocale === "es") {
-      setLocaleState(savedLocale);
-    } else {
-      // Auto-detect browser language
-      const browserLang = navigator.language.split("-")[0];
-      if (browserLang === "es") {
-        setLocaleState("es");
+    try {
+      const savedLocale = localStorage.getItem("NEXT_LOCALE") as Locale;
+      if (savedLocale === "en" || savedLocale === "es") {
+        setLocaleState(savedLocale);
+        document.documentElement.lang = savedLocale;
+      } else {
+        // Por defecto en inglés al inicio (feedback explícito)
+        setLocaleState("en");
+        document.documentElement.lang = "en";
       }
+    } catch {
+      // Ignorar si localStorage está bloqueado
     }
   }, []);
 
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);
-    localStorage.setItem("NEXT_LOCALE", newLocale);
-    document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000`;
+    try {
+      localStorage.setItem("NEXT_LOCALE", newLocale);
+      document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
+      document.documentElement.lang = newLocale;
+    } catch {}
+
+    // Refrescar ScrollTrigger ante cambios de altura generados por el idioma
+    if (typeof window !== "undefined") {
+      requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
+      });
+    }
   };
 
   const messages = locale === "es" ? esMessages : enMessages;

@@ -27,9 +27,11 @@ export default function DesignSystemPage() {
     if (isDark) {
       document.documentElement.classList.remove('dark');
       setIsDark(false);
+      try { localStorage.setItem('theme', 'light'); } catch {}
     } else {
       document.documentElement.classList.add('dark');
       setIsDark(true);
+      try { localStorage.setItem('theme', 'dark'); } catch {}
     }
   };
 

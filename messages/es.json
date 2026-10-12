@@ -37,7 +37,8 @@
     "interactiveMap": {
       "overline": "Alcance Nacional",
       "title": "52 Jurisdicciones.",
-      "description": "Licenciados y operando activamente en los 50 estados, Washington DC y Puerto Rico. Un solo acuerdo cubre toda tu operación."
+      "description": "Licenciados y operando activamente en los 50 estados, Washington DC y Puerto Rico. Un solo acuerdo cubre toda tu operación.",
+      "cta": "Contrátate"
     },
     "licensingGrid": {
       "title": "Licencias por estado",
@@ -101,9 +102,10 @@
       "eppigo": {
         "name": "Eppigo™",
         "cta": "Únete a Eppigo",
-        "title": "Insurance that finally makes sense.",
+        "title": "Seguros que por fin tienen sentido.",
         "subtitle": "<bold>Asiste a tus clientes</bold> dentro de su portal:\n<bold>pólizas, wallet, documentos</bold>, chat directo\ny <bold>enrollment</bold>, todo en tiempo real.",
-        "desc": "Donde ellos gestionan sus pólizas y wallets, y tu agencia los asiste en tiempo real."
+        "desc": "Donde ellos gestionan sus pólizas y wallets, y tu agencia los asiste en tiempo real.",
+        "trademark": "marca registrada"
       },
       "solutions": {
         "name": "Agency Solutions",
@@ -115,7 +117,9 @@
         "f2Title": "Embudos de Alta Conversión",
         "f2Desc": "Recorridos testeados para transformar prospectos fríos en clientes reales.",
         "f3Title": "Activos Premium",
-        "f3Desc": "Material de venta y diseño con la calidad gráfica de una agencia top."
+        "f3Desc": "Material de venta y diseño con la calidad gráfica de una agencia top.",
+        "ctaMarketing": "Marketing",
+        "ctaTech": "Tecnología"
       }
     },
     "darkGradient": {
@@ -231,7 +235,7 @@
       "titleLine2": "un downline entero.",
       "desc": "El sistema es el mismo. Lo que cambia es lo que ves.",
       "tagAgent": "Agente",
-      "tagOwner": "Agency Owner",
+      "tagOwner": "Dueño de Agencia",
       "tagSub": "Sub-agencia",
       "toggleAgent": "Para agentes",
       "toggleAgency": "Para agencias",
@@ -407,7 +411,7 @@
       "agencyFeature3Desc": "Resumen centralizado de appointments, acuerdos y cotización de grupo."
     },
     "downline": {
-      "overline": "Agency Downline",
+      "overline": "Downline de Agencia",
       "title1": "Ves a tu equipo",
       "title2": "sin tener que preguntarle.",
       "scrollHint": "Desliza hacia abajo",
@@ -435,14 +439,15 @@
       "pill2": "Tiempo Real",
       "pill3": "Dashboard",
       "pill4": "Cifrado",
-      "card1Title": "Direct Enrollment",
+      "card1Title": "Inscripción Directa",
       "card1Desc": "Cotiza e inscribe al cliente de <bold>principio a fin sin salir de GO AMS</bold>. Tienes acceso a <blue>todos los carriers en una sola pantalla</blue>, eliminando la necesidad de visitar múltiples portales para cerrar una venta.",
-      "card2Title": "Partial Enrollment",
+      "card2Title": "Inscripción Parcial",
       "card2Desc": "Asiste al cliente completando el proceso inicial, y <blue>envíale un enlace seguro</blue> para que él mismo ingrese su <bold>información sensible</bold> (como tarjeta de crédito) desde su dispositivo.",
-      "card3Title": "Referral Link",
+      "card3Title": "Enlace de Referidos",
       "card3Desc": "Envía un enlace único al cliente para redirigirlo a nuestra plataforma <bold>Eppigo™</bold>. Cualquier compra que realice el usuario se traduce automáticamente en una <blue>comisión porcentual</blue> para ti.",
-      "card4Title": "Proposals",
-      "card4Desc": "Genera cotizaciones personalizadas y dinámicas según el perfil del cliente. <bold>Filtra y ajusta las mejores opciones</bold> para enviarle una <blue>propuesta lista para comparar y elegir</blue> con total claridad."
+      "card4Title": "Propuestas",
+      "card4Desc": "Genera cotizaciones personalizadas y dinámicas según el perfil del cliente. <bold>Filtra y ajusta las mejores opciones</bold> para enviarle una <blue>propuesta lista para comparar y elegir</blue> con total claridad.",
+      "unifiedPlatform": "Plataforma Unificada"
     },
     "delegateUsers": {
       "overline": "Control de Acceso",
@@ -472,19 +477,19 @@
       "off": "OFF"
     },
     "backOfficeTour": {
-      "panel1Title": "APPOINTMENTS",
+      "panel1Title": "NOMBRAMIENTOS",
       "panel1Desc": "Gestiona y rastrea todos tus contratos, solicitudes y nombramientos activos con aseguradoras en un solo lugar.",
-      "panel2Title": "MEMBER SUPPORT",
+      "panel2Title": "SOPORTE AL MIEMBRO",
       "panel2Desc": "Sistema de tickets directo y asistencia dedicada para resolver consultas operativas y casos de pólizas con rapidez.",
-      "panel3Title": "DOCUMENTS",
+      "panel3Title": "DOCUMENTOS",
       "panel3Desc": "Repositorio centralizado y seguro para expedientes de clientes, archivos de pólizas y acuerdos firmados.",
-      "panel4Title": "DELEGATE USERS",
+      "panel4Title": "USUARIOS DELEGADOS",
       "panel4Desc": "Control granular de accesos y roles para delegar tareas a tu equipo y asistentes sin comprometer datos confidenciales.",
-      "panel5Title": "RESOURCES",
+      "panel5Title": "RECURSOS",
       "panel5Desc": "Biblioteca de guías de aseguradoras, materiales comerciales, manuales y herramientas operativas listas para usar.",
-      "panel6Title": "NOTIFICATIONS",
+      "panel6Title": "NOTIFICACIONES",
       "panel6Desc": "Alertas en tiempo real sobre vencimiento de licencias, estatus de pólizas, renovaciones y pagos de comisiones.",
-      "panel7Title": "REPORTING",
+      "panel7Title": "REPORTES",
       "panel7Desc": "Business intelligence completo, analíticas de producción, seguimiento de volumen de equipo y exportación de datos."
     },
     "howToJoin": {
@@ -715,7 +720,7 @@
       "description": "Sincronización nativa con todo el ecosistema de Google Calendar. Las citas son parte del flujo de trabajo, no eventos aislados."
     },
     "automation": {
-      "headline": "Keep the follow-up moving automatically."
+      "headline": "Mantén el seguimiento avanzando automáticamente."
     },
     "workBehind": {
       "overline": "Seguimiento",

@@ -710,7 +710,7 @@ export default function InteractiveGlobeEpicare({ isWidget = false }: { isWidget
           {/* TEXT OVERLAY (BOTTOM) */}
           <div className="col-span-12 flex flex-col justify-center items-center text-center gap-6">
             <button className="pointer-events-auto group w-fit h-12 pl-6 pr-2 rounded-full flex items-center gap-3 bg-[var(--color-action-primary-bg)] text-[var(--color-action-primary-text)] shadow-elevation-2 transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-4 active:scale-[0.96] active:opacity-80 active:duration-150">
-              <span className="text-body-sm font-medium">Get contracted</span>
+              <span className="text-body-sm font-medium">{t('cta')}</span>
               <span className="relative w-8 h-8 rounded-full bg-[var(--color-action-primary-text)] text-[var(--color-action-primary-bg)] flex items-center justify-center overflow-hidden shrink-0">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="absolute w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" aria-hidden="true">
                   <path d="M7 17 17 7M7 7h10v10"></path>

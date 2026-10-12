@@ -224,7 +224,7 @@ export default function ProductSpotlightEpicare({ variant }: { variant: Spotligh
               <div className="flex flex-col items-start gap-4">
                 <div className="flex items-start my-1">
                   <img src={asset('/Files/logo-eppigo.svg')} alt="Eppigo" className="h-10 lg:h-12 w-auto object-contain" />
-                  <span aria-label="marca registrada" className="-ml-3 lg:-ml-3.5 -mt-1.5 lg:-mt-2 text-h3 lg:text-h2 font-light! leading-none text-[var(--color-brand-orange)]">®</span>
+                  <span aria-label={t('trademark')} className="-ml-3 lg:-ml-3.5 -mt-1.5 lg:-mt-2 text-h3 lg:text-h2 font-light! leading-none text-[var(--color-brand-orange)]">®</span>
                 </div>
                 <h2 className="text-display text-[var(--color-text-primary)]">
                   {t('title')}
@@ -289,7 +289,7 @@ export default function ProductSpotlightEpicare({ variant }: { variant: Spotligh
                   className="group w-full sm:w-fit h-12 pl-6 pr-2 rounded-full flex items-center justify-between sm:justify-start gap-3 text-white shadow-elevation-2 transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-4 active:scale-[0.96] active:opacity-80 active:duration-150"
                   style={{ backgroundColor: `var(${accentVar})` }}
                 >
-                  <span className="text-xs font-bold tracking-[0.2em] uppercase">Marketing</span>
+                  <span className="text-xs font-bold tracking-[0.2em] uppercase">{t('ctaMarketing')}</span>
                   <span className="relative w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden shrink-0" style={{ color: `var(${accentVar})` }}>
                     <ArrowUR className="absolute w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
                     <ArrowUR className="absolute w-4 h-4 -translate-x-5 translate-y-5 transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
@@ -300,7 +300,7 @@ export default function ProductSpotlightEpicare({ variant }: { variant: Spotligh
                   href="#technology"
                   className="group w-full sm:w-fit h-12 pl-6 pr-2 rounded-full flex items-center justify-between sm:justify-start gap-3 bg-white border border-gray-200 shadow-elevation-1 transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-3 hover:border-transparent active:scale-[0.96] active:opacity-80 active:duration-150"
                 >
-                  <span className="text-xs font-bold tracking-[0.2em] uppercase" style={{ color: `var(${accentVar})` }}>Technology</span>
+                  <span className="text-xs font-bold tracking-[0.2em] uppercase" style={{ color: `var(${accentVar})` }}>{t('ctaTech')}</span>
                   <span className="relative w-8 h-8 rounded-full flex items-center justify-center overflow-hidden shrink-0 transition-colors duration-300" style={{ backgroundColor: `var(${accentVar})`, color: 'white' }}>
                     <ArrowUR className="absolute w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
                     <ArrowUR className="absolute w-4 h-4 -translate-x-5 translate-y-5 transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />

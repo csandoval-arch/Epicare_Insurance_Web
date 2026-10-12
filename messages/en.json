@@ -36,7 +36,8 @@
     "interactiveMap": {
       "overline": "National Reach",
       "title": "52 Jurisdictions.",
-      "description": "Licensed and actively operating in all 50 states, Washington DC, and Puerto Rico. One agreement covers your entire footprint."
+      "description": "Licensed and actively operating in all 50 states, Washington DC, and Puerto Rico. One agreement covers your entire footprint.",
+      "cta": "Get contracted"
     },
     "licensingGrid": {
       "title": "Licenses by state",
@@ -102,7 +103,8 @@
         "cta": "Join Eppigo",
         "title": "Insurance that finally makes sense.",
         "subtitle": "<bold>Assist your clients</bold> inside their portal:\n<bold>policies, wallet, documents</bold>, direct chat\nand <bold>enrollment</bold>, all in real time.",
-        "desc": "Quote, build the proposal, and enroll the client without leaving the portal."
+        "desc": "Quote, build the proposal, and enroll the client without leaving the portal.",
+        "trademark": "registered trademark"
       },
       "solutions": {
         "name": "Agency Solutions",
@@ -114,7 +116,9 @@
         "f2Title": "Funnels",
         "f2Desc": "The prospect journey, already built.",
         "f3Title": "Sales material",
-        "f3Desc": "Built for insurance, not generic templates."
+        "f3Desc": "Built for insurance, not generic templates.",
+        "ctaMarketing": "Marketing",
+        "ctaTech": "Technology"
       }
     },
     "darkGradient": {
@@ -441,7 +445,8 @@
       "card3Title": "Referral Link",
       "card3Desc": "Send a unique link to the client redirecting them to our <bold>Eppigo™</bold> platform. Any purchase they make automatically translates into a <blue>percentage commission</blue> for you.",
       "card4Title": "Proposals",
-      "card4Desc": "Generate dynamic, personalized quotes based on client data. <bold>Filter and tailor the best options</bold> to send a <blue>ready-to-choose proposal</blue> with total clarity."
+      "card4Desc": "Generate dynamic, personalized quotes based on client data. <bold>Filter and tailor the best options</bold> to send a <blue>ready-to-choose proposal</blue> with total clarity.",
+      "unifiedPlatform": "Unified Platform"
     },
     "delegateUsers": {
       "overline": "Access Control",

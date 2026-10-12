@@ -478,7 +478,7 @@ function QuoteEnrollDesktop() {
               <div className="qw-reveal inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-[var(--color-brand-blue)]/20 bg-[var(--color-brand-blue)]/5 backdrop-blur-md">
                  <div className="w-2 h-2 rounded-full bg-[var(--color-brand-blue)] animate-pulse" />
                  <span className="text-body-sm font-bold tracking-widest uppercase text-[var(--color-brand-blue)]">
-                   Plataforma Unificada
+                   {t('unifiedPlatform')}
                  </span>
               </div>
             </div>
@@ -704,7 +704,7 @@ function QuoteEnrollMobile() {
           <div className="mobile-qw-reveal inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full border border-[var(--color-brand-blue)]/20 bg-[var(--color-brand-blue)]/5 backdrop-blur-md">
              <div className="w-2 h-2 rounded-full bg-[var(--color-brand-blue)] animate-pulse" />
              <span className="text-body-xs font-bold tracking-widest uppercase text-[var(--color-brand-blue)]">
-               Plataforma Unificada
+               {t('unifiedPlatform')}
              </span>
           </div>
         </div>
