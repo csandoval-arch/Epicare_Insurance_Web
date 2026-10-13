@@ -26,11 +26,11 @@ export const JOIN_BRANCHES: { key: JoinBranch }[] = [{ key: "agent" }, { key: "a
 
 export const JOIN_PATHS: Record<JoinBranch, JoinPath[]> = {
   agent: [
-    { key: "agent-licensed", href: "/join-us?role=agent-licensed" },
-    { key: "agent-unlicensed", href: "/join-us?role=agent-unlicensed" },
+    { key: "agent-licensed", href: "/join-us/?role=agent-licensed" },
+    { key: "agent-unlicensed", href: "/join-us/?role=agent-unlicensed" },
   ],
   agency: [
-    { key: "agency-fmo", href: "/join-us?role=agency-fmo" },
-    { key: "agency-trademark", href: "/join-us?role=agency-trademark" },
+    { key: "agency-fmo", href: "/join-us/?role=agency-fmo" },
+    { key: "agency-trademark", href: "/join-us/?role=agency-trademark" },
   ],
 };

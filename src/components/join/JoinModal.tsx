@@ -62,7 +62,15 @@ export default function JoinModal() {
             <BranchHead icon={BRANCH_ICON[b.key]} tag={t(`${b.key}.tag`)} title={t(`${b.key}.title`)} body={t(`${b.key}.body`)} />
             <div className="grid grid-cols-2 gap-static-sm lg:gap-static-md">
               {JOIN_PATHS[b.key].map((p) => (
-                <JoinTile key={p.key} icon={PATH_ICON[p.key]} title={t(`paths.${p.key}.title`)} text={t(`paths.${p.key}.text`)} more={t("moreInfo")} href={p.href} />
+                <JoinTile
+                  key={p.key}
+                  roleKey={p.key}
+                  icon={PATH_ICON[p.key]}
+                  title={t(`paths.${p.key}.title`)}
+                  text={t(`paths.${p.key}.text`)}
+                  more={t("moreInfo")}
+                  href={p.href}
+                />
               ))}
             </div>
           </section>

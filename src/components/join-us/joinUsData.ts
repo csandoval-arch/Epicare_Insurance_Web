@@ -24,12 +24,14 @@ export interface FormEmbed {
 
 const AGENT_FORM: FormEmbed = { formId: "nQpPub6lsr5H4pIPp1tG", formName: "Website - Be an Epicare Agent" };
 const UNLICENSED_FORM: FormEmbed = { formId: "hZW6rrsjvuTNq5rUKJlk", formName: "Website - Get agent license" };
+const FMO_FORM: FormEmbed = { formId: "vkKPrcsUSPzIKDU82wkr", formName: "Website - FMO Partner" };
+const TRADEMARK_FORM: FormEmbed = { formId: "7apIAFW8GEHMZI2eiVfh", formName: "Website - Trademark Model" };
 
 export const FORMS: Record<JoinPathKey, FormEmbed> = {
   "agent-licensed": AGENT_FORM,
   "agent-unlicensed": UNLICENSED_FORM,
-  "agency-fmo": AGENT_FORM,
-  "agency-trademark": AGENT_FORM,
+  "agency-fmo": FMO_FORM,
+  "agency-trademark": TRADEMARK_FORM,
 };
 
 export const FORM_HOST = "https://link.epicareinsurance.com";

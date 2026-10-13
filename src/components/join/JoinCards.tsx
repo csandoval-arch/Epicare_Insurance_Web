@@ -47,13 +47,39 @@ export function BranchHead({ icon, tag, title, body }: { icon: Icon; tag: string
   );
 }
 
-export function JoinTile({ icon, title, text, more, href }: { icon: Icon; title: string; text: string; more: string; href: string | null }) {
+export function JoinTile({
+  icon,
+  title,
+  text,
+  more,
+  href,
+  roleKey,
+}: {
+  icon: Icon;
+  title: string;
+  text: string;
+  more: string;
+  href: string | null;
+  roleKey?: JoinPathKey;
+}) {
   const router = useRouter();
 
   const handleClick = () => {
     if (!href) return;
     joinModalStore.close();
-    router.push(href);
+
+    // Si ya estamos dentro de /join-us, actualizamos la vista de forma reactiva e instantánea
+    if (typeof window !== "undefined" && window.location.pathname.includes("/join-us")) {
+      if (roleKey) {
+        window.dispatchEvent(new CustomEvent("epicareJoinRoleChange", { detail: roleKey }));
+      }
+      const targetQuery = roleKey ? `?role=${roleKey}` : "";
+      const targetUrl = `${window.location.pathname}${targetQuery}`;
+      window.history.pushState(null, "", targetUrl);
+      router.replace(href);
+    } else {
+      router.push(href);
+    }
   };
 
   return (

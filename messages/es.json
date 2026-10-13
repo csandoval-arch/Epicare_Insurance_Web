@@ -1255,6 +1255,223 @@
             }
           ]
         }
+      },
+      "agency-fmo": {
+        "title": [
+          "Crece más rápido.",
+          "Recluta de forma inteligente.",
+          "<k>Vende más.</k>"
+        ],
+        "subtitle": "Epicare empodera a las agencias con un stack tecnológico integral diseñado para seguros y acceso a aseguradoras para escalar a nivel nacional — no solo administrar tu cartera.",
+        "contactTitle": "Ponte en contacto",
+        "benefits": {
+          "eyebrow": "Beneficios",
+          "title": "¿Por qué las agencias eligen Epicare?",
+          "cta": "Regístrate",
+          "items": [
+            {
+              "key": "carriers",
+              "title": "132 aseguradoras (y contando)",
+              "body": "Un portafolio integral y diverso para satisfacer cualquier necesidad de tus clientes."
+            },
+            {
+              "key": "contracting",
+              "title": "Contratación ágil",
+              "body": "Onboarding simplificado con aseguradoras para que tus agentes comiencen a vender más rápido."
+            },
+            {
+              "key": "commissions",
+              "title": "Comisiones de primer nivel",
+              "body": "Esquemas competitivos y planes de rendimiento que premian el crecimiento sostenido."
+            },
+            {
+              "key": "go-epic-stack",
+              "title": "Suite GO EPIC completa incluida",
+              "body": "GO CRM, GO AMS y GO AI integrados para captación de leads, automatización y reportería."
+            },
+            {
+              "key": "epic-university",
+              "title": "Epic University — Plataforma 24/7",
+              "body": "Tutoriales bajo demanda, guías prácticas y manuales por rol para capacitar en ventas, sistemas y cumplimiento."
+            },
+            {
+              "key": "co-branding",
+              "title": "Co-branding y soporte de lanzamiento",
+              "body": "Recursos de marca, plantillas bilingües, landing pages y guías de reclutamiento para acelerar tu presencia."
+            },
+            {
+              "key": "assignable-talent",
+              "title": "Talento asignable",
+              "body": "Conectamos o asignamos agentes precalificados de nuestros embudos de reclutamiento directo a tu agencia."
+            },
+            {
+              "key": "compliance",
+              "title": "Cumplimiento y soporte institucional",
+              "body": "Traspasos de aseguradoras, rastreo de licencias, directrices CMS/HIPAA y control de calidad continuo."
+            }
+          ]
+        },
+        "howItWorks": {
+          "eyebrow": "Proceso",
+          "title": "Cómo funciona",
+          "subtitle": "(simple y repetible)",
+          "cta": "Postúlate ahora",
+          "steps": [
+            {
+              "step": "01",
+              "title": "Aplica y califica",
+              "body": "Debida diligencia básica: verificación en NIPR, seguro E&O y revisión de producción."
+            },
+            {
+              "step": "02",
+              "title": "Licencia y co-branding",
+              "body": "Firma el acuerdo de licencia (sin tarifas de franquicia) y recibe tus recursos de marca Epicare + Ciudad/Equipo."
+            },
+            {
+              "step": "03",
+              "title": "Onboarding (4–6 semanas)",
+              "body": "Nombramientos con aseguradoras, transferencias y activación de sistemas."
+            },
+            {
+              "step": "04",
+              "title": "Activa tu stack tecnológico",
+              "body": "GO CRM/AMS/AI, biblioteca de campañas y manuales de ventas listos para operar."
+            },
+            {
+              "step": "05",
+              "title": "Lanzamiento y reclutamiento",
+              "body": "Landing page, campañas orgánicas/pagadas (opcionales) y acceso directo a agentes reclutables de nuestros embudos."
+            }
+          ]
+        },
+        "closing": {
+          "eyebrow": "Plan de Lanzamiento",
+          "title": [
+            "Arranca más rápido,",
+            "recluta más inteligente,",
+            "y <k>retiene más ganancias.</k>"
+          ],
+          "body": "Agenda una reunión con nosotros y te guiaremos paso a paso por el plan de lanzamiento acelerado.",
+          "cta": "Agendar una reunión",
+          "badge": "Lanzamiento Acelerado de Agencia",
+          "alt": "Alianza de liderazgo y reunión de lanzamiento de agencia en Epicare"
+        }
+      },
+      "agency-trademark": {
+        "title": [
+          "Construye Tu Propia",
+          "<k>Agencia Epicare Insurance.</k>"
+        ],
+        "subtitle": "Arranca más rápido, recluta de forma más inteligente y gana más sin tarifas de franquicia. El Modelo de Licencia Epicare te brinda nuestra marca, manuales y stack tecnológico completo para escalar con confianza.",
+        "contactTitle": "Ponte en contacto",
+        "benefits": {
+          "eyebrow": "Modelo de Licencia",
+          "title": "Beneficios clave de crear tu propia agencia Epicare Insurance",
+          "cta": "Ponte en contacto",
+          "items": [
+            {
+              "key": "co-branding",
+              "title": "Co-Branding nacional, cero regalías",
+              "body": "Opera bajo Epicare como Director de Agencia sin tarifas de franquicia ni royalties. Recibe manual de marca, plantillas bilingües (ES/EN), landing pages y biblioteca de campañas."
+            },
+            {
+              "key": "go-to-market",
+              "title": "Lanzamiento inmediato en los 50 estados",
+              "body": "Comercializa los mismos productos (ACA/Medicare, vida, suplementarios) a nivel nacional, sin restricciones territoriales exclusivas."
+            },
+            {
+              "key": "operational-stack",
+              "title": "Stack operativo integral incluido",
+              "body": "Todas las plataformas EPICARE GO: GO CRM, GO AMS, GO AI, GO CALLS y Epicare Academy incluidas para captación de prospectos, agendamiento y retención."
+            },
+            {
+              "key": "hierarchy-support",
+              "title": "Jerarquía Epicare y soporte de aseguradoras",
+              "body": "Onboarding y transferencias con aseguradoras, soporte de cumplimiento (CMS/HIPAA donde aplique), auditoría de calidad en llamadas y contratos ágiles."
+            },
+            {
+              "key": "economics",
+              "title": "Economía favorable para el licenciatario",
+              "body": "Esquemas y comisiones alineados a producción y calidad, con renegociación tras el mes 6. Bonificaciones por persistencia y calidad según resultados."
+            },
+            {
+              "key": "benefit-parity",
+              "title": "Paridad total de beneficios",
+              "body": "Los agentes licenciatarios reciben los mismos beneficios esenciales que los agentes directos de Epicare, una ventaja única sobre programas tradicionales."
+            },
+            {
+              "key": "community-growth",
+              "title": "Programas de comunidad y crecimiento",
+              "body": "Masterminds exclusivos, estudios de caso, Deal Desk para cierres complejos y reconocimiento nacional (insignias Epicare Top Licensee)."
+            }
+          ]
+        },
+        "manifesto": {
+          "eyebrow": "El Modelo de Licencia",
+          "statement": "Crea tu Agencia Epicare con <k>cero tarifas de franquicia.</k> Utiliza nuestra marca, procesos y tecnología para vender y reclutar más rápido en cualquier estado, con comisiones basadas en desempeño que mejoran a medida que creces.",
+          "badges": [
+            "0% Tarifas de franquicia",
+            "Los 50 estados",
+            "Stack GO completo",
+            "Comisiones progresivas"
+          ],
+          "cta": "Empezar ahora"
+        },
+        "comparison": {
+          "eyebrow": "Ventaja Estratégica",
+          "title": [
+            "¿Por qué crear una Agencia Epicare",
+            "vs. <k>empezar desde cero?</k>"
+          ],
+          "subtitle": "Evita el desembolso inicial de franquicia, los retrasos operativos y las ataduras de regalías, lanzando con una marca nacional consolidada y tecnología integral.",
+          "cta": "Regístrate",
+          "items": [
+            {
+              "key": "no-franchise-fee",
+              "n": "01",
+              "badge": "Ahorro de $25k–$50k+",
+              "title": "Cero costo de franquicia",
+              "body": "Elimina los costos iniciales de $25k–$50k+ y las ataduras de regalías plurianuales típicas de las franquicias tradicionales.",
+              "traditionalLabel": "Franquicia Tradicional",
+              "traditionalValue": "$25k–$50k+ y Regalías",
+              "epicareLabel": "Licencia Epicare",
+              "epicareValue": "$0 Coste · 0% Regalías"
+            },
+            {
+              "key": "lower-risk-speed",
+              "n": "02",
+              "badge": "Lanzamiento Acelerado",
+              "title": "Menor riesgo, mayor velocidad",
+              "body": "Lanzas más rápido, con menor capital y fricción operativa, manteniendo todo el potencial de ingresos para los de alto rendimiento.",
+              "traditionalLabel": "Inicio Desde Cero",
+              "traditionalValue": "6–12 Meses y Alto Riesgo",
+              "epicareLabel": "Licencia Epicare",
+              "epicareValue": "4–6 Semanas al Mercado"
+            },
+            {
+              "key": "brand-stack-playbook",
+              "n": "03",
+              "badge": "Llave en Mano",
+              "title": "Marca + Stack + Manuales",
+              "body": "A diferencia de muchos programas 'sin costo', Epicare licencia la marca y provee el stack completo EPICARE GO (CRM/AMS/AI/CALLS) más manuales bilingües desde el primer día.",
+              "traditionalLabel": "Programas 'Sin Costo' Genéricos",
+              "traditionalValue": "Solo Códigos, Sin Software",
+              "epicareLabel": "Licencia Epicare",
+              "epicareValue": "Stack GO + Manuales Día 1"
+            },
+            {
+              "key": "faster-recruitment",
+              "n": "04",
+              "badge": "Comisiones Progresivas",
+              "title": "Reclutamiento ágil y mejores márgenes",
+              "body": "Recluta apalancándote en una marca nacional y retén más ingresos netos gracias a esquemas de comisiones progresivas basadas en resultados (vs. modelos rígidos de franquicia).",
+              "traditionalLabel": "Modelos Rígidos de Franquicia",
+              "traditionalValue": "Comisiones Fijas y Topes",
+              "epicareLabel": "Licencia Epicare",
+              "epicareValue": "Escalado por Desempeño"
+            }
+          ]
+        }
       }
     },
     "form": {

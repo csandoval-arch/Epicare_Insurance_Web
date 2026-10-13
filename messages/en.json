@@ -1254,6 +1254,223 @@
             }
           ]
         }
+      },
+      "agency-fmo": {
+        "title": [
+          "Build faster.",
+          "Recruit smarter.",
+          "<k>Sell more.</k>"
+        ],
+        "subtitle": "Epicare empowers agencies with a complete, insurance-first tech stack and carrier access designed to scale you nationwide — not just manage your book.",
+        "contactTitle": "Get In Touch",
+        "benefits": {
+          "eyebrow": "Benefits",
+          "title": "Why agencies choose Epicare",
+          "cta": "Register",
+          "items": [
+            {
+              "key": "carriers",
+              "title": "132 carriers (and counting)",
+              "body": "A broader portfolio to match any client need."
+            },
+            {
+              "key": "contracting",
+              "title": "Fast contracting",
+              "body": "Streamlined carrier onboarding so agents start selling sooner."
+            },
+            {
+              "key": "commissions",
+              "title": "Top-tier commissions",
+              "body": "Competitive splits and performance paths that reward growth."
+            },
+            {
+              "key": "go-epic-stack",
+              "title": "Full GO EPIC stack included",
+              "body": "GO CRM, GO AMS & GO AI working together for lead gen, automation, and reporting."
+            },
+            {
+              "key": "epic-university",
+              "title": "Epic University — 24/7 Learning Platform",
+              "body": "On-demand tutorials, step-by-step guides, and role-specific playbooks that train agents on sales, compliance, systems, and growth."
+            },
+            {
+              "key": "co-branding",
+              "title": "Co-branding & launch support",
+              "body": "Brand assets, bilingual templates, landing pages, and recruiting playbooks to accelerate market entry."
+            },
+            {
+              "key": "assignable-talent",
+              "title": "Assignable talent",
+              "body": "We can connect or assign pre-qualified agents from our recruitment pipelines directly to your agency."
+            },
+            {
+              "key": "compliance",
+              "title": "Compliance & carrier support",
+              "body": "Carrier transfers, license tracking, CMS/HIPAA guidance, and QA workflows that keep you clean and selling."
+            }
+          ]
+        },
+        "howItWorks": {
+          "eyebrow": "Process",
+          "title": "How it works",
+          "subtitle": "(simple & repeatable)",
+          "cta": "Apply Now",
+          "steps": [
+            {
+              "step": "01",
+              "title": "Apply & qualify",
+              "body": "Basic due diligence: NIPR verification, E&O, and production check."
+            },
+            {
+              "step": "02",
+              "title": "License & co-brand",
+              "body": "Sign the license agreement (no franchise fees) and get your Epicare + City/Team assets."
+            },
+            {
+              "step": "03",
+              "title": "Onboard (4–6 weeks)",
+              "body": "Carrier appointments, transfers, and system activation."
+            },
+            {
+              "step": "04",
+              "title": "Activate your stack",
+              "body": "GO CRM/AMS/AI, campaign library, and sales playbooks go live."
+            },
+            {
+              "step": "05",
+              "title": "Launch & recruit",
+              "body": "Landing page, organic/paid campaigns (optional), and direct access to recruitable agents from our pipelines."
+            }
+          ]
+        },
+        "closing": {
+          "eyebrow": "Launch Plan",
+          "title": [
+            "Start faster,",
+            "recruit smarter,",
+            "and <k>keep more.</k>"
+          ],
+          "body": "Schedule a meeting with us and we’ll walk you through the fast-track launch plan.",
+          "cta": "Schedule a Meeting",
+          "badge": "Fast-Track Agency Launch",
+          "alt": "Epicare leadership alliance and agency launch meeting"
+        }
+      },
+      "agency-trademark": {
+        "title": [
+          "Build Your",
+          "<k>Epicare Insurance Agency.</k>"
+        ],
+        "subtitle": "Launch faster, recruit smarter, and earn more without franchise fees. Epicare’s Licensee Model gives you our brand, playbooks, and full technology stack so you can scale your agency across states with confidence.",
+        "contactTitle": "Get In Touch",
+        "benefits": {
+          "eyebrow": "Licensee Model",
+          "title": "Key Benefits of Creating Your Own Epicare Insurance Agency",
+          "cta": "Get In Touch",
+          "items": [
+            {
+              "key": "co-branding",
+              "title": "National Co-Branding, Zero Fees",
+              "body": "Operates under Epicare as Agency Director with no franchise fee or royalties. Get brand guidelines, bilingual templates (ES/EN), landing pages, campaign & script libraries, and pre-approved assets."
+            },
+            {
+              "key": "go-to-market",
+              "title": "Immediate Go-to-Market in All 50 States",
+              "body": "Sell the same products (ACA/Medicare, life, ancillary) nationwide—no exclusive territories required. Multiple directors may operate in the same zone as you define."
+            },
+            {
+              "key": "operational-stack",
+              "title": "Operational Stack Included",
+              "body": "All EPICARE GO PLATFORMS: GO CRM, GO AMS, GO AI, GO CALLS & Epicare Academy are available (optional but included) for lead capture, scheduling, retention and lightweight reporting."
+            },
+            {
+              "key": "hierarchy-support",
+              "title": "Epicare Hierarchy & Carrier Support",
+              "body": "Onboarding and transfers with carriers, compliance support (CMS/HIPAA where applicable), QA on calls, and approved assets to streamline contracting."
+            },
+            {
+              "key": "economics",
+              "title": "Licensee-Friendly Economics",
+              "body": "Splits and overrides aligned to production and quality, with renegotiation opportunities after month 6. Bonuses for persistence and QA based on production."
+            },
+            {
+              "key": "benefit-parity",
+              "title": "Benefit Parity",
+              "body": "Licensee agents receive the same core benefits as direct Epicare agents—an advantage over typical sub-agency programs."
+            },
+            {
+              "key": "community-growth",
+              "title": "Community & Growth Programs",
+              "body": "Masterminds, case studies, Deal Desk for complex closes, and national recognition (Epicare Top Licensee badges)."
+            }
+          ]
+        },
+        "manifesto": {
+          "eyebrow": "The Licensee Model",
+          "statement": "Create your Epicare Agency with <k>zero franchise fees.</k> Use our brand, processes and tech to sell and recruit faster in any state with performance-based splits that improve as you grow.",
+          "badges": [
+            "0% Franchise Fees",
+            "All 50 States",
+            "Complete GO Stack",
+            "Performance Splits"
+          ],
+          "cta": "Get Started"
+        },
+        "comparison": {
+          "eyebrow": "Strategic Advantage",
+          "title": [
+            "Why Build an Epicare Agency",
+            "vs. <k>Starting From Zero</k>"
+          ],
+          "subtitle": "Skip the upfront franchise capital, operational lag, and royalty penalties while launching with a proven national brand and full tech infrastructure.",
+          "cta": "Register",
+          "items": [
+            {
+              "key": "no-franchise-fee",
+              "n": "01",
+              "badge": "Saves $25k–$50k+",
+              "title": "No franchise price tag",
+              "body": "Skips the $25k–$50k+ upfront costs and multi-year royalty hooks typical of traditional franchises.",
+              "traditionalLabel": "Traditional Franchise",
+              "traditionalValue": "$25k–$50k+ & Royalties",
+              "epicareLabel": "Epicare Licensee",
+              "epicareValue": "$0 Fees · 0% Royalties"
+            },
+            {
+              "key": "lower-risk-speed",
+              "n": "02",
+              "badge": "Fast-Track Launch",
+              "title": "Lower risk, higher speed",
+              "body": "You launch quicker, with less capital and operational friction, while keeping upside for high performers.",
+              "traditionalLabel": "Starting From Scratch",
+              "traditionalValue": "6–12 Months & High Burn",
+              "epicareLabel": "Epicare Licensee",
+              "epicareValue": "4–6 Weeks to Market"
+            },
+            {
+              "key": "brand-stack-playbook",
+              "n": "03",
+              "badge": "Day-One Turnkey",
+              "title": "Brand + Stack + Playbook",
+              "body": "Unlike many “no-fee” programs, Epicare licenses the brand and provides the full EPICARE GO stack (CRM/AMS/AI/CALLS) plus bilingual playbooks from day one.",
+              "traditionalLabel": "Generic No-Fee Programs",
+              "traditionalValue": "Contracting Only, No Stack",
+              "epicareLabel": "Epicare Licensee",
+              "epicareValue": "Full GO Stack + Playbooks"
+            },
+            {
+              "key": "faster-recruitment",
+              "n": "04",
+              "badge": "Performance Splits",
+              "title": "Faster recruitment & better economics",
+              "body": "Recruit using a national brand and keep more net revenue through performance-based split improvements (vs. fixed franchise models).",
+              "traditionalLabel": "Fixed Franchise Models",
+              "traditionalValue": "Capped Splits & Flat Payouts",
+              "epicareLabel": "Epicare Licensee",
+              "epicareValue": "Performance-Driven Scaling"
+            }
+          ]
+        }
       }
     },
     "form": {

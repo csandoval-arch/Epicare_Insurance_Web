@@ -9,7 +9,7 @@
  * 3 Beneficios · 4 Formación (banda azul).
  */
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -21,6 +21,12 @@ import JoinUsBenefits from "./JoinUsBenefits";
 import JoinUsTraining from "./JoinUsTraining";
 import UnlicensedBenefits from "./UnlicensedBenefits";
 import UnlicensedRoadmap from "./UnlicensedRoadmap";
+import FmoBenefits from "./FmoBenefits";
+import FmoHowItWorks from "./FmoHowItWorks";
+import FmoClosing from "./FmoClosing";
+import TrademarkBenefits from "./TrademarkBenefits";
+import TrademarkManifesto from "./TrademarkManifesto";
+import TrademarkComparison from "./TrademarkComparison";
 
 const isRole = (v: string | null): v is JoinPathKey => !!v && (ROLES as string[]).includes(v);
 
@@ -28,7 +34,47 @@ export default function JoinUsView() {
   const roles = useTranslations("joinUs.roles");
   const searchParams = useSearchParams();
   const roleParam = searchParams.get("role");
-  const role: JoinPathKey = isRole(roleParam) ? roleParam : DEFAULT_ROLE;
+
+  // Estado reactivo para asegurar actualización inmediata tanto en local como en static export
+  const [activeRole, setActiveRole] = useState<JoinPathKey>(() => {
+    if (typeof window !== "undefined") {
+      const urlRole = new URLSearchParams(window.location.search).get("role");
+      if (isRole(urlRole)) return urlRole;
+    }
+    return isRole(roleParam) ? roleParam : DEFAULT_ROLE;
+  });
+
+  // Sincronizar si searchParams de Next.js cambia (ej. navegación externa entre rutas)
+  useEffect(() => {
+    const roleFromSearch = searchParams.get("role");
+    const target = isRole(roleFromSearch) ? roleFromSearch : DEFAULT_ROLE;
+    setActiveRole((prev) => (prev !== target ? target : prev));
+  }, [searchParams]);
+
+  // Escuchar evento personalizado emitido desde JoinModal y popstate del navegador
+  useEffect(() => {
+    const onRoleChange = (e: Event) => {
+      const detail = (e as CustomEvent<JoinPathKey>).detail;
+      if (isRole(detail)) {
+        setActiveRole(detail);
+      }
+    };
+
+    const onPopState = () => {
+      const urlRole = new URLSearchParams(window.location.search).get("role");
+      setActiveRole(isRole(urlRole) ? urlRole : DEFAULT_ROLE);
+    };
+
+    window.addEventListener("epicareJoinRoleChange", onRoleChange);
+    window.addEventListener("popstate", onPopState);
+
+    return () => {
+      window.removeEventListener("epicareJoinRoleChange", onRoleChange);
+      window.removeEventListener("popstate", onPopState);
+    };
+  }, []);
+
+  const role: JoinPathKey = activeRole;
   const rootRef = useRef<HTMLDivElement>(null);
 
   useJoinMotion(rootRef, role);
@@ -60,12 +106,24 @@ export default function JoinUsView() {
           <UnlicensedBenefits />
           <UnlicensedRoadmap />
         </>
-      ) : (
+      ) : role === "agent-licensed" ? (
         <>
           <JoinUsBenefits role={role} />
           <JoinUsTraining />
         </>
-      )}
+      ) : role === "agency-fmo" ? (
+        <>
+          <FmoBenefits />
+          <FmoHowItWorks />
+          <FmoClosing />
+        </>
+      ) : role === "agency-trademark" ? (
+        <>
+          <TrademarkBenefits />
+          <TrademarkManifesto />
+          <TrademarkComparison />
+        </>
+      ) : null}
     </div>
   );
 }

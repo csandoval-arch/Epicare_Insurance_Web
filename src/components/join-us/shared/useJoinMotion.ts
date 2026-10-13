@@ -33,16 +33,15 @@ export function useJoinMotion(scopeRef: RefObject<HTMLElement | null>, role?: st
         const q = gsap.utils.selector(act);
         const tl = gsap.timeline({
           paused: isHero,
-          defaults: { force3D: true },
           scrollTrigger: isHero ? undefined : { trigger: act, start: TRIGGER.standard, toggleActions: "play none none none" },
         });
         if (q(".jb-birth").length)
-          tl.fromTo(q(".jb-birth"), { yPercent: REVEAL.birthPercent }, { yPercent: 0, duration: DUR.birth, ease: EASE.dramatic, stagger: STAGGER.base }, 0);
+          tl.fromTo(q(".jb-birth"), { yPercent: REVEAL.birthPercent }, { yPercent: 0, duration: DUR.birth, ease: EASE.dramatic, stagger: STAGGER.base, force3D: true }, 0);
         if (q(".jb-curtain").length)
-          tl.fromTo(q(".jb-curtain"), { yPercent: 100 }, { yPercent: 0, duration: DUR.slow, ease: EASE.inOut }, 0.1)
-            .fromTo(q(".jb-curtain-in"), { yPercent: -100, scale: 1.08 }, { yPercent: 0, scale: 1, duration: DUR.slow, ease: EASE.inOut }, 0.1);
+          tl.fromTo(q(".jb-curtain"), { yPercent: 100 }, { yPercent: 0, duration: DUR.slow, ease: EASE.inOut, force3D: true }, 0.1)
+            .fromTo(q(".jb-curtain-in"), { yPercent: -100, scale: 1.08 }, { yPercent: 0, scale: 1, duration: DUR.slow, ease: EASE.inOut, force3D: true }, 0.1);
         if (q(".jb-rise").length)
-          tl.fromTo(q(".jb-rise"), { y: REVEAL.md, opacity: 0 }, { y: 0, opacity: 1, duration: DUR.base, ease: EASE.out, stagger: STAGGER.base }, 0.4);
+          tl.fromTo(q(".jb-rise"), { y: REVEAL.md, opacity: 0 }, { y: 0, opacity: 1, duration: DUR.base, ease: EASE.out, stagger: STAGGER.base, force3D: true }, 0.4);
         q(".jb-count").forEach((node) => {
           const to = Number(node.dataset.value);
           const n = { v: 0 };
