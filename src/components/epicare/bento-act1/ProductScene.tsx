@@ -8,7 +8,7 @@ import { asset, posterFor } from "@/lib/asset";
 import { DUR, EASE } from "@/lib/motion";
 import SmartVideo from "../SmartVideo";
 import type { PanelSpec } from "../BentoGridDesktop";
-import { CARD_SURFACE } from "./layout";
+import { CARD_SURFACE, CARD_LIGHT } from "./layout";
 
 // Piezas de cada acto de producto del Bento (desktop): la UI del producto (vídeo), la pill que sigue al
 // ratón sobre ella, y logo + una línea + CTA. Sin adornos: el producto es el protagonista.
@@ -85,7 +85,7 @@ export function ProductCopy({ panel, lead, body, cta, comingSoonLabel, className
  *  dentro de un contenedor que ya la enmarca y recorta. Con `panel.blend` (vídeos de fondo plano: CRM,
  *  Academy) el fondo del vídeo desaparece y se funde con el de la sección: `multiply` en claro (el
  *  blanco se vuelve transparente) y `screen` en oscuro (el negro se vuelve transparente). */
-export function ProductMedia({ panel, className = "", framed = true }: { panel: PanelSpec; className?: string; framed?: boolean }) {
+export function ProductMedia({ panel, className = "", framed = true, forceLight = false }: { panel: PanelSpec; className?: string; framed?: boolean; /** Tarjeta siempre clara: se usa el vídeo claro en los dos temas. */ forceLight?: boolean }) {
   const fit = panel.isAms ? "object-cover object-left-top" : panel.isAcademy ? "object-contain scale-[0.85]" : "object-contain";
   const frame = framed ? "rounded-xl border border-[var(--color-border-Strokes-default)]" : "";
   // Con blend, la superficie es la MISMA de la sección (BG-1): el track pineado es una capa aislada
@@ -93,6 +93,13 @@ export function ProductMedia({ panel, className = "", framed = true }: { panel: 
   const surface = CARD_SURFACE;
   const light = panel.blend ? "mix-blend-multiply" : "";
   const dark = panel.blend ? "mix-blend-screen" : "";
+  if (forceLight) {
+    return (
+      <div className={`relative overflow-hidden ${framed ? `rounded-xl ${CARD_LIGHT.hairline}` : ""} ${CARD_LIGHT.surface} ${className}`}>
+        <SmartVideo src={panel.videoLight} poster={posterOf(panel, panel.videoLight)} className={`absolute inset-0 w-full h-full ${fit} ${light}`} />
+      </div>
+    );
+  }
   return (
     <div className={`relative overflow-hidden ${frame} ${surface} ${className}`}>
       <SmartVideo src={panel.videoLight} poster={posterOf(panel, panel.videoLight)} className={`absolute inset-0 w-full h-full ${fit} ${light} dark:hidden`} />

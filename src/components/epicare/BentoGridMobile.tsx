@@ -10,7 +10,7 @@ import HubTitle from "./bento-act1/HubTitle";
 import { PANELS } from "./BentoGridDesktop";
 import { ProductMedia, lines } from "./bento-act1/ProductScene";
 import { HubPlaque, renderHubMark, hubMarksTimeline, observeHubLoop } from "./bento-act1/HubIntro";
-import { ACT1_ON_BRAND_CLASS, ACT1_ON_BRAND_VARS, CARD_SURFACE } from "./bento-act1/layout";
+import { ACT1_ON_BRAND_CLASS, ACT1_ON_BRAND_VARS, CARD_LIGHT } from "./bento-act1/layout";
 // ── INTERNAL ARC: brand accent per card (title + 5 products). The ambient
 // orb morphs to the active card's color so the journey has a beginning,
 // middle and end instead of being a flat carousel.
@@ -207,7 +207,7 @@ export default function BentoGridMobile() {
               <div className={`relative w-full h-[68dvh] max-h-[528px] flex flex-col justify-start rounded-lg border border-[var(--color-border-Strokes-default)] p-[var(--space-gutter-sm)] ${ACT1_ON_BRAND_CLASS}`} style={ACT1_ON_BRAND_VARS}>
                 <span aria-hidden="true" className="stack-shade pointer-events-none absolute inset-0 z-20 rounded-lg bg-[var(--color-overlay-backdrop)] opacity-0" />
                 {/* Recuadro de logo común en móvil (w-32 h-16): igual para el GO Hub y los tres productos */}
-                <HubPlaque className="w-24 h-24 mt-static-xl mb-static-lg" logoClassName="w-16 h-16" radiusClass="rounded-md" />
+                <HubPlaque className="w-28 h-24 mt-static-xl mb-static-lg" logoClassName="w-14 h-14" radiusClass="rounded-md" />
                 <HubTitle className="hub-title text-display-lg text-left" renderMark={renderHubMark} />
                 {/* Lo que viene (como en desktop): tres fichas en fila; clic = baja hasta esa tarjeta */}
                 <div className="mt-auto mb-static-xl grid grid-cols-3 gap-static-sm">
@@ -235,30 +235,36 @@ export default function BentoGridMobile() {
             const body = (
               <>
                 <span aria-hidden="true" className="stack-shade pointer-events-none absolute inset-0 z-20 rounded-lg bg-[var(--color-overlay-backdrop)] opacity-0" />
-                {/* Arriba, antes de la UI: el logo en su recuadro (en Academy, "Próximamente" a la derecha) */}
+                {/* Arriba: el logo en su recuadro (en Academy, "Próximamente" a la derecha); debajo el titular; el vídeo cierra */}
                 <div className="shrink-0 flex items-center justify-between p-[var(--space-gutter-sm)]">
-                  <div className="w-32 h-16 flex items-center justify-center rounded-md border border-[var(--color-border-Strokes-default)]">
-                    <Logo className={`${isAcademy ? "h-10" : "h-9"} w-auto text-[var(--color-brand-blue)] dark:text-[var(--color-text-White-100)]`} />
+                  {/* Misma caja que la placa del acto 1 (112 × 96), sin stroke: la separa su fondo. */}
+                  <div className={`w-28 h-24 flex items-center justify-center rounded-md ${CARD_LIGHT.logoSurface}`} style={CARD_LIGHT.logoInk}>
+                    <Logo className={`${isAcademy ? "h-10" : "h-9"} w-auto text-[var(--color-brand-blue)]`} />
                   </div>
                   {comingSoon && (
-                    <span className="h-static-xl px-static-md rounded-full flex items-center border border-[var(--color-border-Strokes-default)] text-ui-label text-[var(--color-text-secondary)]">
+                    <span className={`h-static-xl px-static-md rounded-full flex items-center ${CARD_LIGHT.hairline} text-ui-label ${CARD_LIGHT.inkSoft}`}>
                       {t(panel.hoverKey)}
                     </span>
                   )}
                 </div>
-                <ProductMedia panel={panel} framed={false} className="w-full flex-1 min-h-0" />
-                {/* Abajo: un solo titular de 2 líneas (gancho + detalle fundidos) y el CTA a su derecha */}
-                <div className="shrink-0 p-[var(--space-gutter-sm)] flex items-end justify-between gap-static-md">
-                  <p className="text-h4 text-[var(--color-text-primary)]">{lines(t(`products.${panel.key}.mobile`))}</p>
-                  {!comingSoon && (
-                    <span aria-hidden="true" className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center bg-[var(--color-brand-blue)] text-[var(--color-text-White-100)] shadow-elevation-2">
-                      <ArrowUR className="w-4 h-4" />
-                    </span>
-                  )}
+                {/* Bajo el logo, el titular solo: un bloque de 2 líneas (gancho + detalle fundidos) */}
+                <div className="shrink-0 px-[var(--space-gutter-sm)] pb-[var(--space-gutter-sm)]">
+                  <p className={`text-h4 ${CARD_LIGHT.ink}`}>{lines(t(`products.${panel.key}.mobile`))}</p>
                 </div>
+                {/* El vídeo cierra la tarjeta, abajo del todo */}
+                <ProductMedia panel={panel} framed={false} forceLight className="w-full flex-1 min-h-0" />
+                {/* La burbuja del CTA flota en la esquina inferior derecha, sobre el vídeo */}
+                {!comingSoon && (
+                  <span
+                    aria-hidden="true"
+                    className="absolute z-30 right-[var(--space-gutter-sm)] bottom-[var(--space-gutter-sm)] w-10 h-10 rounded-full flex items-center justify-center bg-[var(--color-brand-blue)] text-[var(--color-text-White-100)] shadow-elevation-2"
+                  >
+                    <ArrowUR className="w-4 h-4" />
+                  </span>
+                )}
               </>
             );
-            const box = `relative w-full h-full flex flex-col overflow-hidden rounded-lg border border-[var(--color-border-Strokes-default)] ${CARD_SURFACE} shadow-elevation-2`;
+            const box = `relative w-full h-full flex flex-col overflow-hidden rounded-lg ${CARD_LIGHT.hairline} ${CARD_LIGHT.surface} shadow-elevation-2`;
 
             return (
               <div

@@ -90,11 +90,14 @@ export const observeHubLoop = (el: Element) => {
   return () => io.disconnect();
 };
 
-/** Logo GO Hub en un recuadro solo con stroke (hairline del DS, sin fondo ni sombra). */
+/**
+ * Logo GO Hub en su caja. Mismo lenguaje que las cajas de logo de los 3 actos de producto: sin
+ * stroke, separada de su fondo por un solo escalón de superficie (sobre el azul, un velo blanco).
+ */
 export function HubPlaque({ className = "w-28 h-28", logoClassName = "w-20 h-20", radiusClass = "rounded-xl" }: { className?: string; logoClassName?: string; radiusClass?: string }) {
   return (
     <div
-      className={`hub-plaque ${className} ${radiusClass} border border-[var(--act1-line,var(--color-border-Strokes-default))] flex items-center justify-center`}
+      className={`hub-plaque ${className} ${radiusClass} bg-[var(--act1-tile,var(--color-surface-BG-1))] flex items-center justify-center`}
     >
       <GoHubLogo className={`hub-logo ${logoClassName}`} />
     </div>
@@ -125,11 +128,13 @@ export default function HubIntro({
     <div className={`w-max h-full shrink-0 flex flex-col justify-center ${CONTENT_EDGE_PL}`}>
       {/* Caja con stroke (hairline del DS) que enmarca el acto 1; mismo alto que las tarjetas (75vh) */}
       <div className={`w-[70vw] lg:w-[50vw] flex flex-col p-static-2xl ${ACT_BOX} ${ACT1_ON_BRAND_CLASS}`} style={ACT1_ON_BRAND_VARS}>
-        <div className="flex-1 flex flex-col justify-center">
+        <div className="flex-1 flex flex-col justify-start">
           {/* Placa cuadrada; en pantallas bajas (<860px de alto) vuelve al tamaño anterior para que las fichas quepan en la caja de 75vh */}
+          {/* Misma caja que la de los logos de producto: 144 × 120, rounded-md, sin stroke.
+              En pantallas bajas (<860px de alto) encoge para que las fichas quepan en los 75vh. */}
           <HubPlaque
-            className="w-40 h-40 [@media(max-height:53.75rem)]:w-20 [@media(max-height:53.75rem)]:h-20 mb-static-2xl"
-            logoClassName="w-24 h-24 [@media(max-height:53.75rem)]:w-14 [@media(max-height:53.75rem)]:h-14"
+            className="w-36 h-30 [@media(max-height:53.75rem)]:w-24 [@media(max-height:53.75rem)]:h-20 mb-static-2xl"
+            logoClassName="w-18 h-18 [@media(max-height:53.75rem)]:w-12 [@media(max-height:53.75rem)]:h-12"
             radiusClass="rounded-md"
           />
           <HubTitle className="hub-title text-display-lg" renderMark={renderHubMark} />
