@@ -132,7 +132,8 @@ export default function HeaderEpicare({
       label: t("about"),
       items: [
         { title: t("aboutCompany"), desc: t("aboutCompanyDesc"), href: "/company" },
-        { title: t("aboutTeam"), desc: t("aboutTeamDesc"), href: "/team" },
+        // Team se desactiva (13-10-2026). La ruta `/team` sigue publicada; solo deja de anunciarse.
+        { title: t("aboutTeam"), desc: t("aboutTeamDesc"), href: "#", soon: true },
         { title: t("aboutLicensing"), desc: t("aboutLicensingDesc"), href: "/licensing" },
       ]
     },
@@ -383,18 +384,49 @@ export default function HeaderEpicare({
               <div 
                 className={`absolute top-[100%] left-1/2 -translate-x-1/2 mt-1 z-[1000000] p-static-xs rounded-lg shadow-elevation-2 border flex flex-col w-[340px] transform-gpu transition-[opacity,transform,visibility] duration-200 ease-out ${dropdownBgClass} ${activeMenu === item.key ? 'opacity-100 visible translate-y-0 pointer-events-auto' : 'opacity-0 invisible translate-y-2 pointer-events-none'}`}
               >
-                  {item.items.map((subItem, idx) => (
-                    <Link href={subItem.href} key={idx} className={`flex flex-col gap-2 p-static-lg rounded-md transition-colors duration-150 ${isHeaderForcedDark ? 'hover:bg-white/[0.08]' : 'hover:bg-black/5 dark:hover:bg-white/[0.08]'}`}>
-                      <div className="flex flex-col items-start gap-1">
-                        <span className={`text-h7 transition-colors duration-200 ${isHeaderForcedDark || isDark ? 'text-white' : 'text-[var(--color-text-primary)]'}`}>
-                          {subItem.title}
+                  {item.items.map((subItem, idx) => {
+                    const onDark = isHeaderForcedDark || isDark;
+                    // `soon`: no es un enlace. Lo que avisa es el CHIP y que no haya hover ni
+                    // cursor de enlace — NO un texto apagado: `--color-text-muted` da 2.50:1 sobre
+                    // blanco (falla AA). El título baja un escalón a `secondary` (5.11:1) y la
+                    // descripción se queda como la de los activos.
+                    const titleClass = subItem.soon
+                      ? onDark ? 'text-white/75' : 'text-[var(--color-text-secondary)]'
+                      : onDark ? 'text-white' : 'text-[var(--color-text-primary)]';
+                    const descClass = onDark ? 'text-white/70' : 'text-[var(--color-text-Black-100)] opacity-80';
+
+                    const body = (
+                      <>
+                        <div className="flex items-center gap-static-sm">
+                          <span className={`text-h7 transition-colors duration-200 ${titleClass}`}>
+                            {subItem.title}
+                          </span>
+                          {subItem.soon && (
+                            <span className={`px-static-sm rounded-full border text-body-xs whitespace-nowrap ${onDark ? 'border-white/25 bg-white/10 text-white/85' : 'border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-3)] text-[var(--color-text-secondary)]'}`}>
+                              {t("comingSoon")}
+                            </span>
+                          )}
+                        </div>
+                        <span className={`text-body-xs leading-relaxed ${descClass}`}>
+                          {subItem.desc}
                         </span>
+                      </>
+                    );
+
+                    return subItem.soon ? (
+                      <div
+                        key={idx}
+                        aria-disabled="true"
+                        className="flex flex-col gap-2 p-static-lg rounded-md cursor-default select-none"
+                      >
+                        {body}
                       </div>
-                      <span className={`text-body-xs leading-relaxed ${isHeaderForcedDark || isDark ? 'text-white/70' : 'text-[var(--color-text-Black-100)] opacity-80'}`}>
-                        {subItem.desc}
-                      </span>
-                    </Link>
-                  ))}
+                    ) : (
+                      <Link href={subItem.href} key={idx} className={`flex flex-col gap-2 p-static-lg rounded-md transition-colors duration-150 ${isHeaderForcedDark ? 'hover:bg-white/[0.08]' : 'hover:bg-black/5 dark:hover:bg-white/[0.08]'}`}>
+                        {body}
+                      </Link>
+                    );
+                  })}
               </div>
             </div>
           ))}

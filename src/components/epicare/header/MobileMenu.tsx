@@ -235,7 +235,10 @@ export default function MobileMenu({ open, onClose, groups, forceDark, loginLabe
               <div key={group.key}>
                 <p className="text-body-md text-[var(--color-text-secondary)] pb-static-sm mb-static-sm border-b border-glass-divider">{group.label}</p>
                 <ul>
-                  {group.items.map((item) => (
+                  {/* En estas columnas un desactivado sería solo ruido (no hay sitio para el chip
+                      sin romper la lista): se OCULTA. El carrusel destacado sí los muestra con su
+                      tarjeta gris, que es donde el "próximamente" aporta. */}
+                  {group.items.filter((item) => !item.soon).map((item) => (
                     <li key={item.title}>
                       <Link
                         href={item.href}
