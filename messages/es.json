@@ -516,9 +516,9 @@
   "goCrm": {
     "hero": {
       "overline": "Prospectos",
-      "title": "Tu Libro de Negocios, <blue>Un Centro de Control.</blue>",
-      "subhead": "La capa de venta de <bold>GO Hub</bold>. Todo lo que pasa antes de que un prospecto se vuelva póliza, en un solo lugar.",
-      "cta": "Abre tu centro de control",
+      "title": "Cierra más. <blue>Reténlos más tiempo.</blue>",
+      "subhead": "La capa de venta de <bold>GO Hub</bold>. Da seguimiento a cada lead, contacta a tiempo y mantén la relación con cada cliente mucho después de firmar la póliza.",
+      "cta": "Da seguimiento ya",
       "scrollDown": "Desplázate hacia abajo"
     },
     "problem": {

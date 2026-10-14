@@ -515,9 +515,9 @@
   "goCrm": {
     "hero": {
       "overline": "Prospects",
-      "title": "Your book of business, <blue>one control center.</blue>",
-      "subhead": "The sales layer of <bold>GO Hub</bold>. Everything that happens before a prospect becomes a policy, in one place.",
-      "cta": "Open your control center",
+      "title": "Close more. <blue>Keep them longer.</blue>",
+      "subhead": "The sales layer of <bold>GO Hub</bold>. Track every lead, follow up on time, and stay in touch with every client long after the policy is signed.",
+      "cta": "Start tracking now",
       "scrollDown": "Scroll down"
     },
     "problem": {
