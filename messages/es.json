@@ -106,21 +106,28 @@
         "subtitle": "<bold>Asiste a tus clientes</bold> dentro de su portal:\n<bold>pólizas, wallet, documentos</bold>, chat directo\ny <bold>enrollment</bold>, todo en tiempo real.",
         "desc": "Donde ellos gestionan sus pólizas y wallets, y tu agencia los asiste en tiempo real.",
         "trademark": "marca registrada"
-      },
-      "solutions": {
-        "name": "Agency Solutions",
-        "cta": "Explorar soluciones",
-        "title": "Marketing que sí cierra pólizas.",
-        "desc": "Olvídate del lienzo en blanco. Despliega campañas, embudos y activos publicitarios diseñados exclusivamente para la industria de seguros.",
-        "f1Title": "Campañas Plug & Play",
-        "f1Desc": "Estrategias de captación completas y listas para activarse en minutos.",
-        "f2Title": "Embudos de Alta Conversión",
-        "f2Desc": "Recorridos testeados para transformar prospectos fríos en clientes reales.",
-        "f3Title": "Activos Premium",
-        "f3Desc": "Material de venta y diseño con la calidad gráfica de una agencia top.",
-        "ctaMarketing": "Marketing",
-        "ctaTech": "Tecnología"
       }
+    },
+    "agencySolutions": {
+      "overline": "AGENCY SOLUTIONS",
+      "headlineLine1": "Marketing que no",
+      "headlineLine2": "tienes que operar.",
+      "subhead": "Epicare tiene una agencia in-house para sus agentes. Creamos, lanzamos y optimizamos tus campañas, y cada lead entra a tu CRM.",
+      "items": [
+        {
+          "title": "Campañas dirigidas",
+          "desc": "Operadas y optimizadas en Meta, Google y TikTok por nuestro equipo."
+        },
+        {
+          "title": "Embudos de conversión",
+          "desc": "Landings hechas para agentes licenciados, no plantillas genéricas."
+        },
+        {
+          "title": "Material de venta",
+          "desc": "Piezas para redes, videos y guías de llamada, con tu nombre."
+        }
+      ],
+      "cta": "Ver marketing"
     },
     "darkGradient": {
       "sectionTitle": "Nosotros llevamos la operación. <span>Tú vendes.</span>",
@@ -1529,6 +1536,179 @@
         "Herramientas digitales"
       ],
       "cta": "Regístrate"
+    }
+  },
+  "solutionsPage": {
+    "hero": {
+      "overline": "TU SOCIO DE CRECIMIENTO",
+      "titleLine1": "Nuestro equipo de marketing,",
+      "titleLine2": "para ayudarte a crecer.",
+      "subhead": "Epicare tiene una agencia in-house para sus agentes. Creamos, lanzamos y optimizamos tus campañas, y cada lead entra directo a tu CRM.",
+      "cta": "Únete",
+      "imageAlt": "Equipo de marketing de Epicare revisando un plan de campaña",
+      "metaTeam": "Equipo in-house, no un proveedor externo",
+      "metaSupport": "Soporte en inglés y español"
+    },
+    "agency": {
+      "overline": "AGENCIA IN-HOUSE",
+      "headline": "Una agencia que trabaja dentro de tu negocio.",
+      "subhead": "No es otra herramienta que aprender. Son personas operando tus campañas en las plataformas donde ya están tus clientes.",
+      "items": [
+        {
+          "title": "Campañas dirigidas",
+          "desc": "Operamos y optimizamos tus campañas en Meta, Google, TikTok y más, con creativos y audiencias ya probados en el mercado de vida y salud.",
+          "meta": "Multicanal"
+        },
+        {
+          "title": "Embudos de conversión",
+          "desc": "Landings y embudos hechos para agentes licenciados, para que el interés que crea una campaña se convierta en una conversación real.",
+          "meta": "Embudos probados"
+        },
+        {
+          "title": "Material de venta",
+          "desc": "Piezas para redes, landings, videos y guías de llamada que produce nuestro equipo, personalizados con tu nombre.",
+          "meta": "Personalizado"
+        }
+      ],
+      "costTag": "QUIÉN OPERA Y QUIÉN PAGA",
+      "costStatement": "Una agencia independiente cobra <blue>entre $1,500 y $3,000 al mes</blue> por esta gestión. Para los agentes de Epicare está incluida.",
+      "costNote": "La pauta se paga directo a cada plataforma.",
+      "artAlt": "Ilustración isométrica del terreno de marketing de Epicare",
+      "platformsMore": "y más"
+    },
+    "tailored": {
+      "overline": "HECHO ALREDEDOR DE TI",
+      "headline": "Armamos una **agencia personalizada** para cada agente, con **su propio flujo de leads**.",
+      "statement": "La estrategia se diseña alrededor de tu mercado, tus productos y el ritmo al que quieres crecer.",
+      "items": [
+        {
+          "title": "Tu propio\nflujo de leads",
+          "desc": "Cada agente recibe **su agencia dedicada**, así los leads que entran son **tuyos** y llegan solo a ti."
+        },
+        {
+          "title": "Material con\ntu nombre",
+          "desc": "Las piezas que produce el equipo de marketing **se personalizan contigo** antes de salir."
+        },
+        {
+          "title": "Soporte que\nno te suelta",
+          "desc": "**Un contacto dedicado en inglés y español**, pendiente de tu tráfico y optimizando tu presupuesto según los resultados."
+        }
+      ]
+    },
+    "technology": {
+      "overline": "HECHO POR EPICARE",
+      "headline": "Infraestructura propia, no licencias de terceros.",
+      "statement": "Todo sobre lo que opera el agente es nuestro: **GO CRM** para pipelines, seguimiento y automatizaciones, **GO AMS** para contratos con carriers, libro de negocio y comisiones, **telefonía** para llamadas y mensajes dentro del mismo espacio, y **comparadores** hechos para los mercados que atendemos.",
+      "biOverline": "BUSINESS INTELLIGENCE",
+      "biBody": "Business Intelligence audita cómo corre, lee las métricas detrás de cada campaña y actualiza las herramientas con lo que el mercado está pidiendo. Desarrollo y BI trabajan codo a codo, así la agencia se mantiene por delante del mercado.",
+      "platformLabel": "LA PLATAFORMA",
+      "platformLead": "Una sola plataforma, configurada por nosotros y entregada lista.",
+      "biLead": "Un equipo leyendo la operación."
+    },
+    "trust": {
+      "overline": "DATOS, PRIVACIDAD Y SEGURIDAD",
+      "headline": "Al estándar que la industria exige.",
+      "desc": "Manejamos estrictos protocolos de privacidad y compliance, y entendemos los requisitos que enfrentan los agentes y las agencias de seguros en Estados Unidos.",
+      "sealTitle": "G2 Risk Solutions",
+      "badge": "Verificación a nivel nacional",
+      "ctaTitle": "Un equipo detrás de tu crecimiento.",
+      "ctaDesc": "Únete a Epicare y empieza a operar con la agencia, la tecnología y el soporte ya montados.",
+      "cta": "Empieza hoy"
+    },
+    "leadJourney": {
+      "headline": "De la campaña a un cliente que se queda.",
+      "intro": "El mismo recorrido para cada lead que generamos: nuestro equipo lo trae, tu CRM lo recibe y desde ahí la relación es tuya.",
+      "stages": "5 etapas",
+      "scrollHint": "Desplaza el flujo",
+      "swipeHint": "Desliza",
+      "prev": "Etapa anterior",
+      "next": "Etapa siguiente",
+      "goCover": "Ir a la portada",
+      "goStage": "Ir a la etapa {n}",
+      "steps": [
+        {
+          "step": "01",
+          "name": "Generamos el lead",
+          "tag": "Marketing",
+          "desc": "La campaña trae a alguien que de verdad está buscando cobertura.",
+          "meta": "Campaña activa"
+        },
+        {
+          "step": "02",
+          "name": "Entra a GO CRM",
+          "tag": "GO CRM",
+          "desc": "El lead llega asignado a ti, sin exportaciones ni copiar datos entre plataformas.",
+          "meta": "Entrada en vivo"
+        },
+        {
+          "step": "03",
+          "name": "Haces seguimiento",
+          "tag": "Agente",
+          "desc": "Contactas al prospecto y cada llamada, nota y próximo paso queda registrado.",
+          "meta": "Llamada y agenda"
+        },
+        {
+          "step": "04",
+          "name": "Vendes",
+          "tag": "Conversión",
+          "desc": "Cierras la póliza con el material que produce nuestro equipo y el apoyo de tu contacto.",
+          "meta": "Póliza emitida"
+        },
+        {
+          "step": "05",
+          "name": "Mantienes la relación",
+          "tag": "Retención",
+          "desc": "Seguimiento constante para que tu cliente se sienta siempre bien atendido y tu cartera quede protegida.",
+          "meta": "Cartera protegida"
+        }
+      ],
+      "crmSnippet": {
+        "leadName": "J. Morales",
+        "campaign": "Campaña de salud · Inbound",
+        "status": "Lead nuevo · Asignado",
+        "callLogged": "Llamada registrada · 4m 12s",
+        "nextStep": "Próximo paso: enviar comparativo"
+      },
+      "cards": {
+        "s1": {
+          "label": "CANAL DE CAPTACIÓN",
+          "live": "Campaña activa",
+          "title": "Marketing multicanal (Vida y Salud)",
+          "f1": "Anuncios segmentados",
+          "f2": "Embudos optimizados",
+          "f3": "Lead directo",
+          "mLabel": "CANAL ACTIVO",
+          "mTitle": "Campaña de Vida y Salud",
+          "mFlow": "Anuncio → Formulario → Lead"
+        },
+        "s2": {
+          "label": "GO CRM · ENTRADA EN VIVO",
+          "synced": "Sincronizado",
+          "note": "Cero exportación manual"
+        },
+        "s3": {
+          "label": "WORKFLOW DEL AGENTE",
+          "note": "El productor hace el seguimiento directo"
+        },
+        "s4": {
+          "label": "EMISIÓN DE PÓLIZA",
+          "state": "Completada",
+          "title": "Póliza aprobada y emitida",
+          "note": "Carrier conectado · Registro automático en GO AMS",
+          "mLabel": "APLICACIÓN",
+          "mState": "Emitida",
+          "mTitle": "Póliza emitida",
+          "mNote": "Carrier conectado y confirmado"
+        },
+        "s5": {
+          "label": "CARTERA ACTIVA",
+          "title": "Cliente a largo plazo",
+          "note": "Revisión anual agendada · Relación y comisión protegidas",
+          "mLabel": "RELACIÓN ACTIVA",
+          "mTitle": "Cliente que se queda",
+          "mNote": "Revisión anual y retención"
+        }
+      }
     }
   }
 }

@@ -29,6 +29,19 @@ const LENIS_OPTIONS = {
 export default function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
+  // ── RESTAURACIÓN DE SCROLL: MANUAL ────────────────────────────────────────
+  // Por defecto el navegador devuelve el scroll a donde estabas al recargar, y lo hace DESPUÉS
+  // del `scrollTo(0, 0)` de abajo: la página aparece arriba y de golpe te tira hacia abajo.
+  // En manual manda la app, que ya se encarga de empezar arriba en cada ruta.
+  useEffect(() => {
+    if (!("scrollRestoration" in window.history)) return;
+    const previous = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
+    return () => {
+      window.history.scrollRestoration = previous;
+    };
+  }, []);
+
   // ── ROUTE CHANGE: RESET SCROLL & REFRESH ─────────────────────────────────
   useEffect(() => {
     window.scrollTo(0, 0);

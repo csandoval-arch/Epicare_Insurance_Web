@@ -150,8 +150,11 @@ export default function HeaderEpicare({
       key: "solutions",
       label: t("solutions"),
       items: [
-        { title: t("solMarketing"), desc: t("solMarketingDesc"), href: "#" },
-        { title: t("solTech"), desc: t("solTechDesc"), href: "#" },
+        // Marketing entra por el principio de la página: su hero YA es el de marketing, y con
+        // `#marketing` el `scrollToHash` de /solutions dejaba al visitante en la sección 2.
+        // Technology sí conserva su ancla: vive en la mitad baja de la página.
+        { title: t("solMarketing"), desc: t("solMarketingDesc"), href: "/solutions" },
+        { title: t("solTech"), desc: t("solTechDesc"), href: "/solutions#solutions" },
       ]
     }
   ];

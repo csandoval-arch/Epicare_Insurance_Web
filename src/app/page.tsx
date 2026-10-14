@@ -6,6 +6,7 @@ import MetricsEpicare from "@/components/epicare/MetricsEpicare";
 import DarkGradientSection from "@/components/epicare/DarkGradientSection";
 import BentoGridEpicare from "@/components/epicare/BentoGridEpicare";
 import ProductSpotlightEpicare from "@/components/epicare/ProductSpotlightEpicare";
+import AgencySolutionsEpicare from "@/components/epicare/AgencySolutionsEpicare";
 import PeopleRevealEpicare from "@/components/epicare/PeopleRevealEpicare";
 import ProductLinesEpicare from "@/components/epicare/ProductLinesEpicare";
 import Coverage52Epicare from "@/components/epicare/Coverage52Epicare";
@@ -96,9 +97,9 @@ export default function EpicareLandingPage() {
       {/* ── S05 · BentoGrid / Ecosistema GO (PICO 2 · pin) ── */}
       <div className="w-full order-6 pb-section-lg"><BentoGridEpicare /></div>
       {/* ── S06a · Eppigo — producción (salió del bento a sección propia) ── */}
-      <div className="relative z-10 w-full order-7 pb-16 md:pb-24"><ProductSpotlightEpicare variant="eppigo" /></div>
-      {/* ── S06b · Agency Solutions — material de venta ── */}
-      <div className="relative z-20 w-full order-7 pb-section-sm"><ProductSpotlightEpicare variant="solutions" /></div>
+      <div className="relative z-10 w-full order-7 pb-16 md:pb-24"><ProductSpotlightEpicare /></div>
+      {/* ── S06b · Agency Solutions — la vitrina que lleva a la página de marketing (/solutions) ── */}
+      <div className="relative z-20 w-full order-7"><AgencySolutionsEpicare /></div>
       {/* ── S07 · PeopleReveal (respiro humano) ── */}
       {/* <div className="w-full order-8 pb-section-lg"><PeopleRevealEpicare /></div> */}
       {/* ── S08 · AgentAgency (Audiencias y Rol) ── */}

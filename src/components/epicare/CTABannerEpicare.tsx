@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslations } from "next-intl";
 import { asset } from "@/lib/asset";
 import { loginModalStore } from "@/lib/loginModalStore";
+import { joinModalStore } from "@/lib/joinModalStore";
 import { EASE, DUR, STAGGER, REVEAL, TRIGGER } from "@/lib/motion";
 
 const BUTTON_CLASS =
@@ -30,6 +31,14 @@ interface CTABannerEpicareProps {
   description?: React.ReactNode;
   buttonText?: string;
   buttonHref?: string;
+  /** Qué modal abre el botón cuando no hay `buttonHref`: acceso (por defecto) o alta. */
+  intent?: "login" | "join";
+  /**
+   * Fondo de la sección. "own" (por defecto) pinta el blanco/negro con el que nació el banner
+   * en la landing y /licensing; "page" lo deja transparente para que herede el de la página y
+   * no meta una franja de otro color en medio del scroll.
+   */
+  surface?: "own" | "page";
 }
 
 /**
@@ -43,6 +52,8 @@ export default function CTABannerEpicare({
   description,
   buttonText,
   buttonHref,
+  intent = "login",
+  surface = "own",
 }: CTABannerEpicareProps) {
   const t = useTranslations("landingV2.ctaBanner");
   const sectionRef = useRef<HTMLElement>(null);
@@ -180,7 +191,7 @@ export default function CTABannerEpicare({
     <section 
       ref={sectionRef} 
       id="cta-final-epicare"
-      className="w-full relative bg-[var(--color-surface-BG-white)] dark:bg-[var(--color-surface-BG-black)] pt-0 pb-section-xs md:pb-section-sm overflow-hidden transition-colors duration-500"
+      className={`w-full relative pt-0 pb-section-xs md:pb-section-sm overflow-hidden transition-colors duration-500 ${surface === "page" ? "bg-transparent" : "bg-[var(--color-surface-BG-white)] dark:bg-[var(--color-surface-BG-black)]"}`}
     >
       <div className="w-full max-w-6xl mx-auto pt-6 pb-8 md:pb-12 px-3.5 sm:px-4 md:px-8">
         <div className="cta-monolith relative w-full rounded-lg md:rounded-xl overflow-hidden shadow-elevation-4 border border-white/10">
@@ -224,7 +235,7 @@ export default function CTABannerEpicare({
                   <ButtonInner label={buttonText ?? t("button")} />
                 </a>
               ) : (
-                <button type="button" onClick={() => loginModalStore.open()} className={BUTTON_CLASS}>
+                <button type="button" onClick={() => (intent === "join" ? joinModalStore : loginModalStore).open()} className={BUTTON_CLASS}>
                   <ButtonInner label={buttonText ?? t("button")} />
                 </button>
               )}
