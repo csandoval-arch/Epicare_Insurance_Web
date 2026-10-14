@@ -1,7 +1,7 @@
 /** Datos reales de contacto de Epicare Insurance Corp. (no se traducen). */
 export const CONTACT = {
-  address: ["2600 Douglas Rd, Suite 902", "Coral Gables, FL 33134"],
-  mapsUrl: "https://www.google.com/maps/search/?api=1&query=2600+Douglas+Rd+Suite+902+Coral+Gables+FL+33134",
+  address: ["6970 Bird Rd APT 308", "Miami, FL 33155-3779", "Estados Unidos"],
+  mapsUrl: "https://www.google.com/maps/search/?api=1&query=6970+Bird+Rd+APT+308+Miami+FL+33155-3779",
   email: "agents@epicareinsurance.com",
   phone: "+1 (888) 374-2467",
   tel: "+18883742467",

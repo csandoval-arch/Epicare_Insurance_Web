@@ -34,8 +34,10 @@ const structuredData = {
       foundingDate: "2021",
       address: {
         "@type": "PostalAddress",
+        streetAddress: "6970 Bird Rd APT 308",
         addressLocality: "Miami",
         addressRegion: "FL",
+        postalCode: "33155-3779",
         addressCountry: "US",
       },
       // Identificadores públicos verificables (los mismos que declara el FAQ).

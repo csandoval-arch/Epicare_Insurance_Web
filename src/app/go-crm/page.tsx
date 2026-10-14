@@ -6,7 +6,9 @@ import HeaderEpicare from "@/components/epicare/HeaderEpicare";
 import FooterEpicare from "@/components/epicare/FooterEpicare";
 import HeroGoCrm from "@/components/go-crm/HeroGoCrm";
 import ProblemGoCrm from "@/components/go-crm/ProblemGoCrm";
-import ContactVsOpportunity from "@/components/go-crm/ContactVsOpportunity";
+// Sección oculta (ver más abajo). El import va comentado a propósito: si se deja vivo, el
+// componente viaja en el bundle publicado aunque su JSX esté comentado.
+// import ContactVsOpportunity from "@/components/go-crm/ContactVsOpportunity";
 import TheWorkBehindASale from "@/components/go-crm/TheWorkBehindASale";
 import ConversationsGoCrm from "@/components/go-crm/ConversationsGoCrm";
 import HorizontalMetricsGoCrm from "@/components/go-crm/metrics-dashboard/HorizontalMetricsGoCrm";
@@ -40,9 +42,12 @@ export default function GoCrmPage() {
       <HeroGoCrm />
       <ProblemGoCrm />
       {/* OpportunitySources: su contenido se fusionó en ContactVsOpportunity. */}
-      {/* Este espaciador es el único dueño del aire entre El problema y Contacto vs Oportunidad. */}
+      {/* Este espaciador es el único dueño del aire entre El problema y la sección que la siga. */}
       <div className="hidden md:block w-full md:pt-section-sm bg-[var(--color-surface-BG-base)]" />
-      <ContactVsOpportunity />
+      {/* ContactVsOpportunity ("Behind {name}, more than one sale") OCULTA por decisión del usuario
+          el 14/10/2026. El componente y su copy siguen en el repo: para reactivarla basta con
+          descomentar esta línea y su import. */}
+      {/* <ContactVsOpportunity /> */}
       {/* ThePipeline: fusionado en TheWorkBehindASale. */}
       <TheWorkBehindASale />
       <ConversationsGoCrm />
