@@ -61,6 +61,8 @@ export function useHeroMotion(rootRef: RefObject<HTMLElement | null>, isEn: bool
     const state = { grow: growFrom, t: 0 };
     let W = 0;
     let H = 0;
+    // Se refresca en cada `measure()`: el layout de la columna cambia al cruzar el breakpoint.
+    let desktop = window.matchMedia(HERO_DESKTOP_MQ).matches;
     let col = { x: 0, y: 0, w: 0, h: 0 };
 
     // Avisa al header de dónde está la columna en pantalla (para poner en blanco los links que cruza).
@@ -93,7 +95,9 @@ export function useHeroMotion(rootRef: RefObject<HTMLElement | null>, isEn: bool
       // Hasta que empieza a crecer no se ve (si no, quedaría una línea de 1px con su sombra abajo).
       frame.style.visibility = sy <= GROW_FROM ? "hidden" : "";
       // Plano = la sección entera, quieto en pantalla: la inversa del marco + su posición de layout.
-      plane.style.transform = `scale(${1 / sx}, ${1 / sy}) translate3d(${-tx - x}px, ${-ty - y}px, 0)`;
+      plane.style.transform = desktop
+        ? `scale(${1 / sx}, ${1 / sy}) translate3d(${-tx - x}px, ${-ty - y}px, 0)`
+        : "none";
       // Copia blanca del titular recortada al marco en este frame (también a su altura actual).
       const left = x + tx;
       const right = W - (left + w * sx);
@@ -111,7 +115,8 @@ export function useHeroMotion(rootRef: RefObject<HTMLElement | null>, isEn: bool
       col = { x: frame.offsetLeft, y: frame.offsetTop, w: frame.offsetWidth, h: frame.offsetHeight };
       plane.style.width = `${W}px`;
       // Desktop: el plano es la sección entera (las ventanas a un mismo plano). Móvil/tablet: la banda.
-      plane.style.height = `${window.matchMedia(HERO_DESKTOP_MQ).matches ? el.clientHeight : frame.offsetHeight}px`;
+      desktop = window.matchMedia(HERO_DESKTOP_MQ).matches;
+      plane.style.height = `${desktop ? el.clientHeight : frame.offsetHeight}px`;
       render();
     };
     measure();

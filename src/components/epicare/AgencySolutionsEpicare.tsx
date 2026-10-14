@@ -170,7 +170,7 @@ export default function AgencySolutionsEpicare() {
 
             <Link
               href={MARKETING_HREF}
-              className="as-fade group w-full lg:w-fit shrink-0 h-12 pl-6 pr-2 rounded-full flex items-center justify-between lg:justify-start gap-3 bg-[var(--color-brand-blue)] text-white shadow-elevation-2 transition-all duration-[450ms] hover:-translate-y-0.5 hover:shadow-elevation-4 active:scale-[0.96] active:opacity-80 active:duration-150"
+              className="as-fade group w-fit shrink-0 h-12 pl-6 pr-2 rounded-full flex items-center justify-start gap-3 bg-[var(--color-brand-blue)] text-white shadow-elevation-2 transition-all duration-[450ms] hover:-translate-y-0.5 hover:shadow-elevation-4 active:scale-[0.96] active:opacity-80 active:duration-150"
               style={{ transitionTimingFunction: EASE_CSS.ui }}
             >
               <span className="text-body-sm font-medium">{t("cta")}</span>
