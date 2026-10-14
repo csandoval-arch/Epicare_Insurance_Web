@@ -1,8 +1,11 @@
+# `sharp` y `unrs-resolver` traen scripts de post-install. Estaban a la vez en `allowBuilds` y en
+# `ignoredBuiltDependencies`, que son órdenes contrarias: el instalador de Vercel se quedaba en
+# un estado ambiguo (sospecha principal del deploy fallido de sept. 2026).
+#
+# Aquí se decide una sola vez: se permiten los builds nativos que el proyecto necesita y no se
+# ignora ninguno.
 allowBuilds:
   '@parcel/watcher': true
   '@swc/core': true
   sharp: true
   unrs-resolver: true
-ignoredBuiltDependencies:
-  - sharp
-  - unrs-resolver

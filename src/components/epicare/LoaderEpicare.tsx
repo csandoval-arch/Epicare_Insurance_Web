@@ -9,16 +9,16 @@ export default function LoaderEpicare() {
   const [visible, setVisible] = useState(() => {
     if (typeof window === "undefined") return true; // SSR: siempre visible (no aplica)
     // Si el loader ya finalizó en una visita anterior de esta sesión, no mostrarlo
-    return !(window as any).epicareLoaderFinished;
+    return !window.epicareLoaderFinished;
   });
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // 1. Detección de carga de página
     const handleLoad = () => {
-      (window as any).__epicarePageLoaded = true;
-      if (typeof (window as any).__epicareTriggerOutro === 'function') {
-        (window as any).__epicareTriggerOutro();
+      window.__epicarePageLoaded = true;
+      if (typeof window.__epicareTriggerOutro === 'function') {
+        window.__epicareTriggerOutro();
       }
     };
 
@@ -43,8 +43,8 @@ export default function LoaderEpicare() {
     // Bloquear scroll al cargar
     document.body.style.overflow = "hidden";
     document.documentElement.classList.remove("show-scrollbar");
-    (window as any).epicareLoaderFinished = false;
-    (window as any).epicareLoaderIntroFinished = false;
+    window.epicareLoaderFinished = false;
+    window.epicareLoaderIntroFinished = false;
 
     const ctx = gsap.context(() => {
       let loopTl: gsap.core.Timeline;
@@ -72,7 +72,7 @@ export default function LoaderEpicare() {
           // Si el nodo ya no existe, ejecutar el callback de limpieza directamente
           document.body.style.overflow = "";
           document.documentElement.classList.add("show-scrollbar");
-          (window as any).epicareLoaderFinished = true;
+          window.epicareLoaderFinished = true;
           window.dispatchEvent(new Event('epicareLoaderFinished'));
           return;
         }
@@ -86,7 +86,7 @@ export default function LoaderEpicare() {
             setVisible(false);
             document.body.style.overflow = "";
             document.documentElement.classList.add("show-scrollbar");
-            (window as any).epicareLoaderFinished = true;
+            window.epicareLoaderFinished = true;
             window.dispatchEvent(new Event('epicareLoaderFinished'));
           }
         });
@@ -96,10 +96,10 @@ export default function LoaderEpicare() {
       const introTl = gsap.timeline({
         onComplete: () => {
           // Avisar que la animación inicial (crítica) ya terminó para que WebGL pueda compilar
-          (window as any).epicareLoaderIntroFinished = true;
+          window.epicareLoaderIntroFinished = true;
           window.dispatchEvent(new Event('epicareLoaderIntroFinished'));
 
-          if ((window as any).__epicarePageLoaded) {
+          if (window.__epicarePageLoaded) {
             triggerOutro();
           } else {
             // 2. Loop de espera si la conexión está lenta (Respiración)
@@ -110,7 +110,7 @@ export default function LoaderEpicare() {
                 duration: 1.2, 
                 ease: "sine.inOut" 
               });
-            (window as any).__epicareTriggerOutro = triggerOutro;
+            window.__epicareTriggerOutro = triggerOutro;
           }
         }
       });

@@ -3,8 +3,9 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin();
 
-// Base path for the GitHub Pages project site (chrisbeep98.github.io/Epicare).
-// Driven by env so local dev stays at root ("").
+// Producción (Vercel) sirve desde la raíz, así que esto queda vacío. Se mantiene por env para
+// poder desplegar bajo un subpath (p. ej. un project site de GitHub Pages) sin tocar código:
+// exporta NEXT_PUBLIC_BASE_PATH y actualiza SITE_URL en src/app/layout.tsx a la vez.
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const nextConfig: NextConfig = {

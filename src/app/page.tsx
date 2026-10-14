@@ -7,9 +7,7 @@ import DarkGradientSection from "@/components/epicare/DarkGradientSection";
 import BentoGridEpicare from "@/components/epicare/BentoGridEpicare";
 import ProductSpotlightEpicare from "@/components/epicare/ProductSpotlightEpicare";
 import AgencySolutionsEpicare from "@/components/epicare/AgencySolutionsEpicare";
-import PeopleRevealEpicare from "@/components/epicare/PeopleRevealEpicare";
 import ProductLinesEpicare from "@/components/epicare/ProductLinesEpicare";
-import Coverage52Epicare from "@/components/epicare/Coverage52Epicare";
 import AgentAgencySection from "@/components/go-ams/AgentAgencySection";
 import StructureCompany from "@/components/company/StructureCompany";
 import FAQEpicare from "@/components/epicare/FAQEpicare";
@@ -100,14 +98,13 @@ export default function EpicareLandingPage() {
       <div className="relative z-10 w-full order-7 pb-16 md:pb-24"><ProductSpotlightEpicare /></div>
       {/* ── S06b · Agency Solutions — la vitrina que lleva a la página de marketing (/solutions) ── */}
       <div className="relative z-20 w-full order-7"><AgencySolutionsEpicare /></div>
-      {/* ── S07 · PeopleReveal (respiro humano) ── */}
-      {/* <div className="w-full order-8 pb-section-lg"><PeopleRevealEpicare /></div> */}
+      {/* ── S07 · PeopleReveal: fuera de la composición. El componente está en
+          _quarantine/dead-code-2026-10-13/ (ver scrollytelling-map). ── */}
       {/* ── S08 · AgentAgency (Audiencias y Rol) ── */}
       <div className="w-full order-9"><AgentAgencySection /></div>
       {/* ── S09 · ProductLines (portafolio) ── */}
       <div className="w-full order-10"><ProductLinesEpicare /></div>
-      {/* ── S10 · Coverage52 (mini-pico visual) ── */}
-      {/* <div className="w-full order-11"><Coverage52Epicare /></div> */}
+      {/* ── S10 · Coverage52: fuera de la composición; mismo criterio que PeopleReveal. ── */}
       {/* ── S13 · El estándar Epicare (misma escena que /company, mensaje para el agente). Conserva el
           ancla #unete, destino de los CTA de Eppigo / Agency Solutions. ── */}
       <div className="w-full order-[13]"><StructureCompany ns="landingV2.standard" id="unete" /></div>

@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * ⚠️ PENDIENTE DE PRODUCCIÓN: los tres retratos del grupo de clientes salen de randomuser.me —
+ * personas que no existen, servidas por un tercero, en una web de seguros. Sustituir por retratos
+ * propios (o por el bloque sin fotos) antes de considerar la página definitiva.
+ */
+
 import React, { useRef, useLayoutEffect, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import gsap from "gsap";
@@ -39,9 +45,9 @@ const InlineGraphic = ({ type, rotate = "0" }: { type: 'clients' | 'unify', rota
 
         {type === 'clients' && (
           <span className="w-max h-[0.7em] rounded-full bg-white/5 border-[0.05em] border-[var(--color-border-Strokes-strong)]/30 backdrop-blur-md flex items-center justify-center px-[0.06em] shadow-elevation-1 group">
-             <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client" className="w-[0.55em] h-[0.55em] rounded-full object-cover border-[0.05em] border-[var(--color-surface-BG-base)] z-30 transition-transform duration-500 group-hover:scale-110" />
-             <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" className="w-[0.55em] h-[0.55em] rounded-full object-cover border-[0.05em] border-[var(--color-surface-BG-base)] -ml-[0.2em] z-20 transition-transform duration-500 group-hover:scale-110" style={{ transitionDelay: '50ms' }} />
-             <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client" className="w-[0.55em] h-[0.55em] rounded-full object-cover border-[0.05em] border-[var(--color-surface-BG-base)] -ml-[0.2em] z-10 transition-transform duration-500 group-hover:scale-110" style={{ transitionDelay: '100ms' }} />
+             <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client" loading="lazy" decoding="async" className="w-[0.55em] h-[0.55em] rounded-full object-cover border-[0.05em] border-[var(--color-surface-BG-base)] z-30 transition-transform duration-500 group-hover:scale-110" />
+             <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" loading="lazy" decoding="async" className="w-[0.55em] h-[0.55em] rounded-full object-cover border-[0.05em] border-[var(--color-surface-BG-base)] -ml-[0.2em] z-20 transition-transform duration-500 group-hover:scale-110" style={{ transitionDelay: '50ms' }} />
+             <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client" loading="lazy" decoding="async" className="w-[0.55em] h-[0.55em] rounded-full object-cover border-[0.05em] border-[var(--color-surface-BG-base)] -ml-[0.2em] z-10 transition-transform duration-500 group-hover:scale-110" style={{ transitionDelay: '100ms' }} />
           </span>
         )}
       </span>
@@ -385,7 +391,7 @@ function QuoteEnrollDesktop() {
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    let ctx = gsap.context(() => {
+    const ctx = gsap.context(() => {
       // 1. Initial Reveal (Title text)
       gsap.fromTo(
         ".qw-reveal",

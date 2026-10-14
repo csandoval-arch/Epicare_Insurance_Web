@@ -32,8 +32,8 @@ export const NUMBERS = { from: "+13214968931", to: "+13055550147" } as const;
 
 export const MESSAGES = {
   stop: "Responde STOP si quieres dejar de recibir mensajes",
-  card: ["Acá te comparto mi tarjeta de presentación para que cuentes con toda", "mi información de contacto."],
-  confirm: "Me podrías confirmar tu nombre?",
+  card: ["Aquí te comparto mi tarjeta de presentación para que cuentes con toda", "mi información de contacto."],
+  confirm: "¿Me podrías confirmar tu nombre?",
   times: ["02:38 PM", "02:39 PM", "02:39 PM"],
 } as const;
 

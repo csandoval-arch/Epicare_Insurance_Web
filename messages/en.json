@@ -60,10 +60,6 @@
       "titleLine3": "that's already running."
     },
     "bento": {
-      "itemDiTitle": "Contracting",
-      "itemDiDesc": "Appointments with 130+ carriers managed from the portal, with live status on every request.",
-      "itemOmsTitle": "Compliance",
-      "itemOmsDesc": "Licensing, E&O, and renewals with alerts before expiration, not after.",
       "sectionTitle": "Sell more,\noperate better\nand keep learning.",
       "card1Title": "GO CRM",
       "card1Desc": "Leads, pipeline, and follow-up in one place. You know who to call today and why.",
@@ -75,7 +71,6 @@
       "card7Desc": "Production, retention, and persistency per agent. The numbers that decide your month.",
       "card8Title": "Academy",
       "card8Desc": "Certifications, product training, and new-agent onboarding. At your own pace.",
-      "cardCta": "Explore",
       "seeCrm": "See CRM",
       "seeAms": "See AMS",
       "comingSoon": "Coming soon",
@@ -179,7 +174,6 @@
     "productLines": {
       "overline": "Product lines",
       "tag": "3 categories",
-      "productsLabel": "products",
       "titleLine1": "What you can sell",
       "titleLine2": "from day one.",
       "desc": "Three categories, with the right carriers in each. All under the same producer contract.",
@@ -231,7 +225,6 @@
       ]
     },
     "peopleReveal": {
-      "portalWord": "TOGETHER",
       "statement": "Your operation, backed.",
       "imageAlt": "Epicare team and agents"
     },
@@ -240,11 +233,6 @@
       "titleLine1": "You work solo, or you run",
       "titleLine2": "an entire downline.",
       "desc": "Same system. What changes is what you see.",
-      "tagAgent": "Agent",
-      "tagOwner": "Agency Owner",
-      "tagSub": "Sub-agency",
-      "toggleAgent": "For agents",
-      "toggleAgency": "For agencies",
       "agentTitle": "For agents",
       "agentKicker": "Solo operator, full control",
       "agencyTitle": "For agencies",
@@ -267,7 +255,6 @@
         "Agency / Agent toggle — operate in both modes",
         "Your agents use the same system you do"
       ],
-      "hoverHint": "Hover to see more →",
       "agentImg1Alt": "Agent dashboard on tablet",
       "agentImg2Alt": "Agent with headset providing support",
       "agencyImg1Alt": "Agency pipeline across stages",
@@ -326,10 +313,6 @@
       "backToTop": "Back to top"
     },
     "footerCta": {
-      "marquee": "EPICARE ✦ REAL OPERATION ✦",
-      "line1": "The agency that works for you.",
-      "line2": "Not the other way around.",
-      "primary": "Request your contract",
       "secondary": "Talk to the team",
       "privacy": "Privacy",
       "terms": "Terms"
@@ -422,15 +405,12 @@
       "title2": "without having to ask.",
       "scrollHint": "Scroll down",
       "card1Title": "Real-Time Downline Hierarchy",
-      "card1Badge": "8 Active Agents · Salesforce",
       "card1Alt": "Real-Time Downline Hierarchy · Production Metrics per Agent",
       "card1Desc": "Every agent’s production, retention and compliance, up to date.",
       "card2Title": "Licenses & Continuing Education",
-      "card2Badge": "NIPR Live Sync",
       "card2Alt": "License Verification and State Expiration Details",
       "card2Desc": "Licenses and expiration dates by state, synced with NIPR.",
       "card3Title": "Digital Agent Onboarding",
-      "card3Badge": "1-Click Direct Invite",
       "card3Alt": "Digital Onboarding and Producer Invitation Workflow",
       "card3Desc": "Invite a new producer and add them to your agency in one click."
     },
@@ -441,10 +421,6 @@
       "title2_1": "Your clients see",
       "title2_2": "their portfolio",
       "title2_3": "on a single screen.",
-      "pill1": "API Sync",
-      "pill2": "Real Time",
-      "pill3": "Dashboard",
-      "pill4": "Encrypted",
       "card1Title": "Direct Enrollment",
       "card1Desc": "Quote and enroll clients <bold>end-to-end without leaving GO AMS</bold>. Access <blue>all carriers from a single screen</blue>, eliminating the need to log into multiple portals to close a sale.",
       "card2Title": "Partial Enrollment",
@@ -460,12 +436,6 @@
       "title1": "Your team logs in",
       "title2": "with their own account.",
       "subtitle": "Grant granular permissions to your assistants or agents. Maintain <bold>complete security</bold> over your agency by deciding <bold>exactly which modules</bold> they can access.",
-      "modQuote": "Quote & Enroll",
-      "modCustomers": "Customers",
-      "modContracts": "Contracts",
-      "modCommissions": "Commissions",
-      "modDownline": "Downline",
-      "modSettings": "Settings",
       "act1Badge": "Assistant Invitation",
       "act1Name": "Sofia Ramirez",
       "act1Role": "Operations Assistant",
@@ -476,11 +446,7 @@
       "act2Blocked": "Restricted",
       "act3Badge": "Assistant Live View",
       "act3Session": "Active Session: Sofia",
-      "act3Safe": "Your commissions and bank accounts remain 100% protected",
-      "statusActive": "Active",
-      "threeModules": "3 Modules",
-      "restricted": "Restricted",
-      "off": "OFF"
+      "act3Safe": "Your commissions and bank accounts remain 100% protected"
     },
     "backOfficeTour": {
       "panel1Title": "APPOINTMENTS",
@@ -513,16 +479,12 @@
     },
     "architecture": {
       "panel1Title": "GO AMS CORE",
-      "panel1Subtitle": "The primary engine.",
       "panel1Desc": "Read and write data in real operations without friction or lag. 100% native synchronization with Epicare.",
       "panel2Title": "CONTRACTS",
-      "panel2Subtitle": "Bi-directional Sync.",
       "panel2Desc": "Contracts and licenses live in Epicare and sync in real time. What you sign appears instantly.",
       "panel3Title": "QUOTES",
-      "panel3Subtitle": "1:1 Pricing.",
       "panel3Desc": "The same catalog and the exact same pricing. The architecture ensures you see exactly what the client sees.",
       "panel4Title": "SECURITY",
-      "panel4Subtitle": "Zero Retention.",
       "panel4Desc": "SSNs and payments travel directly to carriers via encrypted tunnels. GO AMS never stores sensitive data."
     },
     "faq": {
@@ -591,26 +553,12 @@
       "title": "With a <blue>CRM</blue> you turn loose opportunities into <blue>predictable sales</blue>.",
       "p1": "Each one has a value and they can all fall through for the same reason: <b>nobody called back.</b>",
       "p2": "That's what a CRM does. Each person gets a file, their stage is tracked, and the next step is planned. It moves out of your memory and into a system.",
-      "cierre": "GO CRM manages the income you haven't collected yet.",
-      "disclaimer": "It doesn't quote, issue policies, or manage commissions. You already have other tools for that.",
-      "featuresTitle": "Four things, done right.",
-      "feature1Title": "Prospects",
-      "feature1Desc": "A file for every person who hasn't bought yet: their details, what they need, and their current stage. Contacted, quoted, application sent, waiting for docs, closed. Grouping them by stage shows you exactly where your business is stalling.",
-      "feature2Title": "Tasks",
-      "feature2Desc": "Something you owe someone, with a deadline. Call Maria on Thursday. Ask Carlos for his ID. This is what turns a contact book into a work plan.",
-      "feature3Title": "Automations",
-      "feature3Desc": "Rules the system executes for you. A prospect comes in, the welcome email goes out. Three days pass with no response, a callback task appears. You set the rules.",
-      "feature4Title": "Tracking",
-      "feature4Desc": "Everything that happened with that person, recorded. And no prospect is left without a defined next step."
+      "cierre": "GO CRM manages the income you haven't collected yet."
     },
     "sources": {
       "overline": "03 — Inbound Streams",
       "headline": "Every opportunity starts somewhere.",
       "description": "<normal>Whether a prospect finds you through</normal> <blue>Facebook,</blue> <normal>fills out a</normal> <blue>Web Form,</blue> <normal>sends a</normal> <blue>WhatsApp,</blue> <normal>or makes an</normal> <blue>Inbound Call...</blue> <normal>it all becomes one structured timeline.</normal>",
-      "outcomeUnified": "Unified Output",
-      "outcomeContact": "One Contact Profile",
-      "outcomeProcess": "Sales Process",
-      "outcomeOpportunity": "One Structured Pipeline",
       "active": "Active"
     },
     "contactVsOpp": {
@@ -630,8 +578,6 @@
           "desc": "Pipeline configured for long-term coverage."
         }
       ],
-      "convergeTitle": "No matter how the prospect arrives",
-      "convergeBody": "Facebook, web form, WhatsApp or inbound call... everything converges into one structured pipeline.",
       "cta": "Connect your sources",
       "v2": {
         "title": "Behind {name}, more than one sale.",
@@ -987,8 +933,6 @@
       "title": "Every case has a crew.",
       "subtitle": "3 ways you grow with Epicare.",
       "policy": "Policy",
-      "policyCase": "Dental plan · Mariano Lozano",
-      "inProgress": "In progress",
       "active": "Active",
       "closing": [
         "The industry <k>working for you</k>,",
@@ -1544,9 +1488,7 @@
       "titleLine2": "helping you grow.",
       "subhead": "Epicare runs an in-house agency for its agents. We build, launch and optimize your campaigns, and every lead lands straight in your CRM.",
       "cta": "Join us",
-      "imageAlt": "Epicare marketing team reviewing a campaign plan",
-      "metaTeam": "In-house team, not an outside vendor",
-      "metaSupport": "Support in English and Spanish"
+      "imageAlt": "Epicare marketing team reviewing a campaign plan"
     },
     "agency": {
       "overline": "IN-HOUSE AGENCY",

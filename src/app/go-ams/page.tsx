@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import HeroSection from "@/components/go-ams/HeroSection";
 import { GoAmsProblemSection } from "@/components/go-ams/GoAmsProblemSection";
 import PlatformRevealSection from "@/components/go-ams/PlatformRevealSection";
@@ -17,23 +16,8 @@ import HeaderEpicare from "@/components/epicare/HeaderEpicare";
 import FooterEpicare from "@/components/epicare/FooterEpicare";
 
 export default function GoAmsPage() {
-  const [isHeaderPill, setIsHeaderPill] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 150) {
-        setIsHeaderPill(true);
-      } else {
-        setIsHeaderPill(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+  // La píldora del header la resuelve el propio HeaderEpicare con `pillAfter` (mismo umbral de
+  // 150px): mantener aquí un segundo listener de scroll solo duplicaba el estado.
   return (
     <main className="min-h-screen bg-[var(--color-surface-BG-base)] transition-colors duration-500 overflow-x-clip relative">
       
@@ -41,7 +25,7 @@ export default function GoAmsPage() {
       {/*   GLOBAL COMPONENTS     */}
       {/* ======================= */}
       <LoaderEpicare />
-      <HeaderEpicare isHeaderPill={isHeaderPill} scrollSafeZone={150} />
+      <HeaderEpicare pillAfter={150} scrollSafeZone={150} />
       
       {/* ======================= */}
       {/*   LANDING SECTIONS      */}

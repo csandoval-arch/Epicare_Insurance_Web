@@ -147,7 +147,7 @@ export default function InteractiveGlobeEpicare({ isWidget = false }: { isWidget
   useEffect(() => {
     // 1.1 Esperar a que la introducción del Loader termine para no bloquear el JS Thread
     const handleIntroFinished = () => setCanLoadGlobe(true);
-    if ((window as any).epicareLoaderIntroFinished) {
+    if (window.epicareLoaderIntroFinished) {
       handleIntroFinished();
     } else {
       window.addEventListener('epicareLoaderIntroFinished', handleIntroFinished, { once: true });
@@ -296,7 +296,7 @@ export default function InteractiveGlobeEpicare({ isWidget = false }: { isWidget
     // Fallback de seguridad: si el LoaderEpicare no existe o falla, liberar la animación después de 5s
     const fallbackId = setTimeout(() => {
       if (typeof window !== 'undefined') {
-        (window as any).epicareLoaderFinished = true;
+        window.epicareLoaderFinished = true;
       }
     }, 5000);
     return () => clearTimeout(fallbackId);
@@ -338,13 +338,13 @@ export default function InteractiveGlobeEpicare({ isWidget = false }: { isWidget
 
       if (!pinsAnimated) {
         const markers = document.querySelectorAll('.globe-marker-inner');
-        const isLoaderDone = (window as any).epicareLoaderFinished;
+        const isLoaderDone = window.epicareLoaderFinished;
         
         if (markers.length >= PINS.length && isLoaderDone) {
           pinsAnimated = true;
           
           // Señalizar al Hero que el globo está listo para sincronizar ambas animaciones
-          (window as any).epicareGlobeIsReady = true;
+          window.epicareGlobeIsReady = true;
           window.dispatchEvent(new Event('epicareGlobeReady'));
           
           // Revelado del planeta: opacidad + escala (transform en compositor; es la ÚNICA entrada del globo,
@@ -671,7 +671,7 @@ export default function InteractiveGlobeEpicare({ isWidget = false }: { isWidget
               
               // Lógica de tap para mobile (sin hover real)
               if (window.innerWidth < 768) {
-                let timeoutId: any;
+                let timeoutId: ReturnType<typeof setTimeout>;
                 el.addEventListener('click', () => {
                   const tooltip = el.querySelector('.tooltip-card');
                   const pinAnim = el.querySelector('.pin-anim');

@@ -123,7 +123,7 @@ export default function HeroSection() {
       });
     };
 
-    if ((window as any).epicareLoaderFinished) {
+    if (window.epicareLoaderFinished) {
       playHeroEntrance();
     } else {
       window.addEventListener('epicareLoaderFinished', playHeroEntrance, { once: true });

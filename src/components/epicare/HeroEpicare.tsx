@@ -21,6 +21,7 @@ import { useLocale } from "./I18nProviderClient";
 import { asset } from "@/lib/asset";
 import { columnCssVars } from "./hero/geometry";
 import { useHeroMotion } from "./hero/useHeroMotion";
+import { joinModalStore } from "@/lib/joinModalStore";
 
 const ArrowUR = ({ className = "" }: { className?: string }) => (
   <svg
@@ -31,9 +32,18 @@ const ArrowUR = ({ className = "" }: { className?: string }) => (
   </svg>
 );
 
-/** Destinos de los CTAs del hero. */
-const HERO_LINKS = { primary: "/contrato", secondary: "/go-ams" } as const;
-/** Retratos del bloque "100+ agentes activos" (decorativos). */
+/**
+ * Destino del CTA secundario. El primario NO es un enlace: abre el modal "Join Epicare", el mismo
+ * que el botón "Únete" del header (decisión del usuario, 2026-10-13). Antes apuntaba a `/contrato`,
+ * una ruta que nunca existió y servía un 404.
+ */
+const HERO_SECONDARY_HREF = "/go-ams";
+/**
+ * Retratos del bloque "100+ agentes activos" (decorativos).
+ *
+ * ⚠️ PENDIENTE DE PRODUCCIÓN: son fotos de stock de Unsplash presentadas como agentes de Epicare,
+ * y se sirven desde un dominio de terceros. Sustituir por retratos propios antes de publicar.
+ */
 const AGENT_AVATARS = [
   "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop",
@@ -239,13 +249,13 @@ function HeroStage({ isEn }: { isEn: boolean }) {
         </div>
 
         <div className="hero-ctas flex flex-col items-start gap-static-md shrink-0">
-          <Link href={HERO_LINKS.primary} className={`${CTA_BASE} bg-[var(--color-action-primary-bg)] text-[var(--color-action-primary-text)] shadow-elevation-2 hover:shadow-elevation-4`}>
+          <button type="button" onClick={() => joinModalStore.open()} className={`${CTA_BASE} bg-[var(--color-action-primary-bg)] text-[var(--color-action-primary-text)] shadow-elevation-2 hover:shadow-elevation-4 cursor-pointer`}>
             <span className="text-body-sm font-medium whitespace-nowrap">{t("ctaPrimary")}</span>
             <span className="relative w-8 h-8 rounded-full bg-[var(--color-action-primary-text)] text-[var(--color-action-primary-bg)] flex items-center justify-center overflow-hidden shrink-0">
               <CtaArrows />
             </span>
-          </Link>
-          <Link href={HERO_LINKS.secondary} className={`${CTA_BASE} bg-[var(--color-hero-ink)]/5 border border-[var(--color-hero-ink)]/20 text-[var(--color-hero-ink)] shadow-elevation-1 hover:bg-[var(--color-hero-ink)]/10`}>
+          </button>
+          <Link href={HERO_SECONDARY_HREF} className={`${CTA_BASE} bg-[var(--color-hero-ink)]/5 border border-[var(--color-hero-ink)]/20 text-[var(--color-hero-ink)] shadow-elevation-1 hover:bg-[var(--color-hero-ink)]/10`}>
             <span className="text-body-sm font-medium whitespace-nowrap">{t("ctaSecondary")}</span>
             <span className="relative w-8 h-8 rounded-full bg-[var(--color-hero-ink)] text-[var(--color-hero-ivory)] flex items-center justify-center overflow-hidden shrink-0">
               <CtaArrows />

@@ -19,6 +19,6 @@ export const NAV_GROUPS: { label: string; items: NavItem[] }[] = [
     label: "gohub",
     items: [{ key: "gohubCrm", href: "/go-crm" }, { key: "gohubAms", href: "/go-ams" }, { key: "gohubCalls" }, { key: "gohubAcademy" }],
   },
-  { label: "solutions", items: [{ key: "solMarketing" }, { key: "solTech" }] },
+  { label: "solutions", items: [{ key: "solMarketing", href: "/solutions" }, { key: "solTech", href: "/solutions#solutions" }] },
   { label: "about", items: [{ key: "aboutCompany", href: "/company" }, { key: "aboutTeam" }, { key: "aboutLicensing", href: "/licensing" }] },
 ];

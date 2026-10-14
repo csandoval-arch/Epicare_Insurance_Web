@@ -25,17 +25,23 @@ const jetBrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-// URL pública del project site de GitHub Pages. Debe coincidir con el
-// NEXT_PUBLIC_BASE_PATH del workflow de deploy (/Epicare).
-export const SITE_URL = "https://chrisbeep98.github.io/Epicare";
+/**
+ * URL pública de producción (Vercel, 2026-10-13). Alimenta canonicals, OpenGraph, el sitemap y
+ * el JSON-LD, así que al cambiar de dominio SOLO se toca esta constante.
+ *
+ * Ojo: este despliegue sirve desde la raíz, así que NO lleva basePath. Si el sitio vuelve a un
+ * project site de GitHub Pages hay que añadir aquí el sufijo `/Epicare` y exportar
+ * NEXT_PUBLIC_BASE_PATH=/Epicare en el build — las dos cosas, o las canónicas quedan descuadradas.
+ */
+export const SITE_URL = "https://epicare-insurance-website.vercel.app";
 
 const DESCRIPTION =
   "We're not the middleman. We're the operation. 130+ carrier appointments, an agency management system, CRM and licensing support — all under one producer contract, across all 52 US jurisdictions.";
 
 /**
  * Tarjeta social compartida por todas las rutas. Sin ella, `summary_large_image`
- * se renderiza sin miniatura en todos los canales. La ruta es relativa a propósito:
- * `metadataBase` conserva el `/Epicare` del project site de GitHub Pages.
+ * se renderiza sin miniatura en todos los canales. La ruta es relativa a propósito: la
+ * resuelve `metadataBase`, así que sigue al dominio sin tocarla.
  */
 export const OG_IMAGE = {
   url: "/og-image.jpg",
