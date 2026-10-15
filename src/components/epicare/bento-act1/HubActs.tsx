@@ -31,6 +31,17 @@ const ACT = {
    * El recorte de ancho sale de la columna del vídeo.
    */
   split: "52%",
+  /**
+   * Cuánto entra el vídeo POR DEBAJO de la columna de texto (% del acto, 15/10/2026). Al estrechar
+   * la tarjeta el vídeo se quedó en 400px y recortaba la escena; en vez de devolverle ancho a costa
+   * del texto, se mete bajo la columna (el texto va en `z-10`).
+   * - `blend`: vídeos de fondo plano (CRM, Academy). Se funden con la tarjeta, así que el solape es
+   *   invisible y pueden entrar a fondo.
+   * - `framed`: el panel de AMS es una captura OPACA con su marco. Entra menos porque, por debajo
+   *   del título, un solape real se vería: a 11% el titular inglés "The core of your" lo tocaría en
+   *   pantallas de ~1280 (la tipografía está topada en 40px y la tarjeta sí encoge con el viewport).
+   */
+  pull: { blend: "11%", framed: "6%" },
   /** Caja del logo: ancho y alto propios, independientes del tamaño del logo. */
   box: { w: "144px", h: "120px" },
   /** Alto del logo dentro de la caja (Academy va 2px más alto: su marca es más baja de x-height). */
@@ -74,10 +85,10 @@ function ActLogo({ panel }: { panel: PanelSpec }) {
  *   `screen` en oscuro (el negro), así el fondo desaparece y el vídeo se funde con la superficie.
  * - AMS es una captura real con su propio fondo: va en una caja con hairline, a 78% de alto.
  */
-function ActMedia({ panel, className = "" }: { panel: PanelSpec; className?: string }) {
+function ActMedia({ panel, className = "", style }: { panel: PanelSpec; className?: string; style?: React.CSSProperties }) {
   if (panel.isAms) {
     return (
-      <div className={`flex items-center justify-end ${className}`}>
+      <div className={`flex items-center justify-end ${className}`} style={style}>
         <div className={`relative w-full h-[78%] overflow-hidden rounded-l-md md:rounded-l-lg border-l border-y border-[color-mix(in_srgb,var(--color-text-Black-100)_12%,var(--color-surface-BG-white))] shadow-elevation-3 ${LOGO_SURFACE}`}>
           <SmartVideo src={panel.videoLight} poster={posterOf(panel, panel.videoLight)} className="absolute inset-0 w-full h-full object-cover object-left" />
         </div>
@@ -87,7 +98,7 @@ function ActMedia({ panel, className = "" }: { panel: PanelSpec; className?: str
 
   const fit = panel.isAcademy ? "object-contain scale-[0.85]" : "object-cover";
   return (
-    <div className={`relative overflow-hidden ${className}`}>
+    <div className={`relative overflow-hidden ${className}`} style={style}>
       <SmartVideo
         src={panel.videoLight}
         poster={posterOf(panel, panel.videoLight)}
@@ -112,17 +123,25 @@ export function HubAct({ panel, lead, body, hoverLabel }: {
         tone={panel.comingSoon ? "muted" : "brand"}
         className={`h-full w-full rounded-xl ${HAIRLINE} ${SURFACE} flex group`}
       >
-        {/* Jerarquía de lectura, anclada ARRIBA: logo (marca) → claim (ancla) → detalle. */}
+        {/* Jerarquía de lectura, anclada ARRIBA: logo (marca) → claim (ancla) → detalle.
+            `relative z-10` la deja POR ENCIMA del vídeo, que entra por debajo (ver ACT.pull). */}
         <div
-          className="h-full px-static-2xl pt-static-2xl pb-static-2xl flex flex-col justify-start gap-static-xl shrink-0 pointer-events-none"
+          className="relative z-10 h-full px-static-2xl pt-static-2xl pb-static-2xl flex flex-col justify-start gap-static-xl shrink-0 pointer-events-none"
           style={{ width: ACT.split }}
         >
           <ActLogo panel={panel} />
-          <p className={`text-display-sm ${INK}`}>{lines(lead)}</p>
+          {/* El titular se mide por su línea más larga en vez de partirse dentro de la columna: con
+              el vídeo debajo y fundido, puede invadirlo. Solo en las tarjetas con blend; la de AMS
+              lleva un panel opaco y su titular cabe sin ayuda. */}
+          <p className={`text-display-sm ${INK} ${panel.blend ? "w-max max-w-[132%]" : ""}`}>{lines(lead)}</p>
           <p className={`text-body-lg ${INK_SOFT}`}>{lines(body)}</p>
         </div>
 
-        <ActMedia panel={panel} className="h-full flex-1 min-w-0" />
+        <ActMedia
+          panel={panel}
+          className="h-full flex-1 min-w-0"
+          style={{ marginLeft: `-${panel.blend ? ACT.pull.blend : ACT.pull.framed}` }}
+        />
       </MediaHover>
     </article>
   );
