@@ -2,8 +2,9 @@
 
 /**
  * @file /solutions — Marketing y Tecnología de Epicare.
- * Seis actos: hero → la agencia in-house → el embudo → hecho alrededor del agente →
- * el plano de la tecnología propia + BI → el sello de privacidad y el cierre.
+ * Cinco actos: hero → la agencia in-house → el embudo → hecho alrededor del agente →
+ * Business Intelligence (el equipo detrás de la plataforma) → el cierre. La sección de privacidad
+ * y compliance se retiró el 14-10-2026 por decisión del usuario: `_quarantine/solutions/trust-compliance-2026-10-14/`.
  * Resuelve los anclajes del header: `#marketing` (la agencia) y `#solutions` / `#technology`
  * (la tecnología).
  *
@@ -24,7 +25,6 @@ import AgencySolutions from "@/components/solutions/AgencySolutions";
 import LeadJourneySolutions from "@/components/solutions/LeadJourneySolutions";
 import TailoredSolutions from "@/components/solutions/TailoredSolutions";
 import TechnologySolutions from "@/components/solutions/TechnologySolutions";
-import TrustSolutions from "@/components/solutions/TrustSolutions";
 import CTABannerEpicare from "@/components/epicare/CTABannerEpicare";
 
 /** A partir de aquí el header pasa a píldora flotante */
@@ -106,9 +106,6 @@ export default function SolutionsPage() {
         <span id="technology" className="sr-only" />
         <TechnologySolutions />
       </div>
-
-      {/* ── 06 · DATOS, PRIVACIDAD Y SEGURIDAD ── */}
-      <TrustSolutions />
 
       {/* ── CIERRE · el mismo banner de CTA que la landing y /licensing, con el modal de alta ── */}
       <CTABannerEpicare

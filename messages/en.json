@@ -1537,28 +1537,23 @@
       ]
     },
     "technology": {
-      "overline": "BUILT BY EPICARE",
-      "headline": "Our own infrastructure, not third-party licenses.",
-      "statement": "Everything an agent operates on is ours: **GO CRM** for pipelines, follow-up and automations, **GO AMS** for carrier contracts, book of business and commissions, **telephony** for calls and messages inside the same workspace, and **quoting tools** built for the markets we serve.",
-      "biOverline": "BUSINESS INTELLIGENCE",
-      "biBody": "Business Intelligence audits how it runs, reads the metrics behind every campaign and updates the tools with what the market is asking for. Development and BI work side by side, so the agency keeps moving ahead of the market.",
-      "platformLabel": "THE PLATFORM",
-      "platformLead": "One platform, set up by us and handed over ready.",
-      "biLead": "A team reading the operation."
+      "headlineAccent": "Business Intelligence",
+      "headlineRest": "is the team keeping the agency ahead of the market.",
+      "statement": "Everything an agent works on is ours: **GO CRM** for pipelines and follow-up, **GO AMS** for contracts and commissions, **telephony** and **quoting tools** inside the same workspace.",
+      "readings": [
+        "**They read the metrics** behind every campaign and every result.",
+        "**They build the campaigns** that those numbers are asking for.",
+        "**They update the tools** with what the market keeps asking for."
+      ],
+      "imageAlt": "Two analysts from the Business Intelligence team reviewing campaign metrics on screen."
     },
     "trust": {
-      "overline": "DATA, PRIVACY & SECURITY",
-      "headline": "Handled to the standard the industry demands.",
-      "desc": "We work under strict privacy and compliance protocols, and we understand the requirements insurance agents and agencies face in the United States.",
-      "sealTitle": "G2 Risk Solutions",
-      "badge": "Nationwide verification",
       "ctaTitle": "A team behind your growth.",
       "ctaDesc": "Join Epicare and start operating with the agency, the technology and the support already in place.",
       "cta": "Start today"
     },
     "leadJourney": {
-      "headline": "From the campaign to a client who stays.",
-      "intro": "The same path for every lead we generate: our team brings it in, your CRM catches it, and you carry the relationship from there.",
+      "headline": "Every lead takes the same path: from the campaign to a client who stays.",
       "stages": "5 stages",
       "scrollHint": "Scroll the flow",
       "swipeHint": "Swipe",
@@ -1569,87 +1564,35 @@
       "steps": [
         {
           "step": "01",
-          "name": "We generate the lead",
+          "name": "We generate the lead for you",
           "tag": "Marketing",
-          "desc": "The campaign brings in someone who is actually looking for coverage.",
-          "meta": "Active campaign"
+          "desc": "The campaign brings in someone who is actually looking for coverage."
         },
         {
           "step": "02",
-          "name": "It lands in GO CRM",
+          "name": "It lands straight in GO CRM",
           "tag": "GO CRM",
-          "desc": "The lead arrives assigned to you, with no exports and no copying between platforms.",
-          "meta": "Real-time entry"
+          "desc": "The lead arrives assigned to you, with no exports and no copying between platforms."
         },
         {
           "step": "03",
-          "name": "You follow up",
+          "name": "You follow up from one place",
           "tag": "Agent",
-          "desc": "You contact the prospect and every call, note and next step stays on record.",
-          "meta": "Call and scheduling"
+          "desc": "You contact the prospect and every call, note and next step stays on record."
         },
         {
           "step": "04",
-          "name": "You sell",
+          "name": "You close and issue the policy",
           "tag": "Conversion",
-          "desc": "You close the policy with the material our team produces and the support of your contact.",
-          "meta": "Policy issued"
+          "desc": "You close the policy with the material our team produces and the support of your contact."
         },
         {
           "step": "05",
-          "name": "You keep the relationship",
+          "name": "You keep the client for years",
           "tag": "Retention",
-          "desc": "Ongoing follow-up so your client always feels taken care of, and your book stays protected.",
-          "meta": "Protected book"
+          "desc": "Ongoing follow-up so your client always feels taken care of, and your book stays protected."
         }
-      ],
-      "crmSnippet": {
-        "leadName": "J. Morales",
-        "campaign": "Health campaign · Inbound",
-        "status": "New lead · Assigned",
-        "callLogged": "Call logged · 4m 12s",
-        "nextStep": "Next step: send quote comparison"
-      },
-      "cards": {
-        "s1": {
-          "label": "ACQUISITION CHANNEL",
-          "live": "Active campaign",
-          "title": "Multichannel marketing (Life & Health)",
-          "f1": "Targeted ads",
-          "f2": "Optimized funnels",
-          "f3": "Direct lead",
-          "mLabel": "ACTIVE CHANNEL",
-          "mTitle": "Life & Health campaign",
-          "mFlow": "Ad → Form → Lead"
-        },
-        "s2": {
-          "label": "GO CRM · LIVE ENTRY",
-          "synced": "Synced",
-          "note": "No manual export"
-        },
-        "s3": {
-          "label": "AGENT WORKFLOW",
-          "note": "The producer follows up directly"
-        },
-        "s4": {
-          "label": "POLICY ISSUE",
-          "state": "Completed",
-          "title": "Policy approved and issued",
-          "note": "Carrier connected · Recorded automatically in GO AMS",
-          "mLabel": "APPLICATION",
-          "mState": "Issued",
-          "mTitle": "Policy issued",
-          "mNote": "Carrier connected and confirmed"
-        },
-        "s5": {
-          "label": "ACTIVE BOOK",
-          "title": "Long-term client",
-          "note": "Annual review scheduled · Relationship and commission protected",
-          "mLabel": "ACTIVE RELATIONSHIP",
-          "mTitle": "Client who stays",
-          "mNote": "Annual review and retention"
-        }
-      }
+      ]
     }
   }
 }

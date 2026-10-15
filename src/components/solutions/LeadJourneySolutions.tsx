@@ -31,8 +31,6 @@ import {
   Handshake,
   ShieldCheck,
   ArrowRight,
-  Clock,
-  Sparkle,
   CaretLeft,
   CaretRight,
 } from "@phosphor-icons/react";
@@ -42,7 +40,6 @@ interface StepData {
   name: string;
   tag: string;
   desc: string;
-  meta: string;
 }
 
 const STEP_ICONS = [
@@ -236,13 +233,9 @@ export default function LeadJourneySolutions() {
             {/* ── PANEL 0: TITULAR EDITORIAL (ALINEADO A LA RETÍCULA CON BUEN MARGEN LEFT) ── */}
             <article className="w-[460px] xl:w-[520px] shrink-0 rounded-xl border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-1)]/70 backdrop-blur-md p-static-lg xl:p-static-xl flex flex-col justify-between min-h-[440px] xl:min-h-[470px] shadow-elevation-1">
               <div>
-                <h2 className="text-display md:text-display-lg xl:text-display-xl text-[var(--color-text-primary)] leading-[1.05] tracking-tight text-balance">
+                <h2 className="text-display-sm md:text-display xl:text-display-lg text-[var(--color-text-primary)] text-balance">
                   {t("headline")}
                 </h2>
-
-                <p className="text-body-md xl:text-body-lg text-[var(--color-text-secondary)] leading-relaxed mt-static-md text-balance">
-                  {t("intro")}
-                </p>
               </div>
 
               {/* Indicador de recorrido al pie */}
@@ -256,60 +249,43 @@ export default function LeadJourneySolutions() {
 
             {/* ── PANELES 1 A 5: LAS 5 ETAPAS DEL RECORRIDO ── */}
             {rawSteps.map((step, idx) => {
-              const isActive = activeStep === idx;
               const IconComponent = STEP_ICONS[idx];
 
               return (
                 <article
                   key={step.step}
                   onClick={() => goToStep(idx)}
-                  className={`w-[420px] xl:w-[460px] shrink-0 rounded-xl border flex flex-col justify-between p-static-lg xl:p-static-xl min-h-[440px] xl:min-h-[470px] transition-all duration-300 relative cursor-pointer ${
-                    isActive
-                      ? "border-[var(--color-brand-blue)] bg-[var(--color-surface-BG-1)] shadow-elevation-3"
-                      : "border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-1)]/40 hover:bg-[var(--color-surface-BG-1)]/70 opacity-80 hover:opacity-100"
-                  }`}
+                  className="group/card w-[420px] xl:w-[460px] shrink-0 rounded-xl border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-1)] flex flex-col justify-between p-static-lg xl:p-static-xl min-h-[440px] xl:min-h-[470px] relative cursor-pointer transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] lg:hover:border-[var(--color-brand-blue)]"
                 >
-                  {/* Pestaña superior azul iluminada en tarjeta activa */}
-                  <div
-                    className={`absolute top-0 left-0 right-0 h-[2px] transition-opacity duration-300 rounded-t-xl ${
-                      isActive ? "bg-[var(--color-brand-blue)] opacity-100" : "opacity-0"
-                    }`}
-                  />
 
                   {/* BLOQUE SUPERIOR */}
                   <div className="flex flex-col gap-y-static-sm">
-                    {/* Fila índice + tag pill + icono */}
-                    <div className="flex items-center justify-between">
+                    {/* Fila de cabecera: solo el índice y su etiqueta. El icono bajó a encabezar
+                        el título (pedido del usuario, 14-10-2026). */}
+                    <div className="flex items-center">
                       <div className="flex items-center gap-static-xs">
                         <span className="text-meta font-mono font-bold text-[var(--color-text-muted)]">
                           {step.step}
                         </span>
                         <span className="w-1 h-1 rounded-full bg-[var(--color-border-Strokes-default)]" />
-                        <span
-                          className={`text-caption font-mono uppercase px-2 py-0.5 rounded-md border text-[11px] ${
-                            isActive
-                              ? "border-[var(--color-brand-blue)]/40 bg-[var(--color-brand-blue)]/10 text-[var(--color-brand-blue)] font-medium"
-                              : "border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-base)] text-[var(--color-text-secondary)]"
-                          }`}
-                        >
+                        <span className="text-caption font-mono uppercase px-2 py-0.5 rounded-md border text-[11px] border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-base)] text-[var(--color-text-secondary)] transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] lg:group-hover/card:border-[var(--color-brand-blue)] lg:group-hover/card:text-[var(--color-text-accent-blue)]">
                           {step.tag}
                         </span>
                       </div>
 
-                      {/* Icono de Phosphor */}
-                      <div
-                        className={`w-10 h-10 rounded-lg flex items-center justify-center border transition-colors ${
-                          isActive
-                            ? "border-[var(--color-brand-blue)] bg-[var(--color-brand-blue)]/10 text-[var(--color-brand-blue)]"
-                            : "border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-base)] text-[var(--color-text-secondary)]"
-                        }`}
-                      >
-                        <IconComponent size={22} weight={isActive ? "duotone" : "regular"} />
-                      </div>
+                    </div>
+                  </div>
+
+                  {/* El título y su bajada se centran en el espacio que queda bajo la cabecera:
+                      ni pegados al índice ni caídos contra el borde inferior. */}
+                  <div className="flex-1 flex flex-col justify-center gap-y-static-lg">
+                    {/* Icono de Phosphor, encabezando el título */}
+                    <div className="w-14 h-14 rounded-lg flex items-center justify-center border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-base)] text-[var(--color-brand-blue)] transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] lg:group-hover/card:border-[var(--color-brand-blue)]">
+                      <IconComponent size={30} weight="duotone" />
                     </div>
 
-                    {/* Título de la etapa */}
-                    <h3 className="text-h3 xl:text-h2 font-semibold text-[var(--color-text-primary)] mt-1">
+                    {/* Título de la etapa · acotado para que rompa siempre en dos líneas */}
+                    <h3 className="text-h3 xl:text-h2 font-semibold text-[var(--color-text-primary)] max-w-xs text-balance">
                       {step.name}
                     </h3>
 
@@ -319,113 +295,6 @@ export default function LeadJourneySolutions() {
                     </p>
                   </div>
 
-                  {/* BLOQUE INFERIOR: MICRO-COMPONENTE TÉCNICO DIALÉCTICO */}
-                  <div className="mt-static-md pt-static-sm border-t border-[var(--color-border-Strokes-default)]">
-                    {/* ETAPA 01: Campañas Inbound */}
-                    {idx === 0 && (
-                      <div className="rounded-lg p-3 border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-base)] flex flex-col gap-1.5">
-                        <div className="flex items-center justify-between text-[11px] font-mono text-[var(--color-text-muted)]">
-                          <span>{t("cards.s1.label")}</span>
-                          <span className="flex items-center gap-1 text-[var(--color-brand-blue)] font-medium">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand-blue)] animate-pulse" />
-                            {t("cards.s1.live")}
-                          </span>
-                        </div>
-                        <div className="text-meta font-semibold text-[var(--color-text-primary)]">
-                          {t("cards.s1.title")}
-                        </div>
-                        <div className="text-[11px] text-[var(--color-text-secondary)] flex items-center gap-1.5">
-                          <span>{t("cards.s1.f1")}</span>
-                          <ArrowRight size={10} />
-                          <span>{t("cards.s1.f2")}</span>
-                          <ArrowRight size={10} />
-                          <span className="text-[var(--color-text-primary)] font-medium">{t("cards.s1.f3")}</span>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* ETAPA 02: Captura en GO CRM */}
-                    {idx === 1 && (
-                      <div className="rounded-lg p-3 border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-base)] flex flex-col gap-1.5 shadow-sm">
-                        <div className="flex items-center justify-between text-[11px] font-mono text-[var(--color-text-muted)]">
-                          <span className="text-[var(--color-text-accent-blue)] font-bold">
-                            {t("cards.s2.label")}
-                          </span>
-                          <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-medium">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                            {t("cards.s2.synced")}
-                          </span>
-                        </div>
-                        <div className="text-meta font-semibold text-[var(--color-text-primary)]">
-                          {t("crmSnippet.leadName")}
-                        </div>
-                        <div className="text-[11px] text-[var(--color-text-secondary)]">
-                          {t("crmSnippet.campaign")}
-                        </div>
-                        <div className="flex items-center justify-between mt-0.5">
-                          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[var(--color-surface-BG-1)] border border-[var(--color-border-Strokes-default)] text-[var(--color-text-muted)]">
-                            {t("crmSnippet.status")}
-                          </span>
-                          <span className="text-[11px] font-mono text-[var(--color-text-muted)]">
-                            {t("cards.s2.note")}
-                          </span>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* ETAPA 03: Seguimiento del Agente en GO CRM */}
-                    {idx === 2 && (
-                      <div className="rounded-lg p-3 border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-base)] flex flex-col gap-1.5 shadow-sm">
-                        <div className="flex items-center justify-between text-[11px] font-mono text-[var(--color-text-muted)]">
-                          <span>{t("cards.s3.label")}</span>
-                          <Clock size={12} className="text-[var(--color-brand-blue)]" />
-                        </div>
-                        <div className="text-meta font-semibold text-[var(--color-text-primary)]">
-                          {t("crmSnippet.callLogged")}
-                        </div>
-                        <div className="text-[11px] text-[var(--color-text-secondary)]">
-                          {t("crmSnippet.nextStep")}
-                        </div>
-                        <div className="text-[10px] font-mono text-[var(--color-text-accent-blue)] font-medium">
-                          {t("cards.s3.note")}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* ETAPA 04: Cierre de Póliza */}
-                    {idx === 3 && (
-                      <div className="rounded-lg p-3 border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-base)] flex flex-col gap-1.5">
-                        <div className="flex items-center justify-between text-[11px] font-mono text-[var(--color-text-muted)]">
-                          <span>{t("cards.s4.label")}</span>
-                          <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
-                            {t("cards.s4.state")}
-                          </span>
-                        </div>
-                        <div className="text-meta font-semibold text-[var(--color-text-primary)]">
-                          {t("cards.s4.title")}
-                        </div>
-                        <div className="text-[11px] text-[var(--color-text-secondary)]">
-                          {t("cards.s4.note")}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* ETAPA 05: Fidelización y Retención */}
-                    {idx === 4 && (
-                      <div className="rounded-lg p-3 border border-[var(--color-brand-blue)]/30 bg-[var(--color-brand-blue)]/5 flex flex-col gap-1.5">
-                        <div className="flex items-center justify-between text-[11px] font-mono text-[var(--color-brand-blue)]">
-                          <span>{t("cards.s5.label")}</span>
-                          <Sparkle size={12} weight="fill" />
-                        </div>
-                        <div className="text-meta font-semibold text-[var(--color-text-primary)]">
-                          {t("cards.s5.title")}
-                        </div>
-                        <div className="text-[11px] text-[var(--color-text-secondary)]">
-                          {t("cards.s5.note")}
-                        </div>
-                      </div>
-                    )}
-                  </div>
                 </article>
               );
             })}
@@ -442,13 +311,9 @@ export default function LeadJourneySolutions() {
             {/* TARJETA 0: TITULAR EDITORIAL EN MÓVIL */}
             <article className="w-[85vw] max-w-[360px] shrink-0 snap-start rounded-xl border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-1)]/70 p-static-md flex flex-col justify-between min-h-[380px]">
               <div>
-                <h2 className="text-display-sm text-[var(--color-text-primary)] leading-[1.1] tracking-tight">
+                <h2 className="text-display-xs text-[var(--color-text-primary)] text-balance">
                   {t("headline")}
                 </h2>
-
-                <p className="text-body-sm text-[var(--color-text-secondary)] leading-relaxed mt-static-sm">
-                  {t("intro")}
-                </p>
               </div>
 
               <div className="pt-static-sm border-t border-[var(--color-border-Strokes-default)] flex items-center justify-between text-xs font-mono text-[var(--color-text-muted)]">
@@ -461,17 +326,12 @@ export default function LeadJourneySolutions() {
 
             {/* TARJETAS 1 A 5 EN MÓVIL */}
             {rawSteps.map((step, idx) => {
-              const isActive = activeStep === idx;
               const IconComponent = STEP_ICONS[idx];
 
               return (
                 <article
                   key={step.step}
-                  className={`w-[85vw] max-w-[360px] shrink-0 snap-start rounded-xl border flex flex-col justify-between p-static-md min-h-[380px] transition-colors ${
-                    isActive
-                      ? "border-[var(--color-brand-blue)] bg-[var(--color-surface-BG-1)]"
-                      : "border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-1)]/40"
-                  }`}
+                  className="w-[85vw] max-w-[360px] shrink-0 snap-start rounded-xl border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-1)] flex flex-col justify-between p-static-md min-h-[380px]"
                 >
                   <div className="flex flex-col gap-y-static-sm">
                     <div className="flex items-center justify-between">
@@ -483,12 +343,15 @@ export default function LeadJourneySolutions() {
                           {step.tag}
                         </span>
                       </div>
-                      <div className="w-8 h-8 rounded-lg border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-base)] flex items-center justify-center text-[var(--color-brand-blue)]">
-                        <IconComponent size={18} weight="duotone" />
-                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex-1 flex flex-col justify-center gap-y-static-lg">
+                    <div className="w-12 h-12 rounded-lg border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-base)] flex items-center justify-center text-[var(--color-brand-blue)]">
+                      <IconComponent size={26} weight="duotone" />
                     </div>
 
-                    <h3 className="text-h3 font-semibold text-[var(--color-text-primary)]">
+                    <h3 className="text-h3 font-semibold text-[var(--color-text-primary)] max-w-[14rem] text-balance">
                       {step.name}
                     </h3>
 
@@ -497,85 +360,6 @@ export default function LeadJourneySolutions() {
                     </p>
                   </div>
 
-                  <div className="mt-static-md pt-static-sm border-t border-[var(--color-border-Strokes-default)]">
-                    {idx === 0 && (
-                      <div className="rounded-lg p-2.5 border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-base)] flex flex-col gap-1 text-xs">
-                        <div className="flex items-center justify-between font-mono text-[11px] text-[var(--color-brand-blue)]">
-                          <span>{t("cards.s1.mLabel")}</span>
-                          <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand-blue)] animate-pulse" />
-                        </div>
-                        <div className="font-semibold text-[var(--color-text-primary)]">
-                          {t("cards.s1.mTitle")}
-                        </div>
-                        <div className="text-[var(--color-text-secondary)] text-[11px]">
-                          {t("cards.s1.mFlow")}
-                        </div>
-                      </div>
-                    )}
-
-                    {idx === 1 && (
-                      <div className="rounded-lg p-2.5 border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-base)] flex flex-col gap-1 text-xs">
-                        <div className="flex items-center justify-between font-mono text-[11px] text-[var(--color-text-accent-blue)]">
-                          <span className="font-semibold">{t("cards.s2.label")}</span>
-                          <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                            {t("cards.s2.synced")}
-                          </span>
-                        </div>
-                        <div className="font-semibold text-[var(--color-text-primary)]">
-                          {t("crmSnippet.leadName")}
-                        </div>
-                        <div className="text-[var(--color-text-secondary)] text-[11px]">
-                          {t("crmSnippet.campaign")}
-                        </div>
-                      </div>
-                    )}
-
-                    {idx === 2 && (
-                      <div className="rounded-lg p-2.5 border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-base)] flex flex-col gap-1 text-xs">
-                        <div className="flex items-center justify-between font-mono text-[11px] text-[var(--color-text-muted)]">
-                          <span>WORKFLOW DEL AGENTE</span>
-                          <Clock size={12} className="text-[var(--color-brand-blue)]" />
-                        </div>
-                        <div className="font-semibold text-[var(--color-text-primary)]">
-                          {t("crmSnippet.callLogged")}
-                        </div>
-                        <div className="text-[var(--color-text-secondary)] text-[11px]">
-                          {t("crmSnippet.nextStep")}
-                        </div>
-                      </div>
-                    )}
-
-                    {idx === 3 && (
-                      <div className="rounded-lg p-2.5 border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-base)] flex flex-col gap-1 text-xs">
-                        <div className="flex items-center justify-between font-mono text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">
-                          <span>{t("cards.s4.mLabel")}</span>
-                          <span>{t("cards.s4.mState")}</span>
-                        </div>
-                        <div className="font-semibold text-[var(--color-text-primary)]">
-                          {t("cards.s4.mTitle")}
-                        </div>
-                        <div className="text-[var(--color-text-secondary)] text-[11px]">
-                          {t("cards.s4.mNote")}
-                        </div>
-                      </div>
-                    )}
-
-                    {idx === 4 && (
-                      <div className="rounded-lg p-2.5 border border-[var(--color-brand-blue)]/30 bg-[var(--color-brand-blue)]/5 flex flex-col gap-1 text-xs">
-                        <div className="flex items-center justify-between font-mono text-[11px] text-[var(--color-brand-blue)]">
-                          <span>{t("cards.s5.mLabel")}</span>
-                          <Sparkle size={12} weight="fill" />
-                        </div>
-                        <div className="font-semibold text-[var(--color-text-primary)]">
-                          {t("cards.s5.mTitle")}
-                        </div>
-                        <div className="text-[var(--color-text-secondary)] text-[11px]">
-                          {t("cards.s5.mNote")}
-                        </div>
-                      </div>
-                    )}
-                  </div>
                 </article>
               );
             })}

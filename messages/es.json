@@ -1538,28 +1538,23 @@
       ]
     },
     "technology": {
-      "overline": "HECHO POR EPICARE",
-      "headline": "Infraestructura propia, no licencias de terceros.",
-      "statement": "Todo sobre lo que opera el agente es nuestro: **GO CRM** para pipelines, seguimiento y automatizaciones, **GO AMS** para contratos con carriers, libro de negocio y comisiones, **telefonía** para llamadas y mensajes dentro del mismo espacio, y **comparadores** hechos para los mercados que atendemos.",
-      "biOverline": "BUSINESS INTELLIGENCE",
-      "biBody": "Business Intelligence audita cómo corre, lee las métricas detrás de cada campaña y actualiza las herramientas con lo que el mercado está pidiendo. Desarrollo y BI trabajan codo a codo, así la agencia se mantiene por delante del mercado.",
-      "platformLabel": "LA PLATAFORMA",
-      "platformLead": "Una sola plataforma, configurada por nosotros y entregada lista.",
-      "biLead": "Un equipo leyendo la operación."
+      "headlineAccent": "Business Intelligence",
+      "headlineRest": "es el equipo que mantiene la agencia por delante del mercado.",
+      "statement": "Todo sobre lo que trabaja el agente es nuestro: **GO CRM** para pipelines y seguimiento, **GO AMS** para contratos y comisiones, **telefonía** y **comparadores** dentro del mismo espacio.",
+      "readings": [
+        "**Leen las métricas** detrás de cada campaña y de cada resultado.",
+        "**Crean las campañas** que esos números les están pidiendo.",
+        "**Actualizan las herramientas** con lo que el mercado va pidiendo."
+      ],
+      "imageAlt": "Dos analistas del equipo de Business Intelligence revisando las métricas de las campañas en pantalla."
     },
     "trust": {
-      "overline": "DATOS, PRIVACIDAD Y SEGURIDAD",
-      "headline": "Al estándar que la industria exige.",
-      "desc": "Manejamos estrictos protocolos de privacidad y compliance, y entendemos los requisitos que enfrentan los agentes y las agencias de seguros en Estados Unidos.",
-      "sealTitle": "G2 Risk Solutions",
-      "badge": "Verificación a nivel nacional",
       "ctaTitle": "Un equipo detrás de tu crecimiento.",
       "ctaDesc": "Únete a Epicare y empieza a operar con la agencia, la tecnología y el soporte ya montados.",
       "cta": "Empieza hoy"
     },
     "leadJourney": {
-      "headline": "De la campaña a un cliente que se queda.",
-      "intro": "El mismo recorrido para cada lead que generamos: nuestro equipo lo trae, tu CRM lo recibe y desde ahí la relación es tuya.",
+      "headline": "Cada lead recorre el mismo camino: de la campaña al cliente que se queda.",
       "stages": "5 etapas",
       "scrollHint": "Desplaza el flujo",
       "swipeHint": "Desliza",
@@ -1570,87 +1565,35 @@
       "steps": [
         {
           "step": "01",
-          "name": "Generamos el lead",
+          "name": "Generamos el lead y te lo asignamos",
           "tag": "Marketing",
-          "desc": "La campaña trae a alguien que de verdad está buscando cobertura.",
-          "meta": "Campaña activa"
+          "desc": "La campaña trae a alguien que de verdad está buscando cobertura."
         },
         {
           "step": "02",
-          "name": "Entra a GO CRM",
+          "name": "Entra directo en tu GO CRM",
           "tag": "GO CRM",
-          "desc": "El lead llega asignado a ti, sin exportaciones ni copiar datos entre plataformas.",
-          "meta": "Entrada en vivo"
+          "desc": "El lead llega asignado a ti, sin exportaciones ni copiar datos entre plataformas."
         },
         {
           "step": "03",
-          "name": "Haces seguimiento",
+          "name": "Haces el seguimiento en un sitio",
           "tag": "Agente",
-          "desc": "Contactas al prospecto y cada llamada, nota y próximo paso queda registrado.",
-          "meta": "Llamada y agenda"
+          "desc": "Contactas al prospecto y cada llamada, nota y próximo paso queda registrado."
         },
         {
           "step": "04",
-          "name": "Vendes",
+          "name": "Cierras y emites la póliza",
           "tag": "Conversión",
-          "desc": "Cierras la póliza con el material que produce nuestro equipo y el apoyo de tu contacto.",
-          "meta": "Póliza emitida"
+          "desc": "Cierras la póliza con el material que produce nuestro equipo y el apoyo de tu contacto."
         },
         {
           "step": "05",
-          "name": "Mantienes la relación",
+          "name": "Conservas al cliente durante años",
           "tag": "Retención",
-          "desc": "Seguimiento constante para que tu cliente se sienta siempre bien atendido y tu cartera quede protegida.",
-          "meta": "Cartera protegida"
+          "desc": "Seguimiento constante para que tu cliente se sienta siempre bien atendido y tu cartera quede protegida."
         }
-      ],
-      "crmSnippet": {
-        "leadName": "J. Morales",
-        "campaign": "Campaña de salud · Inbound",
-        "status": "Lead nuevo · Asignado",
-        "callLogged": "Llamada registrada · 4m 12s",
-        "nextStep": "Próximo paso: enviar comparativo"
-      },
-      "cards": {
-        "s1": {
-          "label": "CANAL DE CAPTACIÓN",
-          "live": "Campaña activa",
-          "title": "Marketing multicanal (Vida y Salud)",
-          "f1": "Anuncios segmentados",
-          "f2": "Embudos optimizados",
-          "f3": "Lead directo",
-          "mLabel": "CANAL ACTIVO",
-          "mTitle": "Campaña de Vida y Salud",
-          "mFlow": "Anuncio → Formulario → Lead"
-        },
-        "s2": {
-          "label": "GO CRM · ENTRADA EN VIVO",
-          "synced": "Sincronizado",
-          "note": "Cero exportación manual"
-        },
-        "s3": {
-          "label": "WORKFLOW DEL AGENTE",
-          "note": "El productor hace el seguimiento directo"
-        },
-        "s4": {
-          "label": "EMISIÓN DE PÓLIZA",
-          "state": "Completada",
-          "title": "Póliza aprobada y emitida",
-          "note": "Carrier conectado · Registro automático en GO AMS",
-          "mLabel": "APLICACIÓN",
-          "mState": "Emitida",
-          "mTitle": "Póliza emitida",
-          "mNote": "Carrier conectado y confirmado"
-        },
-        "s5": {
-          "label": "CARTERA ACTIVA",
-          "title": "Cliente a largo plazo",
-          "note": "Revisión anual agendada · Relación y comisión protegidas",
-          "mLabel": "RELACIÓN ACTIVA",
-          "mTitle": "Cliente que se queda",
-          "mNote": "Revisión anual y retención"
-        }
-      }
+      ]
     }
   }
 }
