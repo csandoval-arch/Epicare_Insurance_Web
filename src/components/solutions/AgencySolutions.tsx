@@ -25,7 +25,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MetaLogo, GoogleLogo, TiktokLogo, type Icon } from "@phosphor-icons/react";
 import { asset } from "@/lib/asset";
 import HoloIcon, { type HoloVariant } from "./HoloIcon";
-import { DUR, EASE, STAGGER, TRIGGER } from "@/lib/motion";
+import { STAGGER, TRIGGER } from "@/lib/motion";
 import { BIRTH_FROM, BIRTH_TO, CARD_FROM, CARD_TO, CONTAINER, FULL, SECTION, oneShot } from "./shared";
 
 interface AgencyItem {
@@ -49,54 +49,18 @@ const PLATFORMS: { name: string; Logo: Icon }[] = [
 /** Silueta holográfica por servicio, en el orden del diccionario. */
 const HOLO_VARIANTS: HoloVariant[] = ["campaigns", "funnels", "material"];
 
-const FOCUS = [
-  { fx: 0.15, fy: 0.57, scale: 2.1 },
-  { fx: 0.49, fy: 0.67, scale: 2.1 },
-  { fx: 0.84, fy: 0.34, scale: 2.1 },
+/** Imágenes de la agencia in-house por cada servicio (brief y assets de marketing). */
+const AGENCY_IMAGES = [
+  "/Files/Marketing/IN-HOUSE AGENCY/Code_Generated_Image.webp",
+  "/Files/Marketing/IN-HOUSE AGENCY/Code_Generated_Image (1).webp",
+  "/Files/Marketing/IN-HOUSE AGENCY/Code_Generated_Image (2).webp",
 ] as const;
-
-/**
- * Lleva el punto (fx, fy) al centro del marco. Con `transform: translate() scale()` la traslación
- * NO se escala, así que hay que multiplicarla por el zoom a mano.
- */
-const cameraTo = ({ fx, fy, scale }: (typeof FOCUS)[number]) => ({
-  xPercent: -(fx - 0.5) * 100 * scale,
-  yPercent: -(fy - 0.5) * 100 * scale,
-  scale,
-});
-
-/** El mismo encuadre, ya resuelto en CSS: los recortes de móvil son estáticos, sin GSAP. */
-const cssCamera = (focus: (typeof FOCUS)[number]) => {
-  const { xPercent, yPercent, scale } = cameraTo(focus);
-  return `translate(${xPercent}%, ${yPercent}%) scale(${scale})`;
-};
 
 export default function AgencySolutions() {
   const t = useTranslations("solutionsPage.agency");
   const items = t.raw("items") as AgencyItem[];
   const sectionRef = useRef<HTMLElement>(null);
-  const artRef = useRef<HTMLImageElement>(null);
   const [active, setActive] = useState(0);
-
-  // ── LA CÁMARA · se mueve cuando cambia el servicio activo ──
-  useLayoutEffect(() => {
-    const art = artRef.current;
-    if (!art) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      gsap.set(art, { xPercent: 0, yPercent: 0, scale: 1 });
-      return;
-    }
-    const tween = gsap.to(art, {
-      ...cameraTo(FOCUS[active] ?? FOCUS[0]),
-      duration: DUR.slow,
-      ease: EASE.inOut,
-      force3D: true,
-      overwrite: "auto",
-    });
-    return () => {
-      tween.kill();
-    };
-  }, [active]);
 
   // ── ENTRADAS Y SEGUIMIENTO DEL SERVICIO ACTIVO ──
   useLayoutEffect(() => {
@@ -113,14 +77,15 @@ export default function AgencySolutions() {
       gsap.fromTo(".ag-close", CARD_FROM, { ...CARD_TO, ...oneShot(el.querySelector(".ag-close")) });
     });
 
-    // El servicio activo es el que cruza la mitad de la pantalla. Sin scrub: estados discretos.
+    // El servicio activo es el que cruza la zona de lectura central.
     const steps = gsap.utils.toArray<HTMLElement>(".ag-step", el);
     const triggers = steps.map((step, i) =>
       ScrollTrigger.create({
         trigger: step,
-        start: "top 60%",
-        end: "bottom 40%",
-        onToggle: ({ isActive }) => isActive && setActive(i),
+        start: "top 55%",
+        end: "bottom 55%",
+        onEnter: () => setActive(i),
+        onEnterBack: () => setActive(i),
       })
     );
 
@@ -151,14 +116,30 @@ export default function AgencySolutions() {
           <div className="ag-stage hidden lg:block col-span-12 lg:col-span-6 lg:sticky lg:top-[var(--space-section-md)] self-start z-0">
             {/* Sin radio: la escena es un marco recto, igual que las tarjetas de la lista. */}
             <div className="relative w-full aspect-[16/11] lg:aspect-[4/3] overflow-hidden border border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-1)]">
-              <img
-                ref={artRef}
-                src={asset("/Files/About_Company/Dot_matrix_map_with_pins_20260929123652 1.png")}
-                alt={t("artAlt")}
-                className="absolute inset-0 w-full h-full object-contain will-change-transform"
-                loading="lazy"
-                decoding="async"
-              />
+              {AGENCY_IMAGES.map((imgSrc, i) => {
+                const isCurrent = i === active;
+                return (
+                  <img
+                    key={imgSrc}
+                    src={asset(imgSrc)}
+                    alt={items[i]?.title ?? t("artAlt")}
+                    className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+                      isCurrent
+                        ? "opacity-100 scale-100 z-10"
+                        : "opacity-0 scale-105 z-0 pointer-events-none"
+                    }`}
+                    loading={i === 0 ? "eager" : "lazy"}
+                    decoding="async"
+                  />
+                );
+              })}
+
+              {/* Indicador sutil de posición de la escena */}
+              <div className="absolute bottom-static-md right-static-md z-20 px-static-sm py-static-xs bg-[var(--color-surface-BG-base)]/85 backdrop-blur-sm border border-[var(--color-border-Strokes-default)] text-meta text-[var(--color-text-secondary)]">
+                <span className="text-[var(--color-text-accent-blue)] font-medium">0{active + 1}</span>
+                <span className="opacity-40"> / </span>
+                <span>0{AGENCY_IMAGES.length}</span>
+              </div>
             </div>
           </div>
 
@@ -176,19 +157,14 @@ export default function AgencySolutions() {
                         : "border-[var(--color-border-Strokes-default)]"
                     }`}
                   >
-                    {/* <lg la escena no puede ir fija (se vería a través de las tarjetas): cada
-                        tarjeta lleva su propio recorte ya encuadrado en su pieza. `object-cover`
-                        y no `contain`: el encuadre desplaza el dibujo y con `contain` asomaba el
-                        fondo del marco por el lado contrario. */}
+                    {/* En móvil cada tarjeta muestra directamente su imagen asignada */}
                     <div className="lg:hidden relative w-full aspect-[16/9] overflow-hidden border-b border-[var(--color-border-Strokes-default)] bg-[var(--color-surface-BG-1)]">
                       <img
-                        src={asset("/Files/About_Company/Dot_matrix_map_with_pins_20260929123652 1.png")}
-                        alt=""
-                        aria-hidden="true"
+                        src={asset(AGENCY_IMAGES[i] ?? AGENCY_IMAGES[0])}
+                        alt={item.title}
                         loading="lazy"
                         decoding="async"
-                        className="absolute inset-0 w-full h-full object-cover"
-                        style={{ transform: cssCamera(FOCUS[i] ?? FOCUS[0]) }}
+                        className="w-full h-full object-cover"
                       />
                     </div>
 

@@ -13,7 +13,7 @@
  * Destinos en `login/loginData.ts` (pendientes). Montado una vez en `app/layout.tsx`.
  */
 
-import type { ComponentType } from "react";
+import type { ComponentType, ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import ArrowUR from "@/components/icons/ArrowUR";
 import GlassModal from "@/components/glass/GlassModal";
@@ -22,6 +22,7 @@ import { useLoginModal } from "@/lib/loginModalStore";
 import { EppigoIcon } from "./EcosystemIcons";
 import { AcademyLogo, AmsLogo, CrmLogo } from "./login/LoginLogos";
 import { LINK_GROUPS, PLATFORMS, type PlatformId } from "./login/loginData";
+import LoginLinkAccordion from "./login/LoginLinkAccordion";
 
 // Wordmarks (CRM, AMS) e icono (Eppigo, con su nombre al lado); CRM/AMS traen aire a la izquierda en el viewBox
 const LOGO: Record<PlatformId, ComponentType<{ className?: string }>> = {
@@ -32,7 +33,8 @@ const LOGO: Record<PlatformId, ComponentType<{ className?: string }>> = {
 
 const LABEL: Record<PlatformId, string> = { crm: "GO CRM", ams: "GO AMS", eppigo: "Eppigo" };
 
-const go = (href: string | null) => href && window.location.assign(href);
+/** Portales externos: pestaña nueva (el modal y la landing quedan abiertos), sin `opener` ni referrer. */
+const go = (href: string | null | undefined) => href && window.open(href, "_blank", "noopener,noreferrer");
 
 export default function LoginModal() {
   const t = useTranslations();
@@ -75,7 +77,7 @@ export default function LoginModal() {
                   </span>
                   {/* Móvil: resumen corto al pie. Desktop: descripción completa + CTA al pie */}
                   <span className="relative mt-auto lg:hidden line-clamp-2 text-body-sm text-[var(--color-text-secondary)]">{t(`login.short.${p.id}`)}</span>
-                  <span className="relative hidden lg:block text-body-md text-[var(--color-text-secondary)]">{t(p.descKey as never)}</span>
+                  <span className="relative hidden lg:block text-body-md text-[var(--color-text-secondary)]">{(t.rich as (key: string, values: Record<string, (chunks: ReactNode) => ReactNode>) => ReactNode)(p.descKey, { bold: (chunks) => <strong className="font-semibold text-[var(--color-text-primary)]">{chunks}</strong> })}</span>
                   {/* Al pie (mt-auto): los CTAs de la fila quedan alineados aunque los textos midan distinto */}
                   <span className="relative hidden mt-auto lg:flex items-center gap-static-xs text-body-sm text-[var(--color-text-accent-blue)]">
                     {t("login.open")}
@@ -98,7 +100,10 @@ export default function LoginModal() {
             Desktop: columna vertical de filas de vidrio sueltas.
             Móvil: los dos grupos lado a lado; cada uno es UN panel de vidrio con filas divididas (lista agrupada).
             Subgrid: títulos y paneles alineados entre columnas aunque un título ocupe dos líneas. */}
-        <aside className="gm-reveal grid grid-cols-2 grid-rows-[auto_auto] gap-x-static-sm gap-y-static-sm lg:flex lg:flex-col lg:gap-static-xl lg:col-start-1 lg:col-span-3 lg:row-start-2 lg:border-r lg:border-[var(--glass-liquid-divider)] lg:pr-[var(--space-section-xs)]">
+        {/* Desktop: el contenedor ocupa la celda pero NO aporta altura (el aside va `absolute`): así los acordeones
+            abiertos no estiran las tarjetas de la derecha; si no caben, la columna hace scroll interno. */}
+        <div className="lg:col-start-1 lg:col-span-3 lg:row-start-2 lg:relative lg:min-h-0">
+        <aside className="gm-reveal grid grid-cols-2 grid-rows-[auto_auto] gap-x-static-sm gap-y-static-sm lg:flex lg:flex-col lg:gap-static-xl lg:absolute lg:inset-0 lg:overflow-y-auto lg:overscroll-contain lg:[scrollbar-gutter:stable] lg:[scrollbar-width:thin] lg:[scrollbar-color:var(--glass-liquid-divider)_transparent] lg:border-r lg:border-[var(--glass-liquid-divider)] lg:pr-[var(--space-section-xs)]">
           {LINK_GROUPS.map((g) => (
             <section key={g.key} aria-labelledby={`login-group-${g.key}`} className="row-span-2 grid grid-rows-subgrid lg:flex lg:flex-col lg:gap-static-sm">
               <h3 id={`login-group-${g.key}`} className="text-h4 self-end lg:self-auto">
@@ -109,14 +114,18 @@ export default function LoginModal() {
                   const label = l.label ?? t(`login.links.${l.key}` as never);
                   return (
                     <li key={label}>
-                      <button
-                        type="button"
-                        onClick={() => go(l.href)}
-                        className="group/link w-full min-h-static-2xl py-static-xs px-static-sm lg:h-static-2xl lg:py-0 lg:px-static-md flex items-center justify-between gap-static-xs lg:gap-static-sm text-body-sm text-left cursor-pointer transition-[translate,scale,background-color] duration-200 ease-out max-lg:active:bg-[var(--glass-liquid-tile)] lg:glass-liquid-tile lg:rounded-md lg:hover:translate-x-0.5 lg:active:scale-[0.98] focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[var(--color-border-Strokes-focus)]"
-                      >
-                        {label}
-                        <ArrowUR aria-hidden="true" className="shrink-0 w-static-md h-static-md text-[var(--color-text-accent-blue)] transition-transform duration-200 ease-out group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-                      </button>
+                      {l.children ? (
+                        <LoginLinkAccordion label={label} links={l.children} onSelect={go} />
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => go(l.href)}
+                          className="group/link w-full min-h-static-2xl py-static-xs px-static-sm lg:h-static-2xl lg:py-0 lg:px-static-md flex items-center justify-between gap-static-xs lg:gap-static-sm text-body-sm text-left cursor-pointer transition-[translate,scale,background-color] duration-200 ease-out max-lg:active:bg-[var(--glass-liquid-tile)] lg:glass-liquid-tile lg:rounded-md lg:hover:translate-x-0.5 lg:active:scale-[0.98] focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[var(--color-border-Strokes-focus)]"
+                        >
+                          {label}
+                          <ArrowUR aria-hidden="true" className="shrink-0 w-static-md h-static-md text-[var(--color-text-accent-blue)] transition-transform duration-200 ease-out group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                        </button>
+                      )}
                     </li>
                   );
                 })}
@@ -124,6 +133,7 @@ export default function LoginModal() {
             </section>
           ))}
         </aside>
+        </div>
       </div>
     </GlassModal>
   );

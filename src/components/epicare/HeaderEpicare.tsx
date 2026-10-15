@@ -28,6 +28,24 @@ const ArrowUR = ({ className = '' }: { className?: string }) => (
   </svg>
 );
 
+/**
+ * @description Un link a la página actual SIN ancla (p. ej. "Marketing" estando en `/solutions#solutions`)
+ * no dispara navegación ni scroll en Next, así que el visitante se quedaba donde estaba.
+ * Se intercepta: sube al inicio por Lenis (nunca `window.scrollTo`, pelea con el smooth scroll) y
+ * limpia el hash de la URL.
+ */
+const scrollTopIfSamePage = (e: React.MouseEvent, href: string) => {
+  if (href.includes("#")) return;
+  const strip = (p: string) => p.replace(/\/$/, "");
+  if (strip(window.location.pathname) !== strip(href)) return;
+
+  e.preventDefault();
+  window.history.replaceState(null, "", window.location.pathname);
+  const lenis = (window as unknown as { lenis?: { scrollTo: (y: number) => void } }).lenis;
+  if (lenis) lenis.scrollTo(0);
+  else window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
 export default function HeaderEpicare({
   isHeaderPill: isHeaderPillProp = false,
   pillAfter,
@@ -132,8 +150,6 @@ export default function HeaderEpicare({
       label: t("about"),
       items: [
         { title: t("aboutCompany"), desc: t("aboutCompanyDesc"), href: "/company" },
-        // Team se desactiva (13-10-2026). La ruta `/team` sigue publicada; solo deja de anunciarse.
-        { title: t("aboutTeam"), desc: t("aboutTeamDesc"), href: "#", soon: true },
         { title: t("aboutLicensing"), desc: t("aboutLicensingDesc"), href: "/licensing" },
       ]
     },
@@ -422,7 +438,12 @@ export default function HeaderEpicare({
                         {body}
                       </div>
                     ) : (
-                      <Link href={subItem.href} key={idx} className={`flex flex-col gap-2 p-static-lg rounded-md transition-colors duration-150 ${isHeaderForcedDark ? 'hover:bg-white/[0.08]' : 'hover:bg-black/5 dark:hover:bg-white/[0.08]'}`}>
+                      <Link
+                        href={subItem.href}
+                        key={idx}
+                        onClick={(e) => scrollTopIfSamePage(e, subItem.href)}
+                        className={`flex flex-col gap-2 p-static-lg rounded-md transition-colors duration-150 ${isHeaderForcedDark ? 'hover:bg-white/[0.08]' : 'hover:bg-black/5 dark:hover:bg-white/[0.08]'}`}
+                      >
                         {body}
                       </Link>
                     );

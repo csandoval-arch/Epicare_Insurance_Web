@@ -62,7 +62,7 @@ export default function HeroSolutions() {
       <div className="sol-hero-panel w-full mt-static-xl lg:mt-static-2xl overflow-hidden">
         <div className="relative w-full h-[34vh] min-h-64 lg:h-[44vh] lg:max-h-[30rem]">
           <img
-            src={asset("/Files/Solutions/people-tech-convergence.jpg")}
+            src={asset("/Files/Marketing/Hero/Code_Generated_Image (3).webp")}
             alt={t("imageAlt")}
             className="sol-hero-zoom w-full h-full object-cover object-center"
             loading="eager"
