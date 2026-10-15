@@ -20,12 +20,17 @@ import type { PanelSpec } from "../BentoGridDesktop";
 
 /** Geometría del acto. Las que no son token (vw/vh/px de la caja) son margen creativo declarado. */
 const ACT = {
-  /** Ancho del acto. */
-  w: "65vw",
+  /** Ancho del acto (65vw → 58vw, pedido de dirección 15/10/2026: tarjetas menos anchas). */
+  w: "58vw",
   /** Alto del acto; el mismo que la caja del acto 1. */
   h: "75vh",
-  /** Porcentaje del acto que ocupa la columna de texto. */
-  split: "42%",
+  /**
+   * Porcentaje del acto que ocupa la columna de texto. Subió de 42% a 52% al estrechar la tarjeta:
+   * los títulos llevan un corte de línea más largo (15/10/2026) y la línea más larga del set
+   * ("Sabes a quién llamar" / "You know who to call") necesita ≈434px a 1440 para no partirse sola.
+   * El recorte de ancho sale de la columna del vídeo.
+   */
+  split: "52%",
   /** Caja del logo: ancho y alto propios, independientes del tamaño del logo. */
   box: { w: "144px", h: "120px" },
   /** Alto del logo dentro de la caja (Academy va 2px más alto: su marca es más baja de x-height). */

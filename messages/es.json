@@ -72,8 +72,8 @@
       "card7Desc": "Producción, retención y persistencia por agente. Los números que deciden tu mes.",
       "card8Title": "Academy",
       "card8Desc": "Certificaciones, entrenamiento de producto y onboarding de agentes nuevos. <bold>A tu ritmo.</bold>",
-      "seeCrm": "Ver CRM",
-      "seeAms": "Ver AMS",
+      "seeCrm": "GO CRM",
+      "seeAms": "GO AMS",
       "comingSoon": "Próximamente",
       "products": {
         "crm": {
@@ -82,12 +82,12 @@
           "mobile": "Sabes a quién llamar hoy\ny tu pipeline en orden."
         },
         "ams": {
-          "lead": "El core de\ntu operación.",
+          "lead": "El core de tu\noperación.",
           "body": "Pólizas, comisiones, licencias\ny downline. Todo auditable.",
           "mobile": "El core de tu operación,\ntodo auditable."
         },
         "academy": {
-          "lead": "Aprende\na tu ritmo.",
+          "lead": "Aprende a tu\nritmo.",
           "body": "Certificaciones, entrenamiento de\nproducto y onboarding de agentes.",
           "mobile": "Certificaciones y onboarding\na tu ritmo."
         }

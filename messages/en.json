@@ -71,8 +71,8 @@
       "card7Desc": "Production, retention, and persistency per agent. The numbers that decide your month.",
       "card8Title": "Academy",
       "card8Desc": "Certifications, product training, and new-agent onboarding. <bold>At your own pace.</bold>",
-      "seeCrm": "See CRM",
-      "seeAms": "See AMS",
+      "seeCrm": "GO CRM",
+      "seeAms": "GO AMS",
       "comingSoon": "Coming soon",
       "products": {
         "crm": {
@@ -81,12 +81,12 @@
           "mobile": "Know who to call today,\nwith your pipeline in order."
         },
         "ams": {
-          "lead": "The core of\nyour operation.",
+          "lead": "The core of your\noperation.",
           "body": "Policies, commissions, licensing,\nand downline. All auditable.",
           "mobile": "The core of your operation,\nall auditable."
         },
         "academy": {
-          "lead": "Learn at\nyour own pace.",
+          "lead": "Learn at your own\npace.",
           "body": "Certifications, product training,\nand new-agent onboarding.",
           "mobile": "Certifications and onboarding\nat your own pace."
         }

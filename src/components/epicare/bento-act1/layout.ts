@@ -6,8 +6,16 @@ import type React from "react";
  */
 export const CONTENT_EDGE_PL = "pl-[calc(max(0px,(100vw_-_var(--max-w-section-lg))/2)_+_var(--space-gutter-md))]";
 
-/** Stroke de las cajas del horizontal: hairline del DS + radio de contenedor. */
-export const ACT_FRAME = "rounded-xl border border-[var(--color-border-Strokes-default)]";
+/**
+ * Stroke de las cajas del horizontal: hairline del DS + radio de contenedor.
+ *
+ * El color va CONGELADO en su versión clara (pedido de dirección 15/10/2026). La caja del acto 1
+ * está siempre sobre el azul de marca, que NO invierte con el tema; con el token bimodal el stroke
+ * saltaba de gris claro (#E0E4E6) a gris oscuro (#383B3D) sin que su fondo cambiara. Mismo recurso
+ * que `CARD_LIGHT`: se reconstruye con los dos tokens que no invierten (`Black-100` 12% sobre
+ * `BG-white` ≈ #E0E4E6, el valor claro de `--color-border-Strokes-default`).
+ */
+export const ACT_FRAME = "rounded-xl border border-[color-mix(in_srgb,var(--color-text-Black-100)_12%,var(--color-surface-BG-white))]";
 /** Fondo de las tarjetas de producto: un paso más claro que el de la sección (BG-1) para separarlas. */
 export const CARD_SURFACE = "bg-[var(--color-surface-BG-white)] dark:bg-[var(--color-surface-BG-2)]";
 /** Caja del acto 1: mismo alto (75vh) que la columna de cada producto, para alinear arriba y abajo. */

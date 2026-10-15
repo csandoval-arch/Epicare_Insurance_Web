@@ -91,7 +91,7 @@ const FlipCard = ({ card, t }: { card: any, t: any }) => {
                 disablePictureInPicture
                 src={cardAsset(card.img)}
                 poster={cardPoster(card.img)}
-                className={`absolute inset-0 w-full h-full hidden dark:block mix-blend-screen ${card.imgClassDark || card.imgClass || "object-cover"}`}
+                className={`absolute inset-0 w-full h-full hidden dark:block mix-blend-lighten brightness-125 ${card.imgClassDark || card.imgClass || "object-cover"}`}
               />
             ) : (
               <img
