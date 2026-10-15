@@ -35,6 +35,9 @@ export default function ColorsSection({ isDark }: { isDark: boolean }) {
               <ColorCard name="surface-BG-4" variable="--color-surface-BG-4" hex={isDark ? "#4A4C4F" : "#D1D5DB"} colorClass="bg-[var(--color-surface-BG-4)]" textWhite={false} />
               <ColorCard name="surface-BG-base" variable="--color-surface-BG-base" hex={isDark ? "#191A1A" : "#F2F2F2"} colorClass="bg-[var(--color-surface-BG-base)]" textWhite={false} />
               <ColorCard name="surface-BG-base-Opacity" variable="--color-surface-BG-base-Opacity" hex={isDark ? "#1E1F1F" : "#F5F5F5"} colorClass="bg-[var(--color-surface-BG-base-Opacity)]" textWhite={false} />
+              {/* El único que INVIERTE el tema: oscuro en modo claro y claro en modo oscuro. Su pareja
+                  de tinta es `--color-text-on-contrast`. Para el bloque que debe leerse aparte. */}
+              <ColorCard name="surface-BG-contrast" variable="--color-surface-BG-contrast" hex={isDark ? "#F2F2F2" : "#191A1A"} colorClass="bg-[var(--color-surface-BG-contrast)]" textWhite={!isDark} />
             </div>
           </div>
           <div className="mb-16">

@@ -74,6 +74,9 @@ html.lenis.lenis-scrolling iframe { pointer-events: none; }
   --color-surface-BG-4: var(--color-surface-BG-4);
   --color-surface-BG-base: var(--color-surface-BG-base);
   --color-surface-BG-base-Opacity: var(--color-surface-BG-base-Opacity);
+  --color-surface-BG-contrast: var(--color-surface-BG-contrast);
+  --color-text-on-contrast: var(--color-text-on-contrast);
+  --color-text-on-contrast-soft: var(--color-text-on-contrast-soft);
   --color-surface-BG-black: var(--color-surface-BG-black);
   --color-surface-BG-white: var(--color-surface-BG-white);
   --color-text-disabled: var(--color-text-disabled);
@@ -178,6 +181,15 @@ html.lenis.lenis-scrolling iframe { pointer-events: none; }
   --color-surface-BG-4: #D1D5DB;
   --color-surface-BG-base: #F2F2F2;
   --color-surface-BG-base-Opacity: #F5F5F5;
+  /* Superficie de CONTRASTE: la única que INVIERTE el tema. En claro es oscura (#191A1A); en
+     oscuro es clara (#F2F2F2, la base del tema claro). Sirve para el bloque que debe leerse
+     APARTE del resto en los dos modos (BI de /solutions): con cualquier otra superficie, en
+     oscuro se funde con la página y se pierde el corte.
+     Va con su pareja de tinta —`--color-text-on-contrast` y su versión atenuada—, que invierte
+     con ella. NO se usa con `dark` local: el envoltorio remapea estos dos tokens y ya. */
+  --color-surface-BG-contrast: #191A1A;
+  --color-text-on-contrast: #FFFFFF;
+  --color-text-on-contrast-soft: #B9C0C6;
   /* Text */
   --color-text-disabled: #D1D5DB;
   --color-text-hint: #6A767C;
@@ -285,6 +297,9 @@ html.lenis.lenis-scrolling iframe { pointer-events: none; }
   --color-surface-BG-4: #4A4C4F;
   --color-surface-BG-base: #191A1A;
   --color-surface-BG-base-Opacity: #1E1F1F;
+  --color-surface-BG-contrast: #F2F2F2;
+  --color-text-on-contrast: #1A1E21;
+  --color-text-on-contrast-soft: #60707C;
   /* Text */
   --color-text-disabled: #363E46;
   --color-text-hint: #8D9CAB;

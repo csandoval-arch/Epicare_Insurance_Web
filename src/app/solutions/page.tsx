@@ -107,14 +107,19 @@ export default function SolutionsPage() {
         <TechnologySolutions />
       </div>
 
-      {/* ── CIERRE · el mismo banner de CTA que la landing y /licensing, con el modal de alta ── */}
-      <CTABannerEpicare
-        title={tTrust("ctaTitle")}
-        description={tTrust("ctaDesc")}
-        buttonText={tTrust("cta")}
-        intent="join"
-        surface="page"
-      />
+      {/* ── CIERRE · el mismo banner de CTA que la landing y /licensing, con el modal de alta ──
+          El aire de arriba se pone AQUÍ, no dentro del banner: el componente lo comparten la
+          landing y /licensing, y tocarlo movería esas dos páginas. Iguala al `pb` con el que
+          termina el bloque oscuro de BI, para que el corte de color se lea simétrico (15-10-2026). */}
+      <div className="pt-section-sm lg:pt-section-md">
+        <CTABannerEpicare
+          title={tTrust("ctaTitle")}
+          description={tTrust("ctaDesc")}
+          buttonText={tTrust("cta")}
+          intent="join"
+          surface="page"
+        />
+      </div>
 
       {/* ── FOOTER GLOBAL ── */}
       <FooterEpicare />
