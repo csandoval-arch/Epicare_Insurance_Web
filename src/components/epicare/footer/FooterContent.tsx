@@ -19,11 +19,11 @@ import EpicareLogo from "@/components/icons/EpicareLogo";
 import { asset } from "@/lib/asset";
 import { EASE, REVEAL } from "@/lib/motion";
 import { curtainEnd } from "./curtain";
-import { CONTACT } from "./data";
 import { FooterLegal } from "./parts";
 import { findStage, useCurtainReveal } from "./useCurtainReveal";
 import { logoBirth, useRevealWhenVisible } from "./useRevealWhenVisible";
 import FooterIndex from "./FooterIndex";
+import { CONTACT } from "@/lib/contact";
 
 /** Foto de la banda (una sola para todas las anchuras; en móvil el recorte centra a la agente). */
 const PHOTO = "/Files/Footer/footer-bg.webp";

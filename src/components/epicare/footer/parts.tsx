@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import ArrowUR from "@/components/icons/ArrowUR";
-import { CONTACT, type NavItem } from "./data";
+import { type NavItem } from "./data";
+import { CONTACT } from "@/lib/contact";
 
 /**
  * @description Enlace del índice del footer. Con destino: enlace con flecha que aparece al hover.
@@ -27,7 +28,7 @@ export function FooterNavLink({ item, className = "", accent }: { item: NavItem;
   );
 }
 
-/** Dirección (enlace a Maps), teléfono y email reales. */
+/** Dirección (enlace a Maps), teléfono y email reales: `tel:`/`mailto:` los entrega el navegador al sistema. */
 export function FooterContact({ className = "", linkClass }: { className?: string; linkClass: string }) {
   return (
     <address className={`not-italic flex flex-col gap-static-xs ${className}`}>

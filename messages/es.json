@@ -100,7 +100,7 @@
         "title": "Seguros que por fin tienen sentido.",
         "subtitle": "<bold>Asiste a tus clientes</bold> dentro de su portal:\n<bold>pólizas, wallet, documentos</bold>, chat directo\ny <bold>enrollment</bold>, todo en tiempo real.",
         "desc": "Donde ellos gestionan sus pólizas y wallets, y tu agencia los asiste en tiempo real.",
-        "trademark": "marca registrada"
+        "trademark": "marca comercial"
       }
     },
     "agencySolutions": {
@@ -263,7 +263,7 @@
     },
     "standard": {
       "overline": "El estándar Epicare detrás de cada agente.",
-      "title": "Tú construyes tu cartera, en tus términos. Epicare pone detrás la tecnología, el marketing y el respaldo de la industria. Cada póliza que vendes lleva el mismo estándar."
+      "title": "Tú construyes tu cartera, en tus términos. Epicare pone detrás la tecnología, el marketing y el respaldo de la industria. Y planes pensados para la experiencia de ambos lados: tus clientes y tú."
     },
     "howToJoin": {
       "overline": "Activación Inmediata",
@@ -505,7 +505,7 @@
       "a6": "Solo el equipo autorizado, cuando resuelve un caso tuyo. Cada acción queda registrada y visible para ti."
     },
     "ctaFinal": {
-      "eyebrow": "Epicare Insurance Corp™",
+      "eyebrow": "Epicare Insurance Corp®",
       "title1": "Toma el control",
       "title2": "de tu agencia.",
       "desc": "El proceso de contracting toma días, no horas. Aplica ahora para tener tu cuenta de GO AMS lista desde el primer día, sin costo de plataforma.",
@@ -815,7 +815,7 @@
       "vision": {
         "overline": "Nuestra visión",
         "title": "Vamos a ser la <b>agencia de referencia</b> en Estados Unidos, donde el agente independiente tiene <b>todo lo que necesita para crecer.</b>",
-        "body": "Crecemos cuando el agente crece.\n<b>Herramientas, formación, marca, cumplimiento y comisiones</b>, todo en un solo lugar, para que nadie tenga que elegir entre escalar y hacerlo bien."
+        "body": "Crecemos cuando el agente crece.\n<b>Herramientas, formación, marca, cumplimiento y comisiones, todo en un solo lugar</b>, para que nadie tenga que elegir entre escalar y hacerlo bien."
       },
       "mapLabel": "Presencia"
     },
@@ -835,7 +835,7 @@
         {
           "meta": "03 · Hoy",
           "title": "La base",
-          "body": "Hoy atendemos <b>los 50 estados, el Distrito de Columbia y Puerto Rico</b>, con <b>más de 130 aseguradoras activas</b> y una marca registrada ante la USPTO. Lo que empezó como una agencia es hoy un sistema de cinco líneas: Insurance Corp, Plans, B2C Verticals, Epicare GO y Academy. Cada una tiene su audiencia. Todas comparten el mismo estándar. Y la regla no ha cambiado: <b>respaldamos al agente, no competimos con él</b>. Seguimos construyendo."
+          "body": "Hoy atendemos <b>los 50 estados, el Distrito de Columbia y Puerto Rico</b>, con <b>más de 130 aseguradoras activas</b> y una marca registrada ante la USPTO. Lo que empezó como una agencia es hoy un sistema de cinco líneas: Insurance Corp, Plans, B2C Verticals, GO Hub y Academy. Cada una tiene su audiencia. Todas comparten el mismo estándar. Y la regla no ha cambiado: <b>respaldamos al agente, no competimos con él</b>. Seguimos construyendo."
         }
       ]
     },
@@ -1433,11 +1433,8 @@
     "contact": {
       "title": "Contacto",
       "addressLabel": "Dirección",
-      "address": "2600 S Douglas Rd Suite 902, Coral Gables, FL 33134",
       "phoneLabel": "Teléfono",
-      "phone": "+1 (888) 374-2467",
-      "emailLabel": "Correo",
-      "email": "info@epicareinsurance.com"
+      "emailLabel": "Correo"
     },
     "benefits": {
       "eyebrow": "Beneficios",

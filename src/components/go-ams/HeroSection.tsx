@@ -153,7 +153,7 @@ export default function HeroSection() {
           {/* Row 1: Eyebrow / Subtitle */}
           <div id="hero-eyebrow" className="col-span-12 lg:col-start-1 lg:col-span-6 lg:row-start-1 lg:row-span-1 flex items-end pb-0 lg:pb-4 pt-0">
             <p id="eyebrow-text" className="hero-eyebrow-text text-ui-label text-[var(--color-text-secondary)]">
-              {t('overline')}<span className="inline-block -translate-y-[4px]">&trade;</span>
+              {t('overline')}<span className="inline-block -translate-y-[4px]">&reg;</span>
             </p>
           </div>
 

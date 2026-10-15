@@ -3,9 +3,11 @@
  * formulario de GoHighLevel y la foto de cada una, y la retícula.
  * Los textos viven en `messages` (`joinUs.*`); un rol sin textos propios usa los de `agent-licensed`.
  *
- * ⚠️ PENDIENTE — las 4 versiones apuntan al MISMO formulario (`nQpPub6lsr5H4pIPp1tG`) y solo
- * `agent-licensed` tiene textos propios. Cuando lleguen los formularios y el copy de cada rol, se
- * rellenan aquí y en `messages` y nada más.
+ * Cada rol tiene su formulario propio en inglés y en español (el de GoHighLevel lleva ` - ESP` en
+ * su nombre interno); `JoinForm` elige por el idioma activo.
+ *
+ * ⚠️ PENDIENTE — solo `agent-licensed` tiene textos propios; los demás roles usan los suyos. Cuando
+ * llegue el copy de cada rol se rellena en `messages` y nada más.
  */
 
 import type { JoinPathKey } from "@/components/join/joinData";
@@ -22,16 +24,27 @@ export interface FormEmbed {
   formName: string;
 }
 
-const AGENT_FORM: FormEmbed = { formId: "nQpPub6lsr5H4pIPp1tG", formName: "Website - Be an Epicare Agent" };
-const UNLICENSED_FORM: FormEmbed = { formId: "hZW6rrsjvuTNq5rUKJlk", formName: "Website - Get agent license" };
-const FMO_FORM: FormEmbed = { formId: "vkKPrcsUSPzIKDU82wkr", formName: "Website - FMO Partner" };
-const TRADEMARK_FORM: FormEmbed = { formId: "7apIAFW8GEHMZI2eiVfh", formName: "Website - Trademark Model" };
+/** Idiomas con formulario propio en GoHighLevel. */
+export type FormLocale = "en" | "es";
 
-export const FORMS: Record<JoinPathKey, FormEmbed> = {
-  "agent-licensed": AGENT_FORM,
-  "agent-unlicensed": UNLICENSED_FORM,
-  "agency-fmo": FMO_FORM,
-  "agency-trademark": TRADEMARK_FORM,
+/** El formulario de cada rol en cada idioma. Los ids los da GoHighLevel: no se inventan ni se derivan. */
+export const FORMS: Record<JoinPathKey, Record<FormLocale, FormEmbed>> = {
+  "agent-licensed": {
+    en: { formId: "nQpPub6lsr5H4pIPp1tG", formName: "Website - Be an Epicare Agent" },
+    es: { formId: "2TkTT3fC214aKx4zNAeH", formName: "Website - Be an Epicare Agent - ESP" },
+  },
+  "agent-unlicensed": {
+    en: { formId: "hZW6rrsjvuTNq5rUKJlk", formName: "Website - Get agent license" },
+    es: { formId: "IDbnvixQ1aUe1b2cXKbJ", formName: "Website - Get agent license - ESP" },
+  },
+  "agency-fmo": {
+    en: { formId: "vkKPrcsUSPzIKDU82wkr", formName: "Website - FMO Partner" },
+    es: { formId: "SU31hrMvyTCYp0qCLjmh", formName: "Website - FMO Partner - ESP" },
+  },
+  "agency-trademark": {
+    en: { formId: "7apIAFW8GEHMZI2eiVfh", formName: "Website - Trademark Model" },
+    es: { formId: "taiLowmUAybwI0YJ8FiG", formName: "Website - Trademark Model - ESP" },
+  },
 };
 
 export const FORM_HOST = "https://link.epicareinsurance.com";

@@ -4,13 +4,15 @@
  * @description El formulario de solicitud (embed de GoHighLevel) en una hoja blanca, sin cabecera propia
  * (la etiqueta mono "Solicitud · …" se quitó a pedido del usuario). Lo enmarca el hero. El script oficial de embed
  * (`form_embed.js`) se inyecta una sola vez y ajusta el alto del iframe a su contenido.
- * El interior del iframe (campos, idioma, botón) se edita en GoHighLevel, no aquí.
+ * Hay un formulario por rol y por idioma (ver `FORMS` en `joinUsData`): el embed en español es otro
+ * formulario distinto en GoHighLevel, no una traducción del mismo.
+ * El interior del iframe (campos, textos, botón) se edita en GoHighLevel, no aquí.
  */
 
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FORM_HOST, FORMS } from "../joinUsData";
+import { FORM_HOST, FORMS, type FormLocale } from "../joinUsData";
 import type { RoleProps } from "../types";
 
 const SCRIPT_ID = "epicare-form-embed";
@@ -20,7 +22,10 @@ const FORM_HEIGHT = 612;
 
 export default function JoinForm({ role, className = "" }: RoleProps & { className?: string }) {
   const t = useTranslations("joinUs.form");
-  const { formId, formName } = FORMS[role];
+  // El formulario es otro embed distinto en español: lo cambia el idioma activo, y el `key` del
+  // iframe lo remonta al vuelo cuando el usuario cambia de idioma sin recargar.
+  const locale = useLocale();
+  const { formId, formName } = FORMS[role][(locale === "es" ? "es" : "en") as FormLocale];
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {

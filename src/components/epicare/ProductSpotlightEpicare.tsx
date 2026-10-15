@@ -167,7 +167,7 @@ export default function ProductSpotlightEpicare() {
             <div className="flex flex-col items-start gap-4">
               <div className="flex items-start my-1">
                 <img src={asset('/Files/logo-eppigo.svg')} alt="Eppigo" className="h-10 lg:h-12 w-auto object-contain" />
-                <span aria-label={t('trademark')} className="-ml-3 lg:-ml-3.5 -mt-1.5 lg:-mt-2 text-h3 lg:text-h2 font-light! leading-none text-[var(--color-brand-orange)]">®</span>
+                <span aria-label={t('trademark')} className="-ml-3 lg:-ml-3.5 -mt-1.5 lg:-mt-2 text-h3 lg:text-h2 font-light! leading-none text-[var(--color-brand-orange)]">™</span>
               </div>
               <h2 className="text-display text-[var(--color-text-primary)]">
                 {t('title')}
