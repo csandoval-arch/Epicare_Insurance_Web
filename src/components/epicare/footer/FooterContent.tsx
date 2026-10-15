@@ -26,7 +26,7 @@ import { logoBirth, useRevealWhenVisible } from "./useRevealWhenVisible";
 import FooterIndex from "./FooterIndex";
 
 /** Foto de la banda (una sola para todas las anchuras; en móvil el recorte centra a la agente). */
-const PHOTO = "/Files/Footer/footer-bg.jpg";
+const PHOTO = "/Files/Footer/footer-bg.webp";
 const SURFACE = "bg-[var(--color-surface-BG-1)] text-[var(--color-text-primary)]";
 const LINK = "hover:text-[var(--color-brand-blue)]";
 /**

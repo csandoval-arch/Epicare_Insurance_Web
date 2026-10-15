@@ -170,8 +170,8 @@ export default function BentoGridDesktop() {
 
   return (
     // OUTER WRAPPER: Protects the Next.js DOM tree from GSAP's pin-spacer height injection
-    // Fondo: superficie 1 del DS (un paso más clara que el gris base; bimodal), pedido 2026-10-06.
-    <div className="relative w-full z-10 bg-[var(--color-surface-BG-1)] transition-colors duration-500 overflow-hidden">
+    // Fondo: azul de marca (pedido de dirección 15/10/2026; antes superficie 1 del DS).
+    <div className="relative w-full z-10 bg-[var(--color-brand-blue)] transition-colors duration-500 overflow-hidden">
 
       <section ref={sectionRef} className="h-screen w-full relative">
         {/* Flota sobre todo el recorrido horizontal: recuerda que se sigue haciendo scroll hacia abajo */}

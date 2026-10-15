@@ -21,10 +21,10 @@ export interface Person {
 }
 
 export const PEOPLE: Person[] = [
-  { contact: CONTACTS_LEFT[0], image: "/client_auto.jpg", opps: [{ price: "$38", stage: 0 }, { price: "$412", stage: 1 }, { price: "$95", stage: 2 }] },
-  { contact: CONTACTS_LEFT[2], image: "/client_scenario_1.jpg", opps: [{ price: "$42", stage: 2 }, { price: "$389", stage: 0 }, { price: "$120", stage: 1 }] },
-  { contact: CONTACTS_LEFT[1], image: "/client_business.jpg", opps: [{ price: "$35", stage: 1 }, { price: "$455", stage: 2 }, { price: "$88", stage: 0 }] },
-  { contact: CONTACTS_RIGHT[1], image: "/client_family.jpg", opps: [{ price: "$64", stage: 0 }, { price: "$730", stage: 1 }, { price: "$140", stage: 2 }] },
+  { contact: CONTACTS_LEFT[0], image: "/client_auto.webp", opps: [{ price: "$38", stage: 0 }, { price: "$412", stage: 1 }, { price: "$95", stage: 2 }] },
+  { contact: CONTACTS_LEFT[2], image: "/client_scenario_1.webp", opps: [{ price: "$42", stage: 2 }, { price: "$389", stage: 0 }, { price: "$120", stage: 1 }] },
+  { contact: CONTACTS_LEFT[1], image: "/client_business.webp", opps: [{ price: "$35", stage: 1 }, { price: "$455", stage: 2 }, { price: "$88", stage: 0 }] },
+  { contact: CONTACTS_RIGHT[1], image: "/client_family.webp", opps: [{ price: "$64", stage: 0 }, { price: "$730", stage: 1 }, { price: "$140", stage: 2 }] },
 ];
 
 /** Color de acento de cada oportunidad: los 3 de marca (el oscuro con su token bimodal de texto). */

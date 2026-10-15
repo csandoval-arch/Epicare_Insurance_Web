@@ -114,8 +114,8 @@ export default function EpicareLandingPage() {
       <div className="w-full order-[14]"><FAQEpicare /></div>
       {/* ── S14.5 · CTA Banner ── */}
       <div className="w-full order-[15] relative z-10">
-        {/* Textos desde `landingV2.ctaBanner` (es/en); aquí el botón baja a la sección del estándar. */}
-        <CTABannerEpicare buttonHref="#unete" />
+        {/* Textos desde `landingV2.ctaBanner` (es/en); el botón abre el modal de alta. */}
+        <CTABannerEpicare intent="join" />
       </div>
       {/* ── S15 · Footer (RESOLUCIÓN) ── */}
       <div className="w-full order-[16]"><FooterEpicare /></div>

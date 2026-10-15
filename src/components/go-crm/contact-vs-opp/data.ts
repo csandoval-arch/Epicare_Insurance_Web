@@ -5,9 +5,9 @@
  */
 
 export const CONTACT_IMAGES = {
-  auto: "/client_auto.jpg",
-  family: "/client_family.jpg",
-  blobs: "/Files/Go_CRM/blue_blobs_bg_light_v2.jpg",
+  auto: "/client_auto.webp",
+  family: "/client_family.webp",
+  blobs: "/Files/Go_CRM/blue_blobs_bg_light_v2.webp",
 } as const;
 
 /** Orígenes permitidos en el chip de la ficha (decisión de producto: no añadir otros). */

@@ -57,7 +57,7 @@ export default function FmoClosing() {
         {/* ── FOTOGRAFÍA EDITORIAL 16:9 CON GRANO Y CHIP FLOTANTE ── */}
         <div className="jb-rise relative w-full aspect-[16/9] md:aspect-[21/9] rounded-2xl overflow-hidden border border-[var(--color-border-Strokes-default)] shadow-elevation-2">
           <Image
-            src={asset("/Files/join-us/fmo-launch.jpg")}
+            src={asset("/Files/join-us/fmo-launch.webp")}
             alt={t("alt")}
             fill
             sizes="(max-width: 1024px) 100vw, 1200px"

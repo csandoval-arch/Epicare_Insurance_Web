@@ -170,7 +170,7 @@ export default function BentoGridMobile() {
       <section
         id="plataforma"
         ref={containerRef}
-        className={`relative w-full h-auto md:h-screen overflow-x-clip md:overflow-hidden bg-[var(--color-surface-BG-1)] transition-colors duration-500 z-20 rounded-t-none rounded-b-xl md:rounded-xl max-w-full`}
+        className={`relative w-full h-auto md:h-screen overflow-x-clip md:overflow-hidden bg-[var(--color-brand-blue)] transition-colors duration-500 z-20 rounded-t-none rounded-b-xl md:rounded-xl max-w-full`}
         style={{ perspective: '2000px' }}
       >
         {/* AMBIENT ORB — the journey's mood: morphs to the active product's accent */}

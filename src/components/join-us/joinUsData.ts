@@ -46,10 +46,10 @@ export interface Benefit {
 
 /** Foto del díptico por rol (agente / agencia). 1376×768. ⚠️ JPEG: pendiente pasar a WebP (no hay cwebp en esta máquina). */
 export const PHOTOS: Record<JoinPathKey, string> = {
-  "agent-licensed": "/Files/for-who/agent-hero.jpeg",
-  "agent-unlicensed": "/Files/for-who/agent-hero.jpeg",
-  "agency-fmo": "/Files/for-who/agency-hero.jpeg",
-  "agency-trademark": "/Files/for-who/agency-hero.jpeg",
+  "agent-licensed": "/Files/for-who/agent-hero.webp",
+  "agent-unlicensed": "/Files/for-who/agent-hero.webp",
+  "agency-fmo": "/Files/for-who/agency-hero.webp",
+  "agency-trademark": "/Files/for-who/agency-hero.webp",
 };
 
 /** Ancla del formulario (destino de los botones "Register"). */

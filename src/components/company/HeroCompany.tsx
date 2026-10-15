@@ -92,7 +92,7 @@ export default function HeroCompany() {
       >
         <div className="hc-mask-inner absolute inset-0" style={{ transform: `translateY(-${MASK_OFFSET}%)` }}>
           <img
-            src={asset("/Files/company_hero_arch.jpg")}
+            src={asset("/Files/company_hero_arch.webp")}
             alt=""
             aria-hidden="true"
             fetchPriority="high"

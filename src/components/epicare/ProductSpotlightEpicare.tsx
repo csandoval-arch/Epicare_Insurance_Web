@@ -17,6 +17,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslations } from 'next-intl';
 import { asset } from '@/lib/asset';
+import { loginModalStore } from '@/lib/loginModalStore';
 import { EASE, DUR, REVEAL, STAGGER, TRIGGER } from '@/lib/motion';
 import SmartVideo from './SmartVideo';
 
@@ -188,9 +189,10 @@ export default function ProductSpotlightEpicare() {
 
             {/* 3. CTA */}
             <div className="mt-2 sm:mt-4 w-full sm:w-auto">
-              <a
-                href="#unete"
-                className="group w-fit h-12 pl-6 pr-2 rounded-full flex items-center gap-3 text-white shadow-elevation-2 transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-4 active:scale-[0.96] active:opacity-80 active:duration-150"
+              <button
+                type="button"
+                onClick={() => loginModalStore.open()}
+                className="group w-fit h-12 pl-6 pr-2 rounded-full flex items-center gap-3 text-white shadow-elevation-2 transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-4 active:scale-[0.96] active:opacity-80 active:duration-150 cursor-pointer"
                 style={{ backgroundColor: `var(${ACCENT_VAR})` }}
               >
                 <span className="text-sm font-semibold">{t('cta')}</span>
@@ -198,7 +200,7 @@ export default function ProductSpotlightEpicare() {
                   <ArrowUR className="absolute w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
                   <ArrowUR className="absolute w-4 h-4 -translate-x-5 translate-y-5 transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
                 </span>
-              </a>
+              </button>
             </div>
 
             </div>

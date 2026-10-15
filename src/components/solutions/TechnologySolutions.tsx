@@ -48,7 +48,7 @@ const READING_ICONS: HoloVariant[] = ["metrics", "build", "tools"];
  * ⚠️ PROVISIONAL: fotografía de archivo, no es el equipo de Epicare. Sustituir por la sesión
  * propia de Business Intelligence antes de dar la página por cerrada.
  */
-const PLATE_PHOTO = "/Files/Solutions/people-tech-convergence.jpg";
+const PLATE_PHOTO = "/Files/Solutions/people-tech-convergence.webp";
 
 /**
  * Velo de la plancha. Doble: oscurece de izquierda a derecha (donde vive la palabra) y remata por

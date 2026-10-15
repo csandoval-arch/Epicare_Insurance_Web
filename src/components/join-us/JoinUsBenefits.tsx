@@ -42,7 +42,7 @@ export default function JoinUsBenefits({ role = DEFAULT_ROLE }: { role?: JoinPat
   const t = useTranslations("joinUs.benefits");
   const items = t.raw("items") as Item[];
   const carriers = t.raw("carriers") as Carriers;
-  const imageSrc = PHOTOS[role] ?? "/Files/for-who/agent-hero.jpeg";
+  const imageSrc = PHOTOS[role] ?? "/Files/for-who/agent-hero.webp";
 
   // Slider nativo de móvil (sin duplicación de DOM, sin saltos de scroll y con opacidad 100% fija)
   const trackRef = useRef<HTMLUListElement>(null);

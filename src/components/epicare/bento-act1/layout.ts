@@ -14,11 +14,12 @@ export const CARD_SURFACE = "bg-[var(--color-surface-BG-white)] dark:bg-[var(--c
 export const ACT_BOX = `h-[75vh] ${ACT_FRAME}`;
 
 /**
- * Acto 1 sobre AZUL de marca (aprobado 06/10/2026). Clase de fondo + variables que leen el
+ * Acto 1 sobre AZUL de marca (aprobado 06/10/2026), un escalón MÁS CLARO que el azul de la sección
+ * (12% de blanco, pedido de dirección 15/10/2026) para que la caja se despegue del fondo. Clase de fondo + variables que leen el
  * titular, los glifos, el logo GO Hub, su recuadro y las fichas (todas con fallback a su color normal).
  * Para volver al acto 1 claro basta con quitar ACT1_ON_BRAND_CLASS y ACT1_ON_BRAND_VARS de las cajas.
  */
-export const ACT1_ON_BRAND_CLASS = "bg-[var(--color-brand-blue)]";
+export const ACT1_ON_BRAND_CLASS = "bg-[color-mix(in_srgb,var(--color-text-White-100)_12%,var(--color-brand-blue))]";
 export const ACT1_ON_BRAND_VARS = {
   "--act1-ink": "var(--color-text-White-100)",
   "--act1-ink-soft": "color-mix(in srgb, var(--color-text-White-100) 80%, transparent)",

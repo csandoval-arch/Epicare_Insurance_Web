@@ -39,7 +39,7 @@ function StructureText({ ns, decorative = false }: { ns: string; decorative?: bo
 }
 
 /** Foto de la máscara: ciudad de noche, a color (sin filtro, para conservar las luces cálidas). */
-const IMAGE_SRC = "/Files/About_Company/company_structure_city.jpg";
+const IMAGE_SRC = "/Files/About_Company/company_structure_city.webp";
 
 /** `ns`: namespace de los textos (overline + title). La landing la reutiliza con su propio mensaje. */
 export default function StructureCompany({ ns = "company.structure", id }: { ns?: string; id?: string }) {

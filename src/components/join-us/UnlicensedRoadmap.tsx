@@ -234,7 +234,7 @@ export default function UnlicensedRoadmap() {
         <div className="w-full max-w-4xl mx-auto pt-static-lg md:pt-static-xl lg:pt-section-sm">
           <div className="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-xl overflow-hidden border border-[var(--color-border-Strokes-default)] shadow-elevation-2 group">
             <img
-              src={asset("/Files/join-us/licensing-roadmap.jpg")}
+              src={asset("/Files/join-us/licensing-roadmap.webp")}
               alt="Pre-licensing study and coursework"
               className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
