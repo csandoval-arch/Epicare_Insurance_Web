@@ -1,6 +1,7 @@
 "use client";
 
 import type Lenis from "lenis";
+import { IconButton } from "@/components/ui/Button";
 
 export const HERO_WRAPPER_ID = "hero-wrapper";
 
@@ -36,14 +37,9 @@ const ArrowDown = ({ className }: { className: string }) => (
  */
 export function HeroScrollButtonMobile({ label }: { label: string }) {
   return (
-    <button
-      type="button"
-      onClick={scrollPastHero}
-      className="lg:hidden shrink-0 w-static-2xl h-static-2xl rounded-full flex items-center justify-center bg-[var(--color-brand-blue)] text-[var(--color-text-White-100)] shadow-elevation-2 active:scale-95 transition-transform cursor-pointer"
-      aria-label={label}
-    >
+    <IconButton label={label} onClick={scrollPastHero} className="lg:hidden">
       <ArrowDown className="w-5 h-5" />
-    </button>
+    </IconButton>
   );
 }
 
@@ -54,18 +50,13 @@ export function HeroScrollButtonMobile({ label }: { label: string }) {
 export function HeroScrollButtonDesktop({ label }: { label: string }) {
   return (
     <div className="absolute top-[140px] left-[-24px] -translate-x-full z-20 hidden lg:flex">
-      <button
-        type="button"
-        onClick={scrollPastHero}
-        className="group relative w-static-2xl h-static-2xl md:w-14 md:h-14 rounded-full flex items-center justify-center bg-[var(--color-brand-blue)] text-[var(--color-text-White-100)] shadow-elevation-2 transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-elevation-4 active:scale-95 cursor-pointer"
-        aria-label={label}
-      >
-        <div className="absolute inset-0 rounded-full border border-white/20 scale-100 group-hover:scale-[1.15] opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out"></div>
-        <span className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-full">
+      <IconButton label={label} size="lg" motion="lift" onClick={scrollPastHero}>
+        <div className="absolute inset-0 rounded-button border border-white/20 scale-100 group-hover:scale-[1.15] opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out"></div>
+        <span className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-button">
           <ArrowDown className="absolute w-5 h-5 transition-transform duration-[600ms] ease-[cubic-bezier(0.68,-0.6,0.32,1.6)] group-hover:translate-y-10" />
           <ArrowDown className="absolute w-5 h-5 -translate-y-10 transition-transform duration-[600ms] ease-[cubic-bezier(0.68,-0.6,0.32,1.6)] group-hover:translate-y-0" />
         </span>
-      </button>
+      </IconButton>
     </div>
   );
 }

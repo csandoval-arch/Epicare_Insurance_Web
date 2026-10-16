@@ -58,7 +58,7 @@ export type PanelSpec = {
   href?: string;
   isAcademy?: boolean;
   isAms?: boolean;
-  /** Texto de la pill que sigue al ratón sobre el vídeo (ver `MediaHover`). */
+  /** Clave de la etiqueta del producto (aria-label en móvil, "Próximamente"). */
   hoverKey: 'seeCrm' | 'seeAms' | 'comingSoon';
   /** Producto sin página todavía: sin enlace y con "Próximamente" en lugar del CTA. */
   comingSoon?: boolean;
@@ -152,20 +152,6 @@ export default function BentoGridDesktop() {
     };
   }, []);
 
-  // Indicadores del acto 1: lleva el scroll hasta dejar el producto i centrado en pantalla.
-  const goToProduct = (i: number) => {
-    const st = pinRef.current;
-    const track = trackRef.current;
-    const card = track?.querySelectorAll<HTMLElement>('.hub-act')[i];
-    if (!st || !track || !card) return;
-    const dist = track.scrollWidth - window.innerWidth;
-    const x = Math.min(dist, Math.max(0, card.offsetLeft - (window.innerWidth - card.offsetWidth) / 2));
-    const y = st.start + ((st.end - st.start) * x) / dist;
-    const lenis = (window as unknown as { lenis?: { scrollTo: (y: number) => void } }).lenis;
-    if (lenis) lenis.scrollTo(y);
-    else window.scrollTo({ top: y, behavior: 'smooth' });
-  };
-
   const copyOf = (p: PanelSpec) => ({ lead: t(`products.${p.key}.lead`), body: t(`products.${p.key}.body`) });
 
   return (
@@ -183,7 +169,7 @@ export default function BentoGridDesktop() {
           className="flex items-center h-full flex-nowrap w-max will-change-transform"
           style={{ gap: `7vw` }}
         >
-          <HubIntro products={PANELS.map(({ key, title }) => ({ key, title }))} onNavigate={goToProduct} />
+          <HubIntro />
 
           {PANELS.map((panel) => {
             const { lead, body } = copyOf(panel);
@@ -193,7 +179,7 @@ export default function BentoGridDesktop() {
                 panel={panel}
                 lead={lead}
                 body={body}
-                hoverLabel={t(panel.hoverKey)}
+                ctaLabel={panel.comingSoon ? t('comingSoon') : t('explore', { name: panel.title })}
               />
             );
           })}

@@ -1,25 +1,11 @@
 {
   "landingV2": {
     "hero": {
-      "subtitle": [
-        "Empowering agents",
-        "to redefine",
-        "success."
-      ],
-      "agentsCount": "100+",
-      "agentsLabel": [
-        "Active",
-        "agents"
-      ],
-      "supporting": "<b>130+ carriers</b>, one contract.",
-      "ctaPrimary": "Request your contract",
-      "ctaSecondary": "View GO AMS",
-      "cutOverline": "Epicare",
-      "cutTitle": [
-        "Go",
-        "Beyond",
-        "Growth."
-      ]
+      "scrollDown": "Scroll Down",
+      "act2Title": "Go Beyond Growth",
+      "act2Sub1": "Insurance Distribution Redefined",
+      "act2Sub2": "The insurtech IMO",
+      "act2Cta": "Join Us"
     },
     "licensingHero": {
       "title": "Our Licensing",
@@ -71,6 +57,8 @@
       "card7Desc": "Production, retention, and persistency per agent. The numbers that decide your month.",
       "card8Title": "Academy",
       "card8Desc": "Certifications, product training, and new-agent onboarding. <bold>At your own pace.</bold>",
+      "hubTagline": "One hub for your whole agency.",
+      "explore": "Explore {name}",
       "seeCrm": "GO CRM",
       "seeAms": "GO AMS",
       "comingSoon": "Coming soon",
@@ -124,7 +112,7 @@
       "cta": "See marketing"
     },
     "darkGradient": {
-      "sectionTitle": "We run the operation. <span>You sell.</span>",
+      "sectionTitle": "We built the bridge no one else wanted to build, <span>and we keep building.</span>",
       "sectionDesc": "Appointments with 130+ carriers, management system, real-time visibility, and dedicated support. Everything included under one contract.",
       "tiltCard": "Tilt",
       "feature1_step": "01 · Contracting",

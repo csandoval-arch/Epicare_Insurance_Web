@@ -1,5 +1,4 @@
 import LoaderEpicare from "@/components/epicare/LoaderEpicare";
-import HeaderEpicare from "@/components/epicare/HeaderEpicare";
 import HeroEpicare from "@/components/epicare/HeroEpicare";
 import BrandsCarousel from "@/components/epicare/BrandsCarousel";
 import MetricsEpicare from "@/components/epicare/MetricsEpicare";
@@ -83,10 +82,9 @@ export default function EpicareLandingPage() {
       />
       {/* ── S00 · Loader ── */}
       <div className="w-full order-1"><LoaderEpicare /></div>
-      {/* ── Header global (smart sticky). Fuera del Hero: el pin del Hero transforma su sección y un
-          `fixed` dentro de un ancestro transformado deja de fijarse a la pantalla. ── */}
-      <HeaderEpicare pillAfter={150} scrollSafeZone={150} />
-      {/* ── S01 · Hero (HOOK · pin 1) ── */}
+      {/* ── S01 · Hero (HOOK · pin 1) ── monta su PROPIO header (`HeaderEpicare` dentro de `HeroEpicare`,
+          que cambia a pastilla y a estilo oscuro según el acto del scroll). Por eso aquí NO hay un
+          header global: serían dos. ── */}
       <div className="w-full order-2"><HeroEpicare /></div>
       {/* ── S02 · BrandsCarousel (credibilidad) — scroll normal después del Hero ── */}
       <div className="w-full order-3 relative z-20"><BrandsCarousel /></div>

@@ -2,6 +2,7 @@
 
 import React from "react";
 import gsap from "gsap";
+import { useTranslations } from "next-intl";
 import { GraduationCap } from "@phosphor-icons/react";
 import GoHubLogo from "../GoHubLogo";
 import HubTitle from "./HubTitle";
@@ -91,14 +92,12 @@ export const observeHubLoop = (el: Element) => {
 };
 
 /**
- * Logo GO Hub en su caja. Mismo lenguaje que las cajas de logo de los 3 actos de producto: sin
- * stroke, separada de su fondo por un solo escalón de superficie (sobre el azul, un velo blanco).
+ * Logo GO Hub solo, sin contenedor ni fondo (feedback 16/10/2026; igual que los logos de los 3 actos
+ * de producto). La caja solo reserva el espacio y el logo va a la izquierda, en el borde del texto.
  */
-export function HubPlaque({ className = "w-28 h-28", logoClassName = "w-20 h-20", radiusClass = "rounded-xl" }: { className?: string; logoClassName?: string; radiusClass?: string }) {
+export function HubPlaque({ className = "w-28 h-28", logoClassName = "w-20 h-20" }: { className?: string; logoClassName?: string }) {
   return (
-    <div
-      className={`hub-plaque ${className} ${radiusClass} bg-[var(--act1-tile,var(--color-surface-BG-1))] flex items-center justify-center`}
-    >
+    <div className={`hub-plaque ${className} flex items-center justify-start`}>
       <GoHubLogo className={`hub-logo ${logoClassName}`} />
     </div>
   );
@@ -109,52 +108,27 @@ export function HubPlaque({ className = "w-28 h-28", logoClassName = "w-20 h-20"
  * producto entre el texto. Primer panel del track, con el borde izquierdo alineado al contenido de la
  * sección anterior (ver `layout.ts`).
  */
-/** Producto que sigue en el track, para su mini-ficha al pie del acto 1. */
-export interface HubNextProduct {
-  key: string;
-  title: string;
-}
-
-export default function HubIntro({
-  products = [],
-  onNavigate,
-}: {
-  /** Productos que siguen en el track (mini-fichas al pie de la caja). */
-  products?: HubNextProduct[];
-  /** Lleva el scroll hasta el producto i. */
-  onNavigate?: (i: number) => void;
-}) {
+export default function HubIntro() {
+  const t = useTranslations("landingV2.bento");
   return (
     <div className={`w-max h-full shrink-0 flex flex-col justify-center ${CONTENT_EDGE_PL}`}>
       {/* Caja con stroke (hairline del DS) que enmarca el acto 1; mismo alto que las tarjetas (75vh) */}
       <div className={`w-[70vw] lg:w-[50vw] flex flex-col p-static-2xl ${ACT_BOX} ${ACT1_ON_BRAND_CLASS}`} style={ACT1_ON_BRAND_VARS}>
         <div className="flex-1 flex flex-col justify-start">
           {/* Placa cuadrada; en pantallas bajas (<860px de alto) vuelve al tamaño anterior para que las fichas quepan en la caja de 75vh */}
-          {/* Misma caja que la de los logos de producto: 144 × 120, rounded-md, sin stroke.
+          {/* Misma reserva que la de los logos de producto: 144 × 120, sin fondo.
               En pantallas bajas (<860px de alto) encoge para que las fichas quepan en los 75vh. */}
           <HubPlaque
             className="w-36 h-30 [@media(max-height:53.75rem)]:w-24 [@media(max-height:53.75rem)]:h-20 mb-static-2xl"
-            logoClassName="w-18 h-18 [@media(max-height:53.75rem)]:w-12 [@media(max-height:53.75rem)]:h-12"
-            radiusClass="rounded-md"
+            logoClassName="w-24 h-24 [@media(max-height:53.75rem)]:w-16 [@media(max-height:53.75rem)]:h-16"
           />
           <HubTitle className="hub-title text-display-lg" renderMark={renderHubMark} />
         </div>
-        {/* Lo que viene: tres mini-fichas en fila, solo con el nombre (mismo lenguaje que las cajas: hairline
-            + radio); hover = borde azul + nombre en primario + leve subida; clic = ir a ese acto */}
-        {products.length > 0 && (
-          <div className="grid grid-cols-3 gap-static-md">
-            {products.map(({ key, title }, i) => (
-              <button
-                key={key}
-                type="button"
-                onClick={() => onNavigate?.(i)}
-                className="group h-static-2xl px-static-md flex items-center rounded-lg border border-[var(--act1-line,var(--color-border-Strokes-default))] bg-[var(--act1-tile,var(--color-surface-BG-white))] dark:bg-[var(--act1-tile,var(--color-surface-BG-1))] transition-[translate,border-color] duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[var(--act1-ink,var(--color-brand-blue))]"
-              >
-                <span className="text-ui-label text-[var(--act1-ink-soft,var(--color-text-secondary))] transition-colors group-hover:text-[var(--act1-ink,var(--color-text-primary))]">{title}</span>
-              </button>
-            ))}
-          </div>
-        )}
+        {/* Pie: una línea corta en lugar de las tres mini-fichas (feedback 16/10/2026) */}
+        <div>
+          <span aria-hidden="true" className="block w-static-xl h-px mb-static-sm bg-[var(--act1-ink-soft,var(--color-text-secondary))]" />
+          <p className="text-body-md text-[var(--act1-ink-soft,var(--color-text-secondary))]">{t("hubTagline")}</p>
+        </div>
       </div>
     </div>
   );

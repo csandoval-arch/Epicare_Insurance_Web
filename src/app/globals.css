@@ -60,6 +60,13 @@ html.lenis.lenis-scrolling iframe { pointer-events: none; }
   --spacing-static-xl: 2rem;
   --spacing-static-2xl: 3rem;
 
+  /* RADIOS DE BOTÓN (2026-10-16): los botones ya no son píldoras. `rounded-button` = 10px para todo
+     botón (con texto o solo ícono); `rounded-button-inner` = 6px para la burbuja de ícono DENTRO del
+     botón (concéntrica: 10px − el aire de 4px de ese lado). Se usan SIEMPRE vía `ui/Button`.
+     (Se pidió 12px, luego 8px, y quedó en 10px el mismo día: cambiar ambos valores aquí lo propaga a todo.) */
+  --radius-button: 0.625rem;
+  --radius-button-inner: 0.375rem;
+
   --font-display: var(--font-inter-display);
   --font-body: var(--font-inter-tight);
   --font-mono: var(--font-jetbrains-mono);

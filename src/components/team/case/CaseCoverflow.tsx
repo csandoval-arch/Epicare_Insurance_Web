@@ -196,7 +196,7 @@ export default function CaseCoverflow({ stages, closing, header = true, mobileAf
   }, []);
 
   const arrowBtn =
-    "w-static-2xl h-static-2xl rounded-full border border-[var(--color-border-Strokes-default)] flex items-center justify-center text-[var(--color-text-primary)] cursor-pointer transition-[border-color,scale] duration-200 hover:border-[var(--color-brand-blue)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-action-focus-ring)]";
+    "w-static-2xl h-static-2xl rounded-button border border-[var(--color-border-Strokes-default)] flex items-center justify-center text-[var(--color-text-primary)] cursor-pointer transition-[border-color,scale] duration-200 hover:border-[var(--color-brand-blue)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-action-focus-ring)]";
   const arrowIcon = (flip: boolean) => (
     <svg viewBox="0 0 24 24" className={`w-static-md h-static-md ${flip ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d={ARROW} />

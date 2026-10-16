@@ -1,42 +1,27 @@
 "use client";
 
-import React, { useLayoutEffect, useRef } from "react";
-import Link from "next/link";
-import gsap from "gsap";
-import ArrowUR from "@/components/icons/ArrowUR";
+import React from "react";
+import Button from "@/components/ui/Button";
 import { asset, posterFor } from "@/lib/asset";
-import { DUR, EASE } from "@/lib/motion";
 import SmartVideo from "../SmartVideo";
 import type { PanelSpec } from "../BentoGridDesktop";
 import { CARD_SURFACE, CARD_LIGHT } from "./layout";
 
-// Piezas de cada acto de producto del Bento (desktop): la UI del producto (vídeo), la pill que sigue al
-// ratón sobre ella, y logo + una línea + CTA. Sin adornos: el producto es el protagonista.
+// Piezas de cada acto de producto del Bento (desktop): la UI del producto (vídeo), y logo + una línea + CTA. Sin adornos: el producto es el protagonista.
 
 /** El vídeo del hero de AMS tiene su poster con otro nombre (posterFor no lo deriva). */
 const AMS_POSTER = asset("/Files/Go_AMS/hero/posters/go-ams-hero-poster.webp");
 const posterOf = (p: PanelSpec, src: string) => (p.isAms ? AMS_POSTER : posterFor(src));
 
-/** CTA de producto: mismo dibujo que `PrimaryCta` (píldora azul + flecha en burbuja), pero navega. */
+/** CTA de producto: el mismo `Button` de todo el sitio, pero navega. */
 export function SceneCta({ href = "#", label }: { href?: string; label: string }) {
-  return (
-    <Link
-      href={href}
-      className="group w-fit h-static-2xl pl-static-lg pr-static-sm rounded-full flex items-center gap-3 bg-[var(--color-brand-blue)] text-[var(--color-text-White-100)] shadow-elevation-2 transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:shadow-elevation-4 active:scale-[0.96]"
-    >
-      <span className="text-body-sm font-medium">{label}</span>
-      <span className="relative w-static-xl h-static-xl rounded-full bg-[var(--color-surface-BG-white)] text-[var(--color-brand-blue)] flex items-center justify-center overflow-hidden shrink-0">
-        <ArrowUR className="absolute w-static-md h-static-md transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
-        <ArrowUR className="absolute w-static-md h-static-md -translate-x-5 translate-y-5 transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
-      </span>
-    </Link>
-  );
+  return <Button href={href} label={label} />;
 }
 
 /** Etiqueta "Próximamente" en lugar del CTA, para productos sin página todavía (no es interactiva). */
 export function ComingSoonTag({ label }: { label: string }) {
   return (
-    <span className="w-fit h-static-2xl px-static-lg rounded-full flex items-center border border-[var(--color-border-Strokes-default)] text-ui-label text-[var(--color-text-secondary)]">
+    <span className="w-fit h-static-2xl px-static-lg rounded-button flex items-center border border-[var(--color-border-Strokes-default)] text-ui-label text-[var(--color-text-secondary)]">
       {label}
     </span>
   );
@@ -63,7 +48,7 @@ export function ProductCopy({ panel, lead, body, cta, comingSoonLabel, className
   cta?: string;
   comingSoonLabel?: string;
   className?: string;
-  /** false cuando la tarjeta entera es el CTA (círculo que sigue al ratón, ver `MediaHover`). */
+  /** false cuando la tarjeta entera es el enlace y el CTA va aparte. */
   showCta?: boolean;
 }) {
   const { Logo, isAcademy, href, comingSoon } = panel;
@@ -104,108 +89,6 @@ export function ProductMedia({ panel, className = "", framed = true, forceLight 
     <div className={`relative overflow-hidden ${frame} ${surface} ${className}`}>
       <SmartVideo src={panel.videoLight} poster={posterOf(panel, panel.videoLight)} className={`absolute inset-0 w-full h-full ${fit} ${light} dark:hidden`} />
       <SmartVideo src={panel.videoDark} poster={posterOf(panel, panel.videoDark)} className={`absolute inset-0 w-full h-full ${fit} ${dark} hidden dark:block`} />
-    </div>
-  );
-}
-
-/**
- * @description Zona (la tarjeta entera) con un círculo que sigue al ratón (late al alcanzarlo y se hunde al hacer clic) mientras está encima ("Ver CRM",
- * "Próximamente"…). El círculo CRECE desde 0 en el punto del cursor (EASE.dramatic) y se encoge al
- * salir; persigue al cursor con un retardo suave (`gsap.quickTo`, solo transform). Con `href` toda la
- * zona es un enlace; sin él, solo informa.
- * En táctil no hay hover: la pill no aparece y el enlace sigue funcionando.
- */
-export function MediaHover({ href, label, tone = "brand", className = "", children }: {
-  href?: string;
-  label: string;
-  /** brand = círculo azul con flecha (navega); muted = círculo gris sin flecha (p. ej. "Próximamente"). */
-  tone?: "brand" | "muted";
-  className?: string;
-  children: React.ReactNode;
-}) {
-  const zoneRef = useRef<HTMLElement>(null);
-  const pillRef = useRef<HTMLSpanElement>(null); // sigue al ratón + aparece/desaparece
-  const faceRef = useRef<HTMLSpanElement>(null); // latido al llegar + hundido al hacer clic
-  const moveX = useRef<((v: number) => void) | null>(null);
-  const moveY = useRef<((v: number) => void) | null>(null);
-  const settle = useRef<number | undefined>(undefined);
-  const interactive = tone === "brand";
-
-  useLayoutEffect(() => {
-    const pill = pillRef.current;
-    if (!pill) return;
-    const ctx = gsap.context(() => {
-      gsap.set(pill, { xPercent: -50, yPercent: -50, scale: 0, autoAlpha: 0 });
-      moveX.current = gsap.quickTo(pill, "x", { duration: DUR.fast, ease: EASE.out });
-      moveY.current = gsap.quickTo(pill, "y", { duration: DUR.fast, ease: EASE.out });
-    });
-    return () => {
-      window.clearTimeout(settle.current);
-      ctx.revert();
-    };
-  }, []);
-
-  // Latido de "llegada": cuando el ratón se detiene, el círculo termina de alcanzarlo (≈ DUR.fast) y
-  // late una vez (crece 8 % y vuelve).
-  const arrive = () =>
-    gsap.fromTo(faceRef.current, { scale: 1 }, { scale: 1.08, duration: DUR.micro, ease: EASE.snap, yoyo: true, repeat: 1, overwrite: "auto" });
-
-  const place = (e: React.PointerEvent) => {
-    const r = zoneRef.current?.getBoundingClientRect();
-    if (!r) return;
-    moveX.current?.(e.clientX - r.left);
-    moveY.current?.(e.clientY - r.top);
-    window.clearTimeout(settle.current);
-    settle.current = window.setTimeout(arrive, DUR.fast * 1000);
-  };
-  const show = (e: React.PointerEvent) => {
-    if (e.pointerType !== "mouse") return;
-    const r = zoneRef.current?.getBoundingClientRect();
-    if (r) gsap.set(pillRef.current, { x: e.clientX - r.left, y: e.clientY - r.top });
-    gsap.to(pillRef.current, { scale: 1, autoAlpha: 1, duration: DUR.fast, ease: EASE.dramatic, overwrite: "auto" });
-  };
-  const hide = () => {
-    window.clearTimeout(settle.current);
-    gsap.to(pillRef.current, { scale: 0, autoAlpha: 0, duration: DUR.microOut, ease: EASE.snap, overwrite: "auto" });
-  };
-  // Clic (solo si navega): se hunde al pulsar y rebota al soltar.
-  const press = () => interactive && gsap.to(faceRef.current, { scale: 0.86, duration: DUR.micro, ease: EASE.snap, overwrite: "auto" });
-  const release = () => interactive && gsap.to(faceRef.current, { scale: 1, duration: DUR.fast, ease: EASE.dramatic, overwrite: "auto" });
-
-  const faceTone = interactive
-    ? "bg-[var(--color-brand-blue)] text-[var(--color-text-White-100)]"
-    : "bg-[var(--color-text-secondary)] text-[var(--color-text-White-100)]";
-
-  const inner = (
-    <>
-      {children}
-      <span ref={pillRef} aria-hidden="true" className="pointer-events-none absolute left-0 top-0 z-20 w-24 h-24">
-        <span
-          ref={faceRef}
-          className={`w-full h-full p-static-sm rounded-full flex flex-col items-center justify-center gap-1 text-center shadow-elevation-4 ${faceTone}`}
-        >
-          <span className="text-body-sm font-medium leading-tight">{label}</span>
-          {interactive && <ArrowUR className="w-4 h-4" strokeWidth={1.75} />}
-        </span>
-      </span>
-    </>
-  );
-
-  const zone = `media-hover relative overflow-hidden ${className}`;
-  const handlers = {
-    onPointerEnter: show,
-    onPointerMove: place,
-    onPointerLeave: () => { release(); hide(); },
-    onPointerDown: press,
-    onPointerUp: release,
-  };
-  return href ? (
-    <Link ref={zoneRef as React.RefObject<HTMLAnchorElement>} href={href} {...handlers} className={zone}>
-      {inner}
-    </Link>
-  ) : (
-    <div ref={zoneRef as React.RefObject<HTMLDivElement>} {...handlers} className={zone}>
-      {inner}
     </div>
   );
 }

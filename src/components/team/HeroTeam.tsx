@@ -18,6 +18,7 @@ import { useTranslations } from "next-intl";
 import type Lenis from "lenis";
 import SecondaryCta from "@/components/go-crm/cta/SecondaryCta";
 import ArrowUR from "@/components/icons/ArrowUR";
+import { IconButton } from "@/components/ui/Button";
 import { TEAM_GRID } from "./grid";
 import CaseCoverflow from "./case/CaseCoverflow";
 import type { CaseStage } from "./case/caseData";
@@ -74,14 +75,9 @@ export default function HeroTeam() {
           // Móvil (4 columnas): subtítulo en las cols 1-3, el CTA como botón redondo en la col 4.
           <div className={`lg:hidden w-full px-gutter-sm ${TEAM_GRID} items-center`}>
             <p className="col-span-3 text-body-lg text-[var(--color-text-secondary)]">{t("subtitle")}</p>
-            <button
-              type="button"
-              onClick={scrollToCrew}
-              aria-label={t("cta")}
-              className="col-start-4 justify-self-end w-static-2xl h-static-2xl rounded-full bg-[var(--color-brand-blue)] text-[var(--color-text-White-100)] flex items-center justify-center shadow-elevation-2 transition-[scale] duration-200 ease-out active:scale-95 focus-visible:outline-2 focus-visible:outline-[var(--color-border-Strokes-focus)]"
-            >
+            <IconButton label={t("cta")} onClick={scrollToCrew} className="col-start-4 justify-self-end">
               <ArrowUR className="w-static-md h-static-md rotate-90" />
-            </button>
+            </IconButton>
           </div>
         }
       />

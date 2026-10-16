@@ -6,8 +6,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslations } from 'next-intl';
 import { EASE, DUR, STAGGER, REVEAL } from '@/lib/motion';
 import { asset } from "@/lib/asset";
-import ArrowUR from "@/components/icons/ArrowUR";
+import Button, { IconButton } from "@/components/ui/Button";
 import BleedRight from "@/components/BleedRight";
+
+/** Baja a la sección siguiente al hero (los dos botones de "bajar", móvil y escritorio). */
+function scrollToNextSection() {
+  const nextSection = document.getElementById("hero-wrapper")?.nextElementSibling;
+  if (nextSection) {
+    const top = nextSection.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top, behavior: "smooth" });
+  }
+}
 
 export default function HeroSection() {
   const t = useTranslations('goAms.hero');
@@ -181,28 +190,12 @@ export default function HeroSection() {
               })}
             </p>
             <div className="flex flex-row items-center gap-3 w-full lg:w-auto">
-              <button className="hero-btn group w-fit min-w-[220px] md:min-w-0 h-12 pl-8 md:pl-6 pr-3 md:pr-2 rounded-full flex justify-between md:justify-start items-center gap-3 bg-[var(--color-brand-blue)] text-[var(--color-surface-BG-base)] shadow-elevation-2 transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-4 active:scale-[0.96] active:opacity-80 active:duration-150 cursor-pointer">
-                <span className="text-body-sm font-medium">{t('cta')}</span>
-                <span className="relative w-8 h-8 rounded-full bg-[var(--color-surface-BG-base)] text-[var(--color-brand-blue)] flex items-center justify-center overflow-hidden shrink-0">
-                  <ArrowUR className="absolute w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
-                  <ArrowUR className="absolute w-4 h-4 -translate-x-5 translate-y-5 transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
-                </span>
-              </button>
+              <Button label={t('cta')} variant="primary-adaptive" layout="wide-mobile" roomyMobile className="hero-btn" />
 
               {/* Mobile Scroll Bubble */}
-              <button 
-                onClick={() => {
-                  const nextSection = document.getElementById("hero-wrapper")?.nextElementSibling;
-                  if (nextSection) {
-                    const top = nextSection.getBoundingClientRect().top + window.scrollY;
-                    window.scrollTo({ top, behavior: 'smooth' });
-                  }
-                }}
-                className="hero-btn lg:hidden shrink-0 w-12 h-12 rounded-full flex items-center justify-center bg-[var(--color-brand-blue)] text-white shadow-elevation-2 active:scale-95 transition-transform cursor-pointer"
-                aria-label="Scroll down"
-              >
+              <IconButton label="Scroll down" className="hero-btn lg:hidden" onClick={scrollToNextSection}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M12 5v14M5 12l7 7 7-7" /></svg>
-              </button>
+              </IconButton>
             </div>
           </div>
 
@@ -213,23 +206,13 @@ export default function HeroSection() {
               
               {/* Scroll Down Button (Desktop Only) */}
               <div className="absolute top-[140px] left-[-24px] -translate-x-full z-20 hidden lg:flex">
-                <button 
-                  onClick={() => {
-                    const nextSection = document.getElementById("hero-wrapper")?.nextElementSibling;
-                    if (nextSection) {
-                      const top = nextSection.getBoundingClientRect().top + window.scrollY;
-                      window.scrollTo({ top, behavior: 'smooth' });
-                    }
-                  }}
-                  className="group relative w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center bg-[var(--color-brand-blue)] text-white shadow-elevation-2 transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-elevation-4 active:scale-95 cursor-pointer"
-                  aria-label="Scroll down"
-                >
-                  <div className="absolute inset-0 rounded-full border border-white/20 scale-100 group-hover:scale-[1.15] opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out"></div>
-                  <span className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-full">
+                <IconButton label="Scroll down" size="lg" motion="lift" onClick={scrollToNextSection}>
+                  <div className="absolute inset-0 rounded-button border border-white/20 scale-100 group-hover:scale-[1.15] opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out"></div>
+                  <span className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-button">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="absolute w-5 h-5 transition-transform duration-[600ms] ease-[cubic-bezier(0.68,-0.6,0.32,1.6)] group-hover:translate-y-10" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7" /></svg>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="absolute w-5 h-5 -translate-y-10 transition-transform duration-[600ms] ease-[cubic-bezier(0.68,-0.6,0.32,1.6)] group-hover:translate-y-0" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7" /></svg>
                   </span>
-                </button>
+                </IconButton>
               </div>
 
               <div id="visual-panel" className="hero-video-card relative bg-[var(--color-surface-BG-1)] shadow-elevation-3 w-full h-auto flex items-center justify-center rounded-lg lg:rounded-l-xl lg:rounded-r-none border border-[var(--color-border-Strokes-default)]/60 overflow-hidden p-0">

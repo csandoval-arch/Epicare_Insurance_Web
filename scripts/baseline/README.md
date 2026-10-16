@@ -2,7 +2,7 @@
 
 Referencia contra la que `scripts/design-fingerprint.mjs` compara el HTML generado.
 
-**Regeneradas el 2026-10-15** en la optimización de assets (WebP y re-encode de vídeo); la vez anterior, el 2026-10-13, en el barrido de producción. Las de septiembre eran del 7 y el 22
+**Regeneradas el 2026-10-16** (las 8) al aprobar el hero nuevo de la landing y el cambio de forma de todos los botones (radio de 10px vía `ui/Button`); el 2026-10-15 en la optimización de assets (WebP y re-encode de vídeo); la vez anterior, el 2026-10-13, en el barrido de producción. Las de septiembre eran del 7 y el 22
 de septiembre y habían quedado obsoletas: la landing daba 1542 diferencias contra la suya, así
 que el verificador anti-regresión estaba apagado en la práctica. Además solo existían tres
 (`landing`, `go-ams`, `go-crm`); ahora hay una por ruta pública.

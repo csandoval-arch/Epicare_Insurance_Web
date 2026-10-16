@@ -2,8 +2,9 @@
 
 import React from "react";
 import { asset, posterFor } from "@/lib/asset";
+import Link from "next/link";
+import Button from "@/components/ui/Button";
 import SmartVideo from "../SmartVideo";
-import { MediaHover } from "./ProductScene";
 import { CARD_LIGHT } from "./layout";
 import type { PanelSpec } from "../BentoGridDesktop";
 
@@ -11,7 +12,7 @@ import type { PanelSpec } from "../BentoGridDesktop";
  * @description Los actos de producto del track de GO Hub. Un acto = un producto, en UN solo
  * contenedor: a la izquierda la jerarquía de lectura (logo → claim → detalle, anclada arriba) y a la
  * derecha su vídeo, fundido con la superficie de la tarjeta para que no se lea como una pieza aparte
- * de su información. El acto entero es el CTA: el círculo nace en el cursor y lo persigue.
+ * de su información. El acto entero es el enlace; el CTA bajo el detalle es la cara visible.
  *
  * Medidas elegidas por el usuario el 14/10/2026 con un panel de pruebas (ya purgado a
  * `_quarantine/landing/gohub-debug/`). Los otros 3 paradigmas que se compararon están en
@@ -62,12 +63,16 @@ const lines = (text: string) =>
     </span>
   ));
 
-/** El logo vive en una caja sin stroke, separada de la tarjeta solo por su fondo. */
+/**
+ * El logo va solo, sin contenedor de fondo (feedback 16/10/2026). La caja se conserva únicamente como
+ * reserva de espacio (mismo alto que antes: el texto no se mueve) y el logo se alinea a la izquierda,
+ * en el borde de la columna de texto.
+ */
 function ActLogo({ panel }: { panel: PanelSpec }) {
   const { Logo, isAcademy } = panel;
   return (
     <div
-      className={`flex items-center justify-center overflow-hidden rounded-md ${LOGO_SURFACE}`}
+      className="flex items-center justify-start"
       // La tarjeta es siempre clara, así que el trazo del logo se ancla a la tinta oscura y no se
       // vuelve blanco en modo oscuro (los SVG lo leen de `--logo-ink`).
       style={{ width: ACT.box.w, height: ACT.box.h, ...LOGO_INK }}
@@ -108,41 +113,61 @@ function ActMedia({ panel, className = "", style }: { panel: PanelSpec; classNam
   );
 }
 
-/** Un producto = un acto. Texto y vídeo en el mismo contenedor, con su jerarquía de lectura. */
-export function HubAct({ panel, lead, body, hoverLabel }: {
+/**
+ * Un producto = un acto. Texto y vídeo en el mismo contenedor, con su jerarquía de lectura.
+ * La tarjeta entera es el enlace (hit box); el CTA bajo el detalle es solo visual (`decorative`, sin
+ * segundo `<a>` anidado) y reacciona al hover de la tarjeta (`group`). Sin `href` (Academy) la
+ * tarjeta no navega y en su lugar va la etiqueta "Próximamente".
+ */
+export function HubAct({ panel, lead, body, ctaLabel }: {
   panel: PanelSpec;
   lead: string;
   body: string;
-  hoverLabel: string;
+  /** Texto del CTA ("Explorar GO CRM") o, si el producto no tiene página, "Próximamente". */
+  ctaLabel: string;
 }) {
+  const zoneClass = `h-full w-full rounded-xl ${HAIRLINE} ${SURFACE} flex group relative overflow-hidden`;
+  const navigates = !panel.comingSoon && !!panel.href;
+  const content = (
+    <>
+      {/* Jerarquía de lectura, anclada ARRIBA: logo (marca) → claim (ancla) → detalle → CTA.
+          `relative z-10` la deja POR ENCIMA del vídeo, que entra por debajo (ver ACT.pull). */}
+      <div
+        className="relative z-10 h-full px-static-2xl pt-static-2xl pb-static-2xl flex flex-col justify-start gap-static-xl shrink-0 pointer-events-none"
+        style={{ width: ACT.split }}
+      >
+        <ActLogo panel={panel} />
+        {/* El titular se mide por su línea más larga en vez de partirse dentro de la columna: con
+            el vídeo debajo y fundido, puede invadirlo. Solo en las tarjetas con blend; la de AMS
+            lleva un panel opaco y su titular cabe sin ayuda. */}
+        <p className={`text-display-sm ${INK} ${panel.blend ? "w-max max-w-[132%]" : ""}`}>{lines(lead)}</p>
+        <p className={`text-body-lg ${INK_SOFT}`}>{lines(body)}</p>
+        {navigates ? (
+          <Button label={ctaLabel} decorative className="mt-static-md" />
+        ) : (
+          <span className={`mt-static-md w-fit h-static-2xl px-static-lg rounded-button flex items-center ${HAIRLINE} text-ui-label ${INK_SOFT}`}>
+            {ctaLabel}
+          </span>
+        )}
+      </div>
+
+      <ActMedia
+        panel={panel}
+        className="h-full flex-1 min-w-0"
+        style={{ marginLeft: `-${panel.blend ? ACT.pull.blend : ACT.pull.framed}` }}
+      />
+    </>
+  );
+
   return (
     <article className="hub-act shrink-0" style={{ width: ACT.w, height: ACT.h }}>
-      <MediaHover
-        href={panel.comingSoon ? undefined : panel.href}
-        label={hoverLabel}
-        tone={panel.comingSoon ? "muted" : "brand"}
-        className={`h-full w-full rounded-xl ${HAIRLINE} ${SURFACE} flex group`}
-      >
-        {/* Jerarquía de lectura, anclada ARRIBA: logo (marca) → claim (ancla) → detalle.
-            `relative z-10` la deja POR ENCIMA del vídeo, que entra por debajo (ver ACT.pull). */}
-        <div
-          className="relative z-10 h-full px-static-2xl pt-static-2xl pb-static-2xl flex flex-col justify-start gap-static-xl shrink-0 pointer-events-none"
-          style={{ width: ACT.split }}
-        >
-          <ActLogo panel={panel} />
-          {/* El titular se mide por su línea más larga en vez de partirse dentro de la columna: con
-              el vídeo debajo y fundido, puede invadirlo. Solo en las tarjetas con blend; la de AMS
-              lleva un panel opaco y su titular cabe sin ayuda. */}
-          <p className={`text-display-sm ${INK} ${panel.blend ? "w-max max-w-[132%]" : ""}`}>{lines(lead)}</p>
-          <p className={`text-body-lg ${INK_SOFT}`}>{lines(body)}</p>
-        </div>
-
-        <ActMedia
-          panel={panel}
-          className="h-full flex-1 min-w-0"
-          style={{ marginLeft: `-${panel.blend ? ACT.pull.blend : ACT.pull.framed}` }}
-        />
-      </MediaHover>
+      {navigates ? (
+        <Link href={panel.href!} aria-label={ctaLabel} className={zoneClass}>
+          {content}
+        </Link>
+      ) : (
+        <div className={zoneClass}>{content}</div>
+      )}
     </article>
   );
 }

@@ -43,25 +43,12 @@ const ArrowUR = ({ className = '' }: { className?: string }) => (
 // ----------------------------------------------------------------------
 export default function BentoGridMobile() {
   const t = useTranslations('landingV2.bento');
-  const th = useTranslations('landingV2.hero');
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
   const progressHitRef = useRef<HTMLDivElement>(null);
   const orbRef = useRef<HTMLDivElement>(null);
   const stRef = useRef<ScrollTrigger | null>(null);
-
-  // Fichas del acto 1: lleva el scroll hasta la tarjeta i (Lenis si está). Se usa offsetTop dentro de la
-  // pista (posición en el flujo), porque una tarjeta sticky ya pegada mide su posición pegada.
-  const goToCard = (i: number) => {
-    const track = trackRef.current;
-    const card = track?.querySelectorAll<HTMLElement>(".mobile-stack-card")[i + 1];
-    if (!track || !card) return;
-    const y = track.getBoundingClientRect().top + window.scrollY + card.offsetTop;
-    const lenis = (window as unknown as { lenis?: { scrollTo: (y: number) => void } }).lenis;
-    if (lenis) lenis.scrollTo(y);
-    else window.scrollTo({ top: y, behavior: "smooth" });
-  };
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -207,20 +194,12 @@ export default function BentoGridMobile() {
               <div className={`relative w-full h-[68dvh] max-h-[528px] flex flex-col justify-start rounded-lg border border-[var(--color-border-Strokes-default)] p-[var(--space-gutter-sm)] ${ACT1_ON_BRAND_CLASS}`} style={ACT1_ON_BRAND_VARS}>
                 <span aria-hidden="true" className="stack-shade pointer-events-none absolute inset-0 z-20 rounded-lg bg-[var(--color-overlay-backdrop)] opacity-0" />
                 {/* Recuadro de logo común en móvil (w-32 h-16): igual para el GO Hub y los tres productos */}
-                <HubPlaque className="w-28 h-24 mt-static-xl mb-static-lg" logoClassName="w-14 h-14" radiusClass="rounded-md" />
+                <HubPlaque className="w-28 h-24 mt-static-xl mb-static-lg" logoClassName="w-[4.5rem] h-[4.5rem]" />
                 <HubTitle className="hub-title text-display-lg text-left" renderMark={renderHubMark} />
-                {/* Lo que viene (como en desktop): tres fichas en fila; clic = baja hasta esa tarjeta */}
-                <div className="mt-auto mb-static-xl grid grid-cols-3 gap-static-sm">
-                  {PANELS.map((p, i) => (
-                    <button
-                      key={p.key}
-                      type="button"
-                      onClick={() => goToCard(i)}
-                      className="h-static-2xl px-static-sm flex items-center justify-center rounded-md border border-[var(--act1-line,var(--color-border-Strokes-default))] bg-[var(--act1-tile,var(--color-surface-BG-white))] dark:bg-[var(--act1-tile,var(--color-surface-BG-1))] text-meta uppercase tracking-[0.05em] text-[var(--act1-ink-soft,var(--color-text-secondary))] whitespace-nowrap active:border-[var(--act1-ink,var(--color-brand-blue))] active:text-[var(--act1-ink,var(--color-text-primary))]"
-                    >
-                      {p.title}
-                    </button>
-                  ))}
+                {/* Pie (como en desktop): una línea corta en lugar de las tres fichas */}
+                <div className="mt-auto mb-static-xl">
+                  <span aria-hidden="true" className="block w-static-xl h-px mb-static-sm bg-[var(--act1-ink-soft,var(--color-text-secondary))]" />
+                  <p className="text-body-md text-[var(--act1-ink-soft,var(--color-text-secondary))]">{t("hubTagline")}</p>
                 </div>
               </div>
           </div>
@@ -237,8 +216,8 @@ export default function BentoGridMobile() {
                 <span aria-hidden="true" className="stack-shade pointer-events-none absolute inset-0 z-20 rounded-lg bg-[var(--color-overlay-backdrop)] opacity-0" />
                 {/* Arriba: el logo en su recuadro (en Academy, "Próximamente" a la derecha); debajo el titular; el vídeo cierra */}
                 <div className="shrink-0 flex items-center justify-between p-[var(--space-gutter-sm)]">
-                  {/* Misma caja que la placa del acto 1 (112 × 96), sin stroke: la separa su fondo. */}
-                  <div className={`w-28 h-24 flex items-center justify-center rounded-md ${CARD_LIGHT.logoSurface}`} style={CARD_LIGHT.logoInk}>
+                  {/* Logo solo, sin fondo (16/10/2026). La caja (112 × 96) solo reserva el espacio; el logo va a la izquierda. */}
+                  <div className="w-28 h-24 flex items-center justify-start" style={CARD_LIGHT.logoInk}>
                     <Logo className={`${isAcademy ? "h-10" : "h-9"} w-auto text-[var(--color-brand-blue)]`} />
                   </div>
                   {comingSoon && (

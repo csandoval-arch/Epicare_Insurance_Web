@@ -7,6 +7,7 @@ import { useLocale } from "./I18nProviderClient";
 import { asset } from "@/lib/asset";
 import { loginModalStore } from "@/lib/loginModalStore";
 import { joinModalStore } from "@/lib/joinModalStore";
+import Button from "@/components/ui/Button";
 import MobileMenu from "./header/MobileMenu";
 import { HERO_COLUMN_EVENT, type HeroColumnDetail } from "./hero/geometry";
 
@@ -20,13 +21,6 @@ interface HeaderEpicareProps {
   isHeaderForcedDark?: boolean;
   scrollSafeZone?: number;
 }
-
-const ArrowUR = ({ className = '' }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <line x1="7" y1="17" x2="17" y2="7"></line>
-    <polyline points="7 7 17 7 17 17"></polyline>
-  </svg>
-);
 
 /**
  * @description Un link a la página actual SIN ancla (p. ej. "Marketing" estando en `/solutions#solutions`)
@@ -53,7 +47,6 @@ export default function HeaderEpicare({
   scrollSafeZone,
 }: HeaderEpicareProps) {
   const t = useTranslations("landingV2.nav");
-  const tHero = useTranslations("landingV2.hero");
   const { locale, setLocale } = useLocale();
   const [isDark, setIsDark] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
@@ -253,10 +246,13 @@ export default function HeaderEpicare({
       : "w-full md:w-[calc(100%-2*var(--space-gutter-sm))] lg:w-[calc(100%-2*var(--space-gutter-md))]"
   }`;
 
-  const navBgClass = isHeaderPill 
+  // Móvil/tablet (<xl): la píldora NO usa `backdrop-blur`. Sobre un video en reproducción (el hero) el
+  // desenfoque obliga al navegador a recalcular el fondo en cada fotograma, y es lo más caro del scroll en un
+  // teléfono. En su lugar, un fondo casi opaco del mismo tono: se ve igual de "cristal" sin el costo.
+  const navBgClass = isHeaderPill
     ? (isHeaderForcedDark || isDark)
-      ? "bg-white/5 border-white/10 backdrop-blur-md shadow-elevation-2 rounded-xl border" 
-      : "bg-white/80 dark:bg-white/5 border-black/10 dark:border-white/10 backdrop-blur-md shadow-elevation-2 rounded-xl border"
+      ? "bg-white/5 border-white/10 backdrop-blur-md max-xl:backdrop-blur-none max-xl:bg-black/55 shadow-elevation-2 rounded-xl border"
+      : "bg-white/80 dark:bg-white/5 border-black/10 dark:border-white/10 backdrop-blur-md max-xl:backdrop-blur-none max-xl:bg-white/90 max-xl:dark:bg-black/55 shadow-elevation-2 rounded-xl border"
     : "bg-transparent border-transparent shadow-none rounded-xl";
 
 
@@ -503,24 +499,24 @@ export default function HeaderEpicare({
           </button>
           
           {/* Botón de Login */}
-          <button onClick={() => loginModalStore.open()} className="group hidden xl:flex h-[44px] pl-5 pr-1.5 rounded-full flex justify-between items-center gap-3 bg-[var(--color-brand-blue)] text-white text-body-sm font-semibold normal-case transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] shadow-elevation-1 hover:brightness-105 hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-3 active:scale-95 cursor-pointer">
-            <span>{t('login')}</span>
-            <span className="relative w-8 h-8 rounded-full bg-white text-[var(--color-brand-blue)] flex items-center justify-center overflow-hidden shrink-0">
-              <ArrowUR className="absolute w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
-              <ArrowUR className="absolute w-4 h-4 -translate-x-5 translate-y-5 transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
-            </span>
-          </button>
-          
+          <Button
+            label={t('login')}
+            size="sm"
+            variant="plain"
+            onClick={() => loginModalStore.open()}
+            className="hidden xl:flex bg-[var(--color-brand-blue)] text-white font-semibold! hover:brightness-105"
+            bubbleClassName="bg-white text-[var(--color-brand-blue)]"
+          />
+
           {/* CTA Desktop Secundario: abre el modal Join Epicare */}
-          <button onClick={() => joinModalStore.open()} className={`group hidden xl:flex h-[44px] pl-5 pr-1.5 rounded-full flex justify-between items-center gap-3 border text-body-sm font-medium normal-case shadow-elevation-1 backdrop-blur-md transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-3 active:scale-95 ${secondaryCtaClass} cursor-pointer`}>
-            <span>{t('joinEpicare')}</span>
-            <span className={`relative w-8 h-8 rounded-full flex items-center justify-center overflow-hidden shrink-0 ${
-              isHeaderForcedDark || isDark ? 'bg-white/10 text-white' : 'bg-black/5 text-[var(--color-text-primary)]'
-            }`}>
-              <ArrowUR className="absolute w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
-              <ArrowUR className="absolute w-4 h-4 -translate-x-5 translate-y-5 transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
-            </span>
-          </button>
+          <Button
+            label={t('joinEpicare')}
+            size="sm"
+            variant="plain"
+            onClick={() => joinModalStore.open()}
+            className={`hidden xl:flex border backdrop-blur-md ${secondaryCtaClass}`}
+            bubbleClassName={isHeaderForcedDark || isDark ? 'bg-white/10 text-white' : 'bg-black/5 text-[var(--color-text-primary)]'}
+          />
         </div>
       </nav>
 

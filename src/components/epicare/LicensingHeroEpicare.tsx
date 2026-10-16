@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import type Lenis from 'lenis';
 import { useTranslations } from 'next-intl';
 import HeaderEpicare from './HeaderEpicare';
+import { IconButton } from '@/components/ui/Button';
 import { EASE, DUR, STAGGER, REVEAL } from '@/lib/motion';
 import InteractiveGlobeEpicare from './InteractiveGlobeEpicare';
 import LegalPlaque from './licensing/LegalPlaque';
@@ -136,19 +137,15 @@ export default function LicensingHeroEpicare() {
             
             {/* BUTTONS */}
             <div className="flex-none md:col-start-5 md:col-span-1 md:row-start-2 z-10 flex flex-col justify-end md:justify-start items-end md:items-start pb-0">
-              <button 
-                onClick={handleScrollToLicenses}
-                className="licensing-btn group relative w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center bg-[var(--color-action-primary-bg)] text-[var(--color-action-primary-text)] shadow-elevation-2 transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-elevation-4 active:scale-95"
-                aria-label={t('cta')}
-              >
-                <div className="absolute inset-0 rounded-full border border-white/20 scale-100 group-hover:scale-[1.15] opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out"></div>
-                <span className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-full">
+              <IconButton label={t('cta')} variant="action" size="lg" motion="lift" onClick={handleScrollToLicenses} className="licensing-btn">
+                <div className="absolute inset-0 rounded-button border border-white/20 scale-100 group-hover:scale-[1.15] opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out"></div>
+                <span className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-button">
                   {/* Arrow Leaving (Down) */}
                   <ArrowDownMinimal className="absolute w-5 h-5 transition-transform duration-[600ms] ease-[cubic-bezier(0.68,-0.6,0.32,1.6)] group-hover:translate-y-10" />
                   {/* Arrow Entering (From Top) */}
                   <ArrowDownMinimal className="absolute w-5 h-5 -translate-y-10 transition-transform duration-[600ms] ease-[cubic-bezier(0.68,-0.6,0.32,1.6)] group-hover:translate-y-0" />
                 </span>
-              </button>
+              </IconButton>
             </div>
           </div>
 

@@ -6,7 +6,7 @@
  */
 
 import type Lenis from "lenis";
-import ArrowUR from "@/components/icons/ArrowUR";
+import Button from "@/components/ui/Button";
 import { JOIN_FORM_ID } from "../joinUsData";
 
 /** Margen sobre el formulario al llegar (deja sitio al header en píldora). */
@@ -27,19 +27,7 @@ export function scrollToForm() {
  * Conecta directamente al formulario de registro en el Hero.
  */
 export function RegisterCta({ label, className = "" }: { label: string; tone?: "light" | "dark"; className?: string }) {
-  return (
-    <button
-      type="button"
-      onClick={scrollToForm}
-      className={`group w-fit h-static-2xl pl-static-lg pr-static-sm rounded-full flex items-center gap-3 bg-[var(--color-brand-blue)] text-[var(--color-text-White-100)] shadow-elevation-2 transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-4 active:scale-[0.96] active:opacity-80 active:duration-150 cursor-pointer ${className}`}
-    >
-      <span className="text-body-sm font-medium">{label}</span>
-      <span className="relative w-static-xl h-static-xl rounded-full bg-[var(--color-surface-BG-white)] text-[var(--color-brand-blue)] flex items-center justify-center overflow-hidden shrink-0">
-        <ArrowUR className="absolute w-static-md h-static-md transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
-        <ArrowUR className="absolute w-static-md h-static-md -translate-x-5 translate-y-5 transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
-      </span>
-    </button>
-  );
+  return <Button label={label} onClick={scrollToForm} className={className} />;
 }
 
 export function SectionTitle({ eyebrow, title, inverse = false, className = "" }: { eyebrow: string; title: string; inverse?: boolean; className?: string }) {

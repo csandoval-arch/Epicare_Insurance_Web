@@ -27,7 +27,7 @@ const GROUP_BTN =
 const GROUP_ON = "border-[var(--color-brand-blue)] bg-[var(--color-surface-BG-1)]";
 const GROUP_OFF = "border-[var(--color-border-Strokes-default)] hover:border-[var(--color-border-Strokes-Hover)]";
 const PILL_BTN =
-  "rounded-full border px-static-lg h-static-2xl text-body-md transition-[translate,border-color,background-color,color] duration-200 ease-out hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-[var(--color-border-Strokes-focus)] cursor-pointer";
+  "rounded-button border px-static-lg h-static-2xl text-body-md transition-[translate,border-color,background-color,color] duration-200 ease-out hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-[var(--color-border-Strokes-focus)] cursor-pointer";
 const PILL_ON = "border-[var(--color-brand-blue)] bg-[var(--color-brand-blue)] text-[var(--color-text-White-100)]";
 const PILL_OFF = "border-[var(--color-border-Strokes-default)] text-[var(--color-text-primary)] hover:border-[var(--color-border-Strokes-Hover)]";
 

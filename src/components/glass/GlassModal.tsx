@@ -197,7 +197,7 @@ export default function GlassModal({ open, onClose, titleId, title, closeLabel, 
                 type="button"
                 onClick={requestClose}
                 aria-label={closeLabel}
-                className="group/close glass-liquid-tile shrink-0 w-static-2xl h-static-2xl rounded-full flex items-center justify-center cursor-pointer transition-[scale,box-shadow,color] duration-300 ease-out hover:[--glass-liquid-tile-edge:var(--color-brand-blue)] hover:text-[var(--color-text-accent-blue)] active:scale-95 active:duration-150 focus-visible:outline-2 focus-visible:outline-[var(--color-border-Strokes-focus)]"
+                className="group/close glass-liquid-tile shrink-0 w-static-2xl h-static-2xl rounded-button flex items-center justify-center cursor-pointer transition-[scale,box-shadow,color] duration-300 ease-out hover:[--glass-liquid-tile-edge:var(--color-brand-blue)] hover:text-[var(--color-text-accent-blue)] active:scale-95 active:duration-150 focus-visible:outline-2 focus-visible:outline-[var(--color-border-Strokes-focus)]"
               >
                 {/* Móvil: chevron abajo (la hoja baja al cerrar); desktop: X. Hover: canto y X en azul, la X gira 90° */}
                 <CaretDown className="lg:hidden w-static-md h-static-md" aria-hidden="true" />

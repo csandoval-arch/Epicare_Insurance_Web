@@ -5,6 +5,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import type Lenis from "lenis";
 import ArrowUR from "@/components/icons/ArrowUR";
+import Button from "@/components/ui/Button";
 import PrimaryCta from "@/components/go-crm/cta/PrimaryCta";
 import { DUR, EASE, STAGGER, REVEAL } from "@/lib/motion";
 import { joinModalStore } from "@/lib/joinModalStore";
@@ -259,17 +260,13 @@ export default function MobileMenu({ open, onClose, groups, forceDark, loginLabe
             {/* Login y Join abren su hoja inferior ENCIMA del menú (no lo cierran): al cerrar la hoja, el menú sigue ahí */}
             <PrimaryCta label={loginLabel} />
             {/* Join: botón secundario (como en desktop): mismo alto que el primario, ancho natural (más corto) → jerarquía */}
-            <button
-              type="button"
+            <Button
+              label={moreLabel}
+              variant="plain"
               onClick={() => joinModalStore.open()}
-              className="group glass-liquid-tile w-fit h-static-2xl pl-static-lg pr-static-sm rounded-full flex justify-between items-center gap-3 text-[var(--color-text-primary)] shadow-elevation-1 transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.96] active:opacity-80 active:duration-150 cursor-pointer"
-            >
-              <span className="text-body-sm font-medium">{moreLabel}</span>
-              <span className="relative w-static-xl h-static-xl rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center overflow-hidden shrink-0">
-                <ArrowUR className="absolute w-static-md h-static-md transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
-                <ArrowUR className="absolute w-static-md h-static-md -translate-x-5 translate-y-5 transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
-              </span>
-            </button>
+              className="glass-liquid-tile text-[var(--color-text-primary)]"
+              bubbleClassName="bg-black/5 dark:bg-white/10"
+            />
           </div>
         </nav>
       </div>

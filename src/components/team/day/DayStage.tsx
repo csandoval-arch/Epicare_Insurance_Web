@@ -15,6 +15,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { DUR, EASE, REVEAL } from "@/lib/motion";
 import ArrowUR from "@/components/icons/ArrowUR";
+import { IconButton } from "@/components/ui/Button";
 import CrewPortrait from "../crew/CrewPortrait";
 import { TEAM_GRID } from "../grid";
 import { DAY_END, DAY_START, activeAt, dayFraction, formatClock, toHours, type DayItem } from "./dayData";
@@ -129,14 +130,9 @@ export default function DayStage({ items, names, nextLabel }: { items: DayItem[]
           <div aria-hidden="true" className="relative flex-1 h-px bg-[var(--color-border-Strokes-default)]">
             <span className="dy-progress absolute inset-0 origin-left bg-[var(--color-brand-blue)]" />
           </div>
-          <button
-            type="button"
-            onClick={() => jumpTo((idx + 1) % items.length)}
-            aria-label={nextLabel}
-            className="shrink-0 w-static-2xl h-static-2xl rounded-full bg-[var(--color-brand-blue)] text-[var(--color-text-White-100)] flex items-center justify-center shadow-elevation-2 transition-[scale] duration-200 ease-out active:scale-95 focus-visible:outline-2 focus-visible:outline-[var(--color-border-Strokes-focus)]"
-          >
+          <IconButton label={nextLabel} onClick={() => jumpTo((idx + 1) % items.length)}>
             <ArrowUR className="w-static-md h-static-md rotate-45" />
-          </button>
+          </IconButton>
         </div>
 
         {/* ── DESKTOP: LA REGLA DEL DÍA con los 8 hitos clicables ── */}

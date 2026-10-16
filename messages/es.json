@@ -1,26 +1,11 @@
 {
   "landingV2": {
     "hero": {
-      "subtitle": [
-        "Impulsamos",
-        "a los agentes",
-        "a redefinir",
-        "el éxito."
-      ],
-      "agentsCount": "100+",
-      "agentsLabel": [
-        "Agentes",
-        "activos"
-      ],
-      "supporting": "<b>130+ aseguradoras</b>, un solo contrato.",
-      "ctaPrimary": "Solicita tu contrato",
-      "ctaSecondary": "Ver GO AMS",
-      "cutOverline": "Epicare",
-      "cutTitle": [
-        "Ve",
-        "más allá",
-        "de crecer."
-      ]
+      "scrollDown": "Baja",
+      "act2Title": "Ve más allá del crecimiento",
+      "act2Sub1": "Distribución\nDe Seguros\nRedefinida",
+      "act2Sub2": "Una\nInsurtech\nIMO",
+      "act2Cta": "Únete"
     },
     "licensingHero": {
       "title": "Nuestras licencias",
@@ -72,6 +57,8 @@
       "card7Desc": "Producción, retención y persistencia por agente. Los números que deciden tu mes.",
       "card8Title": "Academy",
       "card8Desc": "Certificaciones, entrenamiento de producto y onboarding de agentes nuevos. <bold>A tu ritmo.</bold>",
+      "hubTagline": "Un solo hub para toda tu agencia.",
+      "explore": "Conoce {name}",
       "seeCrm": "GO CRM",
       "seeAms": "GO AMS",
       "comingSoon": "Próximamente",
@@ -125,7 +112,7 @@
       "cta": "Ver marketing"
     },
     "darkGradient": {
-      "sectionTitle": "Nosotros llevamos la operación. <span>Tú vendes.</span>",
+      "sectionTitle": "Construimos el puente que nadie más quiso construir, <span>y seguimos construyendo.</span>",
       "sectionDesc": "Appointments con 130+ carriers, sistema de gestión, visibilidad en tiempo real y equipo de soporte. Todo incluido bajo el mismo contrato.",
       "tiltCard": "Girar",
       "feature1_step": "01 · Contratación",

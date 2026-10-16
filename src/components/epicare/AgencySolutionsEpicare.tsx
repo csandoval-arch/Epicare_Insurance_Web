@@ -25,11 +25,11 @@
  */
 
 import { useLayoutEffect, useRef } from "react";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { DUR, EASE, EASE_CSS, REVEAL, STAGGER, TRIGGER } from "@/lib/motion";
+import Button from "@/components/ui/Button";
+import { DUR, EASE, REVEAL, STAGGER, TRIGGER } from "@/lib/motion";
 import { useSnapIndex } from "@/components/solutions/useSnapIndex";
 import HoloPlate, { type HoloPlateVariant } from "@/components/solutions/HoloPlate";
 import SlideIndicator from "@/components/team/SlideIndicator";
@@ -72,22 +72,6 @@ const TILE_HEIGHT = "aspect-[4/5] md:aspect-auto md:min-h-[24rem]";
 /** Acento superior que se extiende al pasar por la celda (la celda es `group/tile`). */
 const HOVER_RULE =
   "absolute top-0 inset-x-0 h-0.5 bg-[var(--color-brand-blue)] origin-left scale-x-0 group-hover/tile:scale-x-100 transition-[scale] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]";
-
-/** Flecha diagonal de las burbujas de CTA (la firma de botón del sitio). */
-const ArrowUR = ({ className = "" }: { className?: string }) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2.5}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-    aria-hidden="true"
-  >
-    <path d="M7 17 17 7M7 7h10v10" />
-  </svg>
-);
 
 export default function AgencySolutionsEpicare() {
   const t = useTranslations("landingV2.agencySolutions");
@@ -168,20 +152,7 @@ export default function AgencySolutionsEpicare() {
           <div className="w-full flex flex-col lg:flex-row lg:items-end lg:justify-between gap-static-lg">
             <p className="as-fade text-body-lg text-[var(--color-text-secondary)] max-w-2xl">{t("subhead")}</p>
 
-            <Link
-              href={MARKETING_HREF}
-              className="as-fade group w-fit shrink-0 h-12 pl-6 pr-2 rounded-full flex items-center justify-start gap-3 bg-[var(--color-brand-blue)] text-white shadow-elevation-2 transition-all duration-[450ms] hover:-translate-y-0.5 hover:shadow-elevation-4 active:scale-[0.96] active:opacity-80 active:duration-150"
-              style={{ transitionTimingFunction: EASE_CSS.ui }}
-            >
-              <span className="text-body-sm font-medium">{t("cta")}</span>
-              <span
-                className="relative w-8 h-8 rounded-full bg-white text-[var(--color-brand-blue)] flex items-center justify-center overflow-hidden shrink-0"
-                aria-hidden="true"
-              >
-                <ArrowUR className="absolute w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
-                <ArrowUR className="absolute w-4 h-4 -translate-x-5 translate-y-5 transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
-              </span>
-            </Link>
+            <Button href={MARKETING_HREF} label={t("cta")} className="as-fade shrink-0" />
           </div>
         </header>
 

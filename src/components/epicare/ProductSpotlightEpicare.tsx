@@ -18,6 +18,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslations } from 'next-intl';
 import { asset } from '@/lib/asset';
 import { loginModalStore } from '@/lib/loginModalStore';
+import Button from '@/components/ui/Button';
 import { EASE, DUR, REVEAL, STAGGER, TRIGGER } from '@/lib/motion';
 import SmartVideo from './SmartVideo';
 
@@ -26,16 +27,6 @@ const VIDEO_LIGHT = asset('/Files/Features/Eppigo_Light_Final.mp4');
 const VIDEO_DARK = asset('/Files/Features/Eppigo_Dark_Final.mp4');
 const POSTER_LIGHT = asset('/Files/Features/posters/Eppigo_Light_Final.webp');
 const POSTER_DARK = asset('/Files/Features/posters/Eppigo_Dark_Final.webp');
-
-/** Up-right arrow used inside the CTA bubbles. */
-const ArrowUR = ({ className = '' }: { className?: string }) => (
-  <svg
-    viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-    strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true"
-  >
-    <path d="M7 17 17 7M7 7h10v10" />
-  </svg>
-);
 
 // ── COMPOSICIÓN DEL FONDO (valores congelados del panel de pruebas) ──
 // Antes vivían en useState alimentados por un debug panel que nunca llegó a
@@ -189,18 +180,7 @@ export default function ProductSpotlightEpicare() {
 
             {/* 3. CTA */}
             <div className="mt-2 sm:mt-4 w-full sm:w-auto">
-              <button
-                type="button"
-                onClick={() => loginModalStore.open()}
-                className="group w-fit h-12 pl-6 pr-2 rounded-full flex items-center gap-3 text-white shadow-elevation-2 transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-elevation-4 active:scale-[0.96] active:opacity-80 active:duration-150 cursor-pointer"
-                style={{ backgroundColor: `var(${ACCENT_VAR})` }}
-              >
-                <span className="text-sm font-semibold">{t('cta')}</span>
-                <span className="relative w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden shrink-0" style={{ color: `var(${ACCENT_VAR})` }}>
-                  <ArrowUR className="absolute w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-5" />
-                  <ArrowUR className="absolute w-4 h-4 -translate-x-5 translate-y-5 transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
-                </span>
-              </button>
+              <Button label={t('cta')} variant="accent" accentVar={ACCENT_VAR} onClick={() => loginModalStore.open()} />
             </div>
 
             </div>
